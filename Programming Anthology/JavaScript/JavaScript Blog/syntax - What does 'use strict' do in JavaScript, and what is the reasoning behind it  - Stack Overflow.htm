@@ -1,0 +1,3090 @@
+<!DOCTYPE html>
+<html itemscope="" itemtype="http://schema.org/QAPage"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/companyjs" async=""></script>
+    
+    <title>syntax - What does "use strict" do in JavaScript, and what is the reasoning behind it? - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico?v=038622610830">
+    <link rel="apple-touch-icon image_src" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=fd7230a85918">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta property="og:type" content="website">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=fde65a5a78c6">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="What does &quot;use strict&quot; do in JavaScript, and what is the reasoning behind it?">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Recently, I ran some of my JavaScript code through Crockford's JSLint, and it gave the following error:
+
+
+  Problem at line 1 character 1: Missing &quot;use strict&quot; statement.
+
+
+Doing some searching, I ">
+    <meta property="og:url" content="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it">
+    <link rel="canonical" href="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it">
+
+    
+    
+    <script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/quant.js" async=""></script><script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/beacon.js" async=""></script><script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/analytics.js" async=""></script><script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/jquery.js"></script>
+    <script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/stub.js"></script>
+    <link rel="stylesheet" type="text/css" href="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/all.css">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question 'What does &quot;use strict&quot; do in JavaScript, and what is the reasoning behind it?'" href="http://stackoverflow.com/feeds/question/1335851">
+    <meta name="twitter:app:country" content="US">
+    <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+    <meta name="twitter:app:id:iphone" content="871299723">
+    <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it">
+    <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+    <meta name="twitter:app:id:ipad" content="871299723">
+    <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it">
+    <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+    <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it">
+    <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+    <script>
+        
+        StackExchange.ready(function () {
+                
+                StackExchange.using("snippets", function () {
+                    StackExchange.snippets.initSnippetRenderer();
+                });
+                
+
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:12,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:1335851});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '1335851');
+            
+                    });
+    </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1421231224,"networkMetaHostname":"meta.stackexchange.com","routeName":"Questions/Show","styleCode":true,"enableUserHovercards":true,"snippets":{"enabled":true,"domain":"stacksnippets.net"},"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"nonAsciiTags":true,"enableSocialMediaInSharePopup":true},"user":{"fkey":"13b9ce956e639cbbcee29f730456d40b","isAnonymous":true,"ab":{"search_improvements":{"v":"experiment_15","g":1}}}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"6a8f3b03a11d","js/moderator.en.js":"cd3fd6b9bd99","js/full-anon.en.js":"ea495e023683","js/full.en.js":"0398f1afe912","js/wmd.en.js":"2f3269a06035","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"1d0adfd3c9ff","js/help.en.js":"637a173e1aa4","js/tageditor.en.js":"c8d06452914a","js/tageditornew.en.js":"7b641d7cc115","js/inline-tag-editing.en.js":"48f13b102998","js/revisions.en.js":"b9f74067e1f5","js/review.en.js":"d9a9585e9bfc","js/tagsuggestions.en.js":"bc2c996faeda","js/post-validation.en.js":"c0ce3e0800ca","js/explore-qlist.en.js":"257ba4cb7b04","js/events.en.js":"653fc9144bae","js/keyboard-shortcuts.en.js":"c6467412b617","js/external-editor.en.js":"49dac339584c","js/external-editor.en.js":"49dac339584c","js/snippet-javascript.en.js":"9d776fe161e5","js/snippet-javascript-codemirror.en.js":"9d068a253c9e"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    
+    
+<script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/full-anon.js" async=""></script><script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/snippet-javascript.js" async=""></script><script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/post-validation.js" async=""></script><script src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/prettify-full.js" async=""></script><link rel="stylesheet" type="text/css" href="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/company.css"></head>
+<body class="question-page new-topbar">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="http://stackoverflow.com/">current community</a></h3>
+    </div>
+    <div class="modal-content current-site-container">
+        <ul class="current-site">
+                <li>
+                        <div class="related-links">
+            <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+                    <a href="http://blog.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:7 })">blog</a>
+            </div>
+
+
+
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="
+        site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                </li>
+                <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    
+
+
+
+    <a href="http://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="
+            site.switch({ target_site:552, item_type:3 }),
+        site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                </li>
+                            <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    <a class="site-link js-gps-track" href="http://careers.stackoverflow.com/?utm_source=stackoverflow.com&amp;utm_medium=site-ui&amp;utm_campaign=multicollider" data-gps-track="site_switcher.click({ item_type:9 })">
+                        <div class="site-icon favicon favicon-careers" title="Stack Overflow Careers"></div>
+                        Stack Overflow Careers
+                    </a>
+                </li>
+        </ul>
+    </div>
+    
+    <div class="header" id="your-communities-header">
+        <h3>
+your communities        </h3>
+            
+    </div>
+    <div class="modal-content" id="your-communities-section">
+            
+            <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f1335851%2fwhat-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f1335851%2fwhat-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+            </div>
+    </div>
+    
+    <div class="header">
+        <h3><a href="http://stackexchange.com/sites">more stack exchange communities</a></h3>
+    </div>
+    <div class="modal-content">
+            <div class="child-content"></div>
+    </div>
+</div>
+        </div>
+
+        <div class="network-items">
+
+            <a href="http://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 134 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                    <span class="topbar-menu-links">
+                            <a href="https://stackoverflow.com/users/signup?returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f1335851%2fwhat-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it" class="login-link">sign up</a>
+                            <a href="https://stackoverflow.com/users/login?returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f1335851%2fwhat-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it" class="login-link">log in</a>
+                            <a href="http://stackoverflow.com/tour">tour</a>
+
+                            <a href="#" class="icon-help js-help-button" title="Help Center and other resources">
+        help
+        <span class="triangle"></span>
+    </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                    <li>
+                        <a href="http://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                            Meta
+                            <span class="item-summary">
+                                Discuss the workings and policies of this site
+                            </span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+                            <a href="http://careers.stackoverflow.com/?utm_source=stackoverflow.com&amp;utm_medium=site-ui&amp;utm_campaign=anon-topbar">stack overflow careers</a>
+                    </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="/search" method="get" autocomplete="off">
+                    <input name="q" placeholder="search" tabindex="1" autocomplete="off" maxlength="240" type="text">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+        <div id="header">
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/help/badges">Badges</a></li>
+                        <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content" class="snippet-hidden">
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+	<link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="http://stackoverflow.com/tour" id="tell-me-more" class="button">Take the 2-minute tour</a>
+            <span id="close"><a title="click to dismiss">×</a></span>
+        </span>
+        <div id="blurb">
+            Stack Overflow is a question and answer site for 
+professional and enthusiast programmers. It's 100% free, no registration
+ required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            } else if ($("body").hasClass("question-page")) {
+                clickSource = 'questionpagemini';
+            } else if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/", expires: 365 });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it" class="question-hyperlink">What does “use strict” do in JavaScript, and what is the reasoning behind it?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="1335851" id="question">
+
+    <div class="everyonelovesstackoverflow" id="careers1">
+        </div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="1335851" type="hidden">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post high-scored-post">3106</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>768</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+        <p>Recently, I ran some of my JavaScript code through Crockford's <a href="http://www.jslint.com/">JSLint</a>, and it gave the following error:</p>
+
+<blockquote>
+  <p>Problem at line 1 character 1: Missing "use strict" statement.</p>
+</blockquote>
+
+<p>Doing some searching, I realized that some people add <code>"use strict";</code>
+ into their JavaScript code. Once I added the statement, the error 
+stopped appearing. Unfortunately, Google did not reveal much of the 
+history behind this string statement. Certainly it must have something 
+to do with how the JavaScript is interpreted by the browser, but I have 
+no idea what the effect would be.</p>
+
+<p>So what is <code>"use strict";</code> all about, what does it imply, and is it still relevant?</p>
+
+<p>Do any of the current browsers respond to the <code>"use strict";</code> string or is it for future use?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/javascript" class="post-tag js-gps-track" title="show questions tagged 'javascript'" rel="tag">javascript</a> <a href="http://stackoverflow.com/questions/tagged/syntax" class="post-tag js-gps-track" title="show questions tagged 'syntax'" rel="tag">syntax</a> <a href="http://stackoverflow.com/questions/tagged/jslint" class="post-tag js-gps-track" title="show questions tagged 'jslint'" rel="tag">jslint</a> <a href="http://stackoverflow.com/questions/tagged/crockford" class="post-tag js-gps-track" title="show questions tagged 'crockford'" rel="tag">crockford</a> <a href="http://stackoverflow.com/questions/tagged/use-strict" class="post-tag js-gps-track" title="show questions tagged 'use-strict'" rel="tag">use-strict</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/1335851" title="short permalink to this question" class="short-link" id="link-post-1335851">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/1335851/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/1335851/revisions" title="show all edits to this post">edited <span title="2014-12-15 15:26:46Z" class="relativetime">Dec 15 '14 at 15:26</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info user-hover">
+    <div class="user-action-time">
+        asked <span title="2009-08-26 16:10:13Z" class="relativetime">Aug 26 '09 at 16:10</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/25847/mark-rogers"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/2a7422e683acff1b012c7564823963ae.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/25847/mark-rogers">Mark Rogers</a><br>
+        <span class="reputation-score" title="reputation score 20134" dir="ltr">20.1k</span><span title="9 gold badges"><span class="badge1"></span><span class="badgecount">9</span></span><span title="50 silver badges"><span class="badge2"></span><span class="badgecount">50</span></span><span title="82 bronze badges"><span class="badge3"></span><span class="badgecount">82</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1335851" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="7" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-8255727" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="supernova">58</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Jose: in 2009, when I wrote that comment, no browser supported strict mode, and adding "use strict" was a timebomb. See <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=579119" rel="nofollow">bugzilla.mozilla.org/show_bug.cgi?id=579119</a> (Amazon screwed up) and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=593963" rel="nofollow">bugzilla.mozilla.org/show_bug.cgi?id=593963</a>
+ (Intel screws up.) Now that real browsers support strict mode, please 
+do use it. (and make sure you test in FF4+ and Safari5.1+)</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/117587/sean-mcmillan" title="5383 reputation" class="comment-user">Sean McMillan</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment8255727_1335851"><span title="2011-08-03 15:16:23Z" class="relativetime-clean">Aug 3 '11 at 15:16</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-8255803" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">12</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Sean: right :) Just don't 
+like the fact that people get scared about such a good feature only 
+because they see a high voted comment stating not to use it.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/701879/jose-faeti" title="7160 reputation" class="comment-user">Jose Faeti</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment8255803_1335851"><span title="2011-08-03 15:19:52Z" class="relativetime-clean">Aug 3 '11 at 15:19</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-10760703" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">5</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">According to the link to <a href="http://caniuse.com/#feat=use-strict" rel="nofollow">CanIUse</a> provided by @Daniel-Dane in his comment below, IE won't support <code>use strict</code> until version 10.  Even though IE has definitely <a href="http://www.w3schools.com/browsers/browsers_stats.asp" rel="nofollow">dropped in the U.S. browser rankings</a>, you can't realistically ignore it entirely.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/490873/hotshot309" title="959 reputation" class="comment-user">hotshot309</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment10760703_1335851"><span title="2011-12-28 18:40:11Z" class="relativetime-clean">Dec 28 '11 at 18:40</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-20593613" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">9</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Until every browser in real 
+use supports strict mode, no validator should ever show a warning for 
+it, and any validator that does is giving such broken, clueless advice 
+that it can't be trusted.  Strict mode takes code that works in all 
+browsers, and turns it into code that works in some and not in others, 
+which is catastrophically worse.  It's only appropriate for testing use,
+ not for production use, or where you know all users will have browsers 
+that support it (eg. if you target specific browsers).</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/136829/glenn-maynard" title="26044 reputation" class="comment-user">Glenn Maynard</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment20593613_1335851"><span title="2013-02-06 03:27:52Z" class="relativetime-clean">Feb 6 '13 at 3:27</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-34634002" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">7</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">If you put <code>"use strict";</code>
+ in your code, and run it in a browser that doesn't support it, the 
+statement has no effect.  If you run it in a later browser, the browser 
+will check for more errors.  If your code doesn't have those errors, but
+ is compatible with older javascript, it will run in older browsers.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/310710/futurenerd" title="141 reputation" class="comment-user">FutureNerd</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment34634002_1335851"><span title="2014-03-29 00:27:10Z" class="relativetime-clean">Mar 29 '14 at 0:27</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-1335851" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link " title="expand to show all comments on this post, or add one of your own" href="#" onclick="">show <b>7</b> more comments</a>
+            </div>
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								13 Answers
+                                <span style="display:none;" itemprop="answerCount">13</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="1335881"></a>
+<div id="answer-1335881" class="answer accepted-answer" data-answerid="1335881" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="1335881" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post high-scored-post">2089</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="The question owner accepted this as the best answer Aug 26 '09 at 16:25.">accepted</span>
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>This article about that might interest you: <a href="http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/">John Resig - ECMAScript 5 Strict Mode, JSON, and More</a></p>
+
+<p>To quote some interesting parts:</p>
+
+<blockquote>
+  <p>Strict Mode is a new feature in ECMAScript 5 that allows you to 
+place a program, or a function, in a "strict" operating context. This 
+strict context prevents certain actions from being taken and throws more
+ exceptions.</p>
+</blockquote>
+
+<p>And:</p>
+
+<blockquote>
+  <p>Strict mode helps out in a couple ways:</p>
+  
+  <ul>
+  <li>It catches some common coding bloopers, throwing exceptions.</li>
+  <li>It prevents, or throws errors, when relatively "unsafe" actions are taken (such as gaining access to the global object).</li>
+  <li>It disables features that are confusing or poorly thought out.</li>
+  </ul>
+</blockquote>
+
+<p>Also note you can apply "strict mode" to the whole file... Or you can use it only for a specific function <em>(still quoting from John Resig's article)</em>:</p>
+
+<pre style="" class="default prettyprint prettyprinted"><code><span class="com">// Non-strict code...</span><span class="pln">
+
+</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(){</span><span class="pln">
+  </span><span class="str">"use strict"</span><span class="pun">;</span><span class="pln">
+
+  </span><span class="com">// Define your library strictly...</span><span class="pln">
+</span><span class="pun">})();</span><span class="pln">
+
+</span><span class="com">// Non-strict code... </span></code></pre>
+
+<p>Which might be helpful if you have to mix old and new code ;-)</p>
+
+<p>So, I suppose it's a bit like the <code>"use strict"</code> you can use in Perl <em>(hence the name?)</em>: it helps you make fewer errors, by detecting more things that could lead to breakages.</p>
+
+<p>Currently, it's <a href="http://caniuse.com/#use-strict"><strong>supported by all major browsers</strong></a>.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/1335881" title="short permalink to this answer" class="short-link" id="link-post-1335881">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/1335881/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/1335881/revisions" title="show all edits to this post">edited <span title="2014-08-14 15:25:05Z" class="relativetime">Aug 14 '14 at 15:25</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/741981/cvsguimaraes"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/15c836c2cdd6f72e2fcf9a230632768d.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/741981/cvsguimaraes">cvsguimaraes</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">4,624</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="41 bronze badges"><span class="badge3"></span><span class="badgecount">41</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2009-08-26 16:15:39Z" class="relativetime">Aug 26 '09 at 16:15</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/138475/pascal-martin"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/37458c7c44851cd6c402e02e5a9be94f.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/138475/pascal-martin">Pascal MARTIN</a><br>
+        <span class="reputation-score" title="reputation score 208621" dir="ltr">209k</span><span title="30 gold badges"><span class="badge1"></span><span class="badgecount">30</span></span><span title="391 silver badges"><span class="badge2"></span><span class="badgecount">391</span></span><span title="492 bronze badges"><span class="badge3"></span><span class="badgecount">492</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1335881" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="18" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-1170410" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="supernova">90</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">do any of the current browsers respond to the "use strict" string or is it for future use?</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/25847/mark-rogers" title="20134 reputation" class="comment-user owner">Mark Rogers</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment1170410_1335881"><span title="2009-08-26 16:24:26Z" class="relativetime-clean">Aug 26 '09 at 16:24</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-2360347" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="hot">26</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Changing the default after so
+ many years ? Too late for that : it would break so many existing 
+sites/scripts/applications... The only possible thing is to help make 
+things better, for the future.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/138475/pascal-martin" title="208621 reputation" class="comment-user">Pascal MARTIN</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment2360347_1335881"><span title="2010-03-04 21:54:49Z" class="relativetime-clean">Mar 4 '10 at 21:54</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-4468830" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">5</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I tried a small code snippet that would be invalid when using <code>"use strict"</code>
+ in Firefox 3.6, Safari 5, Chrome 7 and Opera 10.6 (all Mac). No errors 
+whatsoever, so i guess 'use strict' is not supported in any browser yet.
+ Didn't test in IE9 though ;)</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/152809/husky" title="2409 reputation" class="comment-user">Husky</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment4468830_1335881"><span title="2010-11-10 09:54:12Z" class="relativetime-clean">Nov 10 '10 at 9:54</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-6924176" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">11</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Chrome 11 seems to pass all of these tests as does IE10 <a href="http://ie.microsoft.com/testdrive/HTML5/TryStrict/Default.html#" rel="nofollow">ie.microsoft.com/testdrive/HTML5/TryStrict/Default.html#</a></span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/128511/gman" title="11678 reputation" class="comment-user">gman</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment6924176_1335881"><span title="2011-05-13 17:27:29Z" class="relativetime-clean">May 13 '11 at 17:27</span></a></span>
+                    <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-9816938" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="supernova">119</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy"><a href="http://caniuse.com/#use-strict" rel="nofollow">caniuse.com/#use-strict</a></span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/234756/daniel-dane" title="89 reputation" class="comment-user">Daniel-Dane</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment9816938_1335881"><span title="2011-11-05 14:59:49Z" class="relativetime-clean">Nov 5 '11 at 14:59</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-1335881" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link " title="expand to show all comments on this post, or add one of your own" href="#" onclick="">show <b>18</b> more comments</a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+<div class="everyonelovesstackoverflow" id="careers3">
+        </div>
+  
+<a name="1335875"></a>
+<div id="answer-1335875" class="answer" data-answerid="1335875" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="1335875" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">581</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>It's a new feature of ECMAScript 5. John Resig wrote up <a href="http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/">a nice summary</a> of it.</p>
+
+<p>It's just a string you put in your JavaScript files (either at the 
+top of your file or inside of a function) that looks like this:</p>
+
+<pre style="" class="default prettyprint prettyprinted"><code><span class="str">"use strict"</span><span class="pun">;</span></code></pre>
+
+<p>Putting it in your code now shouldn't cause any problems with current
+ browsers as it's just a string. It may cause problems with your code in
+ the future if your code violates the pragma.  For instance, if you 
+currently have <code>foo = "bar"</code> without defining <code>foo</code> first, your code will start failing...which is a good thing in my opinion.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/1335875" title="short permalink to this answer" class="short-link" id="link-post-1335875">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/1335875/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/1335875/revisions" title="show all edits to this post">edited <span title="2014-10-26 10:31:59Z" class="relativetime">Oct 26 '14 at 10:31</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/63550/peter-mortensen"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/RIZKi.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/63550/peter-mortensen">Peter Mortensen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,831</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="55 silver badges"><span class="badge2"></span><span class="badgecount">55</span></span><span title="90 bronze badges"><span class="badge3"></span><span class="badgecount">90</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2009-08-26 16:14:23Z" class="relativetime">Aug 26 '09 at 16:14</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/8590/seth"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/c27d47451fe1aa3db6c92457da06083b.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/8590/seth">seth</a><br>
+        <span class="reputation-score" title="reputation score 19567" dir="ltr">19.6k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="43 silver badges"><span class="badge2"></span><span class="badgecount">43</span></span><span title="51 bronze badges"><span class="badge3"></span><span class="badgecount">51</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1335875" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-1170433" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="supernova">43</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I'm sorry I didn't pick 
+yours, MARTIN's explanation was just more detailed, even though you were
+ first to the scene with the correct answer. Still I gave you +1.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/25847/mark-rogers" title="20134 reputation" class="comment-user owner">Mark Rogers</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment1170433_1335875"><span title="2009-08-26 16:26:37Z" class="relativetime-clean">Aug 26 '09 at 16:26</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-20371911" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="supernova">57</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Fail fast and fail loudly.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/61109/niels-bom" title="2205 reputation" class="comment-user">Niels Bom</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment20371911_1335875"><span title="2013-01-29 22:20:19Z" class="relativetime-clean">Jan 29 '13 at 22:20</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-28412921" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">7</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">If you are writing Javascript inline in HTML files, start each new block with <code>&lt;script&gt;"use strict";</code>.  The flag only applies to the block in which it is included.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/86967/nobar" title="6809 reputation" class="comment-user">nobar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment28412921_1335875"><span title="2013-10-05 18:50:13Z" class="relativetime-clean">Oct 5 '13 at 18:50</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-29777419" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">How does safari react to this line? (Safari uses ECMAScript3)</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/489856/vincent" title="1052 reputation" class="comment-user">Vincent</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment29777419_1335875"><span title="2013-11-15 11:20:30Z" class="relativetime-clean">Nov 15 '13 at 11:20</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-32992155" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy"><a href="http://conceptf1.blogspot.com/2014/02/avascript-best-practices-ecmascript5-strict-mode.html" rel="nofollow">ECMAScript5 strict mode</a>(in my blog). old browsers ignore it. It works like u running in without it.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/821057/zaheer-ahmed" title="13920 reputation" class="comment-user">Zaheer Ahmed</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment32992155_1335875"><span title="2014-02-15 20:04:35Z" class="relativetime-clean">Feb 15 '14 at 20:04</span></a></span>
+                    <span class="edited-yes" title="this comment was edited 2 times"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-1335875" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="11496488"></a>
+<div id="answer-11496488" class="answer" data-answerid="11496488" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="11496488" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">135</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If people are worried about using <code>use strict</code> it might be worth checking out this article: </p>
+
+<p><a href="http://www.novogeek.com/post/ECMAScript-5-Strict-mode-support-in-browsers-What-does-this-mean.aspx">http://www.novogeek.com/post/ECMAScript-5-Strict-mode-support-in-browsers-What-does-this-mean.aspx</a></p>
+
+<p>It talks about browser support, but more importantly how to deal with it safely:</p>
+
+<pre style="" class="default prettyprint prettyprinted"><code><span class="kwd">function</span><span class="pln"> isStrictMode</span><span class="pun">(){</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">!</span><span class="kwd">this</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln"> 
+</span><span class="com">//returns false, since 'this' refers to global object and '!this' becomes false</span><span class="pln">
+
+</span><span class="kwd">function</span><span class="pln"> isStrictMode</span><span class="pun">(){</span><span class="pln">   
+    </span><span class="str">"use strict"</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">!</span><span class="kwd">this</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln"> 
+</span><span class="com">//returns true, since in strict mode, the keyword 'this' does not refer to global object, unlike traditional JS. So here,'this' is null and '!this' becomes true.</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/11496488" title="short permalink to this answer" class="short-link" id="link-post-11496488">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/11496488/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2012-07-15 23:25:53Z" class="relativetime">Jul 15 '12 at 23:25</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/240363/jamie-hutber"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/e57ddb14f23a80ca2de80331039a037e.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/240363/jamie-hutber">Jamie Hutber</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,355</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="37 silver badges"><span class="badge2"></span><span class="badgecount">37</span></span><span title="75 bronze badges"><span class="badge3"></span><span class="badgecount">75</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-11496488" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="9" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-19849938" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">12</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">You show us exactly why it is unwise and dangerous to use "use strict".</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/565244/erwinus" title="1826 reputation" class="comment-user">Erwinus</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment19849938_11496488"><span title="2013-01-12 11:20:20Z" class="relativetime-clean">Jan 12 '13 at 11:20</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-21230531" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="supernova">56</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I disagree. I think this shows why its very useful. In essence it means that this returns its function and not the <code>window</code></span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/240363/jamie-hutber" title="5355 reputation" class="comment-user">Jamie Hutber</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment21230531_11496488"><span title="2013-02-26 15:25:21Z" class="relativetime-clean">Feb 26 '13 at 15:25</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-25824961" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">9</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">when do you ever want the window with <code>this</code> that you can't target with <code>window</code>?</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/240363/jamie-hutber" title="5355 reputation" class="comment-user">Jamie Hutber</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment25824961_11496488"><span title="2013-07-18 08:34:07Z" class="relativetime-clean">Jul 18 '13 at 8:34</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-26168350" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">7</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">It refers to itself. <code>this</code> belongs to its own function and not the global window</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/240363/jamie-hutber" title="5355 reputation" class="comment-user">Jamie Hutber</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment26168350_11496488"><span title="2013-07-28 21:17:28Z" class="relativetime-clean">Jul 28 '13 at 21:17</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-26726077" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">7</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">In the second one <code>this</code> one is actually <code>undefined</code>.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/1745452/broxzier" title="1527 reputation" class="comment-user">Broxzier</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment26726077_11496488"><span title="2013-08-14 11:40:32Z" class="relativetime-clean">Aug 14 '13 at 11:40</span></a></span>
+                    <span class="edited-yes" title="this comment was edited 2 times"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-11496488" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link " title="expand to show all comments on this post, or add one of your own" href="#" onclick="">show <b>9</b> more comments</a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="17495829"></a>
+<div id="answer-17495829" class="answer" data-answerid="17495829" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="17495829" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">31</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I strongly recommend every developer to start using strict mode now. 
+There are enough browsers supporting it that strict mode will 
+legitimately help save us from errors we didn’t even know were in your 
+code.</p>
+
+<p>Apparently, at the initial stage there will be errors we have never 
+encountered before. To get the full benefit, we need to do proper 
+testing after switching to strict mode to make sure we have caught 
+everything. Definitely we don’t just throw <strong>"use strict"</strong>
+ in our code and assume there are no errors. So the churn is that it’s 
+time to start using this incredibly useful language feature to write 
+better code.</p>
+
+<p>For example,</p>
+
+<pre style="" class="default prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> person </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    name </span><span class="pun">:</span><span class="pln"> </span><span class="str">'xyz'</span><span class="pun">,</span><span class="pln">
+    position </span><span class="pun">:</span><span class="pln"> </span><span class="str">'abc'</span><span class="pun">,</span><span class="pln">
+    fullname </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">  </span><span class="str">"use strict"</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">};</span></code></pre>
+
+<p><a href="http://www.jslint.com/" rel="nofollow">JSLint</a> is a 
+debugger written by Douglas Crockford. Simply paste in your script, and 
+it’ll quickly scan for any noticeable issues and errors in your code.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/17495829" title="short permalink to this answer" class="short-link" id="link-post-17495829">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/17495829/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/17495829/revisions" title="show all edits to this post">edited <span title="2014-10-26 10:36:16Z" class="relativetime">Oct 26 '14 at 10:36</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/63550/peter-mortensen"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/RIZKi.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/63550/peter-mortensen">Peter Mortensen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,831</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="55 silver badges"><span class="badge2"></span><span class="badgecount">55</span></span><span title="90 bronze badges"><span class="badge3"></span><span class="badgecount">90</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-07-05 19:38:24Z" class="relativetime">Jul 5 '13 at 19:38</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/983624/pank"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/Sc7lN.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/983624/pank">Pank</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,652</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="37 bronze badges"><span class="badge3"></span><span class="badgecount">37</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-17495829" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-31917062" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Pretty sure every modern browser is supporting it :D</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/240363/jamie-hutber" title="5355 reputation" class="comment-user">Jamie Hutber</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment31917062_17495829"><span title="2014-01-17 21:26:46Z" class="relativetime-clean">Jan 17 '14 at 21:26</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-31931720" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@JamieHutber : Please visit this link <a href="http://caniuse.com/use-strict" rel="nofollow">caniuse.com/use-strict</a>  AND <a href="http://kangax.github.io/es5-compat-table/" rel="nofollow">kangax.github.io/es5-compat-table</a>. It will give exact idea for all browser.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/983624/pank" title="2652 reputation" class="comment-user">Pank</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment31931720_17495829"><span title="2014-01-18 13:21:12Z" class="relativetime-clean">Jan 18 '14 at 13:21</span></a></span>
+                    <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39125672" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">*were instead of where</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/1644901/gast%c3%b3n-bengolea" title="810 reputation" class="comment-user">Gastón Bengolea</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment39125672_17495829"><span title="2014-08-05 10:16:45Z" class="relativetime-clean">Aug 5 '14 at 10:16</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-17495829" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="22141126"></a>
+<div id="answer-22141126" class="answer" data-answerid="22141126" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="22141126" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">29</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>A word of caution, all you hard-charging programmers:  applying "use 
+strict" to existing code can be hazardous!  This thing is not some 
+feel-good, happy-face sticker that you can slap on the code to make it 
+'better'.  With the "use strict" pragma, the browser will suddenly THROW
+ exceptions in random places that it never threw before just because at 
+that spot you are doing something that default/loose JavaScript happily 
+allows but strict JavaScript abhors!  You may have strictness violations
+ hiding in seldom used calls in your code that will only throw an 
+exception when they do eventually get run - say, in the production 
+environment that your paying customers use!</p>
+
+<p>If you are going to take the plunge, it is a good idea to apply "use 
+strict" alongside comprehensive unit tests and a strictly configured 
+JSHint build task that will give you some confidence that there is no 
+dark corner of your module that will blow up horribly just because 
+you've turned on Strict Mode.  Or, hey, here's another option:  just 
+don't add "use strict" to any of your legacy code, it's probably safer 
+that way, honestly.  DEFINITELY DO NOT add "use strict" to any modules 
+you do not own or maintain, like third party modules.</p>
+
+<p>I think even though it is a deadly caged animal, "use strict" can be 
+good stuff, but you have to do it right.  The best time to go strict is 
+when your project is greenfield and you are starting from scratch.  
+Configure JSHint/JSLint with all the warnings and options cranked up as 
+tight as your team can stomach, get a good build/test/assert system du 
+jour rigged like Grunt+Karma+Chai, and only THEN start marking all your 
+new modules as "use strict".  Be prepared to cure lots of niggly errors 
+and warnings.  Make sure everyone understands the gravity by configuring
+ the build to FAIL if JSHint/JSLint produces any violations.</p>
+
+<p>My project was not a greenfield project when I adopted "use strict". 
+ As a result, my IDE is full of red marks because I don't have "use 
+strict" on half my modules, and JSHint complains about that.  It's a 
+reminder to me about what refactorings I should do in the future.  My 
+goal is to be red mark free due to all of my missing "use strict" 
+statements, but that is years away now.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/22141126" title="short permalink to this answer" class="short-link" id="link-post-22141126">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/22141126/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/22141126/revisions" title="show all edits to this post">edited <span title="2014-05-27 17:21:03Z" class="relativetime">May 27 '14 at 17:21</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-03-03 07:37:19Z" class="relativetime">Mar 3 '14 at 7:37</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/360064/dwoldrich"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/acf71ef86e54517ef5e5e001f107f667.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/360064/dwoldrich">DWoldrich</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">835</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-22141126" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-36107699" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">WHY are devs in this thread so cavalier about "use strict"??  It THROWS EXCEPTIONS in <i>otherwise working JavaScript</i>,
+ for goodness sakes!  Just sprinkle it on the code like sugar on Corn 
+Flakes, eh?  NO!  BAD!  "use strict" should be used cautiously, 
+preferably only in code you control that has unit tests that pass 
+against all major browsers and that exercise all code paths.  You got 
+tests?  Okay, "use strict" is fine for you, knock yourselves out.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/360064/dwoldrich" title="835 reputation" class="comment-user">DWoldrich</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment36107699_22141126"><span title="2014-05-08 08:38:54Z" class="relativetime-clean">May 8 '14 at 8:38</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39679922" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">As you say, you got to have the right amount!</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/1624960/zevi-sternlicht" title="4509 reputation" class="comment-user">Zevi Sternlicht</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment39679922_22141126"><span title="2014-08-21 18:46:29Z" class="relativetime-clean">Aug 21 '14 at 18:46</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-22141126" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="9643692"></a>
+<div id="answer-9643692" class="answer" data-answerid="9643692" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="9643692" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">13</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If you use a browser released in the last year or so then it most 
+likely supports JavaScript Strict mode. Only older browsers around 
+before ECMAScript 5 became the current standard don't support it. </p>
+
+<p>The quotes around the command make sure that the code will still work
+ in older browsers as well (although the things that generate a syntax 
+error in strict mode will generally just cause the script to malfunction
+ in some hard to detect way in those older browsers).</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/9643692" title="short permalink to this answer" class="short-link" id="link-post-9643692">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/9643692/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2012-03-10 03:31:15Z" class="relativetime">Mar 10 '12 at 3:31</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1260550/stephen"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/9baeed27e72bbd2856b8d5a2d4314f24.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1260550/stephen">Stephen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">209</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9643692" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-13849723" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">5</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Then what does it do?</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/986276/anish-gupta" title="1534 reputation" class="comment-user">Anish Gupta</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment13849723_9643692"><span title="2012-05-20 14:47:37Z" class="relativetime-clean">May 20 '12 at 14:47</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-15089012" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">... this describes <i>in part</i> the compatibility, but not what it actually does.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/537025/courtsimas" title="502 reputation" class="comment-user">courtsimas</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment15089012_9643692"><span title="2012-07-11 16:04:02Z" class="relativetime-clean">Jul 11 '12 at 16:04</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-9643692" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="26487977"></a>
+<div id="answer-26487977" class="answer" data-answerid="26487977" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="26487977" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p><em>My two cents:</em></p>
+
+<p>One of the goals of strict mode is to allow for faster debugging of 
+issues. It helps the developers by throwing exception when certain wrong
+ things occur that can cause silent &amp; strange behaviour of your 
+webpage. The moment we use <code>use strict</code>, the code will throw out errors which helps developer to fix it in advance.</p>
+
+<p>Few important things which I have learned after using <code>use strict</code> :</p>
+
+<p><strong><em>Prevents Global Variable Declaration:</em></strong></p>
+
+<pre style="" class="default prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> tree1Data </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> name</span><span class="pun">:</span><span class="pln"> </span><span class="str">'Banana Tree'</span><span class="pun">,</span><span class="pln">age</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100</span><span class="pun">,</span><span class="pln">leafCount</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100000</span><span class="pun">};</span><span class="pln">
+
+</span><span class="kwd">function</span><span class="pln"> </span><span class="typ">Tree</span><span class="pun">(</span><span class="pln">typeOfTree</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">var</span><span class="pln"> age</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">var</span><span class="pln"> leafCount</span><span class="pun">;</span><span class="pln">
+
+    age </span><span class="pun">=</span><span class="pln"> typeOfTree</span><span class="pun">.</span><span class="pln">age</span><span class="pun">;</span><span class="pln">
+    leafCount </span><span class="pun">=</span><span class="pln"> typeOfTree</span><span class="pun">.</span><span class="pln">leafCount</span><span class="pun">;</span><span class="pln">
+    nameoftree </span><span class="pun">=</span><span class="pln"> typeOfTree</span><span class="pun">.</span><span class="pln">name</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> tree1 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Tree</span><span class="pun">(</span><span class="pln">tree1Data</span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">window</span><span class="pun">);</span></code></pre>
+
+<p>Now,this code creates <code>nameoftree</code> in global scope which could be accessed using <code>window.nameoftree</code>. When we implement <code>use strict</code> the code would throw error.</p>
+
+<blockquote>
+  <p>Uncaught ReferenceError: nameoftree is not defined</p>
+</blockquote>
+
+<p><a href="http://jsfiddle.net/shubh0602/08p556u5/"><kbd>Sample</kbd></a></p>
+
+<p><strong><em>Eliminates <code>with</code> statement :</em></strong></p>
+
+<p><code>with</code> statements can't be minified using tools like <a href="http://marijnhaverbeke.nl/uglifyjs">uglify-js</a>. They're also <a href="http://www.2ality.com/2011/06/with-statement.html">deprecated</a> and removed from future JavaScript versions.</p>
+
+<p><a href="http://jsfiddle.net/shubh0602/vjgznz79/"><kbd>Sample</kbd></a></p>
+
+<p><strong><em>Prevents Duplicates :</em></strong></p>
+
+<p>When we have duplicate property, it throws an exception </p>
+
+<blockquote>
+  <p>Uncaught SyntaxError: Duplicate data property in object literal not
+  allowed in strict mode</p>
+</blockquote>
+
+<pre style="" class="default prettyprint prettyprinted"><code><span class="str">"use strict"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> tree1Data </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    name</span><span class="pun">:</span><span class="pln"> </span><span class="str">'Banana Tree'</span><span class="pun">,</span><span class="pln">
+    age</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100</span><span class="pun">,</span><span class="pln">
+    leafCount</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100000</span><span class="pun">,</span><span class="pln">
+    name</span><span class="pun">:</span><span class="str">'Banana Tree'</span><span class="pln">
+</span><span class="pun">};</span></code></pre>
+
+<p>There are few more but I need to gain more knowledge on that.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/26487977" title="short permalink to this answer" class="short-link" id="link-post-26487977">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/26487977/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        answered <a href="http://stackoverflow.com/posts/26487977/revisions" title="show all edits to this post"><span title="2014-10-21 13:31:24Z" class="relativetime">Oct 21 '14 at 13:31</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Oct 21 '14 at 13:31. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-26487977" href="http://stackoverflow.com/posts/26487977/revisions" title="show revision history for this post">
+        Shubh
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-26487977" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-42548832" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Good to know, where can I read more hands down examples like these?</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/1410465/svarog" title="275 reputation" class="comment-user">svarog</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment42548832_26487977"><span title="2014-11-19 07:08:55Z" class="relativetime-clean">Nov 19 '14 at 7:08</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-26487977" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="22664687"></a>
+<div id="answer-22664687" class="answer" data-answerid="22664687" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="22664687" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>To invoke strict mode for an entire script, put the exact statement <code>"use strict";</code> (or <code>'use strict';</code>) before any other statements.</p>
+
+<pre style="" class="default prettyprint prettyprinted"><code><span class="com">// Whole-script strict mode syntax</span><span class="pln">
+</span><span class="str">"use strict"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> v </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Hi!  I'm a strict mode script!"</span><span class="pun">;</span></code></pre>
+
+<p>This syntax has a trap that has already bitten a major site: it isn't
+ possible to blindly concatenate non-conflicting scripts. Consider 
+concatenating a strict mode script with a non-strict mode script: the 
+entire concatenation looks strict! The inverse is also true: non-strict 
+plus strict looks non-strict. Concatenation of strict mode scripts with 
+each other is fine, and concatenation of non-strict mode scripts is 
+fine. Only concatenating strict and non-strict scripts is problematic. 
+It is thus recommended that you enable strict mode on a 
+function-by-function basis (at least during the transition period).</p>
+
+<p>You can also take the approach of wrapping the entire contents of a 
+script in a function and having that outer function use strict mode. 
+This eliminates the concatenation problem but it means that you have to 
+explicitly export any global variables out of the function scope.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/22664687" title="short permalink to this answer" class="short-link" id="link-post-22664687">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/22664687/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/22664687/revisions" title="show all edits to this post">edited <span title="2014-06-04 20:22:01Z" class="relativetime">Jun 4 '14 at 20:22</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/241211/michael"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/f3efe4930dab0a7c2cdcc5fdc7764696.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/241211/michael">Michael</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">731</span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-03-26 14:50:52Z" class="relativetime">Mar 26 '14 at 14:50</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1458467/reishabh"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/36dc1101bc428630686c2ae56b1a53ec.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1458467/reishabh">Reishabh</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">171</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-22664687" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-44080123" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This is an excellent point, but it doesn't answer the question that was asked.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/615754/nnnnnn" title="72611 reputation" class="comment-user">nnnnnn</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment44080123_22664687"><span title="2015-01-08 10:35:56Z" class="relativetime-clean">Jan 8 at 10:35</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-22664687" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="27114400"></a>
+<div id="answer-27114400" class="answer" data-answerid="27114400" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="27114400" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p><code>"use strict";</code> instructs the browser to use the Strict mode, which is a reduced and safer feature set   of javascript. </p>
+
+<h2>List of features (non exhaustive)</h2>
+
+<ol>
+<li><p>Disallows global variables. (Catches missing var declarations and typos in variable names) </p></li>
+<li><p>Silent failing assignments will throw error in strict mode (<code>assigning NaN = 5;</code>) </p></li>
+<li><p>Attempts to delete undeletable properties will throw (<code>delete Object.prototype</code>) </p></li>
+<li><p>Requires all property names in an object literal to be unique (<code>var x = {x1: "1", x1: "2"}</code>) </p></li>
+<li><p>Function parameter names must be unique (<code>function sum (x, x) {...}</code>) </p></li>
+<li><p>Forbids Octal syntax (<code>var x = 023;// some devs assume wrongly that a preceding zero does nothing to change the number.</code> ) </p></li>
+<li><p>Forbids the <code>with</code> keyword <code>eval</code> in strict mode does not introduce new variables  </p></li>
+<li><p>Forbids deleting plain names (<code>delete x;</code>)</p></li>
+<li><p>Forbids binding or assignment of the names 'eval' and 'arguments' in any form </p></li>
+<li><p>Strict mode does not alias properties of the arguments object with the formal parameters. (i.e. in <code>function sum (a,b) { return arguments[0] + b;}</code> This works because arguments[0] is bound to a and so on. )</p></li>
+<li><p><code>arguments.callee</code> is not supported</p></li>
+</ol>
+
+<p>[Ref: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode%5D">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode]</a></p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/27114400" title="short permalink to this answer" class="short-link" id="link-post-27114400">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/27114400/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2014-11-24 21:22:08Z" class="relativetime">Nov 24 '14 at 21:22</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/223656/gprasant"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/461bf497b8c2b0dbc9b1128ae1915b6f.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/223656/gprasant">gprasant</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,464</span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="37 bronze badges"><span class="badge3"></span><span class="badgecount">37</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-27114400" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-27114400" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="16863603"></a>
+<div id="answer-16863603" class="answer" data-answerid="16863603" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="16863603" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>"Use Strict"; is an insurance that programmer will not use the loose 
+or the bad properties of JavaScript. It is a guide, just like a ruler 
+will help you make straight lines. "Use Strict" will help you do 
+"Straight coding".</p>
+
+<p>Those that prefer not to use rulers to do their lines straight 
+usually end up in those pages asking for others to debug their code.</p>
+
+<p>Believe me. The overhead is negligible compared to poorly designed code. <a href="http://www.yuiblog.com/blog/2010/12/14/strict-mode-is-coming-to-town/" rel="nofollow">Doug Crockford, who has been a senior JavaScript developer for several years, has a very interesting post here</a>. Personally, I like to return to his site all the time to make sure I don't forget my good practice.</p>
+
+<p><strong>Modern JavaScript practice should always evoke the "Use Strict"; pragma.</strong> The only reason that the ECMA Group has made the "Strict" mode optional <em>is to permit less experienced coders access to JavaScript and give then time to adapt to the new and safer coding practices.</em></p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/16863603" title="short permalink to this answer" class="short-link" id="link-post-16863603">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/16863603/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/16863603/revisions" title="show all edits to this post">edited <span title="2014-10-26 10:34:02Z" class="relativetime">Oct 26 '14 at 10:34</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/63550/peter-mortensen"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/RIZKi.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/63550/peter-mortensen">Peter Mortensen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,831</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="55 silver badges"><span class="badge2"></span><span class="badgecount">55</span></span><span title="90 bronze badges"><span class="badge3"></span><span class="badgecount">90</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-05-31 18:29:33Z" class="relativetime">May 31 '13 at 18:29</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/2436758/user2436758"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/ead26e2f17b7b7f5f7a823224febc4b9.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/2436758/user2436758">user2436758</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">253</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-16863603" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-29275320" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="supernova">42</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">The reason strict mode is optional has nothing to do with what you've stated.  The real reason <i>is to not break existing code that may not conform</i>.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/34806/george-jempty" title="4068 reputation" class="comment-user">George Jempty</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment29275320_16863603"><span title="2013-10-31 13:34:21Z" class="relativetime-clean">Oct 31 '13 at 13:34</span></a></span>
+                    <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39572899" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">8</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Indeed, the less experienced coders ought to be the <i>first</i> ones to enable the "use strict";</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/918959/antti-haapala" title="12824 reputation" class="comment-user">Antti Haapala</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment39572899_16863603"><span title="2014-08-19 05:37:20Z" class="relativetime-clean">Aug 19 '14 at 5:37</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-16863603" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="22687419"></a>
+<div id="answer-22687419" class="answer" data-answerid="22687419" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="22687419" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Strict mode makes several changes to normal JavaScript semantics:</p>
+
+<ul>
+<li><p>eliminates some JavaScript silent errors by changing them
+to throw errors.</p></li>
+<li><p>fixes mistakes that make it difficult for JavaScript
+engines to perform optimizations.</p></li>
+<li><p>prohibits some syntax likely to be defined in future
+versions of ECMAScript.</p></li>
+</ul>
+
+<p>for more information vistit <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode" rel="nofollow">Strict Mode- Javascript</a></p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/22687419" title="short permalink to this answer" class="short-link" id="link-post-22687419">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/22687419/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/22687419/revisions" title="show all edits to this post">edited <span title="2014-10-29 17:34:22Z" class="relativetime">Oct 29 '14 at 17:34</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/220935/alexy13"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/031ad508ae8ee452ac3ee85d998df134.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/220935/alexy13">alexy13</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,561</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="19 silver badges"><span class="badge2"></span><span class="badgecount">19</span></span><span title="43 bronze badges"><span class="badge3"></span><span class="badgecount">43</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-03-27 12:18:30Z" class="relativetime">Mar 27 '14 at 12:18</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/972950/renganathan-m-g"><div><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/2f61b96b6c9c5421e9e931af0cf086da.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/972950/renganathan-m-g">RENGANATHAN M G</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">478</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-22687419" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-22687419" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="22725570"></a>
+<div id="answer-22725570" class="answer" data-answerid="22725570" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="22725570" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>There's a good talk by some people who were on the ECMAScript committee: <a href="http://www.youtube.com/watch?v=Kq4FpMe6cRs" rel="nofollow">Changes to JavaScript, Part 1: ECMAScript 5"</a> about how incremental use of the <code>"use strict"</code>
+ switch allows JavaScript implementers to clean up a lot of the 
+dangerous features of JavaScript without suddenly breaking every website
+ in the world.</p>
+
+<p>Of course it also talks about just what a lot of those misfeatures are (were) and how ECMAScript 5 fixes them.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/22725570" title="short permalink to this answer" class="short-link" id="link-post-22725570">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/22725570/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/22725570/revisions" title="show all edits to this post">edited <span title="2014-03-29 19:39:26Z" class="relativetime">Mar 29 '14 at 19:39</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-03-29 00:47:24Z" class="relativetime">Mar 29 '14 at 0:47</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/310710/futurenerd"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/fnplN.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/310710/futurenerd">FutureNerd</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">141</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-22725570" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-22725570" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="25686413"></a>
+<div id="answer-25686413" class="answer" data-answerid="25686413" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input name="_id_" value="25686413" type="hidden">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Including "<strong>use strict</strong>" in the beginning of your all 
+sensitive JavaScript files from this point is a small way to be a better
+ JavaScript programmer and avoid random variables becoming global and 
+things change silently.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/25686413" title="short permalink to this answer" class="short-link" id="link-post-25686413">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/25686413/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-09-05 12:53:26Z" class="relativetime">Sep 5 '14 at 12:53</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/904554/little-dinosaur"><div class="gravatar-wrapper-32"><img src="syntax%20-%20What%20does%20%27use%20strict%27%20do%20in%20JavaScript,%20and%20what%20is%20the%20reasoning%20behind%20it%20%20-%20Stack%20Overflow_files/ZHNs1.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/904554/little-dinosaur">little dinosaur</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">541</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="22 bronze badges"><span class="badge3"></span><span class="badgecount">22</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25686413" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+            <div id="comments-link-25686413" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+				        <div class="question-status">
+        <h2>                    <b>protected</b> by <a href="http://stackoverflow.com/users/1723893/nullpoi%d0%b8te%d1%8f">NullPoiиteя</a> <span dir="ltr"><span title="2013-06-10 05:02:18Z" class="relativetime">Jun 10 '13 at 5:02</span></span>
+</h2>
+        <p>
+Thank you for your interest in this question.   Because it has attracted low-quality answers, posting an answer now requires 10 <a href="http://stackoverflow.com/help/whats-reputation">reputation</a> on this site.  <br><br>  Would you like to answer one of these <a href="http://stackoverflow.com/unanswered?fromProtectedNotice=true">unanswered questions</a> instead?  </p>
+    </div>
+
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/javascript" class="post-tag" title="show questions tagged 'javascript'" rel="tag">javascript</a> <a href="http://stackoverflow.com/questions/tagged/syntax" class="post-tag" title="show questions tagged 'syntax'" rel="tag">syntax</a> <a href="http://stackoverflow.com/questions/tagged/jslint" class="post-tag" title="show questions tagged 'jslint'" rel="tag">jslint</a> <a href="http://stackoverflow.com/questions/tagged/crockford" class="post-tag" title="show questions tagged 'crockford'" rel="tag">crockford</a> <a href="http://stackoverflow.com/questions/tagged/use-strict" class="post-tag" title="show questions tagged 'use-strict'" rel="tag">use-strict</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2009-08-26 16:10:13Z"><b>5 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>454132 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it?lastactivity" class="lastactivity-link" title="2014-12-15 15:26:46Z">29 days ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+						
+			<div class="everyonelovesstackoverflow" id="careers2">
+        </div>
+        <div id="hireme">
+            <script>
+window.careers_adurl="//careers.stackoverflow.com/ad/companyjs",window.careers_cssurl="//cdn-careers.sstatic.net/careers/gethired/company.min.css?v=23eb103c5bb3",window.careers_cssurl2="//cdn-careers.sstatic.net/careers/gethired/sidebar.min.css?v=42e1b750f0fa",window.careers_adselector="#hireme",StackExchange.ready(function(){$.ajax({url:"//cdn-careers.sstatic.net/careers/gethired/company-loader.min.js?v=d38fcbba30f7",dataType:"script",cache:!1})});            </script>
+            
+        </div>
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/18417381?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">17</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/18417381/in-node-js-how-the-use-strict-statement-is-interpreted?lq=1" class="question-hyperlink">In node.js, how the 'use strict' statement is interpreted?</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/14889967?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">4</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/14889967/use-strict-in-javascript?lq=1" class="question-hyperlink">“use strict” in javascript</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/21814335?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/21814335/benefits-of-use-strict-in-js?lq=1" class="question-hyperlink">Benefits of “Use Strict” in JS</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/13487129?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/13487129/why-using-strict-mode-in-javascript-libraries?lq=1" class="question-hyperlink">Why using `strict mode` in JavaScript libraries?</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/27448784?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/27448784/why-is-use-strict-still-a-string-literal?lq=1" class="question-hyperlink">Why is “use strict” still a string literal?</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/1232040?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">864</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/1232040/empty-an-array-in-javascript?lq=1" class="question-hyperlink">Empty an array in JavaScript?</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/8107000?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">23</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/8107000/jshint-com-requires-using-strict-what-does-this-mean?lq=1" class="question-hyperlink">Jshint.com requires “using strict”. What does this mean?</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/6020178?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">18</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/6020178/can-i-disable-ecmascript-strict-mode-for-specific-functions?lq=1" class="question-hyperlink">Can I disable ECMAscript strict mode for specific functions?</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/6246939?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">18</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/6246939/start-play-embedded-iframe-youtube-video-on-click-of-an-image?lq=1" class="question-hyperlink">start/play embedded (iframe) youtube-video on click of an image</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/2343608?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">21</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/2343608/in-ecmascript5-whats-the-scope-of-use-strict?lq=1" class="question-hyperlink">In ECMAScript5, what's the scope of “use strict”?</a>
+</div>					<div class="spacer more">
+				<a href="http://stackoverflow.com/questions/linked/1335851?lq=1">see more linked questions…</a>
+			</div>
+	</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/810313?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">43
+    </div>
+</a><a href="http://stackoverflow.com/questions/810313/what-is-the-reason-behind-jslint-saying-there-are-too-many-var-statements?rq=1" class="question-hyperlink">What is the reason behind JSLint saying there are “too many var statements”</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/7300005?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">13
+    </div>
+</a><a href="http://stackoverflow.com/questions/7300005/javascript-jslint-what-to-replace-jquerythis-with-when-using-use-strict?rq=1" class="question-hyperlink">Javascript/jsLint: What to replace jQuery(this) with when using “use strict”;</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/7955160?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/7955160/jslint-complains-about-function-expression-namespace-syntax?rq=1" class="question-hyperlink">JSLint complains about function expression namespace syntax</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/11617793?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/11617793/web-browser-is-being-strict-for-operations-on-undefined-variables-in-javascrip?rq=1" class="question-hyperlink">Web browser is being “strict” for operations on undefined variables in Javascript</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/13264105?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/13264105/use-strict-causes-undefined-error?rq=1" class="question-hyperlink">“use strict” causes undefined error</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/14932520?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/14932520/is-bad-line-breaking-obsolete-with-use-strict?rq=1" class="question-hyperlink">Is “Bad Line Breaking” obsolete with “use strict”?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/17307060?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="http://stackoverflow.com/questions/17307060/why-does-jslint-not-like-objectobj?rq=1" class="question-hyperlink">Why does jslint not like Object(obj)</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/17770048?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/17770048/why-does-jslint-give-strict-violation-error-on-this-function?rq=1" class="question-hyperlink">Why does JSLint give strict violation error on this function?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/20841450?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="http://stackoverflow.com/questions/20841450/does-the-type-of-quotes-matter-when-using-use-strict?rq=1" class="question-hyperlink">Does the type of quotes matter when using use strict?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24461186?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">8
+    </div>
+</a><a href="http://stackoverflow.com/questions/24461186/why-does-jslint-prefer-constructorobj-over-objectobj?rq=1" class="question-hyperlink">Why does jslint prefer {}.constructor(obj) over Object(obj)</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="http://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-space" title="Space Exploration Stack Exchange"></div><a href="http://space.stackexchange.com/questions/7792/if-the-apollo-mandate-were-delivered-today-would-the-mission-vehicles-and-pro" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:508 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    If the Apollo mandate were delivered today, would the mission vehicle(s) and profile be similar?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-ux" title="User Experience Stack Exchange"></div><a href="http://ux.stackexchange.com/questions/71887/why-did-the-mouse-beat-the-light-pen-paddle-and-other-pointing-devices" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:102 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why did the mouse beat the light pen, paddle, and other pointing devices?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="http://aviation.stackexchange.com/questions/11659/is-there-any-limit-by-faa-on-the-age-of-aircraft-to-be-operational" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there any limit by FAA on the age of aircraft to be operational
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="http://aviation.stackexchange.com/questions/11694/can-seaplanes-be-landed-on-normal-airfields-or-some-muddy-or-marshed-areas" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can seaplanes be landed on normal airfields or some muddy or marshed areas?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-salesforce" title="Salesforce Stack Exchange"></div><a href="http://salesforce.stackexchange.com/questions/63286/best-practices-page-reference-method-return-null" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:459 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Best Practices : Page Reference method return null
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/221378/when-someone-has-great-influence-within-a-group-how-do-you-call-his-situation" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    When someone has great influence within a group, how do you call his situation?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/27926505/what-type-of-object-is-an-r-package" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What type of object is an R package?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-boardgames" title="Board &amp; Card Games Stack Exchange"></div><a href="http://boardgames.stackexchange.com/questions/22504/can-you-force-property-onto-players-in-monopoly" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:147 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can you force property onto players in Monopoly
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1103223/does-a-non-abelian-semigroup-without-identity-exist" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Does a non-abelian semigroup without identity exist?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/79025/how-to-describe-rc4-bias-to-non-tech-people" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to describe RC4 'bias' to non-tech people
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/79109/how-does-ollivander-distinguish-wands-by-sight" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does Ollivander distinguish wands by sight?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="http://tex.stackexchange.com/questions/222882/drawing-minimal-xy-axis" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Drawing minimal xy axis
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="http://gaming.stackexchange.com/questions/201554/what-is-the-best-angle-for-an-enderpearl-if-i-am-aiming-for-distance" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the best angle for an enderpearl if I am aiming for distance?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/79104/what-exactly-is-an-abomination-in-frank-herberts-dune-universe" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What exactly is an "abomination" in Frank Herbert's Dune Universe?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="http://workplace.stackexchange.com/questions/40268/should-i-give-honest-but-bad-feedback-about-a-colleague-when-asked-by-another" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should I give honest (but bad) feedback about a colleague when asked by another team looking to hire him?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="http://movies.stackexchange.com/questions/30024/identify-this-movie-animation-between-1990-and-2005" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Identify This Movie: Animation between 1990 and 2005
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/36721/would-successive-rejections-of-different-papers-by-the-same-journal-lower-the-pr" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Would successive rejections of different papers by 
+the same journal lower the probability of acceptance of the next 
+submission to the same journal?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/36746/techniques-for-good-board-handwriting" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Techniques for good board handwriting
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/221319/what-do-you-call-an-individual-who-tolerates-criticism" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What do you call an individual who tolerates criticism?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/44278/debunking-stroustrups-debunking-of-the-myth-c-is-for-large-complicated-pro" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Debunking Stroustrup's debunking of the myth “C++ is for large, complicated, programs only”
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="http://rpg.stackexchange.com/questions/55274/with-the-lifespan-of-elves-would-you-ever-encounter-a-low-level-elf" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    With the lifespan of elves, would you ever encounter a low-level elf?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-blender" title="Blender Stack Exchange"></div><a href="http://blender.stackexchange.com/questions/23170/why-cant-i-import-a-svg-file" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:502 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why can't I import a SVG file?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="http://travel.stackexchange.com/questions/41893/are-non-muslims-allowed-to-build-snowmen-in-saudi-arabia-and-similar-countries" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Are non-Muslims allowed to build snowmen in Saudi Arabia and similar countries?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1100141/why-are-primes-considered-to-be-the-building-blocks-of-the-integers" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why are primes considered to be the "building blocks" of the integers?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/1335851" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/1335851/ivc/62da');});
+</script>
+<noscript>
+    <div><img src="/posts/1335851/ivc/62da" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="http://blog.stackoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="http://data.stackexchange.com/">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on")'>mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com/" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (10)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com/">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo © 2015 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a>                   with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2015.1.13.2171
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5620270-1');        
+        
+        ga('set', 'dimension2', '|javascript|syntax|jslint|crockford|use-strict|');         
+        ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+            qc.async=true;
+            qc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+            s.parentNode.insertBefore(qc, s);
+            var sc=document.createElement('script');
+            sc.async=true;
+            sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+            s.parentNode.insertBefore(sc, s);
+        })();
+        _comscore.push({ c1: "2", c2: "17440561" });
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+    
+</body></html>

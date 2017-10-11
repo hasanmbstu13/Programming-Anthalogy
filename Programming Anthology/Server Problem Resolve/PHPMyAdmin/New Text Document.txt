@@ -1,0 +1,11 @@
+Problem: #1142 - SELECT command denied to user ''@'localhost' for table 'pma_table_uiprefs'
+
+Solution: comment $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin'; this line in 
+	phpmyadmin folder -> config.inc.php
+
+
+Mysql problem
+Run cmd.exe in administrator way
+then write 'sc delete mysql'
+run  xampp as administration way
+then install service

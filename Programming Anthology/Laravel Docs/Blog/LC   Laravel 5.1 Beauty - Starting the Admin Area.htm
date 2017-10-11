@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Starting the administration area for the Laravel 5.1 Beauty blog, compiling assets, and customizing the log in/out process.">
+  <meta name="author" content="Chuck Heintzelman">
+
+  <title>LC :: Laravel 5.1 Beauty - Starting the Admin Area</title>
+
+    <link href="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/bootstrap.css" rel="stylesheet">
+  <link href="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/blog.css" rel="stylesheet">
+    <link href="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/rainbow.css" rel="stylesheet">
+
+    <link href="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/font-awesome.css" rel="stylesheet" type="text/css">
+  <link href="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/css.css" rel="stylesheet" type="text/css">
+  <link href="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/css_002.css" rel="stylesheet" type="text/css">
+
+  <link rel="icon" type="image/x-icon" href="http://laravelcoding.com/favicon.ico">
+  <link rel="alternate" type="application/rss+xml" href="http://laravelcoding.com/rss" title="Chuck Heintzelman's Laravel Coding">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+<script src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/analytics.js" async=""></script><script src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/embed.js" async="" type="text/javascript"></script><script charset="UTF-8" async="" src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/alfie.js"></script><style id="igtranslator-color" type="text/css"></style></head>
+<body>
+  <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://laravelcoding.com/">Chuck Heintzelman</a>
+    </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="http://laravelcoding.com/">Home</a>
+        </li>
+        <li>
+          <a href="http://laravelcoding.com/blog?tag=L5+Beauty">Laravel 5 Beauty</a>
+        </li>
+      </ul>
+              <ul class="nav navbar-nav navbar-right">
+                      <li><a href="http://leanpub.com/l5-beauty"><span style="color:#ff6699">The Laravel 5.1 Beauty Book</span></a></li>
+                  </ul>
+          </div>
+  </div>
+</nav>
+    <header class="intro-header" style="background-image: url('http://chuckheintzelman.com.s3-us-west-2.amazonaws.com/dtsp/758.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="post-heading">
+            <h1>Laravel 5.1 Beauty - Starting the Admin Area</h1>
+            <h2 class="subheading">Creating the skeleton of the administration area for our blog.</h2>
+            <span class="meta">
+              Posted on April 5, 2015
+                              in
+                <a href="http://laravelcoding.com/blog?tag=L5+Beauty">L5 Beauty</a>
+                          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+    <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="alert alert-success">
+<b>Note:</b> this is the sixth step in the tutorial.
+</div>
+
+<p>In this chapter we’ll continue building on the <strong>l5beauty</strong> project and start developing the administration area.</p>
+
+<h2>Chapter Contents</h2>
+
+<ul>
+<li><a href="#08-routes">Establishing the Routes</a>
+
+<ul>
+<li><a href="#08-middleware">Middleware</a></li>
+<li><a href="#08-resourcectls">Resource Controllers</a></li>
+</ul></li>
+<li><a href="#08-adminctrl">Creating the Admin Controllers</a></li>
+<li><a href="#08-views">Creating the Views</a>
+
+<ul>
+<li><a href="#08-adminlay">Creating an Admin Layout</a></li>
+<li><a href="#08-navbar">Creating the Navbar Partial</a></li>
+<li><a href="#08-loginform">Creating the Login Form</a></li>
+<li><a href="#08-errors">Creating the Errors Partial</a></li>
+<li><a href="#08-postindex">Creating the Post Index View</a></li>
+</ul></li>
+<li><a href="#08-loginout">Testing logging in and out</a>
+
+<ul>
+<li><a href="#08-adminuser">Creating the admin user</a></li>
+<li><a href="#08-fixlogout">Fixing log out location</a></li>
+<li><a href="#08-fixloginloc">Fix default login location</a></li>
+<li><a href="#08-loginout2">Logging in and out</a></li>
+</ul></li>
+<li><a href="#08-cleanfiles">Cleaning up a couple unneeded files</a></li>
+<li><a href="#recap-08">Recap</a></li>
+</ul>
+
+<h2 id="08-routes">Establishing the Routes</h2>
+
+<p>In the last chapter, when creating the blog in 10 minutes, the <code>app/Http/routes.php</code> file was set up for the blog. Now, we’ll add some additional routes for administration.</p>
+
+<div class="well media">
+
+<div class="media-left">
+   <i class="fa fa-question-circle fa-2x fa-fw"></i>
+ </div>
+
+<div class="media-body">
+
+<h4 class="media-heading">Why Routes?</h4>
+
+<p>Laravel 5.1 needs a way to tie web requests to the code that handles the
+web request. This is called routing. All routing within this book is
+defined in the <code>app/Http/routes.php</code> file.</p>
+
+<p>Whenever a web request is made to a file that doesn’t exist within the
+<code>public</code> directory, Laravel 5.1 looks at the routes file to determine
+what to return. For instance, a web request to <code>/css/app.css</code> will be
+handled by the web server (assuming <code>public/css/app.css</code> exists), but
+a request to <code>/blog/my-welcome-page</code> doesn’t exist in the <code>public</code>
+directory and Laravel 5.1 tries to find a matching route to execute.</p>
+
+</div>
+
+</div>
+
+<p>Update the <code>app/Http/routes.php</code> to match what’s below.</p>
+
+<h4 class="caption-title">Adding Admin Routes</h4>
+
+<pre><code class="language-php rainbow"><span class="variable language php-tag">&lt;?php</span>
+
+<span class="comment">// Blog pages</span>
+<span class="function call">get</span>(<span class="string">'/'</span>, <span class="storage function">function</span> () {
+  <span class="keyword">return</span> <span class="function call">redirect</span>(<span class="string">'/blog'</span>);
+});
+<span class="function call">get</span>(<span class="string">'blog'</span>, <span class="string">'BlogController@index'</span>);
+<span class="function call">get</span>(<span class="string">'blog/{slug}'</span>, <span class="string">'BlogController@showPost'</span>);
+
+<span class="comment">// Admin area</span>
+<span class="function call">get</span>(<span class="string">'admin'</span>, <span class="storage function">function</span> () {
+  <span class="keyword">return</span> <span class="function call">redirect</span>(<span class="string">'/admin/post'</span>);
+});
+<span class="variable dollar-sign">$</span><span class="variable">router</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span><span class="function call">group</span>([
+  <span class="string">'namespace'</span> <span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">'Admin'</span>,
+  <span class="string">'middleware'</span> <span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">'auth'</span>,
+], <span class="storage function">function</span> () {
+  <span class="function call">resource</span>(<span class="string">'admin/post'</span>, <span class="string">'PostController'</span>);
+  <span class="function call">resource</span>(<span class="string">'admin/tag'</span>, <span class="string">'TagController'</span>);
+  <span class="function call">get</span>(<span class="string">'admin/upload'</span>, <span class="string">'UploadController@index'</span>);
+});
+
+<span class="comment">// Logging in and out</span>
+<span class="function call">get</span>(<span class="string">'/auth/login'</span>, <span class="string">'Auth\AuthController@getLogin'</span>);
+<span class="function call">post</span>(<span class="string">'/auth/login'</span>, <span class="string">'Auth\AuthController@postLogin'</span>);
+<span class="function call">get</span>(<span class="string">'/auth/logout'</span>, <span class="string">'Auth\AuthController@getLogout'</span>);
+
+</code></pre>
+
+<dl>
+<dt>Line 11 - 13</dt>
+<dd>Redirect requests to <code>/admin</code> to the <code>/admin/post</code> page</dd>
+
+<dt>Line 14 - 16</dt>
+<dd>Start a routing group using the namespace <code>Admin</code> (which actually will expand out to <code>App\Http\Controllers\Admin</code>) and force the <code>auth</code> middleware to be active. (See the section below on Middleware).</dd>
+
+<dt>Line 18 - 19</dt>
+<dd>Within the route group, add two <strong>Resource Controllers</strong> (see below).</dd>
+
+<dt>Line 20</dt>
+<dd>Add a route so whenever a GET request is made to <code>/admin/upload</code> the <code>index()</code> method of <code>App\Http\Controllers\Admin\UploadController</code> will be called.</dd>
+
+<dt>Line 24 - 26</dt>
+<dd>Here we add routes for logging in and logging out.</dd>
+</dl>
+
+<p>Once you save the <code>routes.php</code> file, the next step will be to create any missing controllers. But before we get to that, let’s explore a couple concepts: <em>Middleware</em> and <em>Resource Controllers</em>.</p>
+
+<div class="well media">
+
+<div class="media-left">
+   <i class="fa fa-info-circle fa-2x fa-fw"></i>
+ </div>
+
+<div class="media-body">
+
+<h4 class="media-heading">Tip - Read the Docs</h4>
+
+<p>Check out the <a href="http://laravel.com/docs/5.1/routing">Laravel 5.1 documentation</a>
+on routing for more information about routing.</p>
+
+</div>
+
+</div>
+
+<h3 id="08-middleware">Middleware</h3>
+
+<p>If you used Laravel 4 you may recall the concept of filters. The 
+middleware in Laravel 5.1 provides the functionality that filters did in
+ Laravel 4, but they are more aptly named.</p>
+
+<h4 class="caption-title">Abstract Flow of Request to Response</h4>
+
+<pre><code>HTTP request received
+-&gt; Check for maintenance mode*
+   -&gt; Start session*
+      -&gt; Get response from controller action
+   -&gt; Encrypt Cookies*
+-&gt; Add cookies to response*
+Return response to user
+</code></pre>
+
+<p>In this simplified flow from a request to the response, the items with the asterisk(*) at the end are considered middleware.</p>
+
+<p>The file <code>app/Http/Kernel.php</code> contains a list of the middleware for your application. When viewing this file note the <code>$middleware</code> property contains the global middleware (that is, middleware always executed) and the <code>$routeMiddleware</code> property contains a list of middleware that can be applied at the route level</p>
+
+<h4>Auth Middleware</h4>
+
+<p>Let’s say a route has the <strong>auth</strong> middleware active, the flow would look similar to what’s below.</p>
+
+<h4 class="caption-title">Request to Response with auth middleware</h4>
+
+<pre><code>HTTP request received
+-&gt; Global "before" middleware
+   -&gt; (auth) If not logged on then return redirect to logon form
+      -&gt; Get response from controller action
+-&gt; Global "after" middleware
+Return response to user
+</code></pre>
+
+<p>Thus, if the <strong>auth</strong> middleware detects the user is not
+ logged on, the controller action is never executed and, instead, the 
+user is redirected to the logon page.</p>
+
+<div class="well media">
+
+<div class="media-left">
+   <i class="fa fa-info-circle fa-2x fa-fw"></i>
+ </div>
+
+<div class="media-body">
+
+<h4 class="media-heading">More About Middleware</h4>
+
+<p>The best place to learn more about Laravel 5.1 Middleware is the official
+<a href="http://laravel.com/docs/5.1/middleware">Laravel 5.1 documentation</a>.</p>
+
+</div>
+
+</div>
+
+<h3 id="08-resourcectls">Resource Controllers</h3>
+
+<p>In our routing file earlier we specified a resourceful route using the <code>resource()</code>
+ function. This single declaration creates multiple routes, names those 
+routes, and points them to a series of expected action methods on the 
+controller.</p>
+
+<p>For example, the <code>resource('admin/post', 'PostController')</code> statement sets up all the routes in the table below.</p>
+
+<h4 class="caption-title">Table 8.1 - Resource routes on the Post controller</h4>
+
+<table class="table table-striped table-hover">
+<thead>
+<tr>
+  <th>HTTP Verb</th>
+  <th>Path</th>
+  <th>Action Method</th>
+  <th>Route Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>GET</td>
+  <td>admin/post</td>
+  <td>index()</td>
+  <td>admin.post.index</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td>admin/post/create</td>
+  <td>create()</td>
+  <td>admin.post.create</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td>admin/post</td>
+  <td>store()</td>
+  <td>admin.post.store</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td>admin/post/{post}</td>
+  <td>show()</td>
+  <td>admin.post.show</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td>admin/post/{post}/edit</td>
+  <td>edit()</td>
+  <td>admin.post.edit</td>
+</tr>
+<tr>
+  <td>PUT/PATCH</td>
+  <td>admin/post/{post}</td>
+  <td>update()</td>
+  <td>admin.post.update</td>
+</tr>
+<tr>
+  <td>DELETE</td>
+  <td>admin/post/{post}</td>
+  <td>destroy()</td>
+  <td>admin.post.destroy</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="08-adminctrl">Creating the Admin Controllers</h2>
+
+<p>Now that the routes are set up for the administration area, use artisan to create the controllers.</p>
+
+<h4 class="caption-title">Creating the admin controllers with artisan</h4>
+
+<pre><code class="language-shell rainbow">~/Code/l5beauty$ php artisan make:controller Admin\\PostController
+Controller created successfully.
+
+~/Code/l5beauty$ php artisan make:controller Admin\\TagController
+Controller created successfully.
+
+~/Code/l5beauty$ php artisan make:controller Admin\\UploadController --plain
+Controller created successfully.
+</code></pre>
+
+<p>Upon completion of the above three artisan commands, there will be three new controller files in the <code>app/Http/Controllers/Admin</code> directory.</p>
+
+<p><strong>NOTE: The <code>--plain</code> option was only used on the upload controller.</strong> The <code>PostController.php</code> and <code>TagController.php</code> files will be created with all the required methods stubbed out.</p>
+
+<div class="well media">
+
+<div class="media-left">
+   <i class="fa fa-hand-o-right fa-2x fa-fw"></i>
+ </div>
+
+<div class="media-body">
+
+<h4 class="media-heading">Try the artisan route:list command</h4>
+
+<p>If you use the <code>artisan route:list</code> command now from the Homestead VM
+you’ll see all the routes and all the actions and controllers they map to.</p>
+
+</div>
+
+</div>
+
+<p>Update the <code>index()</code> method within the <code>PostController</code> class to match what’s below.</p>
+
+<h4 class="caption-title">PostController’s index() method</h4>
+
+<pre><code class="language-php rainbow">  <span class="comment">/**
+   * Display a listing of the posts.
+   *
+   * @return Response
+   */</span>
+  <span class="keyword">public</span> <span class="storage function">function</span> <span class="entity name function">index</span>()
+  {
+    <span class="keyword">return</span> <span class="function call">view</span>(<span class="string">'admin.post.index'</span>);
+  }
+</code></pre>
+
+<p>The <code>index()</code> method simply returns the view. We’ll build it shortly.</p>
+
+<h2 id="08-views">Creating the Views</h2>
+
+<p>There’s a few views we need to create. Let’s just run through them one-by-one.</p>
+
+<h3 id="08-adminlay">Creating an Admin Layout</h3>
+
+<p>The Blade templating engine is one of the most powerful features of 
+Laravel. We’ll set up a layout to use for our blog administration which 
+will give the administrationi area a consistent look.</p>
+
+<p>Create a directory named <code>resources/views/admin</code> and within this directory create a <code>layout.blade.php</code> file with the following content.</p>
+
+<h4 class="caption-title">Content of admin.layout view</h4>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+  &lt;title&gt;{{ config('blog.title') }} Admin&lt;/title&gt;
+
+  &lt;link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+        rel="stylesheet"&gt;
+  @yield('styles')
+
+  &lt;!--[if lt IE 9]&gt;
+    &lt;script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"&gt;&lt;/script&gt;
+    &lt;script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"&gt;&lt;/script&gt;
+  &lt;![endif]--&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+{{-- Navigation Bar --}}
+&lt;nav class="navbar navbar-default"&gt;
+  &lt;div class="container-fluid"&gt;
+    &lt;div class="navbar-header"&gt;
+      &lt;button type="button" class="navbar-toggle collapsed"
+              data-toggle="collapse" data-target="#navbar-menu"&gt;
+        &lt;span class="sr-only"&gt;Toggle Navigation&lt;/span&gt;
+        &lt;span class="icon-bar"&gt;&lt;/span&gt;
+        &lt;span class="icon-bar"&gt;&lt;/span&gt;
+        &lt;span class="icon-bar"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;a class="navbar-brand" href="#"&gt;{{ config('blog.title') }} Admin&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="collapse navbar-collapse" id="navbar-menu"&gt;
+      @include('admin.partials.navbar')
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+
+@yield('content')
+
+&lt;script
+src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script
+src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"&gt;&lt;/script&gt;
+
+@yield('scripts')
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>This snippet of code may look familiar. It’s the Basic template for <a href="http://getbootstrap.com/">Bootstrap</a>. There’s just a few additional hooks in it.</p>
+
+<dl>
+<dt><code>&lt;title&gt;{{ config('blog.title') }} Admin&lt;/title&gt;</code></dt>
+<dd>Here we set the title of the page to the blog’s title with the word “Admin” added on.</dd>
+
+<dt><code>@yield('styles')</code></dt>
+<dd>This Blade directive will output the section (if there is one) named <strong>styles</strong>. It allows us to put some extra CSS at the top of the template.</dd>
+
+<dt><code>@include('admin.partials.navbar')</code></dt>
+<dd>Here we’re including another blade template (which does not yet exist).</dd>
+
+<dt><code>@yield('content')</code></dt>
+<dd>This will output the main content of the page.</dd>
+
+<dt><code>@yield('scripts')</code></dt>
+<dd>Here’s where additional javascript can be output.</dd>
+</dl>
+
+<div class="well media">
+
+<div class="media-left">
+   <i class="fa fa-key fa-2x fa-fw"></i>
+ </div>
+
+<div class="media-body">
+
+<h4 class="media-heading">Escaped or Unescaped?</h4>
+
+<p>Blade templates provide two ways to output PHP expressions.
+You can wrap the PHP code in double curly braces <code>{{ 'like this' }}</code> and
+the value of the PHP expression will be output at that point in the
+template, but the output will be escaped—meaning HTML entities will
+be encoded. If you want the value to not be escaped, then wrap the
+expression in a curly brace and double exclamation <code>{!! 'like this' !!}</code>.</p>
+
+</div>
+
+</div>
+
+<h3 id="08-navbar">Creating the Navbar Partial</h3>
+
+<p>This view is the one the layout includes.</p>
+
+<p>Create the new directory <code>resources/admin/partials</code> and within that directory create a <code>navbar.blade.php</code> file with the following content.</p>
+
+<h4 class="caption-title">Initial Content of admin.partials.navbar view</h4>
+
+<pre><code>&lt;ul class="nav navbar-nav"&gt;
+  &lt;li&gt;&lt;a href="/"&gt;Blog Home&lt;/a&gt;&lt;/li&gt;
+  @if (Auth::check())
+    &lt;li @if (Request::is('admin/post*')) class="active" @endif&gt;
+      &lt;a href="/admin/post"&gt;Posts&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li @if (Request::is('admin/tag*')) class="active" @endif&gt;
+      &lt;a href="/admin/tag"&gt;Tags&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li @if (Request::is('admin/upload*')) class="active" @endif&gt;
+      &lt;a href="/admin/upload"&gt;Uploads&lt;/a&gt;
+    &lt;/li&gt;
+  @endif
+&lt;/ul&gt;
+
+&lt;ul class="nav navbar-nav navbar-right"&gt;
+  @if (Auth::guest())
+    &lt;li&gt;&lt;a href="/auth/login"&gt;Login&lt;/a&gt;&lt;/li&gt;
+  @else
+    &lt;li class="dropdown"&gt;
+      &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+         aria-expanded="false"&gt;{{ Auth::user()-&gt;name }}
+        &lt;span class="caret"&gt;&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;ul class="dropdown-menu" role="menu"&gt;
+        &lt;li&gt;&lt;a href="/auth/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  @endif
+&lt;/ul&gt;
+</code></pre>
+
+<p>If a user is logged in, then this template displays a menu for <strong>Posts</strong>, <strong>Tags</strong>, and <strong>Uploads</strong> on the left and a <strong>Logout</strong> on the right.</p>
+
+<p>If there is no user logged in then only a <strong>Login</strong> link is displayed on the right.</p>
+
+<h3 id="08-loginform">Creating the Login Form</h3>
+
+<p>Now that we have an admin layout, creating a login form is a bit simpler. Create the <code>resources/views/auth</code> directory and within this directory create a <code>login.blade.php</code> file with the following content.</p>
+
+<h4 class="caption-title">Content of auth.login view</h4>
+
+<pre><code>@extends('admin.layout')
+
+@section('content')
+  &lt;div class="container-fluid"&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="col-md-8 col-md-offset-2"&gt;
+        &lt;div class="panel panel-default"&gt;
+          &lt;div class="panel-heading"&gt;Login&lt;/div&gt;
+          &lt;div class="panel-body"&gt;
+
+            @include('admin.partials.errors')
+
+            &lt;form class="form-horizontal" role="form" method="POST"
+                  action="{{ url('/auth/login') }}"&gt;
+              &lt;input type="hidden" name="_token" value="{{ csrf_token() }}"&gt;
+
+              &lt;div class="form-group"&gt;
+                &lt;label class="col-md-4 control-label"&gt;E-Mail Address&lt;/label&gt;
+                &lt;div class="col-md-6"&gt;
+                  &lt;input type="email" class="form-control" name="email"
+                         value="{{ old('email') }}" autofocus&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class="form-group"&gt;
+                &lt;label class="col-md-4 control-label"&gt;Password&lt;/label&gt;
+                &lt;div class="col-md-6"&gt;
+                  &lt;input type="password" class="form-control" name="password"&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class="form-group"&gt;
+                &lt;div class="col-md-6 col-md-offset-4"&gt;
+                  &lt;div class="checkbox"&gt;
+                    &lt;label&gt;
+                      &lt;input type="checkbox" name="remember"&gt; Remember Me
+                    &lt;/label&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class="form-group"&gt;
+                &lt;div class="col-md-6 col-md-offset-4"&gt;
+                  &lt;button type="submit" class="btn btn-primary"&gt;Login&lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+@endsection
+</code></pre>
+
+<p>Just a couple things to note in with this form.</p>
+
+<p>We included a not-yet-created <code>admin.partials.errors</code>. This will be created next.</p>
+
+<p>The <code>old()</code> function used to output the value of the email
+ field will contain the value entered if this form generates an error 
+and is displayed again.</p>
+
+<h3 id="08-errors">Creating the Errors Partial</h3>
+
+<p>Checking for input errors and displaying those errors is such a 
+common task when dealing with forms that we’re breaking it out into its 
+own tiny Blade template.</p>
+
+<p>Create a new <code>errors.blade.php</code> file in the <code>resources/views/admin/partials</code> directory with the following content.</p>
+
+<h4 class="caption-title">Content of admin.partials.errors view</h4>
+
+<pre><code>@if (count($errors) &gt; 0)
+  &lt;div class="alert alert-danger"&gt;
+    &lt;strong&gt;Whoops!&lt;/strong&gt;
+    There were some problems with your input.&lt;br&gt;&lt;br&gt;
+    &lt;ul&gt;
+      @foreach ($errors-&gt;all() as $error)
+        &lt;li&gt;{{ $error }}&lt;/li&gt;
+      @endforeach
+    &lt;/ul&gt;
+  &lt;/div&gt;
+@endif
+</code></pre>
+
+<p>The <code>$errors</code> variable is available to every view. It will
+ contain a collection of errors, if there are any. So here we just check
+ if there’s any errors and output them.</p>
+
+<h3 id="08-postindex">Creating the Post Index View</h3>
+
+<p>Create a new directory named <code>resources/views/admin/post</code> and within that directory a new file named <code>index.blade.php</code> with the following content.</p>
+
+<h4 class="caption-title">Initial Content of admin.post.index view</h4>
+
+<pre><code>@extends('admin.layout')
+
+@section('content')
+  &lt;div class="container-fluid"&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="col-md-8 col-md-offset-2"&gt;
+        &lt;div class="panel panel-default"&gt;
+          &lt;div class="panel-heading"&gt;
+            &lt;h3 class="panel-title"&gt;Posts&lt;/h3&gt;
+          &lt;/div&gt;
+          &lt;div class="panel-body"&gt;
+
+            TODO
+
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+@stop
+</code></pre>
+
+<p>This is just a temporary view at this point. In a future chapter we’ll finish it.</p>
+
+<h2 id="08-loginout">Testing logging in and out</h2>
+
+<p>Point your browser to <code>http://l5beauty.app/admin</code> and see what happens. You should see the logon screen.</p>
+
+<p>Here’s actually what happened.</p>
+
+<ol>
+<li>The ‘admin’ route was matched (in <code>app/Http/routes.php</code>) and the closure was executed which redirected your browser to ‘/admin/post’.</li>
+<li>The route named ‘admin.post.index’ (see <code>artisan route:list</code>) was matched from the ‘/admin/post’ URI, but the <strong>auth</strong> middleware determined no user was logged in and did another redirect, this time to ‘/auth/login’.</li>
+<li>The ‘/auth/login’ route found a match and executed the <code>getLogin()</code> method of the <code>Auth\AuthController</code>. <em>(This method actually resides in the <code>AuthenticateUsers</code> trait.)</em></li>
+<li>The <code>getLogin()</code> method returned the contents of the ‘auth.login’ view, which is the login screen you should have seen.</li>
+</ol>
+
+<p>Now, you could try logging in, but at this point it won’t do much good since we haven’t added a user to the system yet.</p>
+
+<h3 id="08-adminuser">Creating the admin user</h3>
+
+<p>The <code>artisan tinker</code> command is a handy way to interact 
+with your application. Follow the steps below to create an 
+administration user for the l5beauty blog.</p>
+
+<h4 class="caption-title">Creating a user using tinker</h4>
+
+<pre><code class="language-php rainbow">~/Code/l5beauty$ php artisan tinker
+Psy Shell v0<span class="keyword dot">.</span><span class="constant numeric">4.3</span> (<span class="constant">PHP</span> <span class="constant numeric">5.6</span><span class="keyword dot">.</span><span class="constant numeric">7</span><span class="keyword operator">-</span><span class="constant numeric">1</span><span class="keyword operator">+</span>deb<span class="keyword dot">.</span>sury<span class="keyword dot">.</span>org~utopic<span class="keyword operator">+</span><span class="constant numeric">1</span> — cli) by Justin Hileman
+<span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span> <span class="variable dollar-sign">$</span><span class="variable">user</span> <span class="keyword operator">=</span> <span class="keyword new">new</span> <span class="support class">App</span>\<span class="support class">User</span>;
+<span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="keyword operator">&lt;</span>App\User <span class="comment">#000000007543b78f0000000009f4a1ca&gt; {}</span>
+<span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span> <span class="variable dollar-sign">$</span><span class="variable">user</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>name <span class="keyword operator">=</span> <span class="string">'Your Name'</span>;
+<span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">"Your Name"</span>
+<span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span> <span class="variable dollar-sign">$</span><span class="variable">user</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>email <span class="keyword operator">=</span> <span class="string">'YOUR@email.com'</span>;
+<span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">"YOUR@email.com"</span>
+<span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span> <span class="variable dollar-sign">$</span><span class="variable">user</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>password <span class="keyword operator">=</span> <span class="function call">bcrypt</span>(<span class="string">'YOUR PASSWORD'</span>);
+<span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">"$2y$10$gBF9EIr9IrIbMX7dwQsCTO6IsBC0/c0P6qzZ01zwPhoW61MMwOVgC"</span>
+<span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span> <span class="variable dollar-sign">$</span><span class="variable">user</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span><span class="function call">save</span>();
+<span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="constant language">true</span>
+<span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span><span class="keyword operator">&gt;</span> <span class="keyword">exit</span>;
+
+</code></pre>
+
+<p>Now you’ll be able to log in with this user you just created. Go back to the login page on the browser and give it a try.</p>
+
+<p>A successful login should present you with the page below.</p>
+
+<h4 class="caption-title">Figure 8.1 - List of Posts</h4>
+
+<p><img class="img-responsive" src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/l5-posts1.jpg" alt="List of Posts" title="List of Posts"></p>
+
+<h3 id="08-fixlogout">Fixing log out location</h3>
+
+<p>If you click on the pull down at the top right of the screen and choose <strong>Logout</strong> to log out, you’ll notice that instead of the login page, now you’re back at the blog page.</p>
+
+<p>Why is this?</p>
+
+<p>If you look at the <code>AuthController</code> class (in the <code>app/Http/Controllers/Auth</code> directory) for the <code>getLogout()</code> method, you’ll discover there isn’t any method by that name. And there’s no <code>getLogout()</code> in the parent class, nor the grandparent. But <code>AuthController</code> does use the <code>AuthenticatesAndRegistersUsers</code> trait, and that uses the <code>AuthenticatesUsers</code> trait. It’s in the <code>AuthenticateUsers</code> trait where the <code>getLogout()</code> method is hiding.</p>
+
+<p>So if you look way down the directory path in the <code>vendor/laravel/framework/src</code> and go further down into the <code>Illuminate/Foundation/Auth</code> directory you’ll find this trait in the <code>AuthenticatesUsers.php</code> file. And in that file, you can see the <code>getLogout()</code> method redirects to the root path (‘/’) when done.</p>
+
+<p>To fix this, edit the <code>AuthController</code> class (it’s in the <code>app/Http/Controllers/Auth</code> directory) so it looks like what’s below.</p>
+
+<h4 class="caption-title">Content of AuthController class</h4>
+
+<pre><code class="language-php rainbow"><span class="variable language php-tag">&lt;?php</span>
+
+<span class="keyword namespace">namespace</span> <span class="support namespace">App</span>\<span class="support namespace">Http</span>\<span class="support namespace">Controllers</span>\<span class="support namespace">Auth</span>;
+
+<span class="keyword namespace">use</span> <span class="support namespace">App</span>\<span class="support namespace">User</span>;
+<span class="keyword namespace">use</span> <span class="support namespace">Validator</span>;
+<span class="keyword namespace">use</span> <span class="support namespace">App</span>\<span class="support namespace">Http</span>\<span class="support namespace">Controllers</span>\<span class="support namespace">Controller</span>;
+<span class="keyword namespace">use</span> <span class="support namespace">Illuminate</span>\<span class="support namespace">Foundation</span>\<span class="support namespace">Auth</span>\<span class="support namespace">AuthenticatesUsers</span>;
+
+<span class="storage class">class</span> <span class="entity name class">AuthController</span><span class="storage modifier extends"> extends </span><span class="entity other inherited-class">Controller</span>
+{
+    <span class="keyword namespace">use</span> <span class="support namespace">AuthenticatesUsers</span>;
+
+    <span class="keyword">protected</span> <span class="variable dollar-sign">$</span><span class="variable">redirectAfterLogout</span> <span class="keyword operator">=</span> <span class="string">'/auth/login'</span>;
+    <span class="keyword">protected</span> <span class="variable dollar-sign">$</span><span class="variable">redirectTo</span> <span class="keyword operator">=</span> <span class="string">'/admin/post'</span>;
+
+    <span class="comment">/**
+     * Create a new authentication controller instance.
+     */</span>
+    <span class="keyword">public</span> <span class="storage function">function</span> <span class="support magic">__construct</span>()
+    {
+        <span class="variable dollar-sign">$</span><span class="variable">this</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span><span class="function call">middleware</span>(<span class="string">'guest'</span>, [<span class="string">'except'</span> <span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">'getLogout'</span>]);
+    }
+
+    <span class="comment">/**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */</span>
+    <span class="keyword">protected</span> <span class="storage function">function</span> <span class="entity name function">validator</span>(<span class="support class">array</span> <span class="variable dollar-sign">$</span><span class="variable">data</span>)
+    {
+        <span class="keyword">return</span> <span class="support class">Validator</span><span class="keyword static">::</span><span class="function call">make</span>(<span class="variable dollar-sign">$</span><span class="variable">data</span>, [
+            <span class="string">'name'</span> <span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">'required|max:255'</span>,
+            <span class="string">'email'</span> <span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">'required|email|max:255|unique:users'</span>,
+            <span class="string">'password'</span> <span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="string">'required|confirmed|min:6'</span>,
+        ]);
+    }
+}
+
+</code></pre>
+
+<p>We removed the <code>AuthenticateAndRegistersUsers</code> trait because our application isn’t going to allow users to be registered, instead we’re just using the <code>AuthenticatesUsers</code> trait. Then we added the <code>$redirectAfterLogout</code> and <code>$redirectTo</code> properties to specify where to redirect after logins and logouts.</p>
+
+<p>The reset of the class is the same as it was before.</p>
+
+<h3 id="08-fixloginloc">Fix default login location</h3>
+
+<p>The default login location is currently set to <code>/home</code>, but we’ll change it.</p>
+
+<p>Edit the <code>RedirectIfAuthenticated.php</code> file located in the <code>app/Http/Middleware</code> directory. Change line #38 to what is below.</p>
+
+<h4 class="caption-title">Change default logged in location</h4>
+
+<pre><code class="language-php rainbow"><span class="comment">// Line #38 should be</span>
+<span class="keyword">return</span> <span class="keyword new">new</span> <span class="support class">RedirectResponse</span>(<span class="string">'/home'</span>);
+
+<span class="comment">// Change it to</span>
+<span class="keyword">return</span> <span class="keyword new">new</span> <span class="support class">RedirectResponse</span>(<span class="string">'/admin/post'</span>);
+</code></pre>
+
+<p>This path will redirect when the <strong>guest</strong> middleware is used on a route.</p>
+
+<h3 id="08-loginout2">Logging in and out</h3>
+
+<p>Since the <code>getLogout()</code> method is now fixed to return back
+ to the administration area instead of the blog, you should be able to 
+log in and out successfully.</p>
+
+<p>Try it.</p>
+
+<ul>
+<li>Point your browser back to <code>http://l5beauty.app/admin</code>. This will redirect you to the log in page.</li>
+<li>Enter the credentials for the user you created. This will take you to the <strong>List of Posts</strong> page.</li>
+<li>Use the dropdown in the navbar to logout. This will take  you back to the log in page.</li>
+</ul>
+
+<h3 id="08-cleanfiles">Cleaning up a couple unneeded files</h3>
+
+<p>There’s a couple files we don’t need. Let’s remove them.</p>
+
+<ul>
+<li><code>app/Http/Controllers/Auth/PasswordController.php</code> - We’re not going to implement password resets so this isn’t needed.</li>
+<li><code>resources/views/welcome.blade.php</code> - Not using.</li>
+</ul>
+
+<h2 id="recap-08">Recap</h2>
+
+<p>Quite a bit was accomplished in this chapter. The routes were 
+established for most of the administration area and there was a brief 
+discussion about Middleware and Resource Controllers in Laravel 5. The 
+logging in and out process was customized specifically for our 
+administration area.</p>
+
+<p>All in all, we now have a strong base to build the admin area upon. 
+In the next chapter we’ll start making the admin area useful and add <em>Tags</em> to our blog system.</p>
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+    <div class="container">
+    <div class="row">
+      <ul class="pager">
+                              <li class="previous">
+              <a href="http://laravelcoding.com/blog/laravel-5-beauty-using-bower">
+                <i class="fa fa-long-arrow-left fa-lg"></i>
+                Next Newer  Post
+              </a>
+            </li>
+                                <li class="next">
+              <a href="http://laravelcoding.com/blog/laravel-5-beauty-the-10-minute-blog">
+                Next Older Post
+                <i class="fa fa-long-arrow-right"></i>
+              </a>
+            </li>
+                        </ul>
+    </div>
+
+  </div>
+  <div class="container">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/a.htm" style="width: 1px ! important; min-width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 9001px ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="dsq-app2" id="dsq-app2" frameborder="0" width="100%"></iframe><iframe style="width: 690px ! important; border: medium none ! important; overflow: hidden ! important; top: 0px ! important; min-width: 690px ! important; max-width: 690px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="indicator-north" id="indicator-north" frameborder="0"></iframe><iframe style="width: 690px ! important; border: medium none ! important; overflow: hidden ! important; bottom: 0px ! important; min-width: 690px ! important; max-width: 690px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="indicator-south" id="indicator-south" frameborder="0"></iframe></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'laravelcoding';
+          var disqus_identifier = 'blog-laravel-5-beauty-starting-the-admin-area';
+          
+    (function() {
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  
+    </div>
+  </div>
+
+  <hr>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+          <li>
+            <a data-original-title="RSS feed" href="http://laravelcoding.com/rss" data-toggle="tooltip" title="">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a data-original-title="Chuck's Twitter Page" href="https://twitter.com/storychuck" data-toggle="tooltip" title="">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a data-original-title="Chuck's Facebook Page" href="https://www.facebook.com/chuck.heintzelman" data-toggle="tooltip" title="">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a data-original-title="Chuck's Google+ Page" href="https://www.google.com/+ChuckHeintzelman" data-toggle="tooltip" title="">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a data-original-title="Chuck's LinkedIn Page" href="http://www.linkedin.com/in/heintzelman/" data-toggle="tooltip" title="">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a data-original-title="Chuck's GitHub Pages" href="https://github.com/ChuckHeintzelman" data-toggle="tooltip" title="">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <p class="copyright text-muted">Copyright © Chuck Heintzelman 2015</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/jquery.js"></script>
+  <script src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/bootstrap.js"></script>
+  <script src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/blog.js"></script>
+
+    <script src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/rainbow.js"></script>
+
+      <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-2383620-12', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  
+<div style="display: none; width: 0px; height: 0px;" class="igtranslator-main-div"><iframe scrolling="no" class="igtranslator-iframe" src="LC%20%20%20Laravel%205.1%20Beauty%20-%20Starting%20the%20Admin%20Area_files/a_002.htm" frameborder="0"></iframe></div><div title="Click to Show Translation" style="background-image: url(&quot;resource://jid1-dgnibwqga0sibw-at-jetpack/data/icons/home.png&quot;); display: none;" class="igtranslator-activator-icon bounceIn"></div></body></html>

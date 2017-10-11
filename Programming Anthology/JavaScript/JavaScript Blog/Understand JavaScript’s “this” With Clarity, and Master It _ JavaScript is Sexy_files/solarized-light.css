@@ -1,0 +1,159 @@
+/**
+ * Solarized Light theme
+ *
+ * Adaptation of Solarized Light from ethanschoonover.com/solarized
+ *
+ * @author Ethan Schoonover
+ * @author David Litmark
+ * @version 1.0.0
+ */
+pre {
+    background: #fdf6e3; /* base3 */
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #657b83; /* base00 */
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+pre, code {
+    font-family: 'Monaco', courier, monospace;
+}
+
+pre .comment {
+    color: #93a1a1; /* base1 */
+}
+
+pre .constant {
+    color: #657b83; /* base00 */
+}
+
+pre .constant.language {
+    color: #268bd2; /* blue */
+}
+
+pre .constant.regexp {
+    color: #2aa198; /* cyan */
+}
+
+pre .storage {
+    color: #268bd2; /* blue */
+}
+
+pre .string, pre .comment.docstring {
+    color: #2aa198; /* cyan */
+}
+
+pre .support.tag.script, pre .support.tag.style {
+    color: #2aa198; /* cyan */
+}
+
+pre .string.regexp {
+    color: #2aa198; /* cyan */
+}
+
+pre .string.regexp.open, pre .string.regexp.close {
+    color: #2aa198; /* cyan */
+}
+
+pre .keyword, pre .selector {
+    color: #859900; /* green */
+}
+
+pre .inherited-class {
+    font-style: italic;
+}
+
+pre .entity {
+    color: #b58900; /* yellow */
+}
+
+pre .support, *[data-language="c"] .function.call {
+    color: #859900; /* green */
+}
+
+pre .support.method {
+    color: #657b83; /* base00 */
+}
+
+pre .support.property {
+    color: #657b83; /* base00 */
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #657b83; /* base00 */
+}
+
+
+
+/*
+
+Line Number plugin ----------------------------------------------------------------
+
+*/
+
+
+.rainbow {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+/*.rainbow .line:hover {
+    background-color: #171b1c;
+}
+.rainbow .line:hover .line-number {
+    background-color: #101313;
+}*/
+.rainbow .line .line-number {
+    text-align: right;
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    color: #D6F3ED;
+
+
+}
+.rainbow .line .line-number:before {
+    content: attr(data-line-number);
+}
+.rainbow .line .line-code {
+    padding-left: 1em;
+    width: 100%;
+}
+
+pre table {
+    border: 0 solid #FCF6F6;
+    line-height: 15px;
+    text-align: left;
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+pre table tr {
+    border-bottom: 0px solid #FCF5F5;
+}
+pre table td {
+    text-align: left;
+    max-width: 600px;
+}
+pre table tr {
+     word-wrap:break-word;
+}
+
+
+@media only screen and (max-width: 900px) {
+    pre table td {
+        max-width: 550px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    pre table td {
+        max-width: 500px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    pre table td {
+        max-width: 280px;
+    }
+}

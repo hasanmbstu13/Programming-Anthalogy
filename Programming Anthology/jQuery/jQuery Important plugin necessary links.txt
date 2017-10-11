@@ -1,0 +1,4 @@
+// For slider use bxslider
+http://bxslider.com
+for slideshow and video use
+http://vegas.jaysalvat.com

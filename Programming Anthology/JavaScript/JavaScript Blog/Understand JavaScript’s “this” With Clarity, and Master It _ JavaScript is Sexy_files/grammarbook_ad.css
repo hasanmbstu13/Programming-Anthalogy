@@ -1,0 +1,255 @@
+/* Center DIV vertically and horizontally */
+.centerItParent {
+    text-align: center;
+}
+
+.centerItParent:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.centerItParent .centeredChild,
+.centerItParent > div,
+.centerItParent > span,
+.centerItParent > p,
+.centerItParent > h1,
+.centerItParent > h2,
+.centerItParent > h3,
+.centerItParent > h4,
+.centerItParent > li {
+    display: inline-block;
+    vertical-align: middle;
+}
+h3.grammarAdHeading {
+    font-size: 22px;
+    color: #05898F;
+    font-weight: 400;
+}
+h2.grammarAdHeading {
+    font-size: 19px;
+    color: #05898F;
+    font-weight: 300;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.siversSuperScript {
+    font-size: 16px;
+}
+/*.boldIt {
+    font-weight: 600;
+}*/
+/*.boldItLightly {
+    font-weight: 400;
+}*/
+
+.bookCoversRow {
+    /*width: 940px;
+    margin-left: -100px;
+    margin-right: -100px;*/
+margin-top: 70px;
+    border: 1px solid #91f4de !important;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    float: none;
+    overflow: auto;
+    background-color: #BFFDFD;
+
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+
+}
+
+.bookCol {
+    width: 294px !important;
+    height: auto;
+    padding-left: 0;
+    padding-right: 0;
+
+}
+
+.bookSignupWrapper {
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.bookSignupWrapper > li {
+    list-style-type: none;
+    margin: 0 !important;
+    padding: 0;
+    float: none;
+    /*min-height: 766px;*/
+    vertical-align: top !important;
+
+    list-style-image: none !important;
+    list-style-position: outside !important;
+    list-style-type: none;
+}
+
+
+
+
+.bookSignupWrapper > li:nth-child(1) {
+    margin-right: 20px !important;
+}
+.bookSignupWrapper > li:nth-child(2) {
+    margin-left: 20px !important;
+}
+
+.bookCoverImgWrapper img {
+    width: 100%;
+    height: auto !important;
+}
+
+.aboveBookCover {
+    float: left;
+    width: 100%;
+}
+
+.aboveBookCover h2.bookTypeTitle {
+    font-size: 22px;
+    text-align: center;
+    color: #688DB4;
+    margin-top: 0;
+    font-weight: 100;
+}
+.aboveBookCover h2.bookTypeTitle.smaller {
+    font-size: 15px !important;
+    color: #688DB4;
+}
+.bookCoverImgWrapper {
+    width: 294px;
+    height: 384px;
+    float: left;
+}
+
+.underBookCover {
+    margin-top: 12px;
+    color: #516d80;
+    font-size: 16px;
+    float: left;
+    min-height: 190px;
+}
+.underBookCover ul {
+    margin-left: 0;
+}
+.underBookCover .listItems {
+    padding-left: 10px;
+    padding-right: 10px;
+    list-style-image: url("images/bullet_blueGreen.png");
+}
+
+.underBookCover li {
+    color: #026B67;
+    font-size: 15px;
+    list-style-image: url("images/green_bullet.png") !important;
+    line-height: 18px !important;
+    margin-bottom: 10px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.underBookCover li a {
+    color: #f26c4f !important;
+}
+.underBookCover li a {
+    color: #04B79A !important;
+}
+.underBookCover .siversQuote {
+    position: relative;
+}
+
+.underBookCover .siversQuote .siversSuperScript {
+    /*position: absolute;*/
+    /*width: 100%;*/
+    /*top: 25px;*/
+}
+
+.getItGetDiscount {
+    margin-left: 0;
+    float: left;
+}
+
+.getItGetDiscount .btn-pink {
+    border-radius: 3px !important;
+    font-size: 17px;
+    height: auto !important;
+    display: block;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+sub, sup {
+    font-size: 12px
+}
+
+sup {
+    position: relative;
+    top: -5px;
+
+}
+
+.answerAuthor {
+	/*font-weight: normal !important;*/
+	font-style: normal !important;
+}
+.faqMeteor li {	
+	font-weight: 400;
+}
+.faqMeteor blockquote {	
+	margin-top: 20px !important;
+	font-weight: 300;
+}
+
+.horizontalDivider {
+display: block;
+float: left;
+clear: both;
+height: 1px;
+margin: 50px 0 60px;
+width: 100%;
+}
+
+.horizontalDivider .line {
+display: block;
+border-bottom: 1px solid #d8d8d8;
+height: 1px;
+margin: 0 auto;
+width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+
+
+}
+
+
+@media (max-width: 768px) and (min-width: 768px) {
+
+}
+
+@media only screen and (max-width: 640px) {
+    h2.grammarAdHeading {
+        font-size: 17px;
+    }
+
+    .bookSignupWrapper > li:nth-child(1) {
+        margin-right: 0 !important;
+    }
+    .bookSignupWrapper > li:nth-child(2) {
+        margin-left: 0 !important;
+        margin-top: 20px !important;
+    }
+
+
+}
+
+
+@media only screen and (max-width: 400px) {
+
+}

@@ -1,0 +1,41 @@
+Put the follwoing button in view file for export 
+<button style="margin-top:10px; margin-left: 90px; width: 150px; height: 30px; float: right;" onclick="window.location.href='<?php echo Router::url(array('controller'=>'Reconciliations', 'action'=>'export_data'))?>'">Export to Excel</button> 
+
+
+// Go to the following link for download the plugin
+https://github.com/joshuapaling/CakePHP-Export-CSV-Plugin
+
+Rename the plugin as Export and put in plugin folder
+
+Add the Export in components like following
+class AppController extends Controller {
+	var $components = array('Export.Export', 'Auth', 'Session', 'Cookie', 'RequestHandler', 'Security');
+}
+
+Load the plugin in 
+In app/Config/bootstrap.php, at the bottom, add a line to load the plugin - either:
+CakePlugin::load('Export'); // Loads only the Export plugin
+
+Extract the data from database as following
+$data = $this->RestaurantTransaction->find('all', array(
+			 'fields' => array(
+			 					'Restaurant.restaurant_name AS Restaurant_Name',
+			 					'RestaurantTransaction.restro_vch_no AS Restaurant_Vch_No',
+			 					'RestaurantTransaction.pikdish_vch_no AS Pikdish_Vch_No',
+			 					'RestaurantTransaction.ref AS Ref',
+			 					'RestaurantTransaction.cr_amt AS Amount'
+
+			 				  ),
+
+			 'conditions' => array(
+			 	'RestaurantTransaction.bank_trans_code' => 0
+			 	)
+			)
+		);
+
+$this->Export->exportCsv($data, 'reconciliations.csv');
+
+
+Manual Query
+		SELECT `restro_vch_no`, `pikdish_vch_no`, `RestaurantTransaction`.`ref` AS `Ref`, `RestaurantTransaction`.`cr_amt` AS `Amount` FROM `pikdish_onlinemenu`.`om_restaurant_transaction` AS `RestaurantTransaction` LEFT JOIN `pikdish_onlinemenu`.`om_restaurants` AS `Restaurant` ON (`RestaurantTransaction`.`restaurant_id` = `Restaurant`.`id`)  WHERE 1 = 1	
+

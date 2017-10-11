@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" dir="ltr" lang="en" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Article"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" dir="ltr" lang="en" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Article"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" dir="ltr" lang="en" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Article"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html style="" class="gt-ie8 js no-touch csstransforms csstransforms3d csstransitions mti-inactive" dir="ltr" prefix="og: http://ogp.me/ns#" itemscope="" itemtype="http://schema.org/Article" lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/1068cf12f6" type="text/javascript"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/nr-852.js"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/linkid.js" async="" type="text/javascript"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/analytics.js" async="" type="text/javascript"></script><script type="text/javascript" async="" src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/7034.js"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/gtm.js" async=""></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/index.php" async=""></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/geo2.js" async="" type="text/javascript"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/oeu1454817229999r0.9681215917503277" async="" type="text/javascript"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/geo2.js" async="" type="text/javascript"></script>
+	<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+			<title>How to use the LEFT JOIN vs. RIGHT OUTER JOIN in SQL</title>
+			<meta name="viewport" content="width=device-width,initial-scale=1">
+			<meta name="description" content="Learn about LEFT vs. RIGHT OUTER JOINs in SQL, see examples of SQL joins and find tips for working with multiple tables.">
+			<meta name="robots" content="noodp">
+			<link rel="canonical" href="http://searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL">
+			<meta property="og:title" content="How to use the LEFT JOIN vs. RIGHT OUTER JOIN in SQL">
+			<meta property="og:site_name" content="SearchSQLServer">
+			<meta property="og:url" content="http://searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL">
+			<meta property="og:description" content="Learn about LEFT vs. RIGHT OUTER JOINs in SQL, see examples of SQL joins and find tips for working with multiple tables.">
+			<meta property="fb:app_id" content="870327132989388">
+			<meta property="og:type" content="article">
+			<meta property="og:locale" content="en_US">
+			<meta property="article:publisher" content="http://www.facebook.com/searchsqlserver">
+			<meta itemprop="name" content="How to use the LEFT JOIN vs. RIGHT OUTER JOIN in SQL">
+			<meta itemprop="description" content="Learn about LEFT vs. RIGHT OUTER JOINs in SQL, see examples of SQL joins and find tips for working with multiple tables.">
+			<meta name="twitter:card" content="summary_large_image">
+			<meta name="twitter:site" content="@searchsqlserver">
+			<meta name="twitter:title" content="How to use the LEFT JOIN vs. RIGHT OUTER JOIN in SQL">
+			<meta name="twitter:description" content="Learn about LEFT vs. RIGHT OUTER JOINs in SQL, see examples of SQL joins and find tips for working with multiple tables.">
+			<meta property="og:image" content="http://cdn.ttgtmedia.com/ITKE/images/logos/TTlogo-379x201.png">
+			<meta itemprop="image" content="http://cdn.ttgtmedia.com/ITKE/images/logos/TTlogo-379x201.png">
+			<link rel="alternate" type="application/rss+xml" title="SearchSQLServer: ContentSyndication" href="http://searchsqlserver.techtarget.com/rss/ContentSyndication.xml">
+			<script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/jquery.js"></script><style id="mti_stylesheet_124d48dd-e515-4302-8bfb-1d5c1e3da916" type="text/css">.mti_hide_element{visibility:hidden;}</style><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/124d48dd-e515-4302-8bfb-1d5c1e3da916.js"></script><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/normalize.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/icomoon.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/jquery.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/jquery-ui-1.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/responsive-carousel_002.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/responsive-carousel.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/mediaelementplayer.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/v8-legacy.css"><link rel="stylesheet" href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/main.css"><!--[if IE 9]>
+<link rel="stylesheet" href="http://cdn.ttgtmedia.com/rms/ux/responsive/css/main_2.css?v=6.40"><link rel="stylesheet" href="http://cdn.ttgtmedia.com/rms/ux/responsive/css/main_3.css?v=6.40"><![endif]-->
+<script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/responsive.js"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/148927072.js"></script><script>
+TT("page", {"clusterName":"SQLPerf","parentTopicName":"Microsoft SQL Server Administration","parentTopicId":"301324","regHost":"http://users.techtarget.com","adScheme":"1","gaSiteAcct":"UA-18475716-1","lang":"en","ga":true,"timestamp":"2016-02-06 22:53:44","adId":"1286374","regTopicName":"Database Performance","siteName":"searchSQLServer","regTopicId":"1175300","topicName":"Microsoft SQL Server Performance Monitoring and Tuning","pubDate":"20080301","adAbbr":"sqlsrv","siteType":"editorial","uaid":"UA-18475716-1","topical":true,"gaPageTrackUrl":"/page/etpk_Microsoft SQL Server Administration-301324/ptpk_Microsoft SQL Server Performance Monitoring and Tuning-301334/true/FEATURE/content/cid_1286374/date_20080301/mem_0/clst_SQLPerf-2240016845/rtpk_Database Performance-1175300/idx_0","pageIndex":0,"topicIds":["301334"],"siteId":87,"atHost":"http://go.techtarget.com","appCode":"0","topicId":"301334","clusterId":"2240016845","homeAdId":"2240013389","zone":"FEATURE"});
+</script>
+
+<!-- Begin Chartbeat -->
+		<script>var _sf_startpt=(new Date()).getTime();</script><!-- End Chartbeat -->
+	
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VwcDVVZACwIDU1lS"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(){}function r(t){function e(t){return t&&t instanceof n?t:t?a(t,i,o):o()}function s(n,r,o){t&&t(n,r,o);for(var i=e(o),a=f(n),s=a.length,c=0;s>c;c++)a[c].apply(i,r);return i}function c(t,e){d[t]=f(t).concat(e)}function f(t){return d[t]||[]}function u(){return r(s)}var d={};return{on:c,emit:s,create:u,listeners:f,context:e,_events:d}}function o(){return new n}var i="nr@context",a=t("gos");e.exports=r()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t){try{i.console&&console.log(t)}catch(e){}}var n,r=t("ee"),o=t(1),i={};try{n=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(i.console=!0,-1!==n.indexOf("dev")&&(i.dev=!0),-1!==n.indexOf("nr_dev")&&(i.nrDev=!0))}catch(a){}i.nrDev&&r.on("internal-error",function(t){e(t.stack)}),i.dev&&r.on("fn-err",function(t,n,r){e(r.stack)}),i.dev&&(e("NR AGENT IN DEVELOPMENT MODE"),e("flags: "+o(i,function(t){return t}).join(", ")))},{1:25,ee:"QJf3ax"}],4:[function(t){function e(t,e,n,i,a){try{f?f-=1:r("err",[a||new UncaughtException(t,e,n)])}catch(c){try{r("ierr",[c,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof s?s.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(6),i=t("ee"),a=t("loader"),s=window.onerror,c=!1,f=0;a.features.err=!0,t(5),window.onerror=e;try{throw new Error}catch(u){"stack"in u&&(t(1),t(2),"addEventListener"in window&&t(3),a.xhrWrappable&&t(4),c=!0)}i.on("fn-start",function(){c&&(f+=1)}),i.on("fn-err",function(t,e,r){c&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){c&&!this.thrown&&f>0&&(f-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:11,2:10,3:8,4:12,5:3,6:26,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t){if(window.addEventListener){var e=t("handle"),n=t("ee");t(1),window.addEventListener("click",function(){e("inc",["ck"])},!1),window.addEventListener("hashchange",function(){e("inc",["hc"])},!1),n.on("pushState-start",function(){e("inc",["ps"])})}},{1:9,ee:"QJf3ax",handle:"D5DuLP"}],6:[function(t){t("loader").features.ins=!0},{loader:"G9z0Bl"}],7:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(1),i=t(2);t("loader").features.stn=!0,t(3);var a=Event;n.on("fn-start",function(t){var e=t[0];e instanceof a&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof a&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),i.on("fn-start",function(){this.bstStart=Date.now()}),i.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),"requestAnimationFrame"])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.clearResourceTimings?window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1):window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:11,2:10,3:9,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],8:[function(t,e){function n(t){for(var e=t;e&&!e.hasOwnProperty("addEventListener");)e=Object.getPrototypeOf(e);e&&r(e)}function r(t){a.inPlace(t,["addEventListener","removeEventListener"],"-",o)}function o(t){return t[1]}var i=t("ee").create(),a=t(1)(i),s=t("gos");e.exports=i,r(window),"getPrototypeOf"in Object?(n(document),n(XMLHttpRequest.prototype)):XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&r(XMLHttpRequest.prototype),i.on("addEventListener-start",function(t){if(t[1]){var e=t[1];if("function"==typeof e){var n=s(e,"nr@wrapped",function(){return a(e,"fn-",null,e.name||"anonymous")});this.wrapped=t[1]=n}else"function"==typeof e.handleEvent&&a.inPlace(e,["handleEvent"],"fn-")}}),i.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:27,ee:"QJf3ax",gos:"7eSDFh"}],9:[function(t,e){var n=t("ee").create(),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState","replaceState"],"-")},{1:27,ee:"QJf3ax"}],10:[function(t,e){var n=t("ee").create(),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:27,ee:"QJf3ax"}],11:[function(t,e){function n(t,e,n){t[0]=i(t[0],"fn-",null,n)}function r(t,e,n){this.method=n,this.timerDuration="number"==typeof t[1]?t[1]:0,t[0]=i(t[0],"fn-",this,n)}var o=t("ee").create(),i=t(1)(o);e.exports=o,i.inPlace(window,["setTimeout","setImmediate"],"setTimer-"),i.inPlace(window,["setInterval"],"setInterval-"),i.inPlace(window,["clearTimeout","clearImmediate"],"clearTimeout-"),o.on("setInterval-start",n),o.on("setTimer-start",r)},{1:27,ee:"QJf3ax"}],12:[function(t,e){function n(){f.inPlace(this,l,"fn-",o)}function r(t,e){f.inPlace(e,["onreadystatechange"],"fn-",o)}function o(t,e){return e}function i(t,e){for(var n in t)e[n]=t[n];return e}var a=t("ee").create(),s=t(1),c=t(2),f=c(a),u=c(s),d=window.XMLHttpRequest,l=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=a,window.XMLHttpRequest=function(t){var e=new d(t);try{a.emit("new-xhr",[e],e),e.hasOwnProperty("addEventListener")&&u.inPlace(e,["addEventListener","removeEventListener"],"-",o),e.addEventListener("readystatechange",n,!1)}catch(r){try{a.emit("internal-error",[r])}catch(i){}}return e},i(d,XMLHttpRequest),XMLHttpRequest.prototype=d.prototype,f.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),a.on("send-xhr-start",r),a.on("open-xhr-start",r)},{1:8,2:27,ee:"QJf3ax"}],13:[function(t){function e(t){var e=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var o=0;u>o;o++)t.removeEventListener(f[o],this.listener,!1);if(!e.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var i=this.lastSize||n(t);if(i&&(r.rxSize=i),this.sameOrigin){var s=t.getResponseHeader("X-NewRelic-App-Data");s&&(e.cat=s.split(", ").pop())}}else e.status=0;r.cbTime=this.cbTime,c.emit("xhr-done",[t],t),a("xhr",[e,r,this.startTime])}}}function n(t){var e=t.responseType,n="arraybuffer"===e||"blob"===e||"json"===e?t.response:t.responseText;return r(n)}function r(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function o(t,e){var n=s(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}var i=t("loader");if(i.xhrWrappable){var a=t("handle"),s=t(2),c=t("ee"),f=["load","error","abort","timeout"],u=f.length,d=t(1),l=t(3),p=window.XMLHttpRequest;i.features.xhr=!0,t(5),t(4),c.on("new-xhr",function(t){var n=this;n.totalCbs=0,n.called=0,n.cbTime=0,n.end=e,n.ended=!1,n.xhrGuids={},n.lastSize=0,l&&(l>34||10>l)||window.opera||t.addEventListener("progress",function(t){n.lastSize=t.loaded},!1)}),c.on("open-xhr-start",function(t){this.params={method:t[0]},o(this,t[1]),this.metrics={}}),c.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),c.on("send-xhr-start",function(t,e){var n=this.metrics,o=t[0],i=this;if(n&&o){var a=r(o);a&&(n.txSize=a)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{c.emit("internal-error",[n])}catch(r){}}};for(var s=0;u>s;s++)e.addEventListener(f[s],this.listener,!1)}),c.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),c.on("xhr-load-added",function(t,e){var n=""+d(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),c.on("xhr-load-removed",function(t,e){var n=""+d(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),c.on("addEventListener-end",function(t,e){e instanceof p&&"load"===t[0]&&c.emit("xhr-load-added",[t[1],t[2]],e)}),c.on("removeEventListener-end",function(t,e){e instanceof p&&"load"===t[0]&&c.emit("xhr-load-removed",[t[1],t[2]],e)}),c.on("fn-start",function(t,e,n){e instanceof p&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),c.on("fn-end",function(t,e){this.xhrCbStart&&c.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:14,3:16,4:12,5:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],14:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname);var i=!e.protocol||":"===e.protocol||e.protocol===n.protocol,a=e.hostname===document.domain&&e.port===n.port;return r.sameOrigin=i&&(!e.hostname||a),r}},{}],15:[function(t,e){function n(t){return function(){r(t,[(new Date).getTime()].concat(i(arguments)))}}var r=t("handle"),o=t(1),i=t(2);"undefined"==typeof window.newrelic&&(newrelic=window.NREUM);var a=["setPageViewName","addPageAction","setCustomAttribute","finished","addToTrace","inlineHit","noticeError"];o(a,function(t,e){window.NREUM[e]=n("api-"+e)}),e.exports=window.NREUM},{1:25,2:26,handle:"D5DuLP"}],16:[function(t,e){var n=0,r=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);r&&(n=+r[1]),e.exports=n},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):void(r.q&&(r.q[t]||(r.q[t]=[]),r.q[t].push(e)))}var r=t("ee").create();e.exports=n,n.ee=r,r.q={}},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],G9z0Bl:[function(t,e){function n(){if(!h++){var t=p.info=NREUM.info,e=f.getElementsByTagName("script")[0];if(t&&t.licenseKey&&t.applicationID&&e){s(d,function(e,n){t[e]||(t[e]=n)});var n="https"===u.split(":")[0]||t.sslForHttp;p.proto=n?"https://":"http://",a("mark",["onload",i()]);var r=f.createElement("script");r.src=p.proto+t.agent,e.parentNode.insertBefore(r,e)}}}function r(){"complete"===f.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=t(1),c=window,f=c.document;t(2);var u=(""+location).split("?")[0],d={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-852.min.js"},l=window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent),p=e.exports={offset:i(),origin:u,features:{},xhrWrappable:l};f.addEventListener?(f.addEventListener("DOMContentLoaded",o,!1),c.addEventListener("load",n,!1)):(f.attachEvent("onreadystatechange",r),c.attachEvent("onload",n)),a("mark",["firstbyte",i()]);var h=0},{1:25,2:15,handle:"D5DuLP"}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],25:[function(t,e){function n(t,e){var n=[],o="",i=0;for(o in t)r.call(t,o)&&(n[i]=e(o,t[o]),i+=1);return n}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],26:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],27:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@original",a=Object.prototype.hasOwnProperty,s=!1;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,c;try{i=this,n=o(arguments),s="function"==typeof r?r(n,i):r||{}}catch(u){d([u,"",[n,i,a],s])}f(e+"start",[n,i,a],s);try{return c=t.apply(i,n)}catch(l){throw f(e+"err",[n,i,l],s),l}finally{f(e+"end",[n,i,c],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=t,u(t,nrWrapper),nrWrapper)}function c(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s))}function f(e,n,r){if(!s){s=!0;try{t.emit(e,n,r)}catch(o){d([o,e,n,r])}s=!1}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){d([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function d(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=c,e.flag=i,e}},{1:26,ee:"QJf3ax"}]},{},["G9z0Bl",4,13,7,6,5]);</script><link rel="shortcut icon" type="image/x-icon" href="http://searchsqlserver.techtarget.com/favicon.ico">
+	<link rel="apple-touch-icon" sizes="144×144" href="http://searchsqlserver.techtarget.com/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="114×114" href="http://searchsqlserver.techtarget.com/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="72×72" href="http://searchsqlserver.techtarget.com/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" href="http://searchsqlserver.techtarget.com/apple-touch-icon-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="144×144" href="http://searchsqlserver.techtarget.com/apple-touch-icon-144x144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114×114" href="http://searchsqlserver.techtarget.com/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72×72" href="http://searchsqlserver.techtarget.com/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="http://searchsqlserver.techtarget.com/apple-touch-icon-precomposed.png"><style id="mti_fontface_124d48dd-e515-4302-8bfb-1d5c1e3da916" type="text/css">@font-face{
+font-family:"NeueHaasGroteskText W01";
+src:url("http://fast.fonts.net/dv2/14/a14594bf-73de-4b5f-9792-9566994a021d.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskTXW01-56It";
+src:url("http://fast.fonts.net/dv2/14/dc9df9ed-36b9-4522-8e57-1a899ed2c224.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskTXW01-65Md";
+src:url("http://fast.fonts.net/dv2/14/34ae0cd2-c49c-4df4-8270-fcda21c1b715.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskTXW01-66MdI";
+src:url("http://fast.fonts.net/dv2/14/c951fbb4-1116-47e5-b057-5691a20747eb.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskTXW01-75Bd";
+src:url("http://fast.fonts.net/dv2/14/d13fb250-6b64-4d97-85df-51fc6625a891.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskTXW01-76BdI";
+src:url("http://fast.fonts.net/dv2/14/d1fbf511-d681-4002-b57e-cabb331b3b2e.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-15Ult";
+src:url("http://fast.fonts.net/dv2/14/cadd8f54-ba24-4ca4-9206-191ed9a6dbf2.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-16Ult";
+src:url("http://fast.fonts.net/dv2/14/ecc21933-8ca6-4f52-8d5d-15f4233e042f.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-25Th";
+src:url("http://fast.fonts.net/dv2/14/ca6a839e-112e-49a1-b98d-ff71960f48f8.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-26ThI";
+src:url("http://fast.fonts.net/dv2/14/8d452ea7-084c-40e7-8751-9a854256f900.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-35XLt";
+src:url("http://fast.fonts.net/dv2/14/2d3ed639-f5d6-489d-9792-c18f0b3a58d6.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-36XLt";
+src:url("http://fast.fonts.net/dv2/14/d61d8213-a0eb-4fa4-a533-2758990f6121.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-45Lt";
+src:url("http://fast.fonts.net/dv2/14/fcd607c0-74ab-4cb5-90c3-db118b1ad287.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-46LtI";
+src:url("http://fast.fonts.net/dv2/14/5a2559cb-b252-4f39-b9e2-2e2c77a049aa.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NeueHaasGroteskDisp W01";
+src:url("http://fast.fonts.net/dv2/14/1d2142cb-3e68-48df-b188-f1ac45a47a8b.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-56It";
+src:url("http://fast.fonts.net/dv2/14/a28c06ea-8829-467a-a7be-4ffdfba4247b.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-65Md";
+src:url("http://fast.fonts.net/dv2/14/75e1af8f-1a4c-475a-8b53-f27e52822b6b.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-66MdI";
+src:url("http://fast.fonts.net/dv2/14/57974581-bbc7-4288-9512-600df67cfe32.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-75Bd";
+src:url("http://fast.fonts.net/dv2/14/c24b7456-b9fe-40ab-94af-ba8d3025fada.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-76BdI";
+src:url("http://fast.fonts.net/dv2/14/e050deac-c053-470f-a815-635994435764.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-95Blk";
+src:url("http://fast.fonts.net/dv2/14/f53e5775-ed10-4b0d-bae1-efc8fb73f320.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"NHaasGroteskDSW01-96Blk";
+src:url("http://fast.fonts.net/dv2/14/baf627c2-ef72-493e-93cc-a8da9a1106a4.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+@font-face{
+font-family:"Museo W01 300";
+src:url("http://fast.fonts.net/dv2/14/d9dabe05-624c-4f28-8eee-b3b6f1841abf.woff2?d44f19a684109620e4841670a090e81868552f26f0d8186b9dd11b65b81ac62810257e136ad8e6bd4bcc876296eb978f99445f7da9e521c86ff957ead526244a240a86eb69e6a65ae0019e5eb729ff4a5a91dc74cbb8b7a351929ebb59c90f4ce8cd058b4fa7fc104f5285e360a0ef08be344103a74113977c6efad807f8c570e961fd76ae0a1afac4174449dfd56b3452da4bd299bc6d39ec316c51d06970ab7560344e42613adf32486dfae312e4254c0d117cefbc8399b7e27d4025f9990dfd9d6fbfb0b492ceca2036dc84f750194c8b40366fe0df0a608c41a444d77fc94da760fc8e49fced02131f2b472c232f4546f958bd6f29593683f9a9b26fff351c6597c458dd73165dd8e5c6ef619c6a187905bcadf61809c3e705df20cf9c9cd186234e5555713542&projectId=124d48dd-e515-4302-8bfb-1d5c1e3da916") format('woff2');}
+</style>
+
+	<link href="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/1.css" rel="stylesheet" type="text/css" id="MonoTypeFontApiFontTracker"><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/dpm_b4c96d80854dd27e76d8cc9e21960eebda52e962.js" async="" type="text/javascript"></script><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/advertisement.js"></script><style id="igtranslator-color" type="text/css"></style></head>
+<body class="header-mobile-fixed" id="news">
+	<!-- Begin Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PWWZSH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PWWZSH');</script><!-- End Google Tag Manager -->
+	<div id="site-container" class="site-container">
+		<div><div><!-- PinnedNavBarController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<!-- AdsController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="interstitial" class="ad ad-ist"><script>GPT.display('interstitial')</script></div><div style="" class="ad-wrapper header-leaderboard ad-mobile">
+	<!-- AdsController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="mobile-lb" class="ad ad-mb"><script>GPT.display('mobile-lb')</script></div></div>
+
+<header class="header" id="page-header">
+	<button class="nav-toggle"><i class="icon" data-icon="9"></i></button>
+	<a style="" href="http://searchsqlserver.techtarget.com/" class="header-logo mobile-link">
+		<span class="header-logo-mobile">SearchSQLServer</span>
+	</a>
+	<a href="http://www.techtarget.com/network" class="header-logo desktop-link">
+		<img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/nav_logo2x.png" alt="TechTarget" class="header-logo-desktop replace_2x">
+		<img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/nav_logo2x.png" alt="TechTarget" class="header-logo-small replace_2x">
+	</a> 
+
+	<button style="" class="header-search-toggle"><i class="icon" data-icon="g"></i></button>
+	<form style="" action="http://www.techtarget.com/search/query" method="get" class="header-search">
+		<label for="header-search-input" class="visuallyhidden">Search the TechTarget Network</label>
+		<span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span><input class="header-search-input ui-autocomplete-input" id="header-search-input" name="q" placeholder="Search the TechTarget Network" type="text">
+	<ul style="display: none;" tabindex="0" id="ui-id-1" class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all"></ul></form>
+
+	<nav class="nav" id="page-nav">
+		<a href="http://users.techtarget.com/registration/searchSQLServer/LoginRegister.page?fromURL=http://searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL" class="nav-join-pro"><span>Sign-up now. Start my free, unlimited access.</span></a>
+		<div class="ad-wrapper nav-pro-callout">
+			<!-- AdsController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="promo-1" class="ad ad-pr"><script>GPT.display('promo-1')</script></div></div>
+
+		<div class="nav-user">
+		<a href="http://users.techtarget.com/registration/searchSQLServer/LoginRegister.page?fromURL=http://searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL" class="nav-user-login"><span class="nav-user-action">Login</span></a>
+		</div>
+		<script>TT(["context","lib/jquery"],function(c,$){var u=c.getUser();if(u.loggedIn){$('div.nav-user').children("a:first")
+			.before('<span class="nav-user-name">'+u.displayName+'</span>')
+			.attr("href", "http://users.techtarget.com/registration/searchSQLServer/Logout.page?fromURL=" + window.location.href).children("span.nav-user-action:first").text('Logout');
+			$('.nav-join-pro').removeAttr('href');$('a.nav-join-pro span').hide();}else{$('div.nav-user').children("a:first").attr("href", "http://users.techtarget.com/registration/searchSQLServer/LoginRegister.page?fromURL="+window.location.href);
+			$('a.nav-join-pro').attr("href", "http://users.techtarget.com/registration/searchSQLServer/LoginRegister.page?fromURL="+window.location.href);}});
+		</script>
+		
+		<ul class="nav-list">
+			<li class="nav-list-item nav-list-item-searchsites">
+				<div class="nav-list-item-header searchsqlserver">
+					<a href="http://searchsqlserver.techtarget.com/">
+						<span class="nav-list-item-header-title">
+							<span class="logo-search">Search</span><span class="logo-1">SQL</span><span class="logo-2">Server</span></span>
+					</a>
+					<i class="icon icon-arrow-down" data-icon="5"></i>
+				</div>
+				<div class="nav-list-sublist nav-list-item-dropdown">
+					<ul class="nav-list-item-jscroll">
+						<li class="nav-list-sublist-item"><a href="http://searchbusinessanalytics.techtarget.com/">SearchBusinessAnalytics</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchdatacenter.techtarget.com/">SearchDataCenter</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchdatamanagement.techtarget.com/">SearchDataManagement</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchaws.techtarget.com/">SearchAWS</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchoracle.techtarget.com/">SearchOracle</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchcontentmanagement.techtarget.com/">SearchContentManagement</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchwindowsserver.techtarget.com/">SearchWindowsServer</a></li>
+						</ul>
+				</div>
+			</li>
+			<li class="nav-list-item nav-list-item-topics">
+				<div class="nav-list-item-header">
+					<span class="nav-list-item-header-type">Topic</span>
+					<span class="nav-list-item-header-title">
+					<a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+						Performance Tuning</a>
+					</span>
+					<i class="icon icon-arrow-down" data-icon="5"></i>
+					<i class="icon icon-navigation-detail" data-icon="A"></i>
+				</div>
+				<div class="nav-list-item-dropdown">
+					<div class="nav-list-item-jscroll">
+						<div class="nav-list-child-topics" id="child-topic-e9de7dac977e6210VgnVCM1000000d01c80aRCRD">
+							<div class="nav-list-sublist-header nav-list-sublist-header-topics">
+								<span class="nav-list-sublist-header-topics-title">
+									SQL Server Administration</span>
+								<span class="view-all">View All<i class="icon" data-icon="6"></i></span>
+							</div>
+							<ul class="nav-list-sublist">
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Installation">
+									Installation</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Tools-and-Utilities">
+									Tools and Utilities</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Backup-and-Recovery">
+									Backup and Recovery</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-High-Availability-Scalability-and-Reliability">
+									Availability and Scalability</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Interoperability">
+									Interoperability</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Replication">
+									Replication</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Security">
+									Security</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Stored-Procedures">
+									Stored Procedures</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Transact-SQL-T-SQL">
+									T-SQL</a></li>
+								</ul>
+							</div>
+						<div class="nav-list-child-topics" id="child-topic-e9de7dac977e6210VgnVCM1000000d01c80aRCRD">
+							<div class="nav-list-sublist-header nav-list-sublist-header-topics">
+								<span class="nav-list-sublist-header-topics-title">
+									SQL Server Administration</span>
+								<span class="view-all">View All<i class="icon" data-icon="6"></i></span>
+							</div>
+							<ul class="nav-list-sublist">
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Installation">
+									Installation</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+									Performance Tuning</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Tools-and-Utilities">
+									Tools and Utilities</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Backup-and-Recovery">
+									Backup and Recovery</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-High-Availability-Scalability-and-Reliability">
+									Availability and Scalability</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Interoperability">
+									Interoperability</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Replication">
+									Replication</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Security">
+									Security</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Stored-Procedures">
+									Stored Procedures</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Transact-SQL-T-SQL">
+									T-SQL</a></li>
+								</ul>
+							</div>
+						<div class="nav-list-child-topics" id="child-topic-71577dac977e6210VgnVCM1000000d01c80aRCRD">
+							<div class="nav-list-sublist-header nav-list-sublist-header-topics">
+								<span class="nav-list-sublist-header-topics-title">
+									SQL Server Development</span>
+								<span class="view-all">View All<i class="icon" data-icon="6"></i></span>
+							</div>
+							<ul class="nav-list-sublist">
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/NET-Development-for-SQL-Server">
+									.Net Development</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Database-Modeling-and-Design">
+									Database Design and Modeling</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/XML-in-SQL-Server">
+									XML</a></li>
+								</ul>
+							</div>
+						<div class="nav-list-child-topics" id="child-topic-3e7a09fdc77e6210VgnVCM1000000d01c80aRCRD">
+							<div class="nav-list-sublist-header nav-list-sublist-header-topics">
+								<span class="nav-list-sublist-header-topics-title">
+									SQL Server Management Issues</span>
+								<span class="view-all">View All<i class="icon" data-icon="6"></i></span>
+							</div>
+							<ul class="nav-list-sublist">
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Consolidation-and-Virtualization">
+									Consolidation and Virtualization</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Career-Advice">
+									Career Advice</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Competitors">
+									Competitors</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Database-Compliance">
+									Compliance</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Migration-Strategies-and-Planning">
+									Migration and Planning</a></li>
+								</ul>
+							</div>
+						<div class="nav-list-child-topics" id="child-topic-43fe09fdc77e6210VgnVCM1000000d01c80aRCRD">
+							<div class="nav-list-sublist-header nav-list-sublist-header-topics">
+								<span class="nav-list-sublist-header-topics-title">
+									SQL Server Platforms</span>
+								<span class="view-all">View All<i class="icon" data-icon="6"></i></span>
+							</div>
+							<ul class="nav-list-sublist">
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-2000">
+									SQL Server 2000</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-2005">
+									SQL Server 2005</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-2008">
+									SQL Server 2008</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-2008-R2">
+									SQL Server 2008 R2</a></li>
+								</ul>
+							</div>
+						<div class="nav-list-child-topics" id="child-topic-8f4109fdc77e6210VgnVCM1000000d01c80aRCRD">
+							<div class="nav-list-sublist-header nav-list-sublist-header-topics">
+								<span class="nav-list-sublist-header-topics-title">
+									BI and Data Warehousing</span>
+								<span class="view-all">View All<i class="icon" data-icon="6"></i></span>
+							</div>
+							<ul class="nav-list-sublist">
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Data-Visualization-Techniques-for-SQL-Server">
+									Data Visualization</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Analysis-Services-SSAS">
+									Analysis Services</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Integration-Services-SSIS">
+									Integration Services</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Reporting-Services-SSRS">
+									Reporting Services</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Business-Intelligence-Strategies">
+									BI Strategies</a></li>
+								<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Data-Warehousing">
+									Data Warehousing</a></li>
+								</ul>
+							</div>
+						<div class="nav-list-child-topics" id="child-topic-6312803545819210VgnVCM1000000d01c80aRCRD">
+							<div class="nav-list-sublist-header nav-list-sublist-header-topics">
+								<span class="nav-list-sublist-header-topics-title">
+									Topics Archive</span>
+								<span class="view-all">View All<i class="icon" data-icon="6"></i></span>
+							</div>
+							</div>
+						<div class="nav-list-parent-topics">
+							<div class="nav-list-sublist-header nav-list-sublist-header-gray">Please select a category</div>
+							<ul class="nav-list-sublist">
+								<li class="nav-list-sublist-item" id="parent-topic-e9de7dac977e6210VgnVCM1000000d01c80aRCRD">
+										SQL Server Administration</li>
+								<li class="nav-list-sublist-item" id="parent-topic-71577dac977e6210VgnVCM1000000d01c80aRCRD">
+										SQL Server Development</li>
+								<li class="nav-list-sublist-item" id="parent-topic-3e7a09fdc77e6210VgnVCM1000000d01c80aRCRD">
+										SQL Server Management Issues</li>
+								<li class="nav-list-sublist-item" id="parent-topic-43fe09fdc77e6210VgnVCM1000000d01c80aRCRD">
+										SQL Server Platforms</li>
+								<li class="nav-list-sublist-item" id="parent-topic-8f4109fdc77e6210VgnVCM1000000d01c80aRCRD">
+										BI and Data Warehousing</li>
+								</ul>
+						</div>
+						</div>
+				</div>
+				</li><li class="nav-list-item nav-list-item-sections">
+					<div class="nav-list-item-header">
+						<span class="nav-list-item-header-type">Section</span>
+						<span class="nav-list-item-header-title">
+									<a href="http://searchsqlserver.techtarget.com/info/manage">Manage</a>
+								</span>
+							<i class="icon icon-arrow-down" data-icon="5"></i>
+						<i class="icon icon-navigation-arrow" data-icon="B"></i>
+					</div>				
+					<div class="nav-list-sublist nav-list-item-dropdown">
+						<ul class="nav-list-item-jscroll">
+						<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/info/news">News</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/info/getstarted">Get Started</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/info/evaluate">Evaluate</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/info/manage">Manage</a></li>
+						<li class="nav-list-sublist-item"><a href="http://searchsqlserver.techtarget.com/info/problemsolve">Problem Solve</a></li>
+						<li class="nav-list-sublist-item sponsored"><a href="http://searchsqlserver.techtarget.com/sponsored_communities">Sponsored Communities</a></li>
+						</ul>
+					</div>
+				</li>
+		<li class="desktop-fixed-search">Search the TechTarget Network</li></ul>
+		<ul class="nav-social">
+			<li class="nav-social-item" title="Follow searchSQLServer on Google+" id="navBarGooglePlus"><a href="https://plus.google.com/112677737133992429317/posts" target="_blank"><i class="icon" data-icon="s"></i></a></li><li class="nav-social-item" title="Like searchSQLServer on Facebook" id="navBarFacebook"><a href="http://www.facebook.com/searchsqlserver" target="_blank"><i class="icon" data-icon="u"></i></a></li><li class="nav-social-item" title="Follow @searchsqlserver on Twitter" id="navBarTwitter"><a href="https://twitter.com/searchsqlserver" target="_blank"><i class="icon" data-icon="c"></i></a></li><li class="nav-social-item" title="Follow searchSQLServer on LinkedIn" id="navBarLinkedIn"><a href="http://www.linkedin.com/company/3087272?trk=tyah" target="_blank"><i class="icon" data-icon="o"></i></a></li></ul>
+	 </nav>
+</header>
+
+<div class="ad-wrapper header-leaderboard ad-desktop">
+	<!-- AdsController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="leaderboard" class="ad ad-lb"><script>GPT.display('leaderboard')</script></div></div>
+</div>
+</div><div id="main-content" class="main-content">
+			<article id="content-columns" class="content-columns">
+				<div><div><!-- ContentItemController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+
+
+
+
+
+
+
+	
+	
+	
+	
+		
+			
+			
+				<div class="main-article-hero-image">
+					<img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/article_gradient_desktop.jpg" class="default-article-img">
+				</div>
+			
+		
+	
+<header id="editorial-content-header" class="main-article-header main-article-header-noimage">
+	<h1 class="main-article-title">How to use the LEFT JOIN vs. RIGHT OUTER JOIN in SQL</h1>
+
+	<ul class="main-article-share-counts">
+		<li class="main-article-share-count main-article-comment-count" title="Add/view comments">
+			<i class="icon" data-icon="z"></i> <span>2</span> </li>
+		
+		<li class="main-article-share-count inline-social-icons inline cboxElement" title="Share this" href="#social-icons-desktop">
+			<i class="icon" data-icon="f"></i>
+			<span></span>
+		</li>
+	</ul>
+
+	<div class="ad-wrapper page-header-ad ad-desktop">
+		<!-- AdsController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="mu-top" class="ad ad-mu"><script>GPT.display('mu-top')</script></div></div>
+
+	<div class="main-article-author">
+			<div class="main-article-author-info">
+				<div class="main-article-author-byline">
+					by&nbsp;John L. Viescas and Michael J. Hernandez</div>
+				</div>
+			</div>
+	<h2 class="main-article-subtitle">In this series of tips, you'll learn 
+LEFT JOIN vs. RIGHT JOIN techniques and find examples for creating 
+simple queries, including how to define a SQL OUTER JOIN by using 
+multiple tables and how to use the SELECT statement and embed SQL JOINs.</h2>
+	</header>
+</div><div><!-- RefineryController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<section class="refinery-wrapper" id="refinery">
+
+<div class="refinery-content closed">
+
+		<header style="height: 188px;" class="refinery-header">
+			<h3>This Article Covers</h3><h2><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">							
+							Performance Tuning<i class="icon" data-icon="0"></i>
+						</a>
+					</h2>
+				
+			<div style="" class="refinery-topics-wrapper">
+					<h3>RELATED TOPICS</h3>
+					<ul class="refinery-topics">
+						<li><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Installation">Installation</a></li>
+	 						<li><a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Tools-and-Utilities">Tools and Utilities</a></li>
+	 						<li><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Backup-and-Recovery">Backup and Recovery</a></li>
+	 						<li><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-High-Availability-Scalability-and-Reliability">Availability and Scalability</a></li>
+	 						<li><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Interoperability">Interoperability</a></li>
+	 						<li><a href="http://searchsqlserver.techtarget.com/resources/SQL-Server-Replication">Replication</a></li>
+	 						</ul>
+				</div></header>
+	
+		<div style="height: 246px;" class="refinery-body">
+		
+			<div class="refinery-articles-wrapper">
+					<h3>Looking for something else?</h3>
+					<ul class="refinery-articles">
+						<li><i class="icon" data-icon="2"></i>
+							<a href="http://searchsqlserver.techtarget.com/tip/Five-tips-to-avoid-a-performance-bottleneck-or-other-SQL-Server-snares">Five tips to avoid a performance bottleneck or other SQL Server snares</a></li>
+						<li><i class="icon" data-icon="2"></i>
+							<a href="http://searchsqlserver.techtarget.com/tip/Dive-deep-into-SQL-Server-2014-in-memory-OLTP">Dive deep into SQL Server 2014 in-memory OLTP</a></li>
+						<li><i class="icon" data-icon="2"></i>
+							<a href="http://searchsqlserver.techtarget.com/tip/Does-SQL-Server-database-size-affect-performance">Does SQL Server database size affect performance?</a></li>
+						</ul>
+				</div>
+			<dl class="refinery-tags">
+					<dt><i class="icon" data-icon="e"></i>TECHNOLOGIES</dt>
+						<dd>
+							<a href="http://www.techtarget.com/technology/Column-table-creation">Column &amp; table creation</a>
+							<a href="http://www.techtarget.com/technology/Database-query-processing">Database query processing</a>
+							<a href="http://www.techtarget.com/technology/SQL">SQL</a>
+							</dd>
+					</dl>
+			</div>
+		<div style="display: block;" id="refineryShowMore" class="refinery-collapse-toggle">
+			<div class="refinery-collapse-toggle-inner show-more">+ Show More</div>
+		</div>
+	</div>
+</section>
+</div><div><!-- GuideController, generated at 16:51:20 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+</div>
+</div><div id="content-left" class="content-left">
+					<div><div style="" class="locking-full-bar">
+	<div style="position: relative;" class="locking-left-bar">
+		<div><!-- ChaptersBarController, generated at 16:51:20 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<nav id="chapters-bar-menu" class="chapters-bar desktop-chapters-bar" data-required-item="section.main-article-chapter">
+	<div class="chapters-bar-header">
+		<i class="icon" data-icon="1"></i>In this Article</div>
+	<ul class="chapters-bar-list"><li class="chapters-bar-item"><a href="#">Syntax</a></li><li class="chapters-bar-item"><a href="#">Using Tables</a></li><li class="chapters-bar-item"><a href="#">Embedding a SELECT Statement</a></li><li class="chapters-bar-item selected"><a href="#">Embedding JOINs within JOINs</a></li><li class="chapters-bar-item"><a href="#">Next Steps</a></li><li class="chapters-bar-item"><a href="#">Dig Deeper</a></li></ul>
+</nav></div><div><!-- GuideController, generated at 16:51:20 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+</div><div><!-- SocialMediaShareBarController, generated at 16:53:04 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="rail-share-bar">
+		<ul style="position: relative;" id="social-icons-desktop" class="share-bar-desktop">
+			<li class="share-bar-item-desktop share-bar-title">Share this item with your network:</li>
+			<li class="share-bar-item-desktop socialMedia-facebook" title="Share on Facebook" data-socialsite="facebook">
+					<a href="#" target="_blank"><i class="icon" data-icon="u"></i></a>
+					<span class="count"></span>
+				</li>
+			<li class="share-bar-item-desktop socialMedia-twitter" title="Share on Twitter" data-socialsite="twitter" data-account="searchsqlserver" data-related="">
+					<a href="#" target="_blank"><i class="icon" data-icon="c"></i></a>
+					<span class="count"></span>
+				</li>
+			<li class="share-bar-item-desktop socialMedia-google" title="Share on Google+" data-socialsite="google">
+					<a href="#" target="_blank"><i class="icon" data-icon="s"></i></a>
+					<span class="count"></span>
+				</li>
+			<li class="share-bar-item-desktop socialMedia-linkedin" title="Share on LinkedIn" data-socialsite="linkedin">
+					<a href="#" target="_blank"><i class="icon" data-icon="o"></i></a>
+					<span class="count"></span>
+				</li>
+			<li class="share-bar-item-desktop contentTools-print" title="Print This Page">
+					<a href="http://searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL?vgnextfmt=print" target="_blank"><i class="icon" data-icon="i"></i></a>
+				</li>
+			<li class="share-bar-item-desktop contentTools-email" title="Email a Friend">
+				<a href="http://api.addthis.com/oexchange/0.8/forward/email/offer?pubid=uxtechtarget&amp;url=http%3A%2F%2Fsearchsqlserver.techtarget.com%2Ffeature%2FHow-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL&amp;title=How+to+use+the+LEFT+JOIN+vs.+RIGHT+OUTER+JOIN+in+SQL&amp;email_template=TechTargetSearchSites&amp;ct=1" target="_blank"><i class="icon" data-icon="n"></i></a>
+			</li>
+		</ul>
+	</div>
+</div><div><!-- RelatedContentController, generated at 22:53:44 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+
+</div><aside class="related-bar desktop-related-bar" id="related-content-bar">
+		<div class="related-bar-header">
+			<i class="icon" data-icon="l"></i>
+			Related Content</div>
+		<ul class="related-bar-list">
+		<li class="related-bar-item">
+			<a href="http://searchsqlserver.techtarget.com/feature/Using-the-FULL-OUTER-JOIN-in-SQL">Using the FULL OUTER JOIN in SQL</a>
+			<span>– SearchSQLServer</span>
+			</li>
+		<li class="related-bar-item">
+			<a href="http://searchsqlserver.techtarget.com/feature/SQL-OUTER-JOIN-sample-statements-for-queries">SQL OUTER JOIN sample statements for queries</a>
+			<span>– SearchSQLServer</span>
+			</li>
+		<li class="related-bar-item">
+			<a href="http://searchsqlserver.techtarget.com/feature/SQL-OUTER-JOIN-sample-uses">SQL OUTER JOIN sample uses</a>
+			<span>– SearchSQLServer</span>
+			</li>
+		</ul>
+</aside></div>
+	<aside style="position: relative;" class="resources-bar desktop-resources-bar" id="resources-bar">
+		<div><!-- VendorResourcesController, generated at 22:53:45 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div class="resources-bar-header"><i class="icon" data-icon="l"></i>Sponsored News</div>
+			<ul class="resources-bar-list sponsored-news">
+				<li class="resources-bar-item">
+						<a href="http://searchstorage.techtarget.com/NetAppSponsoredNews/Desktop-Virtualization-Can-Converged-Infrastructure-and-Flash-Help-Deliver-on-Its-Promise?asrc=SS_sqlsrv_SN-1286374">Desktop Virtualization: Can Converged Infrastructure and Flash Help Deliver on ...</a>
+						<span>–NetApp</span>
+					</li>
+				<li class="resources-bar-item">
+						<a href="http://searchcompliance.techtarget.com/VeritasInfoGovernance/Smart-Access-Policies-Are-Key-to-Protecting-Organizational-Secrets?asrc=SS_sqlsrv_SN-1286374">Smart Access Policies Are Key to Protecting Organizational Secrets</a>
+						<span>–Symantec</span>
+					</li>
+				<li class="resources-bar-item see-more"><a href="http://searchsqlserver.techtarget.com/sponsored_communities">See More</a></li>
+				</ul>
+		<div class="resources-bar-header"><i class="icon" data-icon="l"></i>Vendor Resources</div>
+		<ul class="resources-bar-list" id="vendorResourcesSplash">
+			<li class="resources-bar-item">
+					<a href="http://searchsqlserver.bitpipe.com/detail/RES/1259596067_212.html">Reduce CPU Usage with 'SMART' SQL</a>
+					<span>–BMC Software, Inc.</span>
+					<i class="icon" data-icon="8"></i>
+				</li>
+			<li class="resources-bar-item">
+					<a href="http://searchsqlserver.bitpipe.com/detail/RES/1449549969_598.html">Food &amp; Beverage Helps Manufacturers Prepare for COOL Compliance and Recall ...</a>
+					<span>–Infor</span>
+					<i class="icon" data-icon="8"></i>
+				</li>
+			</ul>
+</div></aside>
+</div></div></div>
+				<div id="content-center" class="content-center">
+					<div><div><!-- EzinePromoController, generated at 22:53:45 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+</div><div><!-- ContentItemController, generated at 22:53:45 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div style="" class="float-mask"></div>
+
+
+
+
+
+<ul style="top: 80px; position: fixed; left: 0px;" class="actions-bar">
+	
+	
+	
+	
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<li style="display: none;" class="actions-bar-item actions-bar-chapters"><i class="icon" data-icon="1"></i></li>
+	
+	
+		<li class="actions-bar-item actions-bar-resources"><i class="icon" data-icon="2"></i></li>
+	
+	
+		<li class="actions-bar-item actions-bar-share"><i class="icon" data-icon="f"></i>
+			<ul class="share-bar-mobile">
+				
+					<li class="share-bar-item-mobile socialMedia-facebook" title="Share on Facebook" data-socialsite="facebook">
+						<a href="#"><i class="icon" data-icon="u"></i></a><span class="count"></span>
+					</li>
+				
+				
+					<li class="share-bar-item-mobile socialMedia-twitter" title="Share on Twitter" data-socialsite="twitter" data-account="searchsqlserver" data-related="bizanalyticstt">
+						<a href="#"><i class="icon" data-icon="c"></i></a><span class="count"></span>
+					</li>
+				
+				
+					<li class="share-bar-item-mobile socialMedia-google" title="Share on Google+" data-socialsite="google">
+						<a href="#"><i class="icon" data-icon="s"></i></a><span class="count"></span>
+					</li>
+				
+				
+				
+					<li class="share-bar-item-mobile socialMedia-linkedin" title="Share on LinkedIn" data-socialsite="linkedin">
+						<a href="#"><i class="icon" data-icon="o"></i></a><span class="count"></span>
+					</li>	
+				
+				<li class="share-bar-item-mobile contentTools-email" title="Email a Friend">
+					<a href="http://api.addthis.com/oexchange/0.8/forward/email/offer?pubid=uxtechtarget&amp;url=http%3A%2F%2Fsearchsqlserver.techtarget.com%2Ffeature%2FHow-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL&amp;title=How+to+use+the+LEFT+JOIN+vs.+RIGHT+OUTER+JOIN+in+SQL&amp;email_template=TechTargetSearchSites&amp;ct=1"><i class="icon" data-icon="n"></i></a>
+				</li>
+			</ul>
+		</li>
+	
+</ul><section id="content-body">
+<p>You'll generally use the OUTER JOIN form that asks for all the rows 
+from one table or result set and any matching rows from a second table 
+or result set. To do this, you specify either a LEFT OUTER JOIN or a 
+RIGHT OUTER JOIN.</p>
+<div class="ad-wrapper ad-embedded"> 
+ <div id="halfpage" class="ad ad-hp">
+  <script>GPT.display('halfpage')</script>
+ </div> 
+ <div id="mu-1" class="ad ad-mu">
+  <script>GPT.display('mu-1')</script>
+ </div> 
+</div> 
+<p>What's the <a href="http://searchoracle.techtarget.com/answer/Oracle-LEFT-JOIN-vs-LEFT-OUTER-JOIN-Whats-the-difference">difference between LEFT and RIGHT</a>? Remember from the previous chapter that to specify an INNER JOIN on two tables, you name the first table, include the <a href="http://itknowledgeexchange.techtarget.com/itanswers/how-can-i-join-3-tables-using-join-keyword/">JOIN keyword</a>, and then name the second table. When you begin <a target="_blank" href="http://technet.microsoft.com/en-us/library/ms191517%28v=sql.105%29.aspx">building queries</a>
+ using OUTER JOIN, the SQL Standard considers the first table you name 
+as the one on the "left," and the second table as the one on the 
+"right." So, if you want all the rows from the first table and any 
+matching rows from the second table, you'll use a <a href="http://searchoracle.techtarget.com/answer/What-is-the-difference-between-left-outer-join-and-outer-join">LEFT OUTER JOIN</a>.
+ Conversely, if you want all the rows from the second table and any 
+matching rows from the first table, you'll specify a RIGHT OUTER JOIN.</p> 
+<section class="section main-article-chapter" data-menu-title="Syntax">
+ <h3 class="section-title"><i class="icon" data-icon="1"></i><b>Syntax</b></h3>
+ <p>Let's examine the syntax needed to build either a LEFT or RIGHT OUTER JOIN.</p>
+</section>  
+<section class="section main-article-chapter" data-menu-title="Using Tables">
+ <h3 class="section-title"><i class="icon" data-icon="1"></i><b>Using Tables</b></h3>
+ <p>We'll start simply with <a href="http://searchoracle.techtarget.com/answer/LEFT-OUTER-JOIN-without-using-LEFT-OUTER-JOIN">defining an OUTER JOIN</a> using tables. Figure 9–3 shows the syntax diagram for creating a query with an OUTER JOIN on two tables.</p>
+ <div class="pro-features-wrapper"></div>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_3.gif" alt="Example of defining an OUTER JOIN on two tables"><br> <b>Figure 9–3</b> Defining an OUTER JOIN on two tables.</p>
+ <p>Just like INNER JOIN (covered in Chapter 8), all the action happens 
+in the FROM clause. (We left out the WHERE and ORDER BY clauses for now 
+to simplify things.) Instead of specifying a single table name, you 
+specify two table names and link them with the JOIN keyword. If you do 
+not specify the type of JOIN you want, your database system assumes you 
+want an INNER JOIN. In this case, because you want an OUTER JOIN, you 
+must explicitly state that you want either a LEFT JOIN or a RIGHT JOIN. 
+The OUTER keyword is optional.</p>
+ <div class="extra-info">
+  <div class="extra-info-inner">
+   <h4>Note</h4> 
+   <p>For those of you following along with the complete syntax diagrams
+ in Appendix A, SQL Standard Diagrams, note that we've pulled together 
+the applicable parts (from <i>Select Statement, Table Reference, and Joined Table</i>) into simpler diagrams that explain the specific syntax we're discussing.</p>
+  </div>
+ </div>
+ <p>The critical part of any JOIN is the ON or USING clause that follows
+ the second table and tells your database system how to perform the 
+JOIN. To solve the JOIN, your database system logically combines every 
+row in the first table with every row in the second table. (This 
+combination of all rows from one table with all rows from a second table
+ is called a <i>Cartesian product</i>.) It then applies the criteria in 
+the ON or USING clause to find the matching rows to be returned. Because
+ you asked for an OUTER JOIN, your database system also returns the 
+unmatched rows from either the "left" or "right" table.</p>
+ <p>You learned about using a search condition to form a WHERE clause in
+ Chapter 6, Filtering Your Data. You can use a search condition in the 
+ON clause within a JOIN to specify a logical test that must be true in 
+order to return any two linked rows. It only makes sense to write a 
+search condition that compares at least one column from the first table 
+with at least one column from the second table. Although you can write a
+ very complex search condition, you can usually specify a simple equals 
+comparison test on the primary key columns from one table with the 
+foreign key columns from the other table.</p>
+ <p>To keep things simple, let's start with the same recipe classes and 
+recipes example we used in the last chapter. Remember that in a 
+well-designed database, you should break out complex classification 
+names into a second table and then link the names back to the primary 
+subject table via a simple key value. In the Recipes sample database, 
+recipe classes appear in a table separate from recipes. Figure 9–4 shows
+ the relationship between the Recipe_Classes and Recipes tables.</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_4.gif" alt="Example of recipe classes in a separate table from recipes"><br> <b>Figure 9–4</b> Recipe classes are in a separate table from recipes.</p>
+ <p>When you originally set up the kinds of recipes to save in your 
+database, you might have started by entering all the recipe classes that
+ came to mind. Now that you've entered a number of recipes, you might be
+ interested in finding out which classes don't have any recipes entered 
+yet. You might also be interested in listing all the recipe classes 
+along with the names of recipes entered so far for each class. You can 
+solve either problem with an OUTER JOIN.</p>
+ <div class="extra-info">
+  <div class="extra-info-inner">
+   <h4>Note</h4> 
+   <p>Throughout this chapter, we use the "Request/Translation/Clean 
+Up/SQL" technique introduced in Chapter 4, Creating a Simple Query.</p>
+  </div>
+ </div>
+ <p style=" text-align: center;"><i><b>"Show me all the recipe types and any matching recipes in my database."</b></i></p>
+ <table style=" width: 100%;" border="1" cellpadding="03" cellspacing="03"> 
+  <tbody>
+   <tr> 
+    <td width="20%"><b>Translation</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select recipe class
+ description and recipe title from the recipe classes table left outer 
+joined with the recipes table on recipe class ID in the recipe classes 
+table matching recipe class ID in the recipes table</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>Clean Up</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select recipe class description </span>
+     <s>
+      <span style=" font-size: small;">and </span>
+     </s><span style=" font-size: small;">recipe title<br> from </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;">recipe classes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"><br> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"><br> on recipe_ classes.recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe classes table</span>
+     </s><span style=" font-size: small;"><br> </span>
+     <s>
+      <span style=" font-size: small;">matching</span>
+     </s><span style=" font-size: small;"> = recipes.recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table</span>
+     </s></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>SQL</b></td> 
+    <td width="80%"><code><span style=" font-size: small;">SELECT Recipe_Classes.RecipeClassDescription,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeTitle&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">FROM Recipe_Classes&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipes&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipe_Classes.RecipeClassID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeClassID</span></code></td> 
+   </tr> 
+  </tbody>
+ </table>
+ <p>When using multiple tables in your FROM clause, remember to qualify 
+fully each column name with the table name wherever you use it so that 
+it's absolutely clear which column from which table you want. Note that 
+we had to qualify the name of RecipeClassID in the ON clause because 
+there are two columns named RecipeClassID—one in the Recipes table and 
+one in the Recipe_Classes table.</p>
+ <div class="extra-info">
+  <div class="extra-info-inner">
+   <h4>Note</h4> 
+   <p>Although most commercial implementations of SQL support OUTER 
+JOIN, some do not. If your database does not support OUTER JOIN, you can
+ still solve the problem by listing all the tables you need in the FROM 
+clause, then moving your search condition from the ON clause to the 
+WHERE clause. You must consult your database documentation to learn the 
+specific nonstandard syntax that your database requires to define the 
+OUTER JOIN. For example, earlier versions of Microsoft SQL Server 
+support this syntax. (Notice the asterisk in the WHERE clause.)</p> 
+   <p><code>SELECT Recipe_Classes.RecipeClassDescription,</code><br> <code>Recipes.RecipeTitle</code><br> <code>FROM Recipe_Classes, Recipes</code><br> <code>WHERE Recipe_Classes.RecipeClassID *=</code><br> <code>Recipes.RecipeClassID</code></p> 
+   <p>If you're using Oracle, the optional syntax is as follows. (Notice the plus sign in the WHERE clause.)</p> 
+   <p><b><code>SELECT Recipe_Classes.RecipeClassDescription,</code><br> <code>Recipes.RecipeTitle</code><br> <code>FROM Recipe_Classes, Recipes</code><br> <code>WHERE Recipe_Classes.RecipeClassID =</code><br> <code>Recipes.RecipeClassID(+)</code></b></p> 
+   <p>Quite frankly, these strange syntaxes were invented by database 
+vendors that wanted to provide this feature long before a clearer syntax
+ was defined in the SQL Standard. Thankfully, the SQL Standard syntax 
+allows you to fully define the source for the final result set entirely 
+within the FROM clause. Think of the FROM clause as fully defining a 
+linked result set from which the database system obtains your answer. In
+ the SQL Standard, you use the WHERE clause only to filter rows out of 
+the result set defined by the FROM clause. Also, because the specific 
+syntax for defining an OUTER JOIN via the WHERE clause varies by 
+product, you might have to learn several different syntaxes if you work 
+with multiple nonstandard products.</p>
+  </div>
+ </div>
+ <p>If you execute our example query in the Recipes sample database, you
+ should see 16 rows returned. Because we didn't enter any soup recipes 
+in the database, you'll get a Null value for RecipeTitle in the row 
+where RecipeClass¬Description is 'Soup'. To find only this one row, use 
+this approach.</p>
+ <p style=" text-align: center;"><i><b>"List the recipe classes that do not yet have any recipes."</b></i></p>
+ <table style=" width: 100%;" border="1" cellpadding="03" cellspacing="03"> 
+  <tbody>
+   <tr> 
+    <td width="20%"><b>Translation</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select recipe class
+ description from the recipe classes table left outer joined with the 
+recipes table on recipe class ID where recipe ID is empty</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>Clean Up</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select recipe class description<br> from </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;">recipe classes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"><br> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"><br> on recipe_classes.recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table matches</span>
+     </s><span style=" font-size: small;"><br> = recipes.recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table</span>
+     </s><span style=" font-size: small;"><br> where recipe ID is </span>
+     <s>
+      <span style=" font-size: small;">empty</span>
+     </s><span style=" font-size: small;"> NULL</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>SQL</b></td> 
+    <td width="80%"><code><span style=" font-size: small;">SELECT Recipe_Classes.RecipeClassDescription</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">FROM Recipe_Classes</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipes</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipe_Classes.RecipeClassID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeClassID</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">WHERE Recipes.RecipeID IS NULL</span></code><span style=" font-size: small;"></span></td> 
+   </tr> 
+  </tbody>
+ </table>
+ <p>If you think about it, we've just done a difference or EXCEPT 
+operation (see Chapter 7) using a JOIN. It's somewhat like saying, "Show
+ me all the recipe classes except the ones that already appear in the 
+recipes table." The set diagram in Figure 9–5 should help you visualize 
+what's going on.</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_5.gif" alt="Example of a possible relationship between two tables"><br> <b>Figure 9–5</b> A possible relationship between recipe classes and recipes.</p>
+ <p>In Figure 9–5, all recipes have a recipe class, but some recipe 
+classes exist for which no recipe has yet been defined. When we add the 
+IS NULL test, we're asking for all the rows in the lighter outer circle 
+that don't have any matches in the set of recipes represented by the 
+darker inner circle.</p>
+ <p>Notice that the diagram for an OUTER JOIN on tables in Figure 9–3 
+also has the optional USING clause. If the matching columns in the two 
+tables have the same name and you want to join only on equal values, you
+ can use the USING clause and list the column names. Let's do the 
+previous problem again with USING.</p>
+ <p style=" text-align: center;"><i><b>"Display the recipe classes that do not yet have any recipes."</b></i></p>
+ <table style=" width: 100%;" border="1" cellpadding="03" cellspacing="03"> 
+  <tbody>
+   <tr> 
+    <td width="20%"><b>Translation</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select recipe class
+ description from the recipe classes table left outer joined with the 
+recipes table using recipe class ID where recipe ID is empty</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>Clean Up</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select recipe class description<br> from </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;">recipe classes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"><br> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> using recipe class ID<br> where recipe ID is </span>
+     <s>
+      <span style=" font-size: small;">empty</span>
+     </s><span style=" font-size: small;"> NULL</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>SQL</b></td> 
+    <td width="80%"><code><span style=" font-size: small;">SELECT Recipe_Classes.RecipeClassDescription</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">FROM Recipe_Classes</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipes</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;"> USING (RecipeClassID)</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">WHERE Recipes.RecipeID IS NULL</span></code><span style=" font-size: small;"></span></td> 
+   </tr> 
+  </tbody>
+ </table>
+ <p>The USING syntax is a lot simpler, isn't it? There's one small 
+catch: Any column in the USING clause loses its table identity because 
+the SQL Standard dictates that the database system must "coalesce" the 
+two columns into a single column. In this example, there's only one 
+RecipeClassID column as a result, so you can't reference 
+Recipes.RecipeClassID or Recipe_Classes.RecipeClassID in the SELECT 
+clause or any other clause.</p>
+ <p>Be aware that some database systems do not yet support USING. If you
+ find that you can't use USING with your database, you can always get 
+the same result with an ON clause and an equals comparison.</p>
+ <div class="extra-info">
+  <div class="extra-info-inner">
+   <h4>Note</h4> 
+   <p>The SQL Standard also defines a type of JOIN operation called a 
+NATURAL JOIN. A NATURAL JOIN links the two specified tables by match- 
+ing all the columns with the same name. If the only common columns are 
+the linking columns and your database supports NATURAL JOIN, you can 
+solve the example problem like this:</p> 
+   <p><code>SELECT Recipe_Classes.RecipeClassDescription</code><br> <code>FROM Recipe_Classes</code><br> <code>NATURAL LEFT OUTER JOIN Recipes</code><br> <code>WHERE Recipes.RecipeID IS NULL</code></p> 
+   <p>Do not specify an ON or USING clause if you use the NATURAL keyword.</p>
+  </div>
+ </div>
+</section>                           
+<section class="section main-article-chapter" data-menu-title="Embedding a SELECT Statement">
+ <h3 class="section-title"><i class="icon" data-icon="1"></i><b>Embedding a SELECT Statement</b></h3>
+ <p>As you recall from Chapter 8, most SQL implementations let you 
+substitute an entire SELECT statement for any table name in your FROM 
+clause. Of course, you must then assign a correlation name (see the 
+section on assigning alias names in Chapter 8) so that the result of 
+evaluating your embedded query has a name. Figure 9–6 shows how to 
+assemble an OUTER JOIN clause using embedded SELECT statements.</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_6.gif" alt="Example of an OUTER JOIN using SELECT statements."><br> <b>Figure 9–6</b> An OUTER JOIN using SELECT statements.</p>
+ <p>Note that a SELECT statement can include all query clauses except an
+ ORDER BY clause. Also, you can mix and match SELECT statements with 
+table names on either side of the OUTER JOIN keywords.</p>
+ <p>Let's look at the Recipes and Recipe_Classes tables again. For this 
+example, let's also assume that you are interested only in classes 
+Salads, Soups, and Main courses. Here's the query with the 
+Recipe_Classes table filtered in a SELECT statement that participates in
+ a LEFT OUTER JOIN with the Recipes table.</p>
+ <p><b>SQL</b><br> <code>SELECT RCFiltered.ClassName, R.RecipeTitle</code><br> <code>FROM</code><br> <code>(SELECT RecipeClassID,</code><br> <code>RecipeClassDescription AS ClassName</code><br> <code>FROM Recipe_Classes AS RC</code><br> <code>WHERE RC.ClassName = 'Salads'</code><br> <code>OR RC.ClassName = 'Soup'</code><br> <code>OR RC.ClassName = 'Main Course')</code><br> <code>AS RCFiltered</code><br> <code>LEFT OUTER JOIN Recipes AS R</code><br> <code>ON RCFiltered.RecipeClassID = R.RecipeClassID</code></p>
+ <p>You must be careful when using a SELECT statement in a FROM clause. 
+First, when you decide to substitute a SELECT statement for a table 
+name, you must be sure to include not only the columns you want to 
+appear in the final result but also any linking columns you need to 
+perform the JOIN. That's why you see both RecipeClassID and 
+RecipeClassDescription in the embedded statement. Just for fun, we gave 
+RecipeClassDescription an alias name of ClassName in the embedded 
+statement. As a result, the SELECT clause asks for ClassName rather than
+ RecipeClassDescription. Note that the ON clause now references the 
+correlation name (RCFiltered) of the embedded SELECT statement rather 
+than the original name of the table or the correlation name we assigned 
+the table inside the embedded SELECT statement.</p>
+ <p>As the query is stated for the actual Recipes sample database, you 
+see one row with RecipeClassDescription of Soup with a Null value 
+returned for Recipe¬Title because there are no soup recipes in the 
+sample database. We could just as easily have built a SELECT statement 
+on the Recipes table on the right side of the OUTER JOIN. For example, 
+we could have asked for recipes that contain the word "beef" in their 
+titles, as in the following statement.</p>
+ <p><b>SQL</b><br> <code>SELECT RCFiltered.ClassName, R.RecipeTitle</code><br> <code>FROM</code><br> <code>(SELECT RecipeClassID,</code><br> <code>RecipeClassDescription AS ClassName</code><br> <code>FROM Recipe_Classes AS RC</code><br> <code>WHERE RC.ClassName = 'Salads'</code><br> <code>OR RC.ClassName = 'Soup'</code><br> <code>OR RC.ClassName = 'Main Course')</code><br> <code>AS RCFiltered</code><br> <code>LEFT OUTER JOIN</code><br> <code>(SELECT Recipes.RecipeClassID, Recipes.Recipe</code><br> <code>Title</code><br> <code>FROM Recipes</code><br> <code>WHERE Recipes.RecipeTitle LIKE '%beef%')</code><br> <code>AS R</code><br> <code>ON RCFiltered.RecipeClassID = R.RecipeClassID</code></p>
+ <p>Keep in mind that the LEFT OUTER JOIN asks for all rows from the 
+result set or table on the left side of the JOIN, regardless of whether 
+any matching rows exist on the right side. The previous query not only 
+returns a Soup row with a Null RecipeTitle (because there are no soups 
+in the database at all) but also a Salad row with a Null. You might 
+conclude that there are no salad recipes in the database. Actually, 
+there are salads in the database but no salads with "beef" in the title 
+of the recipe!</p>
+ <div class="extra-info">
+  <div class="extra-info-inner">
+   <h4>Note</h4> 
+   <p>You might have noticed that you can enter a full search condition 
+as part of the ON clause in a JOIN. This is absolutely true, so it is 
+perfectly legal in the SQL Standard to solve the example problem as 
+follows.</p> 
+   <p><b><code>SELECT Recipe_Classes.RecipeClassDescription,</code><br> <code>Recipes.RecipeTitle</code><br> <code>FROM Recipe_Classes</code><br> <code>LEFT OUTER JOIN Recipes</code><br> <code>ON Recipe_Classes.RecipeClassID =</code><br> <code>Recipes.RecipeClassID</code><br> <code>AND</code><br> <code>(Recipe_Classes.RecipeClassDescription = 'Salads'</code><br> <code>OR Recipe_Classes.RecipeClassDescription = 'Soup'</code><br> <code>OR Recipe_Classes.RecipeClassDescription =</code><br> <code>'Main Course')</code><br> <code>AND Recipes.RecipeTitle LIKE '%beef%'</code></b></p> 
+   <p>Unfortunately, we have discovered that some major implementations 
+of SQL solve this problem incorrectly or do not accept this syntax at 
+all! Therefore, we recommend that you always enter in the search 
+condition in the ON clause only criteria that compare columns from the 
+two tables or result sets. If you want to filter the rows from the 
+underlying tables, do so with a sepa- rate search condition in a WHERE 
+clause in an embedded SELECT statement.</p>
+  </div>
+ </div>
+</section>           
+<section class="section main-article-chapter" data-menu-title="Embedding JOINs within JOINs">
+ <h3 class="section-title"><i class="icon" data-icon="1"></i><b>Embedding JOINs within JOINs</b></h3>
+ <p>Although you can solve many problems by linking just two tables, many times you'll need to link <a href="http://searchoracle.techtarget.com/answer/Outer-join-with-three-or-more-tables">three, four, or more tables</a>
+ to get all the data to solve your request. For example, you might want 
+to fetch all the relevant information about recipes—the type of recipe, 
+the recipe name, and all the ingredients for the recipe—in one query. 
+Now that you understand what you can do with an OUTER JOIN, you might 
+also want to list all recipe classes—even those that have no recipes 
+defined yet—and all the details about recipes and their ingredients. 
+Figure 9–7 shows all the tables needed to answer this request.</p>
+ <div style="display: block;" class="join-discussion-wrapper"><ul style="display: block;" id="embeddedDiscussions" class="join-discussion-content carousel carousel-slide" data-transition="slide" data-paginate="">
+			<section class="carousel-item carousel-active" id="embedded-discussions">
+			<li class="carousel-item carousel-active">
+					<div class="discussion-question">
+						<div class="image-resize">
+									<img class="asker-img" src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/28978.gif">
+								</div>
+								<p><span class="asker">John L. Viescas and Michael J. Hernandez</span>&nbsp;asks:</p>
+							<h2 class="question">What’s the most challenging aspect of SQL joins?</h2>
+						<i class="icon" data-icon="Z"></i>
+					</div>
+					<div class="discussion-cta">
+						<p class="response-count">1&nbsp;
+						Response</p>
+						<a href="http://itknowledgeexchange.techtarget.com/discussions/discussion/whats-the-most-challenging-aspect-of-sql-joins/" class="button blue-button">Join the Discussion</a>
+					</div>
+				</li>
+			</section>
+			<nav class="carousel-nav carousel-nav-paginated"><a href="#prev" class="prev" aria-hidden="true" title="Previous">Prev</a><ol class="carousel-pagination"><li class="carousel-active-page"><a href="#1" title="Go to slide 1">1</a></li><li><a href="#2" title="Go to slide 2">2</a></li></ol><a href="#next" class="next" aria-hidden="true" title="Next">Next</a></nav></ul></div>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_7.gif" alt="Example of tables from the sample database "><br> <b>Figure 9–7</b> The tables you need from the Recipes sample database to fetch all the information about recipes.</p>
+ <p>Looks like you need data from five different tables! Just as in 
+Chapter 8, you can do this by constructing a more complex FROM clause, 
+embedding JOIN clauses within JOIN clauses. <a href="http://msdn.microsoft.com/en-us/library/ms173815.aspx" target="_blank">Here's the trick</a>:
+ Everywhere you can specify a table name, you can also specify an entire
+ JOIN clause surrounded with parentheses. Figure 9–8 shows a simplified 
+version of joining two tables. (We've left off the correlation name 
+clauses and chosen the ON clause to form a simple INNER or OUTER JOIN of
+ two tables.)</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_8.gif" alt="Example of simple JOIN of two tables."><br> <b>Figure 9–8</b> A simple JOIN of two tables.</p>
+ <p>To add a third table to the mix, just place an open parenthesis 
+before the first table name, add a close parenthesis after the search 
+condition, and then insert another JOIN, a table name, the ON keyword, 
+and another search condition. Figure 9–9 (on page 306) shows how to do 
+this.</p>
+ <p>If you think about it, the JOIN of two tables inside the parentheses
+ forms a logical table, or inner result set. This result set now takes 
+the place of the first simple table name in Figure 9–8. You can continue
+ this process of enclosing an entire JOIN clause in parentheses and then
+ adding another JOIN keyword, table name, ON keyword, and search 
+condition until you have all the result sets you need. Let's make a 
+request that needs data from all the tables shown in Figure 9–7 and see 
+how it turns out. (You might use this type of request for a report that 
+lists all recipe types with details about the recipes in each type.)</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_9.gif" alt="Example of a simple JOIN of three tables."><br> <b>Figure 9–9</b> A simple JOIN of three tables.</p>
+ <p style=" text-align: center;"><i><b>"I need all the recipe types, and
+ then the matching recipe names, preparation instructions, ingredient 
+names, ingredient step numbers, ingredient quantities, and ingredient 
+measurements from my recipes database, sorted in recipe title and step 
+number sequence."</b></i></p>
+ <table style=" width: 100%;" border="1" cellpadding="03" cellspacing="03"> 
+  <tbody>
+   <tr> 
+    <td width="20%"><b>Translation</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select the recipe 
+class description, recipe title, preparation instructions, ingredient 
+name, recipe sequence number, amount, and measurement description from 
+the recipe classes table left outer joined with the recipes table on 
+recipe class ID in the recipe classes table matching recipe ID in the 
+recipes table, then joined with the recipe ingredients table on recipe 
+ID in the recipes table matching recipe ID in the recipe ingredients 
+table, then joined with the ingredients table on ingredient ID in the 
+ingredients table matching ingredient ID in the recipe ingredients 
+table, and then finally joined with the measurements table on 
+measurement amount ID in the measurements table matching measurement 
+amount ID in the recipe ingredients table, order by recipe title and 
+recipe sequence number</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>Clean Up</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;"> recipe class description, recipe title, preparation </span>
+     <s>
+      <span style=" font-size: small;">instructions</span>
+     </s><span style=" font-size: small;">, ingredient name, recipe sequence number, amount, </span>
+     <s>
+      <span style=" font-size: small;">and</span>
+     </s><span style=" font-size: small;"> measurement description from </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;">recipe classes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on recipe_classes .recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe classes table</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">matching</span>
+     </s><span style=" font-size: small;"> = recipes .recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table,</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">then</span>
+     </s><span style=" font-size: small;"> inner join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipe ingredients </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on recipes.recipe ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table matching</span>
+     </s><span style=" font-size: small;"> = recipe_ingredients.recipe ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ingredients table, then</span>
+     </s><span style=" font-size: small;"> inner join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> ingredients </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on ingredients.ingredient ID </span>
+     <s>
+      <span style=" font-size: small;">in the ingredients table matching</span>
+     </s><span style=" font-size: small;"> = recipe_ingredients.ingredient ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ingredients table, and then</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">finally</span>
+     </s><span style=" font-size: small;"> inner join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> measurements </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on measurements.measurement amount ID </span>
+     <s>
+      <span style=" font-size: small;">in the</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">measurements table matching</span>
+     </s><span style=" font-size: small;">= recipe_ingredients.measurement amount ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ingredients table,</span>
+     </s><span style=" font-size: small;"> order by recipe title, </span>
+     <s>
+      <span style=" font-size: small;">and</span>
+     </s><span style=" font-size: small;"> recipe sequence number</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>SQL</b></td> 
+    <td width="80%"><code><span style=" font-size: small;">SELECT Recipe_Classes.RecipeClassDescription,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeTitle, Recipes.Preparation,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Ingredients.IngredientName,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.RecipeSeqNo,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.Amount,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Measurements.MeasurementDescription</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">FROM (((Recipe_Classes</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipes</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipe_Classes.RecipeClassID =</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeClassID)</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">INNER JOIN Recipe_Ingredients</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipes.RecipeID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.RecipeID)</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">INNER JOIN Ingredients</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Ingredients.IngredientID =</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.IngredientID)</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">INNER JOIN Measurements&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Measurements.MeasureAmountID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.MeasureAmountID</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ORDER BY RecipeTitle, RecipeSeqNo</span></code><span style=" font-size: small;"></span></td> 
+   </tr> 
+  </tbody>
+ </table>
+ <p>In truth, you can substitute an entire JOIN of two tables anywhere 
+you might otherwise place only a table name. In Figure 9–9, we implied 
+that you must first join the first table with the second table and then 
+join that result with the third table. You could also join the second 
+and third tables first (as long as the third table is, in fact, related 
+to the second table and not the first one) and then perform the final 
+JOIN with the first table. Figure 9–10 (on page 308) shows you this 
+alternate method.</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_10.gif" alt="Example of Joining more than two tables "><br> <b>Figure 9–10</b> Joining more than two tables in an alternate sequence.</p>
+ <p>To solve the request we just showed you using five tables, we could have also stated the SQL as follows.</p>
+ <p><b>SQL</b><br> <code>SELECT Recipe_Classes.RecipeClassDescription,</code><br> <code> Recipes.RecipeTitle, Recipes.Preparation,&nbsp;</code><br> <code> Ingredients.IngredientName,&nbsp;</code><br> <code> Recipe_Ingredients.RecipeSeqNo,&nbsp;</code><br> <code> Recipe_Ingredients.Amount,&nbsp;</code><br> <code> Measurements.MeasurementDescription</code><br> <code> FROM Recipe_Classes&nbsp;</code><br> <code> LEFT OUTER JOIN&nbsp;</code><br> <code> (((Recipes&nbsp;</code><br> <code> INNER JOIN Recipe_Ingredients&nbsp;</code><br> <code> ON Recipes.RecipeID = Recipe_Ingredients.RecipeID)&nbsp;</code><br> <code> INNER JOIN Ingredients&nbsp;</code><br> <code> ON Ingredients.IngredientID =&nbsp;</code><br> <code> Recipe_Ingredients.IngredientID)&nbsp;</code><br> <code> INNER JOIN Measurements&nbsp;</code><br> <code> ON Measurements.MeasureAmountID =</code><br> <code> Recipe_Ingredients.MeasureAmountID)&nbsp;</code><br> <code> ON Recipe_Classes.RecipeClassID =&nbsp;</code><br> <code> Recipes.RecipeClassID</code><br> <code> ORDER BY RecipeTitle, RecipeSeqNo</code></p>
+ <p>Remember that the optimizers in some database systems are sensitive 
+to the sequence of the JOIN definitions. If your query with many JOINs 
+is taking a long time to execute on a large database, it might run 
+faster if you change the sequence of JOINs in your SQL statement.</p>
+ <p>You might have noticed that we used only one OUTER JOIN in the 
+previous multiple-JOIN examples. You're probably wondering whether it's 
+possible or even makes sense to use more than one OUTER JOIN in a 
+complex JOIN. Let's assume that there are not only some recipe classes 
+that don't have matching recipe rows but also some recipes that don't 
+have any ingredients defined yet. In the previous example, you won't see
+ any rows from the Recipes table that do not have any matching rows in 
+the Recipe_Ingredients table because the INNER JOIN eliminates them. 
+Let's ask for all recipes as well.</p>
+ <p style=" text-align: center;"><i><b>"I need all the recipe types, and
+ then all the recipe names and preparation instructions, and then any 
+matching ingredient names, ingredient step numbers, ingredient 
+quantities, and ingredient measurements from my recipes database, sorted
+ in recipe title and step number sequence."</b></i></p>
+ <table style=" width: 100%;" border="1" cellpadding="03" cellspacing="03"> 
+  <tbody>
+   <tr> 
+    <td width="20%"><b>Translation</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select the recipe 
+class description, recipe title, preparation instructions, ingredient 
+name, recipe sequence number, amount, and measurement description from 
+the recipe classes table left outer joined with the recipes table on 
+recipe class ID in the recipe classes table matching recipe class ID in 
+the recipes table, then left outer joined with the recipe ingredients 
+table on recipe ID in the recipes table matching recipe ID in the recipe
+ ingredients table, then joined with the ingredients table on ingredient
+ ID in the ingredients table matching ingredient ID in the recipe 
+ingredients table, and then finally joined with the measurements table 
+on measurement amount ID in the measurements table matching measurement 
+amount ID in the recipe ingredients table, order by recipe title and 
+recipe sequence number</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>Clean Up</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;"> recipe class description, recipe title, preparation </span>
+     <s>
+      <span style=" font-size: small;">instructions</span>
+     </s><span style=" font-size: small;">, ingredient name, recipe sequence number, amount, </span>
+     <s>
+      <span style=" font-size: small;">and</span>
+     </s><span style=" font-size: small;"> measurement description from </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;">recipe classes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on recipe_classes.recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe classes table</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">matching</span>
+     </s><span style=" font-size: small;"> = recipes.recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table,</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">then</span>
+     </s><span style=" font-size: small;"> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipe ingredients </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on recipes.recipe ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table matching</span>
+     </s><span style=" font-size: small;"> = recipe_ingredients.recipe ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ingredients table, then</span>
+     </s><span style=" font-size: small;"> inner join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> ingredients </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on ingredients.ingredient ID </span>
+     <s>
+      <span style=" font-size: small;">in the ingredients table matching</span>
+     </s><span style=" font-size: small;"> = recipe_ingredients.ingredient ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ingredients table,</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">and then finally</span>
+     </s><span style=" font-size: small;"> inner join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> measurements </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on measurement.measurement amount ID </span>
+     <s>
+      <span style=" font-size: small;">in the measurements table matching</span>
+     </s><span style=" font-size: small;"> = recipe_ingredients.measurement amount ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ingredients table,</span>
+     </s><span style=" font-size: small;"> order by recipe title </span>
+     <s>
+      <span style=" font-size: small;">and</span>
+     </s><span style=" font-size: small;"> recipe sequence number</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>SQL</b></td> 
+    <td width="80%"><code><span style=" font-size: small;">SELECT Recipe_Classes.RecipeClassDescription,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeTitle, Recipes.Preparation,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Ingredients.IngredientName,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.RecipeSeqNo,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.Amount,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Measurements.MeasurementDescription</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">FROM (((Recipe_Classes&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipes&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipe_Classes.RecipeClassID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeClassID)&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipe_Ingredients&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipes.RecipeID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.RecipeID)&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">INNER JOIN Ingredients&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Ingredients.IngredientID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.IngredientID)&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">INNER JOIN Measurements&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Measurements.MeasureAmountID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.MeasureAmountID</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ORDER BY RecipeTitle, RecipeSeqNo</span></code><span style=" font-size: small;"></span></td> 
+   </tr> 
+  </tbody>
+ </table>
+ <p>Be careful! This sort of multiple OUTER JOIN works as expected only 
+if you're following a path of one-to-many relationships. Let's look at 
+the relationships between Recipe_Classes, Recipes, and 
+Recipe_Ingredients again, as shown in Figure 9–11.</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_11.gif" alt="Example of relationships between three tables "><br> <b>Figure 9–11</b> The relationships between the Recipe_Classes, Recipes, and Recipe_Ingredients tables.</p>
+ <p>You might see a one-to-many relationship sometimes called a 
+parent-child relationship. Each parent row (on the "one" side of the 
+relationship) might have zero or more children rows (on the "many" side 
+of the relationship). Unless you have orphaned rows on the "many" side 
+(for example, a row in Recipes that has a Null in its RecipeClassID 
+column), every row in the child table should have a matching row in the 
+parent table. So it makes sense to say Recipe_Classes LEFT JOIN Recipes 
+to pick up any parent rows in Recipe_Classes that don't have any 
+children yet in Recipes. Recipe_Classes RIGHT JOIN Recipes should 
+(barring any orphaned rows) give you the same result as an INNER JOIN.</p>
+ <p>Likewise, it makes sense to ask for Recipes LEFT JOIN Recipe_ 
+Ingredients because you might have some recipes for which no ingredients
+ have yet been entered. Recipes RIGHT JOIN Recipe_Ingredients doesn't 
+work because the linking column (RecipeID) in Recipe_Ingredients is also
+ part of that table's compound primary key. Therefore, you are 
+guaranteed to have no orphaned rows in Recipe_Ingredients because no 
+column in a primary key can contain a Null value.</p>
+ <p>Now, let's take it one step further and ask for all ingredients, 
+including those not yet included in any recipes. First, take a close 
+look at the relationships between the tables, including the Ingredients 
+table, as shown in Figure 9–12.</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/ojq_12.gif" alt="Example of relationships between four tables"><br> <b>Figure 9–12</b> The relationships between the Recipe_Classes, Recipes, Recipe_ Ingredients, and Ingredients tables.</p>
+ <p>Let's try this request. (Caution: There's a trap here!)</p>
+ <p style=" text-align: center;"><i><b>"I </b><a id="Need" name="Need"><b> </b></a><b>need
+ all the recipe types, and then all the recipe names and preparation 
+instructions, and then any matching ingredient step numbers, ingredient 
+quantities, and ingredient measurements, and finally all ingredient 
+names from my recipes database, sorted in recipe title and step number 
+sequence."</b></i></p>
+ <table style=" width: 100%;" border="1" cellpadding="3" cellspacing="3"> 
+  <tbody>
+   <tr> 
+    <td width="20%"><b>Translation</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select the recipe 
+class description, recipe title, preparation instructions, ingredient 
+name, recipe sequence number, amount, and measurement description from 
+the recipe classes table left outer joined with the recipes table on 
+recipe class ID in the recipe classes table matches class ID in the 
+recipes table, then left outer joined with the recipe ingredients table 
+on recipe ID in the recipes table matches recipe ID in the recipe 
+ingredients table, then joined with the measurements table on 
+measurement amount ID in the measurements table matches measurement 
+amount ID in the measurements table, and then finally right outer joined
+ with the ingredients table on ingredient ID in the ingredients table 
+matches ingredient ID in the recipe ingredients table, order by recipe 
+title and recipe sequence number</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>Clean Up</b></td> 
+    <td width="80%"><span style=" font-size: small;">Select </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;"> recipe class description, recipe title, preparation </span>
+     <s>
+      <span style=" font-size: small;">instructions</span>
+     </s><span style=" font-size: small;">, ingredient name, recipe sequence number, amount, </span>
+     <s>
+      <span style=" font-size: small;">and</span>
+     </s><span style=" font-size: small;"> measurement description from </span>
+     <s>
+      <span style=" font-size: small;">the</span>
+     </s><span style=" font-size: small;">recipe classes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipes </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on recipe_classes .recipe class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe classes table matches</span>
+     </s><span style=" font-size: small;"> = recipes .class ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table,</span>
+     </s><span style=" font-size: small;"></span>
+     <s>
+      <span style=" font-size: small;">then</span>
+     </s><span style=" font-size: small;"> left outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> recipe ingredients </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on recipes.recipe ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipes table matches</span>
+     </s><span style=" font-size: small;"> = recipe_ingredients.recipe ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ¬ingredients table,</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">then</span>
+     </s><span style=" font-size: small;"> inner join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> measurements </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on measurements.measurement amount ID </span>
+     <s>
+      <span style=" font-size: small;">in the measurements table matches</span>
+     </s><span style=" font-size: small;"> = measurements.measurement amount ID </span>
+     <s>
+      <span style=" font-size: small;">in the measurements table,</span>
+     </s><span style=" font-size: small;"> </span>
+     <s>
+      <span style=" font-size: small;">and then finally</span>
+     </s><span style=" font-size: small;"> right outer join</span>
+     <s>
+      <span style=" font-size: small;">ed with the</span>
+     </s><span style=" font-size: small;"> ingredients </span>
+     <s>
+      <span style=" font-size: small;">table</span>
+     </s><span style=" font-size: small;"> on ingredients.ingredient ID </span>
+     <s>
+      <span style=" font-size: small;">in the ingredients table matches</span>
+     </s><span style=" font-size: small;"> = recipe_ingredients.ingredient ID </span>
+     <s>
+      <span style=" font-size: small;">in the recipe ingredients table,</span>
+     </s><span style=" font-size: small;"> order by recipe title, </span>
+     <s>
+      <span style=" font-size: small;">and</span>
+     </s><span style=" font-size: small;"> recipe sequence number</span></td> 
+   </tr> 
+   <tr> 
+    <td width="20%"><b>SQL</b></td> 
+    <td width="80%"><code><span style=" font-size: small;">SELECT Recipe_Classes.RecipeClassDescription,</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeTitle, Recipes.Preparation,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;"> Ingredients.IngredientName,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.RecipeSeqNo,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.Amount,&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Measurements.MeasurementDescription</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">FROM (((Recipe_Classes&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipes&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipe_Classes.RecipeClassID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipes.RecipeClassID)&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">LEFT OUTER JOIN Recipe_Ingredients&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Recipes.RecipeID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.RecipeID)&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">INNER JOIN Measurements&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Measurements.MeasureAmountID =</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.MeasureAmountID)&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">RIGHT OUTER JOIN Ingredients&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ON Ingredients.IngredientID =&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">Recipe_Ingredients.IngredientID&nbsp;</span></code><span style=" font-size: small;"><br> </span><code><span style=" font-size: small;">ORDER BY RecipeTitle, RecipeSeqNo</span></code><span style=" font-size: small;"></span></td> 
+   </tr> 
+  </tbody>
+ </table>
+ <p>Do you think this will work? Actually, the answer is a resounding 
+NO! Most database systems analyze the entire FROM clause and then try to
+ determine the most efficient way to assemble the table links. Let's 
+assume, however, that the database decides to fully honor how we've 
+grouped the JOINs within parentheses. This means that the database 
+system will work from the innermost JOIN first (Recipe_Classes joined 
+with Recipes) and then work outward.</p>
+ <p>Because some rows in Recipe_Classes might not have any matching rows
+ in Recipes, this first JOIN returns rows that have a Null value in 
+RecipeClassID. Looking back at Figure 9–12, you can see that there's a 
+one-to-many relationship between Recipe_Classes and Recipes. Unless some
+ recipes exist that haven't been assigned a recipe class, we should get 
+all the rows from the Recipes table anyway! The next JOIN with the 
+Recipe_Ingredients table also asks for a LEFT OUTER JOIN. We want all 
+the rows, regardless of any Null values, from the previous JOIN (of 
+Recipe_Classes with Recipes) and any matching rows in 
+Recipe_Ingredients. Again, because some rows in Recipe_Classes might not
+ have matching rows in Recipes or some rows in Recipes might not have 
+matching rows in Recipe_Ingredients, several of the rows might have a 
+Null in the IngredientID column from the Recipe_Ingredients table. What 
+we're doing with both JOINs is "walking down" the one-to-many 
+relationships from Recipe_Classes to Recipes and then from Recipes to 
+Recipe_Ingredients. So far, so good. (By the way, the final INNER JOIN 
+with Measurements is inconsequential—we know that all Ingredients have a
+ valid MeasureAmountID.)</p>
+ <p>Now the trouble starts. The final RIGHT OUTER JOIN asks for all the 
+rows from Ingredients and any matching rows from the result of the 
+previous JOINs. Remember from Chapter 5 that a Null is a very special 
+value—it cannot be equal to any other value, not even another Null. When
+ we ask for all the rows in Ingredients, the IngredientID in all these 
+rows has a non-Null value. None of the rows from the previous JOIN that 
+have a Null in IngredientID will match at all, so the final JOIN throws 
+them away! You will see any ingredient that isn't used yet in any 
+recipe, but you won't see recipe classes that have no recipes or recipes
+ that have no ingredients.</p>
+ <p>If your database system decides to solve the query by performing the
+ JOINs in a different order, you might see recipe classes that have no 
+recipes and recipes that have no ingredients, but you won't see 
+ingredients not yet used in any recipe because of the Null matching 
+problem. Some database systems might recognize this logic problem and 
+refuse to solve your query at all—you'll see something like an 
+"ambiguous OUTER JOINs" error message. The problem we're now 
+experiencing results from trying to "walk back up" a many-to-one 
+relationship with an OUTER JOIN going in the other direction. Walking 
+down the hill is easy, but walking back up the other side requires 
+special tools. What's the solution to this problem? Read on to the next 
+section to find out!</p>
+ <p><img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/book_cover_sql_mm.gif" alt="Exchange 2007 Storage Systems" align="left" height="129" hspace="5" vspace="5" width="100"> <i>This chapter excerpt from</i> SQL Queries for Mere Mortals: A Hands-On Guide to Data Manipulation in SQL (2nd Edition) <i>by John L. Viescas and Michael J. Hernandez, is printed with permission from </i><a href="http://www.informit.com/imprint/index.aspx?st=61085" target="_blank"><i>Addison-Wesley Professional</i></a><i>, Copyright 2007.</i></p>
+ <p><i>Click here for the </i><a href="http://cdn.ttgtmedia.com/searchSQLServer/downloads/Outer_Joins_Query_book.pdf" target="_blank"><i>chapter download</i></a><i>&nbsp;or </i><a href="http://www.amazon.com/SQL-Queries-Mere-Mortals-Hands/dp/0321444434" target="_blank"><i>purchase the book here</i></a><i>.</i></p>
+</section></section>
+
+
+
+
+<section class="section next-steps" data-menu-title="Next Steps" id="next-steps">
+	<h4 class="section-title"><i class="icon" data-icon="m"></i>Next Steps</h4>
+	<p>Part 1: <a href="http://searchsqlserver.techtarget.com/feature/How-to-construct-and-use-SQL-OUTER-JOINs-optimally" target="_blank">How to construct and use SQL OUTER JOINs optimally</a></p>
+
+<p>Part 2: <b>How to use the LEFT vs. the RIGHT OUTER JOIN</b></p>
+
+<p>Part 3: <a href="http://searchsqlserver.techtarget.com/feature/Using-the-FULL-OUTER-JOIN-in-SQL" target="_blank">Using the FULL OUTER JOIN in SQL</a></p>
+
+<p>Part 4: <a href="http://searchsqlserver.techtarget.com/feature/SQL-OUTER-JOIN-sample-uses" target="_blank">SQL
+OUTER JOIN sample uses</a></p>
+
+<p>Part 5: <a href="http://searchsqlserver.techtarget.com/feature/SQL-OUTER-JOIN-sample-statements-for-queries" target="_blank">SQL OUTER JOIN sample statements for queries</a></p>
+</section>
+
+
+
+
+
+
+
+	<div class="publish-date">
+		
+		
+			
+			
+				<span>This was first published in</span> March 2008
+				
+			
+				
+	</div>
+<div class="ad-wrapper ad-inline ad-mobile">
+	<!-- AdsController, generated at 22:53:45 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="mobile-2" class="ad ad-mb"><script>GPT.display('mobile-2')</script></div></div></div><div><!-- DigDeeperController, generated at 22:53:45 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<section class="section dig-deeper" id="dig-deeper" data-digdeeper-reference-id="5f888450b8eb2210VgnVCM1000000d01c80aRCRD" data-menu-title="Dig Deeper">
+	<h4 class="section-title"><i class="icon" data-icon="m"></i>Dig Deeper on Microsoft SQL Server Performance Monitoring and Tuning</h4>
+	<div class="dig-deeper-nav-wrapper">
+		<ul style="width: 551px;" class="dig-deeper-nav" id="dig-deeper-tabs">
+			<li class="dig-deeper-nav-item selected" data-filtertype="all" data-page="1">
+								<a href="#dd-tab1">
+									All<i class="icon" data-icon="3"></i>
+								<span></span></a>
+							</li>
+						<li class="dig-deeper-nav-item" data-filtertype="news_infotype" data-page="1">
+								<a href="#dd-tab2">
+									News<i class="icon" data-icon="3"></i>
+								<span></span></a>
+							</li>
+						<li class="dig-deeper-nav-item" data-filtertype="get_started_infotype" data-page="1">
+								<a href="#dd-tab3">
+									Get Started<i class="icon" data-icon="3"></i>
+								<span></span></a>
+							</li>
+						<li class="dig-deeper-nav-item" data-filtertype="evaluate_infotype" data-page="1">
+								<a href="#dd-tab4">
+									Evaluate<i class="icon" data-icon="3"></i>
+								<span></span></a>
+							</li>
+						<li class="dig-deeper-nav-item" data-filtertype="manage_infotype" data-page="1">
+								<a href="#dd-tab5">
+									Manage<i class="icon" data-icon="3"></i>
+								<span></span></a>
+							</li>
+						<li class="dig-deeper-nav-item" data-filtertype="problem_solve_infotype" data-page="1">
+								<a href="#dd-tab6">
+									Problem Solve<i class="icon" data-icon="3"></i>
+								<span></span></a>
+							</li>
+						</ul>
+	</div>
+	<div id="dig-deeper-tabs-content">
+		<div style="display: block;" id="dd-tab1">			
+					<ul class="dig-deeper-content" id="digDeeperContent_all">
+						<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Comparing-memory-optimized-tables-and-disk-based-tables">Comparing memory-optimized tables and disk-based tables</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Five-tips-to-avoid-a-performance-bottleneck-or-other-SQL-Server-snares">Five tips to avoid a performance bottleneck or other SQL Server snares</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Dive-deep-into-SQL-Server-2014-in-memory-OLTP">Dive deep into SQL Server 2014 in-memory OLTP</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Does-SQL-Server-database-size-affect-performance">Does SQL Server database size affect performance?</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							</ul>
+					<button class="button black-button dig-deeper-load-more" id="digDeeperLoadMore_all" style="">
+							Load More</button>
+					<noscript>
+						<a href="http://searchsqlserver.techtarget.com/resources/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+									<button class="button black-button dig-deeper-load-more" id="digDeeperViewAll">
+										View All</button>
+								</a>
+							</noscript>
+	
+				</div>
+			<div style="display: none;" id="dd-tab2">			
+					<ul class="dig-deeper-content" id="digDeeperContent_news_infotype">
+						<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/news/2240145077/Microsoft-bulks-up-SQL-Server-scalability-to-rival-buff-competition">Microsoft bulks up SQL Server scalability to rival buff competition</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/news/2240035978/SQL-Server-BI-performance-for-the-uninitiated">SQL Server BI performance for the uninitiated</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/feature/New-Microsoft-products-focus-on-configuration-virtualization">Q&amp;A: New Microsoft products focus on configuration, virtualization</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/news/1166243/SQL-Server-2000-indexing-QA-to-create-and-tune-indexes">Q&amp;A: Create and tune indexes in SQL Server 2000</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							</ul>
+					<button class="button black-button dig-deeper-load-more" id="digDeeperLoadMore_news_infotype" style="">
+							Load More</button>
+					<noscript>
+						<a href="http://searchsqlserver.techtarget.com/info/news/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+									<button class="button black-button dig-deeper-load-more" id="digDeeperViewAll_news_infotype">
+										View All News</button>
+								</a>
+							</noscript>
+	
+				</div>
+			<div style="display: none;" id="dd-tab3">			
+					<ul class="dig-deeper-content" id="digDeeperContent_get_started_infotype">
+						<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tutorial/Step-1-Invest-in-good-application-design">Step 1: Invest in good application design</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tutorial/Tutorial-Performance-tuning-SQL-Server-via-queries-indexes-and-more">Tutorial: Performance tuning SQL Server via queries, indexes and more</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tutorial/Tutorial-SQL-Server-indexing-tips-to-improve-performance">Tutorial: SQL Server indexing tips to improve performance</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tutorial/Tutorial-Learn-SQL-Server-basics-from-A-Z">Tutorial: Learn SQL Server basics from A-Z</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							</ul>
+					<button class="button black-button dig-deeper-load-more" id="digDeeperLoadMore_get_started_infotype" style="">
+							Load More</button>
+					<noscript>
+						<a href="http://searchsqlserver.techtarget.com/info/getstarted/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+									<button class="button black-button dig-deeper-load-more" id="digDeeperViewAll_get_started_infotype">
+										View All Get started</button>
+								</a>
+							</noscript>
+	
+				</div>
+			<div style="display: none;" id="dd-tab4">			
+					<ul class="dig-deeper-content" id="digDeeperContent_evaluate_infotype">
+						<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Comparing-memory-optimized-tables-and-disk-based-tables">Comparing memory-optimized tables and disk-based tables</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/feature/New-Microsoft-products-focus-on-configuration-virtualization">Q&amp;A: New Microsoft products focus on configuration, virtualization</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/feature/Top-10-SQL-Server-Tips-of-2008">Top 10 SQL Server Tips of 2008</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Five-sqlcmd-features-to-automate-SQL-Server-database-tasks">Five sqlcmd features to automate SQL Server database tasks</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							</ul>
+					<button class="button black-button dig-deeper-load-more" id="digDeeperLoadMore_evaluate_infotype" style="">
+							Load More</button>
+					<noscript>
+						<a href="http://searchsqlserver.techtarget.com/info/evaluate/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+									<button class="button black-button dig-deeper-load-more" id="digDeeperViewAll_evaluate_infotype">
+										View All Evaluate</button>
+								</a>
+							</noscript>
+	
+				</div>
+			<div style="display: none;" id="dd-tab5">			
+					<ul class="dig-deeper-content" id="digDeeperContent_manage_infotype">
+						<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Five-tips-to-avoid-a-performance-bottleneck-or-other-SQL-Server-snares">Five tips to avoid a performance bottleneck or other SQL Server snares</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Dive-deep-into-SQL-Server-2014-in-memory-OLTP">Dive deep into SQL Server 2014 in-memory OLTP</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Does-SQL-Server-database-size-affect-performance">Does SQL Server database size affect performance?</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Defining-half-a-dozen-daily-SQL-Server-DBA-responsibilities">Defining half a dozen daily SQL Server DBA responsibilities</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							</ul>
+					<button class="button black-button dig-deeper-load-more" id="digDeeperLoadMore_manage_infotype" style="">
+							Load More</button>
+					<noscript>
+						<a href="http://searchsqlserver.techtarget.com/info/manage/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+									<button class="button black-button dig-deeper-load-more" id="digDeeperViewAll_manage_infotype">
+										View All Manage</button>
+								</a>
+							</noscript>
+	
+				</div>
+			<div style="display: none;" id="dd-tab6">			
+					<ul class="dig-deeper-content" id="digDeeperContent_problem_solve_infotype">
+						<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Five-tips-to-avoid-a-performance-bottleneck-or-other-SQL-Server-snares">Five tips to avoid a performance bottleneck or other SQL Server snares</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Dive-deep-into-SQL-Server-2014-in-memory-OLTP">Dive deep into SQL Server 2014 in-memory OLTP</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Does-SQL-Server-database-size-affect-performance">Does SQL Server database size affect performance?</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							<li class="dig-deeper-content-item">
+									<h5><a href="http://searchsqlserver.techtarget.com/tip/Defining-half-a-dozen-daily-SQL-Server-DBA-responsibilities">Defining half a dozen daily SQL Server DBA responsibilities</a></h5>
+									<i class="icon" data-icon="2"></i>
+									</li>
+							</ul>
+					<button class="button black-button dig-deeper-load-more" id="digDeeperLoadMore_problem_solve_infotype" style="">
+							Load More</button>
+					<noscript>
+						<a href="http://searchsqlserver.techtarget.com/info/problemsolve/Microsoft-SQL-Server-Performance-Monitoring-and-Tuning">
+									<button class="button black-button dig-deeper-load-more" id="digDeeperViewAll_problem_solve_infotype">
+										View All Problem solve</button>
+								</a>
+							</noscript>
+	
+				</div>
+			</div>
+</section>
+</div><div><!-- ProFeaturesController, generated at 17:36:47 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+</div><div><!-- GuideController, generated at 16:51:20 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+</div><div><!-- DiscussionsController, generated at 22:53:46 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+
+	</div>
+</div><div><!-- AskAnExpertController, generated at 22:53:46 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+</div><div><!-- HaveAQuestionForAnExpertController, generated at 22:53:46 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+</div>
+</div></article></div>
+				<div id="content-right" class="content-right"></div>
+			
+		</div>
+		<div><div><!-- CommentingController, generated at 22:53:46 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<section id="commenting" class="main-content comments-wrapper" data-comment-reference-id="5f888450b8eb2210VgnVCM1000000d01c80aRCRD">
+		<div class="content-columns">
+			<div class="content-left comments-left">
+				<div class="discussion-sidebar">
+						<div class="discussion-sidebar-header"><i class="icon" data-icon="y"></i>Related Discussions</div>
+								<div class="discussion-sidebar-question">
+									<p><span class="asker">John L. Viescas and Michael J. Hernandez</span>&nbsp;asks:</p>
+										<h2 class="question">What’s the most challenging aspect of SQL joins?</h2>
+								</div>
+		
+								<div class="discussion-sidebar-cta">
+									<p class="response-count">1&nbsp;
+									Response So Far</p>
+									<a href="http://itknowledgeexchange.techtarget.com/discussions/discussion/whats-the-most-challenging-aspect-of-sql-joins/" class="button blue-button">Join the Discussion</a>
+								</div>
+							</div>
+				</div>
+					 
+			<div class="content-center comments-center">
+				<h3 class="comments-count">
+					<i class="icon" data-icon="z"></i>
+					<span class="comments-count-num">2</span>&nbsp;comments</h3>
+				
+				<a id="sortByOldest" class="comments-order" href="#">Oldest&nbsp;<i class="icon" data-icon="5"></i></a>
+				<a id="sortByNewest" class="comments-order" href="#" style="display: none;">Newest&nbsp;<i class="icon" data-icon="5"></i></a>
+				
+				
+				<div id="commentingErrors">
+					</div>
+						
+				<form style="display: none;" id="loggedinCommentsForm" class="comments-form logged-in">
+					<textarea id="loggedinCommentBody" class="comments-form-textarea" placeholder="Share your comment"></textarea>
+					<input id="loggedinSubmit" class="comments-form-btn" value="Comment" type="submit">
+					<input id="loggedinUserHandle" class="comments-form-create-handle" style="display: none;" placeholder="Create User Name" type="text">
+				</form>
+				<form id="loggedoutCommentsForm" class="comments-form logged-out" style="">
+					<textarea id="loggedoutCommentBody" class="comments-form-textarea" placeholder="Share your comment"></textarea>
+					<fieldset class="notifications"> 
+		                <input data-field="" id="notifications" name="notifications" checked="checked" type="checkbox">
+		                	Send me notifications when other members comment.</fieldset> 
+	                <p class="miniRegTitle">
+						<span class="formType" id="formType">Register</span> or <a id="toggleRegisterLink" href="#" class="toggleRegisterLink">Login</a></p>
+					<h4 class="comments-input-label">E-Mail</h4>
+					<input id="loggedoutEmail" class="comments-email" placeholder="email@techtarget.com" type="text">
+					<h4 id="registerFields" class="comments-input-label">Username / Password</h4>
+					<h4 id="loginFields" class="comments-input-label" style="display: none;">Password</h4>
+							
+					<input id="loggedoutUserHandle" class="comments-username" placeholder="Username" type="text">
+					<input id="loggedoutPassword" class="comments-password" placeholder="Password" type="password">
+					<p id="forgotPassword" class="forgot-password" style="display: none;"><a href="#">Forgot your password?</a></p>
+					
+					<input id="loggedoutSubmit" class="comments-form-btn" value="Comment" type="submit">
+					<p class="comments-disclaimer">
+						By submitting you agree to receive email from TechTarget and its 
+partners. If you reside outside of the United States, you consent to 
+having your personal data transferred to and processed in the United 
+States. <a href="http://www.techtarget.com/html/privacy_policy.html">Privacy</a></p>
+				</form>
+				
+				<div id="repoComments">
+					<div id="268_comment_33599" class="comment-wrapper"><div class="comment-thumbnail-wrap"><img class="comment-thumbnail" src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/62812.gif"></div><div class="comment-content"><p class="comment-user-info"><span class="comment-username">ToddN2000</span><span class="comment-date"> — 20 Apr 2015&nbsp;&nbsp;&nbsp;5:38 PM</span></p><p class="comment-body">Nice
+ article. For people trying to wrap their heads around the differences 
+this article should help them understand better. A lot of &nbsp;manuals 
+could use some more real world examples to help users understand.</p></div><div class="comment-share"><ul><li class="comment-flag"><a href="mailto:socialmedia@techtarget.com?subject=PLEASE%20REVIEW%20COMMENT%2033599:%20How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL&amp;body=Please%20review%20a%20recent%20comment%20for%20inappropriate%20content.%0A%0AURL:%20http://searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL%0AAuthor:%20ToddN2000%0AComment%20ID:%2033599"><i class="icon" data-icon="t"></i> &nbsp;</a></li></ul></div></div><div id="268_comment_33744" class="comment-wrapper"><div class="comment-thumbnail-wrap"><img class="comment-thumbnail" src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/400518-2014938059.gif"></div><div class="comment-content"><p class="comment-user-info"><span class="comment-username">Veretax</span><span class="comment-date"> — 23 Apr 2015&nbsp;&nbsp;&nbsp;7:18 AM</span></p><p class="comment-body">Wow
+ that is a really good article, and spoken in very understandable 
+language. &nbsp;A definite read if someone is confused on which type of 
+join to use.</p></div><div class="comment-share"><ul><li class="comment-flag"><a href="mailto:socialmedia@techtarget.com?subject=PLEASE%20REVIEW%20COMMENT%2033744:%20How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL&amp;body=Please%20review%20a%20recent%20comment%20for%20inappropriate%20content.%0A%0AURL:%20http://searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL%0AAuthor:%20Veretax%0AComment%20ID:%2033744"><i class="icon" data-icon="t"></i> &nbsp;</a></li></ul></div></div></div>
+				
+				<div id="comments-foot" class="comments-foot" style="display: none;">
+					<div class="comments-mask"></div>
+					<button class="button black-button comments-load-more">Load More Comments</button>
+				</div>
+				
+			</div>
+			<div class="content-right"></div>
+		</div>
+		<div style="display:none;">
+			<div id="forgotPasswordModal">
+				<div id="forgotPasswordModalHeader">
+					<h4>Forgot Password?</h4>
+					<div id="forgotPasswordModalMessaging">
+						<span class="forgotPasswordModalIntro">No problem! Submit your e-mail address below. We'll send you an email containing your password.</span>
+					</div>
+				</div>		
+				<form action="" method="post" id="forgotPasswordModalForm" name="forgotPasswordModalForm">
+					<ol>
+						<li>
+							<label for="forgotPasswordModalFormMessage">E-Mail:</label>
+							<input id="forgotPasswordModalFormMessage" name="email" tabindex="1" class="required">
+						</li>
+					</ol>
+					<button type="submit" id="forgotPasswordModalFormSubmit" class="button primaryButton cboxElement">
+						Submit</button>
+				</form>
+			</div>
+		</div>
+		<div style="display:none;">
+			<div id="forgotPasswordModalConfirm">
+				<div id="forgotPasswordModalHeader">
+					<h4>Your password has been sent to:<span class="email"></span></h4>
+				</div>
+			</div>
+		</div>
+	</section>
+</div><div><!-- GoogleAdSenseController, generated at 16:53:04 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div class="ad-wrapper body-pro-callout">
+		<div class="body-pro-callout-inner">
+			<!-- AdsController, generated at 16:53:04 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div id="promo-2" class="ad ad-pr"><script>GPT.display('promo-2')</script></div></div>
+	</div>
+<section class="main-content ads-by-google" id="ads-by-google">
+		<h2><a href="https://www.google.com/adsense/support/bin/request.py?contact=abg_afc">-ADS BY GOOGLE</a></h2>
+		<script async="" src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/adsbygoogle.js"></script>
+		<!-- Search Sites Responsive AFC -->
+		<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6050985421795229" data-ad-slot="8728364240" data-ad-format="auto"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</section>
+</div><div><!-- NetworkCoverageController, generated at 16:53:04 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<section class="latest-wrapper" id="network-coverage">
+		<nav class="latest-nav-wrapper">
+			<h2>Latest TechTarget <span class="latest-title">resources</span></h2>
+			<ul class="latest-nav">
+				<li>
+						<a href="#" class="latest-nav-item selected" data-item="1">
+							Business Analytics<i class="icon mobile-icon" data-icon="5"></i> 
+							<i class="icon desktop-icon" data-icon="A"></i> 
+						</a>
+					</li>
+				<li>
+						<a href="#" class="latest-nav-item" data-item="2">
+							Data Center<i class="icon mobile-icon" data-icon="5"></i> 
+							<i class="icon desktop-icon" data-icon="A"></i> 
+						</a>
+					</li>
+				<li>
+						<a href="#" class="latest-nav-item" data-item="3">
+							Data Management<i class="icon mobile-icon" data-icon="5"></i> 
+							<i class="icon desktop-icon" data-icon="A"></i> 
+						</a>
+					</li>
+				<li>
+						<a href="#" class="latest-nav-item" data-item="4">
+							AWS<i class="icon mobile-icon" data-icon="5"></i> 
+							<i class="icon desktop-icon" data-icon="A"></i> 
+						</a>
+					</li>
+				<li>
+						<a href="#" class="latest-nav-item" data-item="5">
+							Oracle<i class="icon mobile-icon" data-icon="5"></i> 
+							<i class="icon desktop-icon" data-icon="A"></i> 
+						</a>
+					</li>
+				<li>
+						<a href="#" class="latest-nav-item" data-item="6">
+							Content Management<i class="icon mobile-icon" data-icon="5"></i> 
+							<i class="icon desktop-icon" data-icon="A"></i> 
+						</a>
+					</li>
+				<li>
+						<a href="#" class="latest-nav-item" data-item="7">
+							Windows Server<i class="icon mobile-icon" data-icon="5"></i> 
+							<i class="icon desktop-icon" data-icon="A"></i> 
+						</a>
+					</li>
+				</ul>
+		</nav>
+		<span class="latest-nav-mask before-mask"></span>
+		<span class="latest-nav-mask after-mask"></span>
+		<div class="latest-body">
+			<div class="latest-content" data-item="1">
+					<h2 class="searchbusinessanalytics">
+						<a href="http://searchbusinessanalytics.techtarget.com/">
+							<span class="logo-search">Search</span><span class="logo-1">Business</span><span class="logo-2">Analytics</span></a>
+					</h2>
+					<ul>
+						<li>
+										<i class="icon" data-icon="2"></i>
+										<h3 style="height: 74px;"><a href="http://searchbusinessanalytics.techtarget.com/news/4500272628/Tech-teams-stop-fighting-self-service-BI-technology-users">Tech teams stop fighting self-service BI technology, users</a></h3>
+										<p>At the 2016 TDWI Executive Summit in Las Vegas, business 
+intelligence managers detailed moves by their organizations to embrace 
+...</p>
+									</li>
+								<li>
+										<i class="icon" data-icon="2"></i>
+										<h3 style="height: 74px;"><a href="http://searchbusinessanalytics.techtarget.com/opinion/Sell-your-CEO-on-business-intelligence-software-tools">Sell your CEO on business intelligence software tools</a></h3>
+										<p>Convincing executives and other workers to adopt business 
+intelligence software remains surprisingly difficult. If you aren't ...</p>
+									</li>
+								<li class="hide-for-small">
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchbusinessanalytics.techtarget.com/feature/BI-self-service-tools-need-middle-ground-on-use-governance">BI self-service tools need middle ground on use, governance</a></h3>
+										<p>Deployments of self-service BI and data discovery tools need to be governed to keep things in order. But finding the right ...</p>
+									</li>
+								</ul>
+				</div>
+			<div class="latest-content" data-item="2">
+					<h2 class="searchdatacenter">
+						<a href="http://searchdatacenter.techtarget.com/">
+							<span class="logo-search">Search</span><span class="logo-1">Data</span><span class="logo-2">Center</span></a>
+					</h2>
+					<ul>
+						<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchdatacenter.techtarget.com/news/4500272630/Life-beyond-Vblock-VCE-repositions-as-EMCs-new-converged-division">Life beyond Vblock: VCE repositions as EMC's new converged division</a></h3>
+										<p>The maker of the Vblock, VCE, is securing its role within 
+the EMC Federation after the Dell-EMC merger as a converged platform ...</p>
+									</li>
+								<li>
+										<i class="icon" data-icon="7"></i>
+										<h3><a href="http://searchdatacenter.techtarget.com/ehandbook/In-IT-hardware-selection-the-first-choice-is-one-vendor-or-many">In IT hardware selection, the first choice is one vendor or many</a></h3>
+										<p>From a data center perspective, choosing hardware from 
+multiple vendors remains a sticking point. This guide looks at the 
+ongoing...</p>
+									</li>
+								<li class="hide-for-small">
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchdatacenter.techtarget.com/tip/IT-certification-programs-to-get-in-demand-skills-for-2016">IT certification programs to get in-demand skills for 2016</a></h3>
+										<p>IT certification programs offer important skills for 
+evolving technological needs. Data center pros will find a lot of clouds
+ on ...</p>
+									</li>
+								</ul>
+				</div>
+			<div class="latest-content" data-item="3">
+					<h2 class="searchdatamanagement">
+						<a href="http://searchdatamanagement.techtarget.com/">
+							<span class="logo-search">Search</span><span class="logo-1">Data</span><span class="logo-2">Management</span></a>
+					</h2>
+					<ul>
+						<li>
+										<i class="icon" data-icon="x"></i>
+										<h3><a href="http://searchdatamanagement.techtarget.com/ezine/Business-Information/HR-metrics-and-analytics-bring-opportunity-concerns">HR metrics and analytics bring opportunity, concerns</a></h3>
+										<p>HR personnel oversee many of the perks that come with a 
+job, such as paychecks and benefits; the elements that most people would
+ ...</p>
+									</li>
+								<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchdatamanagement.techtarget.com/tip/SQL-on-Hadoop-platforms-open-brave-new-analytics-world">SQL-on-Hadoop platforms open brave new analytics world</a></h3>
+										<p>Hadoop has been slowly plodding through the big data jungle, but SQL's integration may put a spring in the elephant's step.</p>
+									</li>
+								<li class="hide-for-small">
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchdatamanagement.techtarget.com/news/4500272462/NoSQL-revs-up-to-the-tune-of-the-Spark-connector">NoSQL revs up to the tune of the Spark connector</a></h3>
+										<p>Attention's been placed on Spark running on Hadoop, but there are Spark connectors for NoSQL that usher in a new class of ...</p>
+									</li>
+								</ul>
+				</div>
+			<div class="latest-content" data-item="4">
+					<h2 class="searchaws">
+						<a href="http://searchaws.techtarget.com/">
+							<span class="logo-search">Search</span><span class="logo-1">AWS</span></a>
+					</h2>
+					<ul>
+						<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchaws.techtarget.com/news/4500272286/Amazon-EFS-stuck-in-beta-lacks-native-Windows-support">Amazon EFS stuck in beta, lacks native Windows support</a></h3>
+										<p>Amazon's long-awaited Elastic File System is expected to hit the market soon, but it won't natively support Windows or ...</p>
+									</li>
+								<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchaws.techtarget.com/tip/New-AWS-SSL-certificate-tool-explained">New AWS SSL certificate tool explained</a></h3>
+										<p>AWS Certificate Manager solves some problems companies 
+experienced with traditional SSL certificate services like GoDaddy and 
+...</p>
+									</li>
+								<li class="hide-for-small">
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchaws.techtarget.com/feature/Navigate-through-AWS-regions-and-availability-zones">Navigate through AWS regions and availability zones</a></h3>
+										<p>Looking for basics on AWS regions and availability zones -- and how that translates into uptime and availability for cloud ...</p>
+									</li>
+								</ul>
+				</div>
+			<div class="latest-content" data-item="5">
+					<h2 class="searchoracle">
+						<a href="http://searchoracle.techtarget.com/">
+							<span class="logo-search">Search</span><span class="logo-1">Oracle</span></a>
+					</h2>
+					<ul>
+						<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchoracle.techtarget.com/tip/How-to-use-services-to-balance-Oracle-RAC-database-workloads">How to use services to balance Oracle RAC database workloads</a></h3>
+										<p>Database administrators can use Oracle's services mechanism
+ to improve application performance and better manage clustered 
+Oracle...</p>
+									</li>
+								<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchoracle.techtarget.com/feature/School-district-rethinks-EBS-after-Oracle-extended-support-ends">School district rethinks EBS after Oracle extended support ends</a></h3>
+										<p>A Colorado school district moved some business applications from Oracle EBS to Workday, then switched to Rimini Street's EBS ...</p>
+									</li>
+								<li class="hide-for-small">
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchoracle.techtarget.com/news/4500271490/Newest-Oracle-Critical-Patch-Update-contains-248-fixes">Newest Oracle Critical Patch Update contains 248 fixes</a></h3>
+										<p>The January 2016 Critical Patch Update has 248 security fixes, a record-breaking high number. It includes fixes for Oracle ...</p>
+									</li>
+								</ul>
+				</div>
+			<div class="latest-content" data-item="6">
+					<h2 class="searchcontentmanagement">
+						<a href="http://searchcontentmanagement.techtarget.com/">
+							<span class="logo-search">Search</span><span class="logo-1">Content</span><span class="logo-2">Management</span></a>
+					</h2>
+					<ul>
+						<li>
+										<i class="icon" data-icon="r"></i>
+										<h3><a href="http://searchcontentmanagement.techtarget.com/essentialguide/Navigating-the-Office-365-and-SharePoint-hybrid-roadmap">Navigating the Office 365 and SharePoint hybrid roadmap</a></h3>
+										<p>SharePoint on-premises is a leading collaboration and ECM 
+platform, but Microsoft's focus has shifted to the cloud and Office 
+365...</p>
+									</li>
+								<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchcontentmanagement.techtarget.com/tip/SharePoint-Managed-Metadata-Service-creates-efficiencies">SharePoint Managed Metadata Service creates efficiencies</a></h3>
+										<p>Manually applying metadata to SharePoint deployments is time-consuming and can create inefficiencies. The overlooked Managed ...</p>
+									</li>
+								<li class="hide-for-small">
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchcontentmanagement.techtarget.com/tip/Steps-to-make-hybrid-SharePoint-search-work">Steps to make hybrid SharePoint search work</a></h3>
+										<p>Since the advent of cloud-based SharePoint, the refrain has
+ been, "Why doesn't search work?" Today, you can configure SharePoint 
+...</p>
+									</li>
+								</ul>
+				</div>
+			<div class="latest-content" data-item="7">
+					<h2 class="searchwindowsserver">
+						<a href="http://searchwindowsserver.techtarget.com/">
+							<span class="logo-search">Search</span><span class="logo-1">Windows</span><span class="logo-2">Server</span></a>
+					</h2>
+					<ul>
+						<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchwindowsserver.techtarget.com/tip/Six-alternative-Hyper-V-management-tools">Six alternative Hyper-V management tools</a></h3>
+										<p>There are a number of third-party Hyper-V management tools available for organizations that need to handle a few dozen nodes.</p>
+									</li>
+								<li>
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchwindowsserver.techtarget.com/tip/Windows-containers-a-reality-through-Hyper-V-nested-virtualization">Windows containers a reality through Hyper-V nested virtualization</a></h3>
+										<p>Microsoft ushers in the use of containers by developing nested virtualization on the Windows Server 2016 platform.</p>
+									</li>
+								<li class="hide-for-small">
+										<i class="icon" data-icon="2"></i>
+										<h3><a href="http://searchwindowsserver.techtarget.com/news/4500271741/Windows-Server-2016-licensing-tweak-could-cause-big-headaches">Windows Server 2016 licensing tweak could cause big headaches</a></h3>
+										<p>Get ready to pay more, experts warn, when Windows Server licensing fees shift from per-processor to per-core starting with ...</p>
+									</li>
+								</ul>
+				</div>
+			</div>
+	</section>
+</div><div><!-- FooterLinksController, generated at 16:53:05 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<footer id="page-footer">
+	<div class="content-left">
+		<!-- Plug in TechTarget Logo inside the anchor tag here. -->
+		<div class="column column-logo">
+			<a href="#"></a>
+		</div>
+	</div>
+	<div class="content-center">
+		<ul class="column">
+			<li class="footer-item footer-item-col-1 footer-item-row-1"><a href="http://searchsqlserver.techtarget.com/about">About Us</a></li>
+			<li class="footer-item footer-item-col-1 footer-item-row-2"><a href="http://searchsqlserver.techtarget.com/about/contact">Contact Us</a></li>
+			<li class="footer-item footer-item-col-1 footer-item-row-3"><a href="http://www.techtarget.com/html/privacy_policy.html">Privacy Policy</a></li>
+			<li class="footer-item footer-item-col-1 footer-item-row-4"><a href="http://searchsqlserver.techtarget.com/videos">Videos</a></li>
+			<li class="footer-item footer-item-col-1 footer-item-row-5"><a href="http://searchsqlserver.techtarget.com/photostories">Photo Stories</a></li>
+			<li class="footer-item footer-item-col-1 footer-item-row-6"><a href="http://searchsqlserver.techtarget.com/guides">Guides</a></li>
+			</ul>
+		<ul class="column">
+			<li class="footer-item footer-item-col-2 footer-item-row-1"><a href="http://searchsqlserver.techtarget.com/about/advertising">Advertisers</a></li>
+			<li class="footer-item footer-item-col-2 footer-item-row-2"><a href="http://searchsqlserver.techtarget.com/about/partners">Business Partners</a></li>
+			<li class="footer-item footer-item-col-2 footer-item-row-3"><a href="http://www.techtarget.com/mediakit">Media Kit</a></li>
+			<li class="footer-item footer-item-col-2 footer-item-row-4"><a href="http://www.techtarget.com/">Corporate Site</a></li>
+			<li class="footer-item footer-item-col-2 footer-item-row-5"><a href="http://searchsqlserver.techtarget.com/experts">Experts</a></li>
+			</ul>
+		<ul class="column column-mobile-hidden">
+			<li class="footer-item footer-item-col-3 footer-item-row-1"><a href="http://reprints.ygsgroup.com/m/techtarget">Reprints</a></li>
+			<li class="footer-item footer-item-col-3 footer-item-row-2"><a href="http://searchsqlserver.techtarget.com/archive">Archive</a></li>
+			<li class="footer-item footer-item-col-3 footer-item-row-3"><a href="http://searchsqlserver.techtarget.com/sitemap">Site Map</a></li>
+			<li class="footer-item footer-item-col-3 footer-item-row-4"><a href="http://searchsqlserver.techtarget.com/events">Events</a></li>
+			<li class="footer-item footer-item-col-3 footer-item-row-5"><a href="http://searchsqlserver.techtarget.com/eproducts">E-Products</a></li>
+			</ul>
+	</div>
+	<div class="content-right">
+		<div class="column column-legal">
+			<p class="footer-legal">All Rights Reserved, <span>
+			<a href="http://searchsqlserver.techtarget.com/about/copyright">Copyright 2005 - 2016</a>, TechTarget</span>
+			
+			</p>
+			
+		</div>
+	</div>
+</footer></div>
+</div><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/responsive-ui.js"></script><!-- Begin Chartbeat -->
+		<script>
+    var _sf_async_config={};
+    _sf_async_config.uid = 41935;
+    _sf_async_config.domain = 'techtargetnetwork.com';
+    _sf_async_config.sections = 'sqlsrv, sqlsrv - Microsoft SQL Server Administration';
+    _sf_async_config.authors = 'John L. Viescas and Michael J. Hernandez, FEATURE, sqlsrv - FEATURE';
+    _sf_async_config.useCanonical = true;
+    (function(){
+      function loadChartbeat() {
+        window._sf_endpt=(new Date()).getTime();
+        var e = document.createElement('script');
+        e.setAttribute('language', 'javascript');
+        e.setAttribute('type', 'text/javascript');
+        e.setAttribute('src',
+           (('https:' == document.location.protocol) ? 'https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/' : 'http://static.chartbeat.com/') + 'js/chartbeat.js');
+        document.body.appendChild(e);
+      }
+      var oldonload = window.onload;
+      window.onload = (typeof window.onload != 'function') ?
+         loadChartbeat : function() { oldonload(); loadChartbeat(); };
+    })();
+</script><!-- End Chartbeat -->
+	<!-- Begin DataPoint Media -->
+		<script>
+(function() {
+var d=document,h=d.getElementsByTagName('head')[0],s=d.createElement('script'),sc = 'https:' == document.location.protocol ? 'https://' : 'http://';
+s.type='text/javascript';
+s.async=true;
+s.src=sc+'s.dpmsrv.com/dpm_b4c96d80854dd27e76d8cc9e21960eebda52e962.min.js';
+h.appendChild(s);
+})();
+</script><!-- End DataPoint Media -->
+	<!-- Begin CrazyEgg -->
+		<script>setTimeout(function(){
+var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0012/7034.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;
+a.type="text/javascript";
+b.parentNode.insertBefore(a,b)
+}, 1);</script><!-- End CrazyEgg -->
+	<!-- Begin GoogleRemarketing -->
+		<script>
+var google_conversion_id = 1070110249;
+var google_conversion_label = "RRsgCOW4tgMQqayi_gM";
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+</script>
+<script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/conversion.js">
+</script><iframe name="google_conversion_frame" title="Google conversion frame" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1070110249/?random=1454817233187&amp;cv=8&amp;fst=1454817233187&amp;num=1&amp;fmt=1&amp;label=RRsgCOW4tgMQqayi_gM&amp;guid=ON&amp;u_h=600&amp;u_w=960&amp;u_ah=563&amp;u_aw=960&amp;u_cd=24&amp;u_his=1&amp;u_tz=360&amp;u_java=false&amp;u_nplug=6&amp;u_nmime=21&amp;frm=0&amp;url=http%3A//searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL&amp;ref=https%3A//www.google.com&amp;tiba=How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" frameborder="0" height="13" width="300">&lt;img
+ height="1" width="1" border="0" alt="" 
+src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1070110249/?frame=0&amp;random=1454817233187&amp;cv=8&amp;fst=1454817233187&amp;num=1&amp;fmt=1&amp;label=RRsgCOW4tgMQqayi_gM&amp;guid=ON&amp;u_h=600&amp;u_w=960&amp;u_ah=563&amp;u_aw=960&amp;u_cd=24&amp;u_his=1&amp;u_tz=360&amp;u_java=false&amp;u_nplug=6&amp;u_nmime=21&amp;frm=0&amp;url=http%3A//searchsqlserver.techtarget.com/feature/How-to-use-the-LEFT-vs-RIGHT-OUTER-JOIN-in-SQL&amp;ref=https%3A//www.google.com&amp;tiba=How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL"
+ /&gt;</iframe>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://googleads.g.doubleclick.net/pagead/viewthroughconversion/1070110249/?value=0&label=RRsgCOW4tgMQqayi_gM&guid=ON&script=0">
+</div>
+</noscript>
+<script>
+var google_conversion_id = 1072226410;
+var google_conversion_label = "x3P_CIql1gMQ6sCj_wM";
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+</script>
+<script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/conversion.js">
+</script><script id="" type="text/javascript">function inlineEventHandler(){var a=Array.prototype.slice.call(arguments);dataLayer.push({eventCategory:a[0],eventAction:a[1],eventLabel:a[2],eventValue:a[3],eventNoninteraction:a[4]});dataLayer.push({event:"gaInlineRegistrationJsEvent"})}var inlineFullRegSubmittedCookie="tt.gtm.inlinereg.fullReg.submitted";
+~document.cookie.indexOf(inlineFullRegSubmittedCookie+"\x3d")&&(inlineEventHandler("Inline Registration","Successful Full Registration","Full Registration Form",null,!0),document.cookie=inlineFullRegSubmittedCookie+"\x3d; expires\x3dThu, 01 Jan 1970 05:00:00 GMT; path\x3d/");
+0<$("#inlineRegistration").length&&($("#inlineRegistration").on("click",".inlineReg_p1 .callToAction a",function(){inlineEventHandler("Inline Registration","Log In Link Click","Partial Registration Form",null,!1)}),$("#inlineRegistration").on("click",".inlineReg_p2 .callToAction a",function(){inlineEventHandler("Inline Registration","Log In Link Click","Full Registration Form",null,!1)}),$("#inlineRegistration").on("click",".inlineReg_p1 .inlineRegLoginErrMsg",function(){inlineEventHandler("Inline Registration",
+"Log In Link Click","Partial Registration Form",null,!1)}),$("#inlineRegistration").on("click",".inlineReg_p2 .inlineRegLoginErrMsg",function(){inlineEventHandler("Inline Registration","Log In Link Click","Full Registration Form",null,!1)}),$("#inlineRegistration").on("tt.inlinereg.emailOnly.error",function(){inlineEventHandler("Inline Registration","Partial Registration Error","Partial Registration Form",null,!0)}),$("#inlineRegistration").on("tt.inlinereg.emailOnly.submit",function(){inlineEventHandler("Inline Registration",
+"Submit Partial Registration","Partial Registration Form",null,!1)}),$("#inlineRegistration").on("tt.inlinereg.fullReg.load",function(){inlineEventHandler("Inline Registration","Full Registration Form Load","Full Registration Form",null,!0)}),$("#inlineRegistration").on("tt.inlinereg.fullReg.error",function(){inlineEventHandler("Inline Registration","Full Registration Error","Full Registration Form",null,!0)}),$("#inlineRegistration").on("tt.inlinereg.fullReg.submit",function(){inlineEventHandler("Inline Registration",
+"Submit Full Registration","Full Registration Form",null,!0);document.cookie=inlineFullRegSubmittedCookie+"\x3d1; path\x3d/"}));</script><script id="" type="text/javascript">(function(){var a=document.createElement("script");a.src="http://cdn.ttgtmedia.com/rms/ux/javascript/advertisement.js";document.head.appendChild(a)})();</script><img alt="" src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/a_003.htm" border="0" height="1" width="1">
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://googleads.g.doubleclick.net/pagead/viewthroughconversion/1072226410/?value=0&label=x3P_CIql1gMQ6sCj_wM&guid=ON&script=0">
+</div>
+</noscript><!-- End GoogleRemarketing -->
+	
+	<div id="mobile-sidebars" class="mobile-sidebars">
+		<nav id="chapters-bar-menu" class="chapters-bar mobile-chapters-bar" data-required-item="section.main-article-chapter">
+	<div class="chapters-bar-header">
+		<i class="icon" data-icon="1"></i>In this Article</div>
+	<ul class="chapters-bar-list"><li class="chapters-bar-item"><a href="#">Syntax</a></li><li class="chapters-bar-item"><a href="#">Using Tables</a></li><li class="chapters-bar-item"><a href="#">Embedding a SELECT Statement</a></li><li class="chapters-bar-item selected"><a href="#">Embedding JOINs within JOINs</a></li><li class="chapters-bar-item"><a href="#">Next Steps</a></li><li class="chapters-bar-item"><a href="#">Dig Deeper</a></li></ul>
+</nav><aside class="resources-bar mobile-resources-bar" id="resources-bar">
+		<div><!-- VendorResourcesController, generated at 22:53:45 Sat Feb 6, 2016, by vappma22.techtarget.com -->
+<div class="resources-bar-header"><i class="icon" data-icon="l"></i>Sponsored News</div>
+			<ul class="resources-bar-list sponsored-news">
+				<li class="resources-bar-item">
+						<a href="http://searchstorage.techtarget.com/NetAppSponsoredNews/Desktop-Virtualization-Can-Converged-Infrastructure-and-Flash-Help-Deliver-on-Its-Promise?asrc=SS_sqlsrv_SN-1286374">Desktop Virtualization: Can Converged Infrastructure and Flash Help Deliver on ...</a>
+						<span>–NetApp</span>
+					</li>
+				<li class="resources-bar-item">
+						<a href="http://searchcompliance.techtarget.com/VeritasInfoGovernance/Smart-Access-Policies-Are-Key-to-Protecting-Organizational-Secrets?asrc=SS_sqlsrv_SN-1286374">Smart Access Policies Are Key to Protecting Organizational Secrets</a>
+						<span>–Symantec</span>
+					</li>
+				<li class="resources-bar-item see-more"><a href="http://searchsqlserver.techtarget.com/sponsored_communities">See More</a></li>
+				</ul>
+		<div class="resources-bar-header"><i class="icon" data-icon="l"></i>Vendor Resources</div>
+		<ul class="resources-bar-list" id="vendorResourcesSplash">
+			<li class="resources-bar-item">
+					<a href="http://searchsqlserver.bitpipe.com/detail/RES/1259596067_212.html">Reduce CPU Usage with 'SMART' SQL</a>
+					<span>–BMC Software, Inc.</span>
+					<i class="icon" data-icon="8"></i>
+				</li>
+			<li class="resources-bar-item">
+					<a href="http://searchsqlserver.bitpipe.com/detail/RES/1449549969_598.html">Food &amp; Beverage Helps Manufacturers Prepare for COOL Compliance and Recall ...</a>
+					<span>–Infor</span>
+					<i class="icon" data-icon="8"></i>
+				</li>
+			</ul>
+</div></aside></div>
+	<div id="image-overlay" class="image-overlay">
+		<div class="image-overlay-img"></div>
+		<div class="image-overlay-close">Close</div>
+	</div>
+	
+<!--
+Component Load Times
+====================
+DefaultPageController=125 ms
+PinnedNavBarController=172 ms
+AdsController=0 ms
+ContentItemController=109 ms
+RefineryController=15 ms
+RelatedContentController=101 ms
+VendorResourcesController=647 ms
+EzinePromoController=6 ms
+DigDeeperController=86 ms
+DiscussionsController=31 ms
+AskAnExpertController=0 ms
+HaveAQuestionForAnExpertController=0 ms
+CommentingController=21 ms
+
+Total time=1313 ms
+Request Serving Server: vappma22.techtarget.com
+-->
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"applicationID":"313780","applicationTime":2056,"beacon":"bam.nr-data.net","queueTime":0,"licenseKey":"1068cf12f6","transactionName":"ZQMAYxdYXUBSAkFbClxJLFgXVFJfWhtQVjBAD00dSl9WUkcUR1dKGA==","agent":"","errorBeacon":"bam.nr-data.net"}</script>
+
+<img src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/activity.gif" class="track"><div style="display: none;" id="cboxOverlay"></div><div style="display: none;" tabindex="-1" role="dialog" class="" id="colorbox"><div id="cboxWrapper"><div><div style="float: left;" id="cboxTopLeft"></div><div style="float: left;" id="cboxTopCenter"></div><div style="float: left;" id="cboxTopRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxMiddleLeft"></div><div style="float: left;" id="cboxContent"><div style="float: left;" id="cboxTitle"></div><div style="float: left;" id="cboxCurrent"></div><button id="cboxPrevious" type="button"></button><button id="cboxNext" type="button"></button><button id="cboxSlideshow"></button><div style="float: left;" id="cboxLoadingOverlay"></div><div style="float: left;" id="cboxLoadingGraphic"></div></div><div style="float: left;" id="cboxMiddleRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxBottomLeft"></div><div style="float: left;" id="cboxBottomCenter"></div><div style="float: left;" id="cboxBottomRight"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div><div style="display: none; width: 0px; height: 0px;" class="igtranslator-main-div"><iframe scrolling="no" class="igtranslator-iframe" src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/a_002.htm" frameborder="0"></iframe></div><div title="Click to Show Translation" style="background-image: url(&quot;resource://jid1-dgnibwqga0sibw-at-jetpack/data/icons/home.png&quot;); display: none; top: 2070.28px; left: 704px;" class="igtranslator-activator-icon bounceIn"></div><script src="How%20to%20use%20the%20LEFT%20JOIN%20vs.%20RIGHT%20OUTER%20JOIN%20in%20SQL_files/chartbeat.js" type="text/javascript" language="javascript"></script></body></html>

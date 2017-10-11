@@ -1,0 +1,4 @@
+Firstly updated all files manually.
+
+In second time you need to update drupal core (security update) when you click on the link it will redirect you drupal page 
+where version is available download it and transfer the file just skip sites(folder) & .htaccess file.

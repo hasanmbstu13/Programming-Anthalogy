@@ -1,0 +1,22 @@
+<?php
+// return $users;
+       
+       //  echo "<pre>";
+       //    print_r($users);
+       //  echo "</pre>";
+       //  die();
+        
+      // $projects = DB::select(DB::raw("SELECT project_id, MAX(next_deadline) AS deadline,projects.`project_no`, projects.`project_text`,
+      //  (SELECT `users`.`color_code` FROM `users` WHERE `users`.`id` = `projects`.`project_manager`) AS `color_code` 
+      //   FROM works
+      //   LEFT JOIN `users` ON `users`.`id` = `works`.`user_id`
+      //   LEFT JOIN projects ON works.`project_id` = projects.`id` 
+      //   WHERE projects.`status` = 'development'
+      //   AND works.`status` = 'started'
+      //   GROUP BY project_id"));
+
+
+      // // echo "<pre>";
+      // //   print_r($projects);
+      // // echo "</pre>";
+      // // die();

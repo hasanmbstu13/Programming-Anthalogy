@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>
+			Cross-Origin Resource Sharing (CORS) AJAX Requests Between jQuery And Node.js
+		</title>
+
+		
+		<meta name="Keywords" content="javascript,node.js,cors,cross-origin resource sharing,cross-domain ajax">
+		<meta name="Description" content="Ben Nadel demonstrates how to implement CORS (Cross-Origin Resource Sharing) using jQuery and Node.js. This allows jQuery to make cross-domain AJAX requests in modern browsers.">
+		<link rel="shortcut icon" type="image/ico" href="http://www.bennadel.com/favicon.png">
+
+		
+		<link rel="alternate" type="application/rss+xml" title="Ben Nadel's ColdFusion, JavaScript, User Experience (UX), and Web Development RSS" href="http://www.bennadel.com/index.cfm?event=blog.rss">
+		
+		
+		<link href="https://plus.google.com/108976367067760160494?rel=author" rel="publisher">
+
+		
+		<meta name="verify-v1" content="4BMHbbVgHMewa8Orm/PNkp0/RtWXuI4Fh/IKPkE2y7A=">
+
+		
+		<link rel="stylesheet" type="text/css" href="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/css.css">
+		<link rel="stylesheet" type="text/css" href="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/bennadel.css">
+
+		
+		
+
+			
+			<meta name="twitter:card" content="summary_large_image">
+			<meta name="twitter:site" content="@BenNadel">
+			<meta name="twitter:title" content="Cross-Origin Resource Sharing (CORS) AJAX Requests Between jQuery And Node.js">
+			<meta name="twitter:description" content="Ben Nadel demonstrates how to implement CORS (Cross-Origin Resource Sharing) using jQuery and Node.js. This allows jQuery to make cross-domain AJAX requests in modern browsers.">
+
+			
+				
+				<meta name="twitter:image" content="http://www.bennadel.com/resources/uploads/2012/cors_jquery_request.jpg">
+
+			
+	<script src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/analytics.js" async=""></script><link rel="stylesheet" href="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/gist-embed-2f0c18bbf9db8afe105a9b5045800d52ba7ce16d394e711a8.css"><style id="igtranslator-color" type="text/css"></style></head>
+	<body id="body">
+
+		
+		<header class="l-site-header">
+
+			<div class="masthead">
+
+				<a href="http://www.bennadel.com/index.cfm" title="Ben Nadel on User Experience (UX), JavaScript, ColdFusion, Node.js, Life, and Love." class="title">
+					Ben Nadel
+				</a>
+
+				<div class="tagline">
+					On User Experience (UX) Design, JavaScript, ColdFusion, Node.js, Life, and Love.
+				</div>
+
+			</div>
+
+			<nav class="active-blog">
+
+				<a href="#primary-navigation" class="root">
+					Navigation:
+				</a>
+
+				<ul id="primary-navigation" class="items">
+					<li class="blog">
+						<a href="http://www.bennadel.com/blog/recent-blog-entries.htm" title="Ben Nadel's Blog On Obsessively Thorough Web Application Development.">Home</a>
+					</li><!--
+					--><li class="projects">
+						<a href="http://www.bennadel.com/projects/overview.htm" title="Ben Nadel's open source web development projects.">Projects</a>
+					</li><!--
+					--><li class="about">
+						<a href="http://www.bennadel.com/about/about-ben-nadel.htm" title="Learn more about Ben Nadel, Co-founder of InVision App, Inc.">About Me</a>
+					</li><li class="contact">
+						<a href="http://www.bennadel.com/contact/contact-ben-nadel.htm" title="Contact Ben Nadel for any web development consutling.">Contact</a>
+					</li><!--
+					--><li class="jobs">
+						<a href="http://www.bennadel.com/jobs/web-development-jobs.htm" title="Find your next web development job on Ben Nadel's job board.">Jobs ( 6 )</a>
+					</li><!--
+					--><li class="people">
+						<a href="http://www.bennadel.com/people/who-rock-my-world.htm" title="The amazing people who rock Ben Nadel's world on the daily!">People</a>
+					</li><!--
+					--><li class="rss">
+						<a href="http://www.bennadel.com/index.cfm?event=blog.rss" title="The BenNadel.com RSS feed." class="rss">RSS</a>
+					</li>
+				</ul>
+
+			</nav>
+
+			<figure>
+
+				<img style="cursor: pointer;" src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/steve_cutter_blades_2.jpg" data-rel="636" alt="Ben Nadel at cf.Objective() 2014 (Bloomington, MN) with: Steve 'Cutter' Blades">
+
+				<figcaption>
+
+					Ben Nadel at cf.Objective() 2014 (Bloomington, MN) with: 
+							<span class="person"><a href="http://blog.cutterscrossing.com/" target="_blank">Steve 'Cutter' Blades</a> (&nbsp;<a href="https://twitter.com/cutterbl" target="_blank">@cutterbl</a>&nbsp;)</span>
+						
+
+				</figcaption>
+
+			<a class="prev">« <span>Previous Photo</span></a><a class="next"><span>Next Photo</span> »</a></figure>
+
+		</header>
+		
+
+
+		
+		<div id="site-content" class="l-site-body">
+
+			
+			<div class="l-site-content content">
+
+				
+
+		<article id="blog-post" data-id="2327" data-gist-id="1790556">
+
+			<header class="m-post-header">
+
+				<h1>
+					Cross-Origin Resource Sharing (CORS) AJAX Requests Between jQuery And Node.js
+				</h1>
+
+				<div class="meta">
+					By <a href="https://plus.google.com/108976367067760160494?rel=author" title="Author: Ben Nadel on Google+" class="author">Ben Nadel</a>
+					on
+					<time datetime="2012-02-10">February 10, 2012</time>
+				</div>
+
+				
+				
+					
+					<div class="tags">
+						Tags:
+
+						
+							<a href="http://www.bennadel.com/blog/tags/6-javascript-dhtml-blog-entries.htm" class="tag">Javascript / DHTML</a> 
+					</div>
+
+				
+
+			</header>
+
+
+			<p>After reading the <a href="http://www.bennadel.com/blog/2324-REST-API-Design-Rulebook-By-Mark-Masse.htm" target="_blank">REST API Design Rulebook by Mark Masse</a>,
+ I'm all jazzed up about API design! This recent enthusiasm has afforded
+ me the motivation to attack a number of new topics all at the same 
+time. If I'm going to be experimenting with API design, why not <a href="http://www.bennadel.com/blog/2321-How-I-Got-Node-js-Running-On-A-Linux-Micro-Instance-Using-Amazon-EC2.htm" target="_blank">try it on an Amazon EC2 (Elastic Compute Cloud) Micro instance</a>?
+ And if it's on EC2, why not try it using Node.js? And, if it's on a 
+remote server, why not look into how Cross-Origin Resource Sharing 
+(CORS) works with jQuery and remote REST APIs? This last question - 
+cross-domian AJAX requests - is what I'd like to touch on in this post.</p><table class="imageborder" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td rowspan="3" width="50%"><br></td><td class="nw">&nbsp;<br></td><td class="n">&nbsp;<br></td><td class="ne">&nbsp;<br></td><td rowspan="3" width="50%"><br></td></tr><tr><td class="w">&nbsp;<br></td><td class="c">&nbsp;<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" height="600" width="545"><param name="movie" value="http://www.bennadel.com/resources/jing/2012-02-10_1107.swf"><param name="quality" value="high"><param name="bgcolor" value="#FFFFFF"><param name="flashVars" value="width=545&amp;height=600"><param name="allowFullScreen" value="true"><param name="scale" value="showall"><param name="allowScriptAccess" value="always"><embed allowfullscreen="true" allowscriptaccess="always" bgcolor="#FFFFFF" flashvars="width=545&amp;height=600" quality="high" scale="showall" src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/2012-02-10_1107.swf" type="application/x-shockwave-flash" height="600" width="545"></object></td><td class="e">&nbsp;<br></td></tr><tr><td class="sw">&nbsp;<br></td><td class="s">&nbsp;<br></td><td class="se">&nbsp;<br></td></tr></tbody></table><p>While
+ I've done a ton of work with AJAX (Asynchronous JavaScript and XML), 
+I've never actually done anything with CORS (Cross-Origin Resource 
+Sharing). Many months ago, <a href="http://www.sagarganatra.com/2011/04/html5-xmlhttprequest-2-cross-origin.html" target="_blank">Sagar Ganatra</a>
+ - an awesome Adobe ColdFusion Engineer - talked about cross-origin 
+requests with the XmlHTTPRequest2 object. This was one of my first views
+ into the possibility of cross-domain AJAX requests; sadly, my 
+exploration ended there.</p><p>Until <em>yesterday</em>!</p><p>CORS 
+(Cross-Origin Resource Sharing) is both simple and complex. It is quite 
+simple in philosophy; but, the devil, as always, is in the details. I 
+need to give a huge thank-you to <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" target="_blank">Nicholas Zakas</a> and <a href="http://remysharp.com/2011/04/21/getting-cors-working/" target="_blank">Remy Sharp</a> for clearing up the CORS workflow on their respective blogs.</p><p>CORS
+ is AJAX. What makes CORS special is that the AJAX request is being 
+posted to a domain different than that of the client. Historically, this
+ type of request has been deemed a security threat and has been denied 
+by the browser. With the prevalence of AJAX and the transformation of 
+thick-client applications, however, modern browsers have been evolved to
+ embrace the idea that critical information doesn't necessarily come 
+from the host domain.</p><p>Now, modern browsers (Internet Explorer 8+, 
+Firefox 3.5+, Safari 4+, and Chrome) can make AJAX requests to other 
+domains so long as the target server allows it. This security handshake 
+takes place in the form of HTTP headers. When the client (browser) makes
+ cross-origin requests, it includes the HTTP header - Origin - which 
+announces the requesting domain to the target server. If the server 
+wants to allow the cross-origin request, it has to echo back the Origin 
+in the HTTP response heder - Access-Control-Allow-Origin.</p><p><em><strong>NOTE</strong>:
+ The server can also echo back "*" as the Access-Control-Allow-Origin 
+value if it wants to be more open-ended with its security policy.</em></p><p>Depending
+ on the complexity of the cross-origin request, the client (browser) may
+ make an initial request - known as a "preflight" request - to the 
+server to gather authorization information. This preflight request can 
+be cached by the client and is therefore not needed for subsequent CORS 
+requests.</p><p><em><strong>NOTE</strong>: Not every type of CORS request requires a preflight request; furthermore, some browsers do not support this concept.</em></p><p>Rather
+ than diving deeper into the actual HTTP request headers (on which I am 
+not an authority), I'd rather just get into some code that makes use of 
+CORS (Cross-Origin Resource Sharing) AJAX requests.</p><p>Before we look
+ at the Node.js server, let's take a look at the client-side jQuery code
+ that performs the CORS requests. In the following code, I'm making both
+ a PUT and a DELETE request to the Node.js server. Notice that I am 
+chaining these two requests in serial; this allows the preflight request
+ to be made on the first CORS request but not on the second:</p><h3>demo.htm - Our jQuery-Powered CORS Demo</h3><div class="gist"><div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-demo-htm" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-html">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-demo-htm-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-demo-htm-LC1" class="blob-code blob-code-inner js-file-line">&lt;!DOCTYPE html&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-demo-htm-LC2" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">html</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-demo-htm-LC3" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">head</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-demo-htm-LC4" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">title</span>&gt;Cross-Origin Resource Sharing (CORS) With jQuery And Node.js&lt;/<span class="pl-ent">title</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-demo-htm-LC5" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">head</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-demo-htm-LC6" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">body</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-demo-htm-LC7" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-demo-htm-LC8" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">h1</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-demo-htm-LC9" class="blob-code blob-code-inner js-file-line">        Cross-Origin Resource Sharing (CORS) With jQuery And Node.js</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-demo-htm-LC10" class="blob-code blob-code-inner js-file-line">    &lt;/<span class="pl-ent">h1</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-demo-htm-LC11" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-demo-htm-LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-demo-htm-LC13" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">h2</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-demo-htm-LC14" class="blob-code blob-code-inner js-file-line">        PUT Response</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-demo-htm-LC15" class="blob-code blob-code-inner js-file-line">    &lt;/<span class="pl-ent">h2</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-demo-htm-LC16" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-demo-htm-LC17" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">pre</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>putResponse<span class="pl-pds">"</span></span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-demo-htm-LC18" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">&lt;!-- To be populated dynamically. --&gt;</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-demo-htm-LC19" class="blob-code blob-code-inner js-file-line">    &lt;/<span class="pl-ent">pre</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-demo-htm-LC20" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-demo-htm-LC21" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-demo-htm-LC22" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">h2</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-demo-htm-LC23" class="blob-code blob-code-inner js-file-line">        DELETE Response</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-demo-htm-LC24" class="blob-code blob-code-inner js-file-line">    &lt;/<span class="pl-ent">h2</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-demo-htm-LC25" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-demo-htm-LC26" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">pre</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>deleteResponse<span class="pl-pds">"</span></span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-demo-htm-LC27" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">&lt;!-- To be populated dynamically. --&gt;</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-demo-htm-LC28" class="blob-code blob-code-inner js-file-line">    &lt;/<span class="pl-ent">pre</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="file-demo-htm-LC29" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="file-demo-htm-LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="file-demo-htm-LC31" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="file-demo-htm-LC32" class="blob-code blob-code-inner js-file-line">    <span class="pl-c">&lt;!-- Load our JavaScript and make some CORS requests. --&gt;</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L33" class="blob-num js-line-number" data-line-number="33"></td>
+        <td id="file-demo-htm-LC33" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>../jquery-1.7.1.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L34" class="blob-num js-line-number" data-line-number="34"></td>
+        <td id="file-demo-htm-LC34" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L35" class="blob-num js-line-number" data-line-number="35"></td>
+        <td id="file-demo-htm-LC35" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L36" class="blob-num js-line-number" data-line-number="36"></td>
+        <td id="file-demo-htm-LC36" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L37" class="blob-num js-line-number" data-line-number="37"></td>
+        <td id="file-demo-htm-LC37" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-c">// Wrap up the PUT request execution.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L38" class="blob-num js-line-number" data-line-number="38"></td>
+        <td id="file-demo-htm-LC38" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-k">var</span> <span class="pl-en">makePUTRequest</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(){</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L39" class="blob-num js-line-number" data-line-number="39"></td>
+        <td id="file-demo-htm-LC39" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L40" class="blob-num js-line-number" data-line-number="40"></td>
+        <td id="file-demo-htm-LC40" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">            <span class="pl-c">// Make the PUT request.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L41" class="blob-num js-line-number" data-line-number="41"></td>
+        <td id="file-demo-htm-LC41" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">            <span class="pl-smi">$</span>.<span class="pl-en">ajax</span>({</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L42" class="blob-num js-line-number" data-line-number="42"></td>
+        <td id="file-demo-htm-LC42" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>PUT<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L43" class="blob-num js-line-number" data-line-number="43"></td>
+        <td id="file-demo-htm-LC43" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8080/some/url/resource/path<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L44" class="blob-num js-line-number" data-line-number="44"></td>
+        <td id="file-demo-htm-LC44" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                contentType<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L45" class="blob-num js-line-number" data-line-number="45"></td>
+        <td id="file-demo-htm-LC45" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                data<span class="pl-k">:</span> <span class="pl-c1">JSON</span>.<span class="pl-en">stringify</span>({</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L46" class="blob-num js-line-number" data-line-number="46"></td>
+        <td id="file-demo-htm-LC46" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Tricia<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L47" class="blob-num js-line-number" data-line-number="47"></td>
+        <td id="file-demo-htm-LC47" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    age<span class="pl-k">:</span> <span class="pl-c1">37</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L48" class="blob-num js-line-number" data-line-number="48"></td>
+        <td id="file-demo-htm-LC48" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                }),</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L49" class="blob-num js-line-number" data-line-number="49"></td>
+        <td id="file-demo-htm-LC49" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                dataType<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L50" class="blob-num js-line-number" data-line-number="50"></td>
+        <td id="file-demo-htm-LC50" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                <span class="pl-en">success</span><span class="pl-k">:</span> <span class="pl-k">function</span>( <span class="pl-smi">response</span> ){</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L51" class="blob-num js-line-number" data-line-number="51"></td>
+        <td id="file-demo-htm-LC51" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L52" class="blob-num js-line-number" data-line-number="52"></td>
+        <td id="file-demo-htm-LC52" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-c">// Put the plain text in the PRE tag.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L53" class="blob-num js-line-number" data-line-number="53"></td>
+        <td id="file-demo-htm-LC53" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-en">$</span>( <span class="pl-s"><span class="pl-pds">"</span>#putResponse<span class="pl-pds">"</span></span> ).<span class="pl-c1">text</span>( response );</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L54" class="blob-num js-line-number" data-line-number="54"></td>
+        <td id="file-demo-htm-LC54" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L55" class="blob-num js-line-number" data-line-number="55"></td>
+        <td id="file-demo-htm-LC55" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                },</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L56" class="blob-num js-line-number" data-line-number="56"></td>
+        <td id="file-demo-htm-LC56" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                <span class="pl-en">error</span><span class="pl-k">:</span> <span class="pl-k">function</span>( <span class="pl-smi">error</span> ){</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L57" class="blob-num js-line-number" data-line-number="57"></td>
+        <td id="file-demo-htm-LC57" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L58" class="blob-num js-line-number" data-line-number="58"></td>
+        <td id="file-demo-htm-LC58" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-c">// Log any error.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L59" class="blob-num js-line-number" data-line-number="59"></td>
+        <td id="file-demo-htm-LC59" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-en">console</span>.<span class="pl-c1">log</span>( <span class="pl-s"><span class="pl-pds">"</span>ERROR:<span class="pl-pds">"</span></span>, error );</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L60" class="blob-num js-line-number" data-line-number="60"></td>
+        <td id="file-demo-htm-LC60" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L61" class="blob-num js-line-number" data-line-number="61"></td>
+        <td id="file-demo-htm-LC61" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                },</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L62" class="blob-num js-line-number" data-line-number="62"></td>
+        <td id="file-demo-htm-LC62" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                <span class="pl-en">complete</span><span class="pl-k">:</span> <span class="pl-k">function</span>(){</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L63" class="blob-num js-line-number" data-line-number="63"></td>
+        <td id="file-demo-htm-LC63" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L64" class="blob-num js-line-number" data-line-number="64"></td>
+        <td id="file-demo-htm-LC64" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-c">// When this completes, execute teh</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L65" class="blob-num js-line-number" data-line-number="65"></td>
+        <td id="file-demo-htm-LC65" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-c">// DELETE request.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L66" class="blob-num js-line-number" data-line-number="66"></td>
+        <td id="file-demo-htm-LC66" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-en">makeDELETERequest</span>();</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L67" class="blob-num js-line-number" data-line-number="67"></td>
+        <td id="file-demo-htm-LC67" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L68" class="blob-num js-line-number" data-line-number="68"></td>
+        <td id="file-demo-htm-LC68" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                }</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L69" class="blob-num js-line-number" data-line-number="69"></td>
+        <td id="file-demo-htm-LC69" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">            });</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L70" class="blob-num js-line-number" data-line-number="70"></td>
+        <td id="file-demo-htm-LC70" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L71" class="blob-num js-line-number" data-line-number="71"></td>
+        <td id="file-demo-htm-LC71" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        };</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L72" class="blob-num js-line-number" data-line-number="72"></td>
+        <td id="file-demo-htm-LC72" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L73" class="blob-num js-line-number" data-line-number="73"></td>
+        <td id="file-demo-htm-LC73" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L74" class="blob-num js-line-number" data-line-number="74"></td>
+        <td id="file-demo-htm-LC74" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-c">// Wrap up the DELETE request execution so it can easily be</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L75" class="blob-num js-line-number" data-line-number="75"></td>
+        <td id="file-demo-htm-LC75" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-c">// invoked from the end of the PUT delete response.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L76" class="blob-num js-line-number" data-line-number="76"></td>
+        <td id="file-demo-htm-LC76" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-k">var</span> <span class="pl-en">makeDELETERequest</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(){</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L77" class="blob-num js-line-number" data-line-number="77"></td>
+        <td id="file-demo-htm-LC77" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L78" class="blob-num js-line-number" data-line-number="78"></td>
+        <td id="file-demo-htm-LC78" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">            <span class="pl-c">// Make the DELETE request.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L79" class="blob-num js-line-number" data-line-number="79"></td>
+        <td id="file-demo-htm-LC79" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">            <span class="pl-smi">$</span>.<span class="pl-en">ajax</span>({</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L80" class="blob-num js-line-number" data-line-number="80"></td>
+        <td id="file-demo-htm-LC80" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>DELETE<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L81" class="blob-num js-line-number" data-line-number="81"></td>
+        <td id="file-demo-htm-LC81" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8080/some/url/resource/path<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L82" class="blob-num js-line-number" data-line-number="82"></td>
+        <td id="file-demo-htm-LC82" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                contentType<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L83" class="blob-num js-line-number" data-line-number="83"></td>
+        <td id="file-demo-htm-LC83" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                data<span class="pl-k">:</span> <span class="pl-c1">JSON</span>.<span class="pl-en">stringify</span>({</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L84" class="blob-num js-line-number" data-line-number="84"></td>
+        <td id="file-demo-htm-LC84" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Tricia<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L85" class="blob-num js-line-number" data-line-number="85"></td>
+        <td id="file-demo-htm-LC85" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    age<span class="pl-k">:</span> <span class="pl-c1">37</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L86" class="blob-num js-line-number" data-line-number="86"></td>
+        <td id="file-demo-htm-LC86" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                }),</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L87" class="blob-num js-line-number" data-line-number="87"></td>
+        <td id="file-demo-htm-LC87" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                dataType<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L88" class="blob-num js-line-number" data-line-number="88"></td>
+        <td id="file-demo-htm-LC88" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                <span class="pl-en">success</span><span class="pl-k">:</span> <span class="pl-k">function</span>( <span class="pl-smi">response</span> ){</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L89" class="blob-num js-line-number" data-line-number="89"></td>
+        <td id="file-demo-htm-LC89" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L90" class="blob-num js-line-number" data-line-number="90"></td>
+        <td id="file-demo-htm-LC90" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-c">// Put the plain text in the PRE tag.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L91" class="blob-num js-line-number" data-line-number="91"></td>
+        <td id="file-demo-htm-LC91" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-en">$</span>( <span class="pl-s"><span class="pl-pds">"</span>#deleteResponse<span class="pl-pds">"</span></span> ).<span class="pl-c1">text</span>( response );</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L92" class="blob-num js-line-number" data-line-number="92"></td>
+        <td id="file-demo-htm-LC92" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L93" class="blob-num js-line-number" data-line-number="93"></td>
+        <td id="file-demo-htm-LC93" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                },</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L94" class="blob-num js-line-number" data-line-number="94"></td>
+        <td id="file-demo-htm-LC94" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                <span class="pl-en">error</span><span class="pl-k">:</span> <span class="pl-k">function</span>( <span class="pl-smi">error</span> ){</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L95" class="blob-num js-line-number" data-line-number="95"></td>
+        <td id="file-demo-htm-LC95" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L96" class="blob-num js-line-number" data-line-number="96"></td>
+        <td id="file-demo-htm-LC96" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-c">// Log any error.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L97" class="blob-num js-line-number" data-line-number="97"></td>
+        <td id="file-demo-htm-LC97" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                    <span class="pl-en">console</span>.<span class="pl-c1">log</span>( <span class="pl-s"><span class="pl-pds">"</span>ERROR:<span class="pl-pds">"</span></span>, error );</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L98" class="blob-num js-line-number" data-line-number="98"></td>
+        <td id="file-demo-htm-LC98" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L99" class="blob-num js-line-number" data-line-number="99"></td>
+        <td id="file-demo-htm-LC99" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">                }</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L100" class="blob-num js-line-number" data-line-number="100"></td>
+        <td id="file-demo-htm-LC100" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">            });</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L101" class="blob-num js-line-number" data-line-number="101"></td>
+        <td id="file-demo-htm-LC101" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L102" class="blob-num js-line-number" data-line-number="102"></td>
+        <td id="file-demo-htm-LC102" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        };</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L103" class="blob-num js-line-number" data-line-number="103"></td>
+        <td id="file-demo-htm-LC103" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L104" class="blob-num js-line-number" data-line-number="104"></td>
+        <td id="file-demo-htm-LC104" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L105" class="blob-num js-line-number" data-line-number="105"></td>
+        <td id="file-demo-htm-LC105" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-c">// Execute the PUT request.</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L106" class="blob-num js-line-number" data-line-number="106"></td>
+        <td id="file-demo-htm-LC106" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-en">makePUTRequest</span>();</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L107" class="blob-num js-line-number" data-line-number="107"></td>
+        <td id="file-demo-htm-LC107" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L108" class="blob-num js-line-number" data-line-number="108"></td>
+        <td id="file-demo-htm-LC108" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"></span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L109" class="blob-num js-line-number" data-line-number="109"></td>
+        <td id="file-demo-htm-LC109" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    &lt;/<span class="pl-ent">script</span>&gt;</span></td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L110" class="blob-num js-line-number" data-line-number="110"></td>
+        <td id="file-demo-htm-LC110" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">body</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-demo-htm-L111" class="blob-num js-line-number" data-line-number="111"></td>
+        <td id="file-demo-htm-LC111" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">html</span>&gt;</td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/bennadel/1790556/raw/87ef696b0f6ed3a189a74ef339a1df886476822a/demo.htm" style="float:right">view raw</a>
+        <a href="https://gist.github.com/bennadel/1790556#file-demo-htm">demo.htm</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div></div><p>As you can see, there's nothing really special going 
+on here. I'm using jQuery to execute AJAX requests in the same way that I
+ always would. The only difference is that I'm posting the AJAX requests
+ to a different domain (and port number).</p><p>When we run the above code, we get the following page output:</p><table class="imageborder" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td rowspan="3" width="50%"><br></td><td class="nw">&nbsp;<br></td><td class="n">&nbsp;<br></td><td class="ne">&nbsp;<br></td><td rowspan="3" width="50%"><br></td></tr><tr><td class="w">&nbsp;<br></td><td class="c">&nbsp;<img alt="CORS AJAX request using jQuery and Node.js." src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/cors_jquery_request.jpg" height="700" width="545"></td><td class="e">&nbsp;<br></td></tr><tr><td class="sw">&nbsp;<br></td><td class="s">&nbsp;<br></td><td class="se">&nbsp;<br></td></tr></tbody></table><p>As
+ you can see, the PUT request is preceded by an OPTIONS request. This 
+OPTIONS request tells the client if a CORS request will be allowed; and,
+ for those requests, which methods (GET, POST, PUT, etc.) can be 
+executed. This OPTIONS request is cached by the client for a 
+server-defined amount of time. This is why only one OPTIONS request 
+needs to be performed despite that fact that two CORS requests (PUT and 
+DELETE) and being run.</p><p>Now that we see how little the client-side 
+code has to change - hardly at all - let's take a look at the Node.js 
+server to see how the security handshake works. For this demo, the 
+Node.js server understands two concepts: 1) OPTIONS requests and 2) 
+everything else. If the request is not an OPTIONS request, the Node.js 
+server simply echos back the request body that was posted.</p><h3>server.js - Our CORS-Enabled Node.js Server</h3><div class="gist"><div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-server-js" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-javascript">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-server-js-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-server-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// Include our HTTP module.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-server-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> http <span class="pl-k">=</span> <span class="pl-c1">require</span>( <span class="pl-s"><span class="pl-pds">"</span>http<span class="pl-pds">"</span></span> );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-server-js-LC3" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-server-js-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-server-js-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// Create an HTTP server so that we can listen for, and respond to</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-server-js-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// incoming HTTP requests. This requires a callback that can be used</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-server-js-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// to handle each incoming request.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-server-js-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> server <span class="pl-k">=</span> <span class="pl-smi">http</span>.<span class="pl-en">createServer</span>(</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-server-js-LC9" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">function</span>( <span class="pl-smi">request</span>, <span class="pl-smi">response</span> ){</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-server-js-LC10" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-server-js-LC11" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-server-js-LC12" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// When dealing with CORS (Cross-Origin Resource Sharing)</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-server-js-LC13" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// requests, the client should pass-through its origin (the</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-server-js-LC14" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// requesting domain). We should either echo that or use *</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-server-js-LC15" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// if the origin was not passed.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-server-js-LC16" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">var</span> origin <span class="pl-k">=</span> (<span class="pl-smi">request</span>.<span class="pl-c1">headers</span>.<span class="pl-smi">origin</span> <span class="pl-k">||</span> <span class="pl-s"><span class="pl-pds">"</span>*<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-server-js-LC17" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-server-js-LC18" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-server-js-LC19" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// Check to see if this is a security check by the browser to</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-server-js-LC20" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// test the availability of the API for the client. If the</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-server-js-LC21" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// method is OPTIONS, the browser is check to see to see what</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-server-js-LC22" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// HTTP methods (and properties) have been granted to the</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-server-js-LC23" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// client.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-server-js-LC24" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> (<span class="pl-smi">request</span>.<span class="pl-c1">method</span>.<span class="pl-c1">toUpperCase</span>() <span class="pl-k">===</span> <span class="pl-s"><span class="pl-pds">"</span>OPTIONS<span class="pl-pds">"</span></span>){</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-server-js-LC25" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-server-js-LC26" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-server-js-LC27" class="blob-code blob-code-inner js-file-line">            <span class="pl-c">// Echo back the Origin (calling domain) so that the</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-server-js-LC28" class="blob-code blob-code-inner js-file-line">            <span class="pl-c">// client is granted access to make subsequent requests</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="file-server-js-LC29" class="blob-code blob-code-inner js-file-line">            <span class="pl-c">// to the API.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="file-server-js-LC30" class="blob-code blob-code-inner js-file-line">            <span class="pl-smi">response</span>.<span class="pl-en">writeHead</span>(</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="file-server-js-LC31" class="blob-code blob-code-inner js-file-line">                <span class="pl-s"><span class="pl-pds">"</span>204<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="file-server-js-LC32" class="blob-code blob-code-inner js-file-line">                <span class="pl-s"><span class="pl-pds">"</span>No Content<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L33" class="blob-num js-line-number" data-line-number="33"></td>
+        <td id="file-server-js-LC33" class="blob-code blob-code-inner js-file-line">                {</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L34" class="blob-num js-line-number" data-line-number="34"></td>
+        <td id="file-server-js-LC34" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>access-control-allow-origin<span class="pl-pds">"</span></span><span class="pl-k">:</span> origin,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L35" class="blob-num js-line-number" data-line-number="35"></td>
+        <td id="file-server-js-LC35" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>access-control-allow-methods<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>GET, POST, PUT, DELETE, OPTIONS<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L36" class="blob-num js-line-number" data-line-number="36"></td>
+        <td id="file-server-js-LC36" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>access-control-allow-headers<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>content-type, accept<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L37" class="blob-num js-line-number" data-line-number="37"></td>
+        <td id="file-server-js-LC37" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>access-control-max-age<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">10</span>, <span class="pl-c">// Seconds.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L38" class="blob-num js-line-number" data-line-number="38"></td>
+        <td id="file-server-js-LC38" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>content-length<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">0</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L39" class="blob-num js-line-number" data-line-number="39"></td>
+        <td id="file-server-js-LC39" class="blob-code blob-code-inner js-file-line">                }</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L40" class="blob-num js-line-number" data-line-number="40"></td>
+        <td id="file-server-js-LC40" class="blob-code blob-code-inner js-file-line">            );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L41" class="blob-num js-line-number" data-line-number="41"></td>
+        <td id="file-server-js-LC41" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L42" class="blob-num js-line-number" data-line-number="42"></td>
+        <td id="file-server-js-LC42" class="blob-code blob-code-inner js-file-line">            <span class="pl-c">// End the response - we're not sending back any content.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L43" class="blob-num js-line-number" data-line-number="43"></td>
+        <td id="file-server-js-LC43" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span>( <span class="pl-smi">response</span>.<span class="pl-en">end</span>() );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L44" class="blob-num js-line-number" data-line-number="44"></td>
+        <td id="file-server-js-LC44" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L45" class="blob-num js-line-number" data-line-number="45"></td>
+        <td id="file-server-js-LC45" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L46" class="blob-num js-line-number" data-line-number="46"></td>
+        <td id="file-server-js-LC46" class="blob-code blob-code-inner js-file-line">        }</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L47" class="blob-num js-line-number" data-line-number="47"></td>
+        <td id="file-server-js-LC47" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L48" class="blob-num js-line-number" data-line-number="48"></td>
+        <td id="file-server-js-LC48" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L49" class="blob-num js-line-number" data-line-number="49"></td>
+        <td id="file-server-js-LC49" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// -------------------------------------------------- //</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L50" class="blob-num js-line-number" data-line-number="50"></td>
+        <td id="file-server-js-LC50" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// -------------------------------------------------- //</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L51" class="blob-num js-line-number" data-line-number="51"></td>
+        <td id="file-server-js-LC51" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L52" class="blob-num js-line-number" data-line-number="52"></td>
+        <td id="file-server-js-LC52" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L53" class="blob-num js-line-number" data-line-number="53"></td>
+        <td id="file-server-js-LC53" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// If we've gotten this far then the incoming request is for</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L54" class="blob-num js-line-number" data-line-number="54"></td>
+        <td id="file-server-js-LC54" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// our API. For this demo, we'll simply be grabbing the</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L55" class="blob-num js-line-number" data-line-number="55"></td>
+        <td id="file-server-js-LC55" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// request body and echoing it back to the client.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L56" class="blob-num js-line-number" data-line-number="56"></td>
+        <td id="file-server-js-LC56" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L57" class="blob-num js-line-number" data-line-number="57"></td>
+        <td id="file-server-js-LC57" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L58" class="blob-num js-line-number" data-line-number="58"></td>
+        <td id="file-server-js-LC58" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// Create a variable to hold our incoming body. It may be</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L59" class="blob-num js-line-number" data-line-number="59"></td>
+        <td id="file-server-js-LC59" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// sent in chunks, so we'll need to build it up and then</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L60" class="blob-num js-line-number" data-line-number="60"></td>
+        <td id="file-server-js-LC60" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// use it once the request has been closed.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L61" class="blob-num js-line-number" data-line-number="61"></td>
+        <td id="file-server-js-LC61" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">var</span> requestBodyBuffer <span class="pl-k">=</span> [];</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L62" class="blob-num js-line-number" data-line-number="62"></td>
+        <td id="file-server-js-LC62" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L63" class="blob-num js-line-number" data-line-number="63"></td>
+        <td id="file-server-js-LC63" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// Now, bind do the data chunks of the request. Since we are</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L64" class="blob-num js-line-number" data-line-number="64"></td>
+        <td id="file-server-js-LC64" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// in an event-loop (JavaScript), we can be confident that</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L65" class="blob-num js-line-number" data-line-number="65"></td>
+        <td id="file-server-js-LC65" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// none of these events have fired yet (??I think??).</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L66" class="blob-num js-line-number" data-line-number="66"></td>
+        <td id="file-server-js-LC66" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">request</span>.<span class="pl-en">on</span>(</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L67" class="blob-num js-line-number" data-line-number="67"></td>
+        <td id="file-server-js-LC67" class="blob-code blob-code-inner js-file-line">            <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L68" class="blob-num js-line-number" data-line-number="68"></td>
+        <td id="file-server-js-LC68" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">function</span>( <span class="pl-smi">chunk</span> ){</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L69" class="blob-num js-line-number" data-line-number="69"></td>
+        <td id="file-server-js-LC69" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L70" class="blob-num js-line-number" data-line-number="70"></td>
+        <td id="file-server-js-LC70" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// Build up our buffer. This chunk of data has</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L71" class="blob-num js-line-number" data-line-number="71"></td>
+        <td id="file-server-js-LC71" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// already been decoded and turned into a string.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L72" class="blob-num js-line-number" data-line-number="72"></td>
+        <td id="file-server-js-LC72" class="blob-code blob-code-inner js-file-line">                <span class="pl-smi">requestBodyBuffer</span>.<span class="pl-c1">push</span>( chunk );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L73" class="blob-num js-line-number" data-line-number="73"></td>
+        <td id="file-server-js-LC73" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L74" class="blob-num js-line-number" data-line-number="74"></td>
+        <td id="file-server-js-LC74" class="blob-code blob-code-inner js-file-line">            }</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L75" class="blob-num js-line-number" data-line-number="75"></td>
+        <td id="file-server-js-LC75" class="blob-code blob-code-inner js-file-line">        );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L76" class="blob-num js-line-number" data-line-number="76"></td>
+        <td id="file-server-js-LC76" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L77" class="blob-num js-line-number" data-line-number="77"></td>
+        <td id="file-server-js-LC77" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L78" class="blob-num js-line-number" data-line-number="78"></td>
+        <td id="file-server-js-LC78" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// Once all of the request data has been posted to the</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L79" class="blob-num js-line-number" data-line-number="79"></td>
+        <td id="file-server-js-LC79" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// server, the request triggers an End event. At this point,</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L80" class="blob-num js-line-number" data-line-number="80"></td>
+        <td id="file-server-js-LC80" class="blob-code blob-code-inner js-file-line">        <span class="pl-c">// we'll know that our body buffer is full.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L81" class="blob-num js-line-number" data-line-number="81"></td>
+        <td id="file-server-js-LC81" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">request</span>.<span class="pl-en">on</span>(</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L82" class="blob-num js-line-number" data-line-number="82"></td>
+        <td id="file-server-js-LC82" class="blob-code blob-code-inner js-file-line">            <span class="pl-s"><span class="pl-pds">"</span>end<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L83" class="blob-num js-line-number" data-line-number="83"></td>
+        <td id="file-server-js-LC83" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">function</span>(){</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L84" class="blob-num js-line-number" data-line-number="84"></td>
+        <td id="file-server-js-LC84" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L85" class="blob-num js-line-number" data-line-number="85"></td>
+        <td id="file-server-js-LC85" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// Flatten our body buffer to get the request content.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L86" class="blob-num js-line-number" data-line-number="86"></td>
+        <td id="file-server-js-LC86" class="blob-code blob-code-inner js-file-line">                <span class="pl-k">var</span> requestBody <span class="pl-k">=</span> <span class="pl-smi">requestBodyBuffer</span>.<span class="pl-c1">join</span>( <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L87" class="blob-num js-line-number" data-line-number="87"></td>
+        <td id="file-server-js-LC87" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L88" class="blob-num js-line-number" data-line-number="88"></td>
+        <td id="file-server-js-LC88" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// Create a response body to echo back the incoming</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L89" class="blob-num js-line-number" data-line-number="89"></td>
+        <td id="file-server-js-LC89" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// request.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L90" class="blob-num js-line-number" data-line-number="90"></td>
+        <td id="file-server-js-LC90" class="blob-code blob-code-inner js-file-line">                <span class="pl-k">var</span> responseBody <span class="pl-k">=</span> (</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L91" class="blob-num js-line-number" data-line-number="91"></td>
+        <td id="file-server-js-LC91" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>Thank You For The Cross-Domain AJAX Request:<span class="pl-cce">\n\n</span><span class="pl-pds">"</span></span> <span class="pl-k">+</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L92" class="blob-num js-line-number" data-line-number="92"></td>
+        <td id="file-server-js-LC92" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>Method: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-smi">request</span>.<span class="pl-c1">method</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n\n</span><span class="pl-pds">"</span></span> <span class="pl-k">+</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L93" class="blob-num js-line-number" data-line-number="93"></td>
+        <td id="file-server-js-LC93" class="blob-code blob-code-inner js-file-line">                    requestBody</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L94" class="blob-num js-line-number" data-line-number="94"></td>
+        <td id="file-server-js-LC94" class="blob-code blob-code-inner js-file-line">                );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L95" class="blob-num js-line-number" data-line-number="95"></td>
+        <td id="file-server-js-LC95" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L96" class="blob-num js-line-number" data-line-number="96"></td>
+        <td id="file-server-js-LC96" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// Send the headers back. Notice that even though we</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L97" class="blob-num js-line-number" data-line-number="97"></td>
+        <td id="file-server-js-LC97" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// had our OPTIONS request at the top, we still need</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L98" class="blob-num js-line-number" data-line-number="98"></td>
+        <td id="file-server-js-LC98" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// echo back the ORIGIN in order for the request to</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L99" class="blob-num js-line-number" data-line-number="99"></td>
+        <td id="file-server-js-LC99" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// be processed on the client.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L100" class="blob-num js-line-number" data-line-number="100"></td>
+        <td id="file-server-js-LC100" class="blob-code blob-code-inner js-file-line">                <span class="pl-smi">response</span>.<span class="pl-en">writeHead</span>(</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L101" class="blob-num js-line-number" data-line-number="101"></td>
+        <td id="file-server-js-LC101" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>200<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L102" class="blob-num js-line-number" data-line-number="102"></td>
+        <td id="file-server-js-LC102" class="blob-code blob-code-inner js-file-line">                    <span class="pl-s"><span class="pl-pds">"</span>OK<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L103" class="blob-num js-line-number" data-line-number="103"></td>
+        <td id="file-server-js-LC103" class="blob-code blob-code-inner js-file-line">                    {</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L104" class="blob-num js-line-number" data-line-number="104"></td>
+        <td id="file-server-js-LC104" class="blob-code blob-code-inner js-file-line">                        <span class="pl-s"><span class="pl-pds">"</span>access-control-allow-origin<span class="pl-pds">"</span></span><span class="pl-k">:</span> origin,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L105" class="blob-num js-line-number" data-line-number="105"></td>
+        <td id="file-server-js-LC105" class="blob-code blob-code-inner js-file-line">                        <span class="pl-s"><span class="pl-pds">"</span>content-type<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>text/plain<span class="pl-pds">"</span></span>,</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L106" class="blob-num js-line-number" data-line-number="106"></td>
+        <td id="file-server-js-LC106" class="blob-code blob-code-inner js-file-line">                        <span class="pl-s"><span class="pl-pds">"</span>content-length<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-smi">responseBody</span>.<span class="pl-c1">length</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L107" class="blob-num js-line-number" data-line-number="107"></td>
+        <td id="file-server-js-LC107" class="blob-code blob-code-inner js-file-line">                    }</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L108" class="blob-num js-line-number" data-line-number="108"></td>
+        <td id="file-server-js-LC108" class="blob-code blob-code-inner js-file-line">                );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L109" class="blob-num js-line-number" data-line-number="109"></td>
+        <td id="file-server-js-LC109" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L110" class="blob-num js-line-number" data-line-number="110"></td>
+        <td id="file-server-js-LC110" class="blob-code blob-code-inner js-file-line">                <span class="pl-c">// Close out the response.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L111" class="blob-num js-line-number" data-line-number="111"></td>
+        <td id="file-server-js-LC111" class="blob-code blob-code-inner js-file-line">                <span class="pl-k">return</span>( <span class="pl-smi">response</span>.<span class="pl-en">end</span>( responseBody ) );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L112" class="blob-num js-line-number" data-line-number="112"></td>
+        <td id="file-server-js-LC112" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L113" class="blob-num js-line-number" data-line-number="113"></td>
+        <td id="file-server-js-LC113" class="blob-code blob-code-inner js-file-line">            }</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L114" class="blob-num js-line-number" data-line-number="114"></td>
+        <td id="file-server-js-LC114" class="blob-code blob-code-inner js-file-line">        );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L115" class="blob-num js-line-number" data-line-number="115"></td>
+        <td id="file-server-js-LC115" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L116" class="blob-num js-line-number" data-line-number="116"></td>
+        <td id="file-server-js-LC116" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L117" class="blob-num js-line-number" data-line-number="117"></td>
+        <td id="file-server-js-LC117" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L118" class="blob-num js-line-number" data-line-number="118"></td>
+        <td id="file-server-js-LC118" class="blob-code blob-code-inner js-file-line">);</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L119" class="blob-num js-line-number" data-line-number="119"></td>
+        <td id="file-server-js-LC119" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L120" class="blob-num js-line-number" data-line-number="120"></td>
+        <td id="file-server-js-LC120" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L121" class="blob-num js-line-number" data-line-number="121"></td>
+        <td id="file-server-js-LC121" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// Bind the server to port 8080.</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L122" class="blob-num js-line-number" data-line-number="122"></td>
+        <td id="file-server-js-LC122" class="blob-code blob-code-inner js-file-line"><span class="pl-smi">server</span>.<span class="pl-en">listen</span>( <span class="pl-c1">8080</span> );</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L123" class="blob-num js-line-number" data-line-number="123"></td>
+        <td id="file-server-js-LC123" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L124" class="blob-num js-line-number" data-line-number="124"></td>
+        <td id="file-server-js-LC124" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L125" class="blob-num js-line-number" data-line-number="125"></td>
+        <td id="file-server-js-LC125" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// Debugging:</span></td>
+      </tr>
+      <tr>
+        <td id="file-server-js-L126" class="blob-num js-line-number" data-line-number="126"></td>
+        <td id="file-server-js-LC126" class="blob-code blob-code-inner js-file-line"><span class="pl-en">console</span>.<span class="pl-c1">log</span>( <span class="pl-s"><span class="pl-pds">"</span>Node.js listening on port 8080<span class="pl-pds">"</span></span> );</td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/bennadel/1790556/raw/87ef696b0f6ed3a189a74ef339a1df886476822a/server.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/bennadel/1790556#file-server-js">server.js</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div></div><p>As you can see, the Node.js server either responds 
+with a 204 No Content response for OPTIONS requests; or, it responds 
+with a 200 OK response for everything else.</p><p>As far as I'm 
+concerned, this is some pretty cool stuff! CORS (Cross-Origin Resource 
+Sharing) AJAX requests may not be supported by every modern browser; 
+but, if you're working on API design, like I am, client-side support is 
+not necessarily a must-have - rather, it's a nice-to-have. And, with 
+such little overhead, it's not too hard to implement.</p> 
+
+				<div class="m-tweet-this">
+					
+					<a href="https://twitter.com/intent/tweet?text=Interesting%20post%20by%20%40BenNadel%20%2D%20Cross%2DOrigin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node%2Ejs%20http%3A%2F%2Fbjam%2Ein%2F2327" target="tweetThis2327" onclick="window.open( this.href, 'tweetThis2327', 'width=600,height=425' ).focus()">
+						<span class="label">Tweet This</span>
+						<span class="message">Interesting post by @BenNadel - Cross-Origin Resource Sharing (CORS) AJAX Requests Between jQuery And Node.js</span>
+					</a>
+
+					<span class="thanks">Thanks my man — <strong>you rock the party that rocks the body!</strong></span>
+					
+				</div>
+				
+			
+
+				<div class="hrule">
+					<br>
+				</div>
+
+
+				<!-- BEGIN: Related Posts. -->
+				<aside class="m-related-posts">
+
+					<h3>
+						Enjoyed This? You Might Also Enjoy Reading:
+					</h3>
+
+					<ul>
+						
+						
+							<li>
+								<a href="http://www.bennadel.com/blog/1658-learning-coldfusion-9-using-oncfcrequest-to-return-jsonp-json-with-padding-api-responses.htm">Learning ColdFusion 9: Using OnCFCRequest() To Return JSONP (JSON With Padding) API Responses</a>
+							</li>
+						
+							<li>
+								<a href="http://www.bennadel.com/blog/1498-ask-ben-cross-site-ajax-requests-using-jquery-and-coldfusion.htm">Ask Ben: Cross-Site AJAX Requests Using jQuery And ColdFusion</a>
+							</li>
+						
+
+					</ul>
+
+				</aside>
+				<!-- END: Related Posts. -->
+
+			
+
+
+			<div class="hrule">
+				<br>
+			</div>
+
+
+			<!-- BEGIN: Job Listings. -->
+			<div class="m-recent-jobs">
+
+				<h3>
+					Looking For A <em>New Job</em>?
+				</h3>
+
+				<div class="actions">
+					<a href="http://www.bennadel.com/jobs/web-development-jobs.htm" title="Find your next web development job on Ben Nadel's job board.">View All Jobs</a> 
+					&nbsp;|&nbsp;
+					<a href="http://www.bennadel.com/jobs/post-a-job-listing.htm" title="Post a job now! Only $29!">Post A Job - Only $29</a> »
+				</div>
+
+				
+				
+
+					<ul>
+						
+
+							<li>
+								<a href="http://www.bennadel.com/jobs/368-ColdFusion-Developer.htm" title="Your new job: ColdFusion Developer">
+									<span class="title">ColdFusion Developer</span> <span class="company">at WRIS Web Services</span>
+								</a>
+							</li>
+
+						
+
+							<li>
+								<a href="http://www.bennadel.com/jobs/366-ColdFusion-Developer.htm" title="Your new job: ColdFusion Developer">
+									<span class="title">ColdFusion Developer</span> <span class="company">at GAP Solutions, Inc.</span>
+								</a>
+							</li>
+
+						
+
+							<li>
+								<a href="http://www.bennadel.com/jobs/365-Expert-Coldfusion-Developer-with-extensive-Microsoft-Media-Services-expertise.htm" title="Your new job: Expert Coldfusion Developer with extensive Microsoft Media Services expertise">
+									<span class="title">Expert Coldfusion Developer with extensive Microsoft Media Services expertise</span> <span class="company">at Atprime Media Services</span>
+								</a>
+							</li>
+
+						
+
+							<li>
+								<a href="http://www.bennadel.com/jobs/364-Senior-CF-Backend-Developer.htm" title="Your new job: Senior CF Backend Developer">
+									<span class="title">Senior CF Backend Developer</span> <span class="company">at Explosive Concepts, Inc.</span>
+								</a>
+							</li>
+
+						
+
+							<li>
+								<a href="http://www.bennadel.com/jobs/363-AngularJS-Opportunities-at-Top-Companies-Get-Better-Compensation-Culture-.htm" title="Your new job: AngularJS Opportunities at Top Companies. Get Better Compensation &amp; Culture!">
+									<span class="title">AngularJS Opportunities at Top Companies. Get Better Compensation &amp; Culture!</span> <span class="company">at AngularJobs.com</span>
+								</a>
+							</li>
+
+						
+					</ul>	
+				
+				
+				
+
+				<div class="kiva">
+					100% of job board revenue is donated to Kiva. <em>Loans that change lives</em> — <a href="http://www.bennadel.com/jobs/web-development-jobs.htm#kiva">Find out more</a> »
+				</div>
+
+			</div>
+			<!-- END: Job Listings. -->
+
+			
+			<div class="hrule">
+				<br>
+			</div>
+
+
+			<!-- BEGIN: Comments. -->
+			<section class="m-comments">
+
+				<h2>
+					Reader Comments
+				</h2>
+
+				
+				
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_38908" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/2f56f147c441727ffd27a57d747f131c.png" class="avatar">
+
+							<a href="http://www.bennadel.com/members/5627-drew-wells.htm" class="author">Drew Wells</a>
+
+							<a href="#comments_38908" class="date">
+								<time datetime="2012-02-10">Feb 10, 2012 at 11:30 AM</time>
+							</a>
+
+							<div class="count">
+								54 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>After you understand the concepts here, this is an awesome cheatsheet for enabling CORS in just about anything <a href="http://enable-cors.org/" rel="nofollow" target="_blank">http://enable-cors.org/</a></p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_39624" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/aac9b0d611c575c79b77039212bf246c.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/9888-cubic.htm" class="author">cubic</a>
+
+							<a href="#comments_39624" class="date">
+								<time datetime="2012-04-28">Apr 28, 2012 at 5:31 AM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>good post; well presented.<br>Can you explain how this works 
+in internet explorer 8+? I thought the IE implementation of the Wc3 
+Recommedation was (typically) non-conformist and requires us to create a
+ XDomainRequest object?</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_39630" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/ecb10cd4428a58569e5975f93c670070.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/9891-cubic.htm" class="author">cubic</a>
+
+							<a href="#comments_39630" class="date">
+								<time datetime="2012-04-28">Apr 28, 2012 at 10:26 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Note: anyone silly enough to use IE will need to</p><div class="code"><ul><li>jQuery.support.cors = true;</li></ul></div><p>in the demo.htm before the first ajax call, as CORS is disabled when run from a localhost.<br>ref. <a href="http://bugs.jquery.com/ticket/8122" rel="nofollow" target="_blank">http://bugs.jquery.com/ticket/8122</a></p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_39700" class="comment ben">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/f9bbc701ca6770ef482cc1e172344e25.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/1851-ben-nadel.htm" class="author">Ben Nadel</a>
+
+							<a href="#comments_39700" class="date">
+								<time datetime="2012-05-08">May 8, 2012 at 10:46 AM</time>
+							</a>
+
+							<div class="count">
+								12,814 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>@Drew, </p><p>Awesome link, thanks!</p><p>@Cubic, </p><p>Unfortunately
+ (or fortunately), I'm on a Mac, so I tend not to test too much R&amp;D 
+code in IE as it would require me booting up my Virtual Machine. Thanks 
+for the link.</p><p>In the api.jquery.com site, it looks like you can 
+add the "withCredentials" header to the AJAX xhrFields collection to get
+ jQuery to honor this:</p><p><a href="http://api.jquery.com/jQuery.ajax/" rel="nofollow" target="_blank">http://api.jquery.com/jQuery.ajax/</a></p><p>... look under "xhrFields" (the last property).</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_39708" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/40b1374b6a6797f27ef2ef05c2d12410.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/9931-madhu-halemane.htm" class="author">Madhu Halemane</a>
+
+							<a href="#comments_39708" class="date">
+								<time datetime="2012-05-09">May 9, 2012 at 3:45 AM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Hi, Ben<br>  Thank you for the awesome post. It really worked for me.<br>
+  I tried to make a HTTP POST request using CORS but it was not making 
+HTTP OPTIONS request. After researching i found that POST and GET 
+requests will not make any OPTIONS request for handshake, unless you 
+have a custom headers like X-PINGOTHER.<br>More information is here <br><a href="https://developer.mozilla.org/En/HTTP_access_control#Preflighted_requests" rel="nofollow" target="_blank">https://developer.mozilla.org/En/HTTP_access_control#Preflighted_requests</a> <br>    <br>Thanks a lot :)</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_40750" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/b7d3d1279331c400761901dbba4d9cc5.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/10265-stephen-tang.htm" class="author">Stephen Tang</a>
+
+							<a href="#comments_40750" class="date">
+								<time datetime="2012-09-07">Sep 7, 2012 at 5:56 PM</time>
+							</a>
+
+							<div class="count">
+								2 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Hi Ben,<br>We met at jQuery Conference in Boston in 2010.  I have no idea if you remember me (I'm in one of your photos in the header)</p><p>At
+ my company, we're now starting to explore CORS, and in my search for 
+"jquery" and "CORS," your page shows up!  It's good to know that the 
+$.ajax() call doesn't change, although it does require jQuery 1.5.1. We 
+just moved to 1.7.2, so it looks like we did upgraded in the nick of 
+time.  Thanks again for putting up these blog posts.</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_40751" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/b7d3d1279331c400761901dbba4d9cc5.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/10265-stephen-tang.htm" class="author">Stephen Tang</a>
+
+							<a href="#comments_40751" class="date">
+								<time datetime="2012-09-07">Sep 7, 2012 at 6:08 PM</time>
+							</a>
+
+							<div class="count">
+								2 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>I have to support IE8, and I don't think jQuery supports IE8 
+or IE9 through jQuery.support.cors = true;  I think some more work is 
+required. :(</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_41655" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/7eebc0479d03508bb4060ab393e3e9aa.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/10660-nachiket.htm" class="author">Nachiket</a>
+
+							<a href="#comments_41655" class="date">
+								<time datetime="2013-02-07">Feb 7, 2013 at 3:25 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>I am trying to add the Basic Authorization in the same request. I have the Hash with me.<br>How can I add it. I tried appending the following :<br>Authorization : "Basic myHash"</p><p>but it is not working somehow!</p><p>Please help..</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_42239" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/b32429ee91c0ab07bbd698ca954dca15.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/10865-herman.htm" class="author">Herman</a>
+
+							<a href="#comments_42239" class="date">
+								<time datetime="2013-05-03">May 3, 2013 at 4:07 AM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Hi Ben!</p><p>Thanks for this writeup! I have been struggling 
+for a day with this now and I think the next step is to pull out the 
+little hair I have left :-(</p><p>I have done the exact same than you have on your example but for some reason that is beyond me I cannot get this to work.</p><p>My
+ preflight options request is never sent to the server (or never 
+reached). It just fails immediately with no response header. Its like 
+ajax decices that it will fail, before it does anything.</p><p>Even when I turn of the server at port 8080 it does the exact same. This tells me that its not even trying!</p><p>This
+ happens only with the "complex" request with the contentType optons 
+added. Once that is remove, it works for obvious reasons</p><p>It happens in chrome, safari and firefox</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_42586" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/6801c83868aa5bce1c6f3ab2e66a087b.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/10977-ramesh.htm" class="author">Ramesh</a>
+
+							<a href="#comments_42586" class="date">
+								<time datetime="2013-06-14">Jun 14, 2013 at 2:36 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>This code is working on IE , chrome and Firefox,  But in IE9 and IE10 if  this option is disabled it is not working. <br>Internet options ? Security ? disabled - access data sources across domains. <br>What is the work around to enable it programmatically or work CORS even this option is disabled. <br>I want JQuery code only. Please help me.</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_43351" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/c8a03b3388dcf48580de8e39415832af.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/11262-cd-smith.htm" class="author">CD Smith</a>
+
+							<a href="#comments_43351" class="date">
+								<time datetime="2013-09-23">Sep 23, 2013 at 7:39 AM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Nice write up but I'd like to point out an issue that I have 
+been having and have yet to find a resolution. Maybe you or another 
+commenter can elaborate on this situation.</p><p>I have a site on one 
+port making requests to WebAPI on another port. CORS is set up via the 
+header and I can make requests via AJAX just fine. But we all know that 
+doesn't suffice in the real world. </p><p>Enter security. </p><p>I have 
+an MVC controller that will accept credentials and validate a user, 
+using Forms Authentication the security ticket is responded back to the 
+user's browser via the .ASPXAUTH cookie. </p><p>Subsequent requests via 
+AJAX do NOT send the cookie across the wire and therefore the user is 
+not authorized for using any secured endpoint.</p><p>So far I have not 
+found any good news as a way around this to get it set up to support 
+sending the cookie. The only thing I can come up with is a token based 
+form of security (much like the big boys using API keys for their 
+endpoints) sent via header information.</p><p>The API that I am building
+ not only has to be secured but also be able to allow a legacy 
+ColdFusion site and JRun use that same security model so OAuth is out 
+the question for us.</p><p>Any ideas?</p><p>Thanks!</p><p>CD</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_43657" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/780ce68d1ef41fa3bf3e701e0c779fce.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/11366-vtt.htm" class="author">VTT</a>
+
+							<a href="#comments_43657" class="date">
+								<time datetime="2013-10-29">Oct 29, 2013 at 1:10 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Extremely well presented.  Nothing i've found on the web is as knowledgeable as this short article.</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_43985" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/268d9faf0acbaf6c2f68e5a469ee5cf7.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/11536-zeke.htm" class="author">Zeke</a>
+
+							<a href="#comments_43985" class="date">
+								<time datetime="2014-01-08">Jan 8, 2014 at 2:48 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Life saver!</p><p>Thanks!</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_44096" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/7f4ece87b7a9b90e0b7808943bd874a0.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/11572-vijay.htm" class="author">Vijay</a>
+
+							<a href="#comments_44096" class="date">
+								<time datetime="2014-01-20">Jan 20, 2014 at 4:20 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>I am getting this error: ReferenceError: require is not defined. Any idea?</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_44145" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/d81be9e2a7f2e7c65091c5ccd6680fa4.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/11591-payam.htm" class="author">Payam</a>
+
+							<a href="#comments_44145" class="date">
+								<time datetime="2014-01-28">Jan 28, 2014 at 4:36 AM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>hi, i have a problem with sending "DELETE" request to my 
+server using AngularJS. I followed your instructions but only query() 
+and get() methods works flawless, but remove() function which user 
+{method: "DELETE"} does not work and my server receives OPTIONS instead 
+of DELETE. Thank you for your help</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_45412" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/420c9dddf6be5639ca8f7b5d19fffbb1.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/12167-ranjit.htm" class="author">Ranjit</a>
+
+							<a href="#comments_45412" class="date">
+								<time datetime="2014-08-04">Aug 4, 2014 at 6:53 AM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Very useful.<br>Thanks.</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_45422" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/e6a88a787260ffcf0a937d4b4d0be898.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/12171-jaswanth.htm" class="author">Jaswanth</a>
+
+							<a href="#comments_45422" class="date">
+								<time datetime="2014-08-05">Aug 5, 2014 at 4:55 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Very much useful for me, thank you so much.</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_45796" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/9f6591a9547887dac97a94573c0907b5.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/12370-budi.htm" class="author">Budi</a>
+
+							<a href="#comments_45796" class="date">
+								<time datetime="2014-10-21">Oct 21, 2014 at 12:58 AM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>How to send http credential via ajax request to nodejs (express) ?</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					<!-- BEGIN: Comment. -->
+					<article id="comments_45807" class="comment ">
+
+						<div class="meta">
+
+							<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/9826adbf6959e8cb04672ec4d4a45045.jpg" class="avatar">
+
+							<a href="http://www.bennadel.com/members/12376-yuri.htm" class="author">Yuri</a>
+
+							<a href="#comments_45807" class="date">
+								<time datetime="2014-10-22">Oct 22, 2014 at 8:08 PM</time>
+							</a>
+
+							<div class="count">
+								1 Comments
+							</div>
+
+						</div>
+
+						<div class="content">
+
+							<p>Nice post, but did I miss something - both PUT and DELETE are 
+going to the same host and same port... So then it doesn't show CORS in 
+action on the browser side?</p>
+
+						</div>
+
+						
+
+					</article>
+					<!-- END: Comment. -->
+
+				
+
+
+					
+					<div class="comments-disabled">
+
+						<div class="reason">
+							<span>Oh my chickens, this post is old!</span>
+						</div>
+
+						<div class="follow-up">
+							<a href="https://twitter.com/BenNadel" title="Ben Nadel's Twitter Account">
+								<em>Hit me up on Twitter</em> if you want to discuss it further.
+							</a>
+						</div>
+
+					</div>
+					
+
+
+				
+				
+
+
+			</section>
+			<!-- END: Comments. -->
+
+		</article>
+
+
+		
+		
+		
+	
+
+			</div>
+			
+
+
+			
+			<div class="l-site-aside">
+
+				
+				
+
+					
+					<div class="m-ad-cluster">
+
+						<a href="http://www.bennadel.com/blog/2439-My-Experience-With-AngularJS-The-Super-heroic-JavaScript-MVW-Framework.htm" title="My Experience With AngularJS - The Super-heroic JavaScript MVW Framework" class="nw">
+							My Experience With AngularJS - The Super Heroic JavaScript MVW Framework
+						</a>
+						
+						<a href="http://www.bennadel.com/jobs/web-development-jobs.htm" title="Find your next web development job on the BenNadel.com job board." class="ne">
+							Find your next web development job on the BenNadel.com job board
+						</a>
+						
+						<a href="http://www.bennadel.com/blog/2192-One-Man-s-Search-For-Love-My-cf-Objective-2011-Lightning-Talk.htm" title="One Man's Search for Love, by Ben Nadel" class="sw">
+							One Man's Search for Love - Lightning Talk
+						</a>
+						
+						<a href="https://github.com/BenNadel" title="Ben Nadel's open-source development projects on GitHub." class="se">
+							Fork Me on GitHub.com
+						</a>
+
+					</div>	
+					
+
+
+					
+					<div class="m-invision-ad">
+
+						<a href="http://www.invisionapp.com/?source=bennadel.com&amp;ad=large" title="UX Prototyping Made Beautiful - Create Interactive Wireframes &amp; High Fidelity Prototypes">
+							UX Prototyping Made Beautiful - Create Interactive Wireframes &amp; High Fidelity Prototypes
+						</a>
+
+					</div>
+					
+
+				
+				
+
+			</div>
+			
+
+
+			
+			<br clear="all">
+
+		</div>
+		
+
+		
+		
+		<footer class="l-site-footer">
+
+			<small>
+
+				<span class="copyright">
+					Ben Nadel © 2016. All content is the property of Ben Nadel and BenNadel.com.
+				</span>
+
+				<a href="#body" class="back-to-top">
+					Back to Top
+				</a>
+
+			</small>
+
+			<section class="epilogue">
+
+				<div class="mini-resume">
+
+					<div class="avatar">
+						<img src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/ben-nadel-avatar.jpg" title="Ben Nadel is co-founder of InVision App, Inc. and a passionate web-applications developer." alt="Ben Nadel's avatar.">
+					</div>
+
+					<div class="title">
+						About Ben Nadel
+					</div>
+					
+					<div class="bio">
+						I am the co-founder and lead engineer at InVision App, Inc — the world's leading prototyping, 
+						collaboration &amp; workflow platform. I also rock out in JavaScript and ColdFusion 24x7 and I dream about
+						promise resolving asynchronously. 
+					</div>
+
+					<div class="social-media">
+						<a href="https://github.com/BenNadel" title="Follow Ben Nadel on GitHub.">GitHub</a> &nbsp;|&nbsp;
+						<a href="https://www.twitter.com/BenNadel" title="Follow Ben Nadel on Twitter.">Twitter</a> &nbsp;|&nbsp;
+						<a href="https://www.linkedin.com/in/BenNadel" title="Follow Ben Nadel on LinkedIn.">LinkedIn</a> &nbsp;|&nbsp;
+						<a href="https://plus.google.com/108976367067760160494?rel=author" title="Follow Ben Nadel on Google Plus.">Google+</a> &nbsp;|&nbsp;
+						<a href="https://www.facebook.com/BenNadel" title="Follow Ben Nadel on Facebook.">Facebook</a>
+					</div>
+
+				</div>
+
+			</section>
+
+		</footer>
+
+
+		
+		<script type="text/javascript" src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/jquery-2.js"></script>
+		<script type="text/javascript" src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/standard.js"></script>
+
+		
+		
+
+			<script type="text/javascript" src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/jquery.js"></script>
+			
+		
+
+			<script type="text/javascript" src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/blog.js"></script>
+			
+		
+		
+			
+			<script type="text/javascript">
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+				ga('create', 'UA-477521-1', 'auto');
+				ga('send', 'pageview');
+			</script>
+			
+
+		
+
+	
+	
+	
+<div style="display: none; width: 0px; height: 0px;" class="igtranslator-main-div"><iframe scrolling="no" class="igtranslator-iframe" src="Cross-Origin%20Resource%20Sharing%20%28CORS%29%20AJAX%20Requests%20Between%20jQuery%20And%20Node.js_files/a.htm" frameborder="0"></iframe></div><div title="Click to Show Translation" style="background-image: url(&quot;resource://jid1-dgnibwqga0sibw-at-jetpack/data/icons/home.png&quot;); display: none;" class="igtranslator-activator-icon bounceIn"></div></body></html>

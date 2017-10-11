@@ -1,0 +1,11 @@
+dsm($entity);
+	// dsm($context);
+	// First priority: If there is a $entity->uid, unblock that user.
+	// This is most likely a user object or the author if a node or comment.
+/*
+	echo '<pre>';
+	var_dump($_REQUEST);
+	var_dump($entity);
+	echo '</pre>';
+	die();
+*/

@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html id="hacks-mozilla-org" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta charset="UTF-8">
+
+  <!-- OpenGraph metadata -->
+  <meta property="og:site_name" content="Mozilla Hacks – the Web developer blog">
+  <meta property="og:title" content="ECMAScript 5 strict mode in Firefox 4">
+  <meta property="og:url" content="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/">
+  <meta property="og:description" content="Editor's note: This article is posted by Chris Heilmann but authored by Jeff Walden - credit where credit is due. Developers in the Mozilla community ...">
+
+  <!--[if IE]>
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="shortcut icon" type="image/ico" href="http://hacks.mozilla.org/wp-content/themes/Hacks2013/favicon.ico">
+  <link rel="home" href="http://hacks.mozilla.org/">
+  <link rel="copyright" href="#copyright">
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/style.css">
+  <link rel="stylesheet" type="text/css" media="print,handheld" href="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/print.css">
+  <link rel="stylesheet" type="text/css" media="all" href="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/tabzilla.css">
+    <link rel="stylesheet" type="text/css" media="all" href="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/socialshare.css">
+    <link rel="alternate" type="application/rss+xml" title="Mozilla Hacks – the Web developer blog RSS Feed" href="http://hacks.mozilla.org/feed/">
+  <link rel="pingback" href="http://hacks.mozilla.org/xmlrpc.php">
+  <link rel="canonical" href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/">
+  <!--[if lte IE 7]><link rel="stylesheet" type="text/css" media="all" href="http://hacks.mozilla.org/wp-content/themes/Hacks2013/css/ie7.css" /><![endif]-->
+  <!--[if lte IE 6]><link rel="stylesheet" type="text/css" media="all" href="http://hacks.mozilla.org/wp-content/themes/Hacks2013/css/ie6.css" /><![endif]-->
+
+  <title>  ECMAScript 5 strict mode in Firefox 4 ✩
+        Mozilla Hacks – the Web developer blog  </title>
+
+  
+  <script src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/ga.js" async="" type="text/javascript"></script><script src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/ga_002.js" async="" type="text/javascript"></script><script type="text/javascript">
+    window.hacks = {};
+    // http://cfsimplicity.com/61/removing-analytics-clutter-from-campaign-urls
+    var removeUtms  =   function(){
+        var l = window.location;
+        if( l.hash.indexOf( "utm" ) != -1 ){
+            var anchor = l.hash.match(/#(?!utm)[^&]+/);
+            anchor  =   anchor? anchor[0]: '';
+            if(!anchor && window.history.replaceState){
+                history.replaceState({},'', l.pathname + l.search);
+            } else {
+                l.hash = anchor;
+            }
+        };
+    };
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35433268-8'],
+              ['_setAllowAnchor', true]);
+    _gaq.push (['_gat._anonymizeIp']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push( removeUtms );
+    (function(d, k) {
+      var ga = d.createElement(k); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = 'https://ssl.google-analytics.com/ga.js';
+      var s = d.getElementsByTagName(k)[0]; s.parentNode.insertBefore(ga, s);
+    })(document, 'script');
+  </script>
+
+  <link rel="alternate" type="application/rss+xml" title="Mozilla Hacks - the Web developer blog » ECMAScript 5 strict mode in Firefox 4 Comments Feed" href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/feed/">
+<link rel="stylesheet" id="wp-syntax-css-css" href="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/wp-syntax.css" type="text/css" media="all">
+<script type="text/javascript" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/jquery.js"></script>
+<script type="text/javascript" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/jquery-migrate.js"></script>
+<script type="text/javascript" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/analytics.js"></script>
+<script type="text/javascript" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/socialshare.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://hacks.mozilla.org/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://hacks.mozilla.org/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Simple HTML5 video encoding with vid.ly – interview, first impressions and invite code" href="http://hacks.mozilla.org/2011/01/simple-html5-video-encoding-with-vid-ly-interview-first-impressions-and-invite-code/">
+<link rel="next" title="People of HTML5 – Rob Hawkes" href="http://hacks.mozilla.org/2011/01/people-of-html5-rob-hawkes/">
+<link rel="canonical" href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/">
+<link rel="shortlink" href="http://hacks.mozilla.org/?p=7116">
+            <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-36116321-4']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+            </script></head>
+
+<body class="single single-post postid-7116 single-format-standard js"><div id="tabzilla-panel" class="tabzilla-closed" tabindex="-1">  <div id="tabzilla-contents">    <div id="tabzilla-promo">      <div class="snippet" id="tabzilla-promo-gear">        <a href="https://gear.mozilla.org/?ref=OMG_launch&amp;utm_campaign=OMG_launch&amp;utm_source=gear.mozilla.org&amp;utm_medium=referral&amp;utm_content=tabzilla">          <h4>Official Mozilla gear is here</h4>        </a>      </div>    </div>    <div id="tabzilla-nav">      <ul>        <li><h2>Mozilla</h2>          <div>            <ul>              <li><a href="https://www.mozilla.org/mission/?icn=tabz">Mission</a></li>              <li><a href="https://www.mozilla.org/about/?icn=tabz">About</a></li>              <li><a href="https://www.mozilla.org/projects/?icn=tabz">Projects</a></li>              <li><a href="https://support.mozilla.org/?icn=tabz">Support</a></li>              <li><a href="https://developer.mozilla.org/?icn=tabz">Developer Network</a></li>            </ul>          </div>        </li>        <li><h2>Products</h2>          <div>            <ul>              <li><a href="https://www.mozilla.org/firefox/?icn=tabz">Firefox</a></li>              <li><a href="https://www.mozilla.org/thunderbird/?icn=tabz">Thunderbird</a></li>              <li><a href="https://www.mozilla.org/firefox/os/?icn=tabz">Firefox OS</a></li>            </ul>          </div>        </li>        <li><h2>Innovations</h2>          <div>            <ul>              <li><a href="https://webmaker.org/?icn=tabz">Webmaker</a></li>              <li><a href="https://www.mozilla.org/research/?icn=tabz">Research</a></li>            </ul>          </div>        </li>        <li><h2>Get Involved</h2>          <div>            <ul>              <li><a href="https://www.mozilla.org/contribute/?icn=tabz">Volunteer</a></li>              <li><a href="https://careers.mozilla.org/?icn=tabz">Careers</a></li>              <li><a href="https://www.mozilla.org/en-US/about/mozilla-spaces/?icn=tabz">Find us</a></li>              <li><a href="https://sendto.mozilla.org/page/contribute/givenow-1page?preset=2&amp;source=mozillaorg_tabzillaTXT&amp;ref=EOYFR2014&amp;utm_campaign=EOYFR2014&amp;utm_source=mozilla.org&amp;utm_medium=referral&amp;utm_content=mozillaorg_tabzillaTXT&amp;icn=tabz" class="donate">Donate</a></li>              <li><a href="https://www.mozilla.org/about/partnerships/?icn=tabz">Partner</a></li>            </ul>          </div>        </li>        <li id="tabzilla-search">          <a href="https://wiki.mozilla.org/Websites/Directory?icn=tabz">Website Directory</a>          <form title="Search Mozilla sites" role="search" action="https://www.google.com/cse">            <input value="002443141534113389537:ysdmevkkknw" name="cx" type="hidden">            <input value="FORID:0" name="cof" type="hidden">            <label for="q">Search</label>            <input placeholder="Search" id="q" name="q" type="search">          </form>        </li>      </ul>    </div>  </div></div>
+<div id="outer-wrapper">
+  <ul id="nav-access" role="navigation">
+    <li><a href="#content-main">Skip to content</a></li>
+  </ul>
+
+  <header id="branding">
+        <h4 id="logo">hacks.mozilla.org <a href="http://hacks.mozilla.org/" title="Go to the home page">Home</a></h4>
+    
+    <form id="fm-search" method="get" action="http://hacks.mozilla.org/" role="search">
+  <p><input placeholder="Search hacks.mozilla.org" name="s" id="s" type="search"> <button type="submit">Go</button></p>
+</form>
+    <nav id="nav-main">
+      <ul role="navigation">
+        <li><a href="http://hacks.mozilla.org/">Home</a></li>
+        <li><a href="http://hacks.mozilla.org/articles/">Articles</a></li>
+        <li><a href="http://hacks.mozilla.org/demos/">Demos</a></li>
+        <li><a href="http://hacks.mozilla.org/about/">About</a></li>
+      </ul>
+    </nav>
+    <a aria-label="Mozilla links" href="#" id="tabzilla">Mozilla</a>
+  </header><!-- /#branding -->
+
+  <div id="content">
+    
+
+  
+<div id="content-head">
+  <ul class="nav-crumbs">
+    <li><a href="http://hacks.mozilla.org/" title="Go to the home page">Home</a></li>
+    <li><a href="http://hacks.mozilla.org/articles/">Articles</a></li>
+  </ul>
+
+  <h1 class="page-title">ECMAScript 5 strict mode in Firefox 4</h1>
+
+  <ul class="nav-paging">
+    <li class="prev"><a href="http://hacks.mozilla.org/2011/01/simple-html5-video-encoding-with-vid-ly-interview-first-impressions-and-invite-code/" rel="prev">Older Article</a></li>    <li class="next"><a href="http://hacks.mozilla.org/2011/01/people-of-html5-rob-hawkes/" rel="next">Newer Article</a></li>  </ul>
+
+
+  <div id="content-bar" class="single">
+    <div class="entry-meta">
+      <p class="entry-posted">on <abbr class="published" title="2011-01-25T08:37:24-08:00">January 25, 2011</abbr>
+      by <a href="http://hacks.mozilla.org/author/cheilmann/" title="Posts by Chris Heilmann" class="url fn" rel="author">Chris Heilmann</a></p>
+      <p class="entry-cat">in
+      <a href="http://hacks.mozilla.org/category/firefox/" rel="category tag">Firefox</a> <a href="http://hacks.mozilla.org/category/jagermonkey/" rel="category tag">JägerMonkey</a> <a href="http://hacks.mozilla.org/category/javascript/" rel="category tag">JavaScript</a> <a href="http://hacks.mozilla.org/category/security/" rel="category tag">Security</a> <a href="http://hacks.mozilla.org/category/tracemonkey/" rel="category tag">TraceMonkey</a>      </p>
+    </div>
+
+    <ul class="entry-extra">
+      <li class="comments">
+              <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/#comments">26 comments</a>
+            </li>
+          <li class="share"><div class="socialshare" data-type="small-bubbles"><div class="dropdown-toggle" data-toggle="socialshare">    <a class="share-button" role="button" href="#" aria-controls="share-options" aria-expanded="false"><span>Share This</span></a>    <div class="share-options">        <ul>            <li><div data-show-face="false" data-height="20" data-width="105" data-layout="button_count" data-send="false" class="fb-like"></div></li>            <li><div class="g-plusone"></div></li>            <li><a data-url="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/" data-text="ECMAScript 5 strict mode in Firefox 4" data-related="mozhacks" data-via="mozhacks" href="https://twitter.com/share" class="twitter-share-button"></a></li>        </ul>    </div></div></div></li>
+        </ul>
+  </div>
+</div><!-- /#content-head -->
+
+<main id="content-main" class="hfeed">
+  <article class="post" role="article">
+    <p><strong>Editor’s note</strong>: This article is posted by Chris Heilmann but authored by <a href="http://whereswalden.com/">Jeff Walden</a> – credit where credit is due.</p>
+<p>Developers in the Mozilla community have made major improvements to 
+the JavaScript engine in Firefox 4. We have devoted much effort to 
+improving performance, but we’ve also worked on new features. We have 
+particularly focused on <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript 5</a>, the latest update to the standard underlying JavaScript.</p>
+<p>Strict mode is arguably the most interesting new feature in ECMAScript 5. It’s a way to <em>opt in</em> to a restricted variant of JavaScript. Strict mode isn’t just a subset: it <em>intentionally</em>
+ has different semantics from normal code. Browsers not supporting 
+strict mode will run strict mode code with different behavior from 
+browsers that do, so don’t rely on strict mode without feature-testing 
+for support for the relevant aspects of strict mode.</p>
+<p>Strict mode code and non-strict mode code can coexist, so scripts can
+ opt into strict mode incrementally. Strict mode blazes a path to future
+ ECMAScript editions where new code with a particular <code>&lt;script type="..."&gt;</code> will likely automatically be executed in strict mode.</p>
+<p>What does strict mode do?  First, it eliminates some JavaScript 
+pitfalls that didn’t cause errors by changing them to produce errors. 
+Second, it fixes mistakes that make it difficult for JavaScript engines 
+to perform optimizations: strict mode code can sometimes be made to run 
+faster than identical code that’s not strict mode. Firefox 4 generally 
+hasn’t optimized strict mode yet, but subsequent versions will. Third, 
+it prohibits some syntax likely to be defined in future versions of 
+ECMAScript.</p>
+<h2>Invoking strict mode</h2>
+<p>Strict mode applies to <em>entire scripts</em> or to <em>individual functions</em>.  It doesn’t apply to block statements enclosed in <code>{}</code> braces; attempting to apply it to such contexts does nothing.  <code>eval</code> code, event handler attributes, strings passed to <a href="https://developer.mozilla.org/en/DOM/window.setTimeout"><code>setTimeout</code></a>, and the like are entire scripts, and invoking strict mode in them works as expected.</p>
+<h3>Strict mode for scripts</h3>
+<p>To invoke strict mode for an entire script, put the <em>exact</em> statement <code>"use strict";</code> (or <code>'use strict';</code>) before any other statements.</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">// Whole-script strict mode syntax</span>
+<span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> v <span style="color: #339933;">=</span> <span style="color: #3366CC;">"Hi!  I'm a strict mode script!"</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<p>This syntax has a trap that has <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=579119">already bitten</a> <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=627531">a major site</a>:
+ it isn’t possible to blindly concatenate non-conflicting scripts.  
+Consider concatenating a strict mode script with a non-strict mode 
+script: the entire concatenation looks strict!  The inverse is also 
+true: non-strict plus strict looks non-strict.  Concatenation of strict 
+mode scripts with each other is fine, and concatenation of non-strict 
+mode scripts is fine.  Only <a href="http://en.wikipedia.org/wiki/Proton_pack">crossing the streams</a> by concatenating strict and non-strict scripts is problematic.</p>
+<h3>Strict mode for functions</h3>
+<p>Likewise, to invoke strict mode for a function, put the <em>exact</em> statement <code>"use strict";</code> (or <code>'use strict';</code>) in the function’s body before any other statements.</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> strict<span style="color: #009900;">(</span><span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #006600; font-style: italic;">// Function-level strict mode syntax</span>
+  <span style="color: #3366CC;">'use strict'</span><span style="color: #339933;">;</span>
+  <span style="color: #000066; font-weight: bold;">function</span> nested<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">"And so am I!"</span><span style="color: #339933;">;</span> <span style="color: #009900;">}</span>
+  <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">"Hi!  I'm a strict mode function!  "</span> <span style="color: #339933;">+</span> nested<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">function</span> notStrict<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">"I'm not strict."</span><span style="color: #339933;">;</span> <span style="color: #009900;">}</span></pre></td></tr></tbody></table></div>
+
+<h2>Changes in strict mode</h2>
+<p>Strict mode changes both syntax and runtime behavior.  Changes generally fall into these categories:</p>
+<ul>
+<li>Converting mistakes into errors (as syntax errors or at runtime)</li>
+<li>Simplifying how the particular variable for a given use of a name is computed</li>
+<li>Simplifying <code>eval</code> and <code>arguments</code></li>
+<li>Making it easier to write “secure” JavaScript</li>
+<li>Anticipating future ECMAScript evolution</li>
+</ul>
+<h3>Converting mistakes into errors</h3>
+<p>Strict mode changes some previously-accepted mistakes into errors.  
+JavaScript was designed to be easy for novice developers, and sometimes 
+it gives operations which should be errors non-error semantics.  
+Sometimes this fixes the immediate problem, but sometimes this creates 
+worse problems in the future.  Strict mode treats these mistakes as 
+errors so that they’re discovered and promptly fixed.</p>
+<p>First, strict mode makes it impossible to accidentally create global 
+variables.  In normal JavaScript, mistyping a variable in an assignment 
+creates a new property on the global object and continues to “work” 
+(although future failure is possible: likely, in modern JavaScript).  
+Assignments which would accidentally create global variables instead 
+throw errors in strict mode:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+mistypedVaraible <span style="color: #339933;">=</span> <span style="color: #CC0000;">17</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a ReferenceError</span></pre></td></tr></tbody></table></div>
+
+<p>Second, strict mode makes assignments which would otherwise silently fail throw an exception.  For example, <code>NaN</code> is a non-writable global variable.  In normal code assigning to <code>NaN</code> does nothing; the developer receives no failure feedback.  In strict mode assigning to <code>NaN</code> throws an exception.  Any assignment that silently fails in normal code will throw errors in strict mode:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #003366; font-weight: bold;">NaN</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">42</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a TypeError</span>
+<span style="color: #000066; font-weight: bold;">var</span> obj <span style="color: #339933;">=</span> <span style="color: #009900;">{</span> <span style="color: #000066; font-weight: bold;">get</span> x<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #CC0000;">17</span><span style="color: #339933;">;</span> <span style="color: #009900;">}</span> <span style="color: #009900;">}</span><span style="color: #339933;">;</span>
+obj.<span style="color: #660066;">x</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a TypeError</span>
+<span style="color: #000066; font-weight: bold;">var</span> fixed <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span>
+<span style="">Object</span>.<span style="color: #660066;">preventExtensions</span><span style="color: #009900;">(</span>fixed<span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+fixed.<span style="color: #660066;">newProp</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">"ohai"</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a TypeError</span></pre></td></tr></tbody></table></div>
+
+<p>Third, if you attempt to delete undeletable properties, strict mode 
+throws errors (where before the attempt would simply have no effect):</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">delete</span> <span style="">Object</span>.<span style="color: #000066; font-weight: bold;">prototype</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a TypeError</span></pre></td></tr></tbody></table></div>
+
+<p>Fourth, strict mode requires that all properties named in an object 
+literal be unique.  Normal code may duplicate property names, with the 
+last one determining the property’s value.  But since only the last one 
+does anything, the duplication is simply a vector for bugs, if the code 
+is modified to change the property value other than by changing the last
+ instance.  Duplicate property names are a syntax error in strict mode:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> o <span style="color: #339933;">=</span> <span style="color: #009900;">{</span> p<span style="color: #339933;">:</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> p<span style="color: #339933;">:</span> <span style="color: #CC0000;">2</span> <span style="color: #009900;">}</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// !!! syntax error</span></pre></td></tr></tbody></table></div>
+
+<p>Fifth, strict mode requires that function argument names be unique.  
+In normal code the last duplicated argument hides previous 
+identically-named arguments.  Those previous arguments remain available 
+through <code>arguments[i]</code>, so they’re not completely 
+inaccessible.  Still, this hiding makes little sense and is probably 
+undesirable (it might hide a typo, for example), so in strict mode 
+duplicate argument names are a syntax error:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> sum<span style="color: #009900;">(</span>a<span style="color: #339933;">,</span> a<span style="color: #339933;">,</span> c<span style="color: #009900;">)</span> <span style="color: #006600; font-style: italic;">// !!! syntax error</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+  <span style="color: #000066; font-weight: bold;">return</span> a <span style="color: #339933;">+</span> b <span style="color: #339933;">+</span> c<span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// wrong if this code ran</span>
+<span style="color: #009900;">}</span></pre></td></tr></tbody></table></div>
+
+<p>Sixth, strict mode forbids octal syntax.  Octal syntax isn’t part of 
+ECMAScript, but it’s supported in all browsers by prefixing the octal 
+number with a zero: <code>0644 === 420</code> and <code>"\045" === "%"</code>.
+  Novice developers sometimes believe a leading zero prefix has no 
+semantic meaning, so they use it as an alignment device — but this 
+changes the number’s meaning!  Octal syntax is rarely useful and can be 
+mistakenly used, so strict mode makes octal a syntax error:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> sum <span style="color: #339933;">=</span> 015 <span style="color: #339933;">+</span> <span style="color: #006600; font-style: italic;">// !!! syntax error</span>
+          <span style="color: #CC0000;">197</span> <span style="color: #339933;">+</span>
+          <span style="color: #CC0000;">142</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<h3>Simplifying variable uses</h3>
+<p>Strict mode simplifies how variable uses map to particular variable 
+definitions in the code.  Many compiler optimizations rely on the 
+ability to say that <em>this</em> variable is stored in <em>this</em> 
+location: this is critical to fully optimizing JavaScript code.  
+JavaScript sometimes makes this basic mapping of name to variable 
+definition in the code impossible to perform except at runtime.  Strict 
+mode removes most cases where this happens, so the compiler can better 
+optimize strict mode code.</p>
+<p>First, strict mode prohibits <code>with</code>.  The problem with <code>with</code>
+ is that any name in it might map either to a property of the object 
+passed to it, or to a variable in surrounding code, at runtime: it’s 
+impossible to know which beforehand.  Strict mode makes <code>with</code> a syntax error, so there’s no chance for a name in a <code>with</code> to refer to an unknown location at runtime:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> x <span style="color: #339933;">=</span> <span style="color: #CC0000;">17</span><span style="color: #339933;">;</span>
+with <span style="color: #009900;">(</span>obj<span style="color: #009900;">)</span> <span style="color: #006600; font-style: italic;">// !!! syntax error</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #006600; font-style: italic;">// If this weren't strict mode, would this be var x, or</span>
+  <span style="color: #006600; font-style: italic;">// would it instead be obj.x?  It's impossible in general</span>
+  <span style="color: #006600; font-style: italic;">// to say without running the code, so the name can't be</span>
+  <span style="color: #006600; font-style: italic;">// optimized.</span>
+  x<span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span></pre></td></tr></tbody></table></div>
+
+<p> The simple alternative of assigning the object to a variable, then 
+accessing the corresponding property on that variable, stands ready to 
+replace <code>with</code>.</p>
+<p>Second, <a href="http://whereswalden.com/2011/01/10/new-es5-strict-mode-support-new-vars-created-by-strict-mode-eval-code-are-local-to-that-code-only/"><code>eval</code> of strict mode code does not introduce new variables into the surrounding code</a>.  In normal code <code>eval("var x;")</code> introduces a variable <code>x</code> into the surrounding function or the global scope.  This means that, in general, in a function containing a call to <code>eval</code>, every name not referring to an argument or local variable must be mapped to a particular definition at runtime (because that <code>eval</code> might have introduced a new variable that would hide the outer variable).  In strict mode <code>eval</code> creates variables only for the code being evaluated, so <code>eval</code> can’t affect whether a name refers to an outer variable or some local variable:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> x <span style="color: #339933;">=</span> <span style="color: #CC0000;">17</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> evalX <span style="color: #339933;">=</span> eval<span style="color: #009900;">(</span><span style="color: #3366CC;">"'use strict'; var x = 42; x"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>x <span style="color: #339933;">===</span> <span style="color: #CC0000;">17</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>evalX <span style="color: #339933;">===</span> <span style="color: #CC0000;">42</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<p>Relatedly, if the function <code>eval</code> is invoked by an expression of the form <code>eval(...)</code>
+ in strict mode code, the code will be evaluated as strict mode code.  
+The code may explicitly invoke strict mode, but it’s unnecessary to do 
+so.</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> strict1<span style="color: #009900;">(</span>str<span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+  <span style="color: #000066; font-weight: bold;">return</span> eval<span style="color: #009900;">(</span>str<span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// str will be treated as strict mode code</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">function</span> strict2<span style="color: #009900;">(</span>f<span style="color: #339933;">,</span> str<span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+  <span style="color: #000066; font-weight: bold;">return</span> f<span style="color: #009900;">(</span>str<span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// not eval(...): str is strict iff it invokes strict mode</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">function</span> nonstrict<span style="color: #009900;">(</span>str<span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #000066; font-weight: bold;">return</span> eval<span style="color: #009900;">(</span>str<span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// str is strict iff it invokes strict mode</span>
+<span style="color: #009900;">}</span>
+strict1<span style="color: #009900;">(</span><span style="color: #3366CC;">"'Strict mode code!'"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+strict1<span style="color: #009900;">(</span><span style="color: #3366CC;">"'use strict'; 'Strict mode code!'"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+strict2<span style="color: #009900;">(</span>eval<span style="color: #339933;">,</span> <span style="color: #3366CC;">"'Non-strict code.'"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+strict2<span style="color: #009900;">(</span>eval<span style="color: #339933;">,</span> <span style="color: #3366CC;">"'use strict'; 'Strict mode code!'"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+nonstrict<span style="color: #009900;">(</span><span style="color: #3366CC;">"'Non-strict code.'"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+nonstrict<span style="color: #009900;">(</span><span style="color: #3366CC;">"'use strict'; 'Strict mode code!'"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<p>Third, strict mode forbids deleting plain names.  Thus names in strict mode <code>eval</code> code behave identically to names in strict mode code not being evaluated as the result of <code>eval</code>. Using <code>delete name</code> in strict mode is a syntax error:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+eval<span style="color: #009900;">(</span><span style="color: #3366CC;">"var x; delete x;"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// !!! syntax error</span></pre></td></tr></tbody></table></div>
+
+<h3>Making <code>eval</code> and <code>arguments</code> simpler</h3>
+<p>Strict mode makes <code>arguments</code> and <code>eval</code> less bizarrely magical.  Both involve a considerable amount of magical behavior in normal code: <code>eval</code> to add or remove bindings and to change binding values, and <code>arguments</code> by its indexed properties aliasing named arguments.  Strict mode makes great strides toward treating <code>eval</code> and <code>arguments</code> as keywords, although full fixes will not come until a future edition of ECMAScript.</p>
+<p>First, the names <code>eval</code> and <code>arguments</code> can’t be bound or assigned in language syntax.  All these attempts to do so are syntax errors:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+eval <span style="color: #339933;">=</span> <span style="color: #CC0000;">17</span><span style="color: #339933;">;</span>
+arguments<span style="color: #339933;">++;</span>
+<span style="color: #339933;">++</span>eval<span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> obj <span style="color: #339933;">=</span> <span style="color: #009900;">{</span> <span style="color: #000066; font-weight: bold;">set</span> p<span style="color: #009900;">(</span>arguments<span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span> <span style="color: #009900;">}</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> eval<span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">try</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span> <span style="color: #000066; font-weight: bold;">catch</span> <span style="color: #009900;">(</span>arguments<span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">function</span> x<span style="color: #009900;">(</span>eval<span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">function</span> arguments<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">var</span> y <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span> eval<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> f <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> <span style="">Function</span><span style="color: #009900;">(</span><span style="color: #3366CC;">"arguments"</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">"'use strict'; return 17;"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<p>Second, strict mode code doesn’t alias properties of <code>arguments</code> objects created within it.  In normal code within a function whose first argument is <code>arg</code>, setting <code>arg</code> also sets <code>arguments[0]</code>, and vice versa (unless no arguments were provided or <code>arguments[0]</code> is deleted). For strict mode functions, <code>arguments</code> objects store the original arguments when the function was invoked. The value of <code>arguments[i]</code> does not track the value of the corresponding named argument, nor does a named argument track the value in the corresponding <code>arguments[i]</code>.</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> f<span style="color: #009900;">(</span>a<span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+  a <span style="color: #339933;">=</span> <span style="color: #CC0000;">42</span><span style="color: #339933;">;</span>
+  <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #009900;">[</span>a<span style="color: #339933;">,</span> arguments<span style="color: #009900;">[</span><span style="color: #CC0000;">0</span><span style="color: #009900;">]</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">var</span> pair <span style="color: #339933;">=</span> f<span style="color: #009900;">(</span><span style="color: #CC0000;">17</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>pair<span style="color: #009900;">[</span><span style="color: #CC0000;">0</span><span style="color: #009900;">]</span> <span style="color: #339933;">===</span> <span style="color: #CC0000;">42</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>pair<span style="color: #009900;">[</span><span style="color: #CC0000;">1</span><span style="color: #009900;">]</span> <span style="color: #339933;">===</span> <span style="color: #CC0000;">17</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<p>Third, <code>arguments.callee</code> is no longer supported.  In normal code <code>arguments.callee</code> refers to the enclosing function.  This use case is weak: simply name the enclosing function!  Moreover, <code>arguments.callee</code>
+ substantially hinders optimizations like inlining functions, because it
+ must be made possible to provide a reference to the un-inlined function
+ if <code>arguments.callee</code> is accessed. For strict mode functions, <code>arguments.callee</code>  is a non-deletable property which throws an error when set or retrieved:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> f <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #000066; font-weight: bold;">return</span> arguments.<span style="color: #660066;">callee</span><span style="color: #339933;">;</span> <span style="color: #009900;">}</span><span style="color: #339933;">;</span>
+f<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a TypeError</span></pre></td></tr></tbody></table></div>
+
+<h3>“Securing” JavaScript</h3>
+<p>Strict mode makes it easier to write “secure” JavaScript.  Some 
+websites now provide ways for users to write JavaScript which will be 
+run by the website <em>on behalf of other users</em>.  JavaScript in 
+browsers can access the user’s private information, so such JavaScript 
+must be partially transformed before it is run, to censor access to 
+forbidden functionality.  JavaScript’s flexibility makes it effectively 
+impossible to do this without many runtime checks.  Certain language 
+functions are so pervasive that performing runtime checks has 
+considerable performance cost.  A few strict mode tweaks, plus requiring
+ that user-submitted JavaScript be strict mode code and that it be 
+invoked in a certain manner, substantially reduce the need for those 
+runtime checks.</p>
+<p>First, the value passed as <code>this</code> to a function in strict mode isn’t boxed into an object.  For a normal function, <code>this</code> is always an object: the provided object if called with an object-valued <code>this</code>; the value, boxed, if called with a Boolean, string, or number <code>this</code>; or the global object if called with an <code>undefined</code> or <code>null</code> <code>this</code>.  (Use <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call"><code>call</code></a>, <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply"><code>apply</code></a>, or <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind"><code>bind</code></a> to specify a particular <code>this</code>.)
+  Automatic boxing is a performance cost, but exposing the global object
+ in browsers is a security hazard, because the global object provides 
+access to functionality “secure” JavaScript environments must 
+invariably.  Thus for a strict mode function, the specified <code>this</code> is used unchanged:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">function</span> fun<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span><span style="color: #339933;">;</span> <span style="color: #009900;">}</span>
+assert<span style="color: #009900;">(</span>fun<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #339933;">===</span> <span style="color: #003366; font-weight: bold;">undefined</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>fun.<span style="color: #660066;">call</span><span style="color: #009900;">(</span><span style="color: #CC0000;">2</span><span style="color: #009900;">)</span> <span style="color: #339933;">===</span> <span style="color: #CC0000;">2</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>fun.<span style="color: #660066;">apply</span><span style="color: #009900;">(</span><span style="color: #003366; font-weight: bold;">null</span><span style="color: #009900;">)</span> <span style="color: #339933;">===</span> <span style="color: #003366; font-weight: bold;">null</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>fun.<span style="color: #660066;">call</span><span style="color: #009900;">(</span><span style="color: #003366; font-weight: bold;">undefined</span><span style="color: #009900;">)</span> <span style="color: #339933;">===</span> <span style="color: #003366; font-weight: bold;">undefined</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+assert<span style="color: #009900;">(</span>fun.<span style="color: #660066;">bind</span><span style="color: #009900;">(</span><span style="color: #003366; font-weight: bold;">true</span><span style="color: #009900;">)</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #339933;">===</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<p>(Tangentially, built-in methods also now won’t box <code>this</code> if it is <code>null</code> or <code>undefined</code>.
+  [This change is independent of strict mode but is motivated by the 
+same concern about exposing the global object.]  Historically, passing <code>null</code> or <code>undefined</code> to a built-in method like <code>Array.prototype.sort()</code> would act as if the global object had been specified.  Now passing either value as <code>this</code> to most built-in methods throws a <code>TypeError</code>.
+  Booleans, numbers, and strings are still boxed by these methods: it’s 
+only when these methods would otherwise act on the global object that 
+they’ve been changed.)</p>
+<p>Second, in strict mode it’s no longer possible to “walk” the 
+JavaScript stack via commonly-implemented extensions to ECMAScript.  In 
+normal code with these extensions, when a function <code>fun</code> is in the middle of being called, <code>fun.caller</code> is the function that most recently called <code>fun</code>, and <code>fun.arguments</code> is the <code>arguments</code> for that invocation of <code>fun</code>.
+  Both extensions are problematic for “secure” JavaScript, because they 
+allow “secured” code to access “privileged” functions and their 
+(potentially unsecured) arguments.  If <code>fun</code> is in strict mode, both <code>fun.caller</code> and <code>fun.arguments</code> are non-deletable properties which throw an error when set or retrieved:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> restricted<span style="color: #009900;">(</span><span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+  restricted.<span style="color: #660066;">caller</span><span style="color: #339933;">;</span>    <span style="color: #006600; font-style: italic;">// throws a TypeError</span>
+  restricted.<span style="color: #660066;">arguments</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a TypeError</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">function</span> privilegedInvoker<span style="color: #009900;">(</span><span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #000066; font-weight: bold;">return</span> restricted<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span>
+privilegedInvoker<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></td></tr></tbody></table></div>
+
+<p>Third, <code>arguments</code> for strict mode functions no longer 
+provide access to the corresponding function call’s variables.  In some 
+old ECMAScript implementations <code>arguments.caller</code> was an object whose properties aliased variables in that function.  This is a <a href="http://stuff.mit.edu/iap/2008/facebook/">security hazard</a>
+ because it breaks the ability to hide privileged values via function 
+abstraction; it also precludes most optimizations.  For these reasons no
+ recent browsers implement it.  Yet because of its historical 
+functionality, <code>arguments.caller</code> for a strict mode function is also a non-deletable property which throws an error when set or retrieved:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">function</span> fun<span style="color: #009900;">(</span>a<span style="color: #339933;">,</span> b<span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+  <span style="color: #000066; font-weight: bold;">var</span> v <span style="color: #339933;">=</span> <span style="color: #CC0000;">12</span><span style="color: #339933;">;</span>
+  <span style="color: #000066; font-weight: bold;">return</span> arguments.<span style="color: #660066;">caller</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// throws a TypeError</span>
+<span style="color: #009900;">}</span>
+fun<span style="color: #009900;">(</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">2</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// doesn't expose v (or a or b)</span></pre></td></tr></tbody></table></div>
+
+<h3>Paving the way for future ECMAScript versions</h3>
+<p>Future ECMAScript versions will likely introduce new syntax, and 
+strict mode in ECMAScript 5 applies some restrictions to ease the 
+transition.  It will be easier to make some changes if the foundations 
+of those changes are prohibited in strict mode.</p>
+<p>First, in strict mode a short list of identifiers become reserved keywords.  These words are <code>implements</code>, <code>interface</code>, <code>let</code>, <code>package</code>, <code>private</code>, <code>protected</code>, <code>public</code>, <code>static</code>, and <code>yield</code>.
+  In strict mode, then, you can’t name or use variables or arguments 
+with these names.  A Mozilla-specific caveat: if your code is JavaScript
+ 1.7 or greater (you’re chrome code, or you’ve used the right <code>&lt;script type=""&gt;</code>) and is strict mode code, <code>let</code> and <code>yield</code> have the functionality they’ve had since those keywords were first introduced.  But strict mode code on the web, loaded with <code>&lt;script src=""&gt;</code> or <code>&lt;script&gt;...&lt;/script&gt;</code>, won’t be able to use <code>let</code>/<code>yield</code> as identifiers.</p>
+<p>Second, <a href="http://whereswalden.com/2011/01/24/new-es5-strict-mode-requirement-function-statements-not-at-top-level-of-a-program-or-function-are-prohibited/">strict mode prohibits function statements not at the top level of a script or function</a>.  In normal code in browsers, function statements are permitted “everywhere”.  <em>This is not part of ES5!</em>
+  It’s an extension with incompatible semantics in different browsers.  
+Future ECMAScript editions hope to specify new semantics for function 
+statements not at the top level of a script or function.  <a href="http://wiki.ecmascript.org/doku.php?id=conventions:no_non_standard_strict_decls">Prohibiting such function statements in strict mode</a> “clears the deck” for specification in a future ECMAScript release:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #3366CC;">"use strict"</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">(</span><span style="color: #003366; font-weight: bold;">true</span><span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #000066; font-weight: bold;">function</span> f<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span> <span style="color: #006600; font-style: italic;">// !!! syntax error</span>
+  f<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">(</span><span style="color: #000066; font-weight: bold;">var</span> i <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #000066; font-weight: bold;">function</span> f2<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span> <span style="color: #006600; font-style: italic;">// !!! syntax error</span>
+  f2<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000066; font-weight: bold;">function</span> baz<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #006600; font-style: italic;">// kosher</span>
+<span style="color: #009900;">{</span>
+  <span style="color: #000066; font-weight: bold;">function</span> eit<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #009900;">}</span> <span style="color: #006600; font-style: italic;">// also kosher</span>
+<span style="color: #009900;">}</span></pre></td></tr></tbody></table></div>
+
+<p>This prohibition isn’t strict mode proper, because such function 
+statements are an extension.  But it is the recommendation of the 
+ECMAScript committee, and browsers will implement it.</p>
+<h2>Strict mode in browsers</h2>
+<p>Firefox 4 is the first browser to fully implement strict mode.  The 
+Nitro engine found in many WebKit browsers isn’t far behind with 
+nearly-complete strict mode support.  Chrome has also <a href="http://codereview.chromium.org/6144005/">started</a>
+ to implement strict mode.  Internet Explorer and Opera haven’t started 
+to implement strict mode; feel free to send those browser makers 
+feedback requesting strict mode support.</p>
+<p>Browsers don’t reliably implement strict mode, so don’t blindly depend on it.  <em>Strict mode changes semantics.</em>
+  Relying on those changes will cause mistakes and errors in browsers 
+which don’t implement strict mode.  Exercise caution in using strict 
+mode, and back up reliance on strict mode with feature tests that check 
+whether relevant features of strict mode are implemented.</p>
+<p>To test out strict mode, download <a href="http://nightly.mozilla.org/">a Firefox nightly</a>
+ and start playing.  Also consider its restrictions when writing new 
+code and when updating existing code.  (To be absolutely safe, however, 
+it’s probably best to wait to use it in production until it’s shipped in
+ browsers.)</p>    <footer class="entry-meta">
+      <p>Posted by <a href="http://hacks.mozilla.org/author/cheilmann/" title="Posts by Chris Heilmann" class="url fn" rel="author">Chris Heilmann</a> 
+      on <time datetime="2011-01-25T08:37:24-08:00">January 25, 2011</time> 
+      at <time datetime="PST08:37:24-08:00">08:37</time></p>
+          <div class="share"><div class="socialshare" data-type="small-bubbles"><div class="dropdown-toggle" data-toggle="socialshare">    <a class="share-button" role="button" href="#" aria-controls="share-options" aria-expanded="false"><span>Share This</span></a>    <div class="share-options">        <ul>            <li><div data-show-face="false" data-height="20" data-width="105" data-layout="button_count" data-send="false" class="fb-like"></div></li>            <li><div class="g-plusone"></div></li>            <li><a data-url="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/" data-text="ECMAScript 5 strict mode in Firefox 4" data-related="mozhacks" data-via="mozhacks" href="https://twitter.com/share" class="twitter-share-button"></a></li>        </ul>    </div></div></div></div>
+        </footer>
+  </article>
+
+    
+    
+    
+
+<section id="comments">
+  <div id="comment-stream">
+    <header class="comments-head">
+      <h3>26 comments</h3>
+              <p class="closed"><strong>Comments are now closed.</strong></p>
+          </header>
+
+      <ol id="comment-list" class="hfeed av">
+    
+ <li id="comment-5809" class="comment even thread-even depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://everlong.org/" class="url" rel="nofollow external" title="http://everlong.org/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/a2b625f331361a7110da59a907d79e95.jpg" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">JulienW</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5809" rel="bookmark" title="Permanent link to this comment by JulienW"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 08:55</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Thanks for this Mozilla, that’s just great. Let’s just use “use
+ strict” during development for now and remove it for production until 
+it’s shipped and we’re sure it’s bugfree. Or not, let’s use it now.</p>
+<p>Will this get into next beta ? I don’t understand if betas comes 
+directly from the trunk or if Firefox 4 is already on its own branch 
+(although it doesn’t seem so).</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5813" class="comment odd alt depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5813" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 10:08</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>It will be in the next beta release.  Numerous portions of strict mode are in previous betas as well; the <code>eval</code>
+ variable binding change was the last big bit we were working on 
+implementing before we were willing to say strict mode was “done”.  
+(“done” because bugs will remain, and in some sense probably always will
+ remain.)</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5810" class="comment even thread-odd thread-alt depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5810" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 09:25</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>“Tangentially, built-in methods also now won’t box this if it is null or undefined.”</p>
+<p>It belatedly occurs to me that we haven’t implemented this yet: <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=619283" rel="nofollow">bug 619283</a>.
+  We’ll fix this fairly shortly, but if you happen to be particularly 
+interested in “secure” variant functionality, hold off on relying on it 
+until we fix this.  (Not that you were likely to start relying on it 
+this early anyway!  You’d have to be insanely forward-looking to be 
+doing that now.  :-) )</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5811" class="comment odd alt thread-even depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://nerget.com/" class="url" rel="nofollow external" title="http://nerget.com">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/3656a0a54449a388d4262e2c77671b32.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">oliver</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5811" rel="bookmark" title="Permanent link to this comment by oliver"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 09:49</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>What is missing from JSC’s strict mode?</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5812" class="comment even depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5812" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 10:06</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>The last time I checked there were a few niggling bits that kangax’s strict mode page was still flagging.  Also, I filed <a href="https://bugs.webkit.org/show_bug.cgi?id=53014" rel="nofollow">bug 53014</a>
+ and CC’d you yesterday over the one last bit I very nearly forgot 
+before writing this post (we literally timed this post to be immediately
+ after today’s nightly build were done to have that change in them).  
+Aside from those bits I think you’re set, at least as far as features go
+ (bugs like the eval tests I mentioned to you in IRC a couple weeks back
+ aside).  But I admit to not following Nitro development all that 
+closely, so I’m mostly relying on others’ evaluations plus a very small 
+bit of my own testing.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5814" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/c757f70e973bf194890823e980adecc4.png" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">Weaner</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5814" rel="bookmark" title="Permanent link to this comment by Weaner"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 10:32</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Isn’t “function f() { }” always the same as “var f = function 
+() {}”? I remember Douglas Crockford saying that in one of his videos. 
+Does this mean that latter also is disallowed in such cases?</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5815" class="comment even depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5815" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 12:38</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>It’s not the same.  In the two cases where ECMAScript specifies behavior, function statements are processed <em>before</em> any code in that scope (be it program or function) executes.  Thus this example works without throwing an exception:</p>
+<pre>var v = g();
+function g() { return "processed before other statements execute"; }
+</pre>
+<p>Likewise for this one:</p>
+<pre>function f()
+{
+  return g();
+  function g() { return "processed before other statements"; }
+}
+f();
+</pre>
+<p>If instead you assigned into a <code>var</code> in those examples, 
+the assignment would occur in source order, so the examples would fail —
+ the assignments would happen after the calls to the function, but the 
+call attempt would throw because the variables would be <code>undefined</code>.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5816" class="comment odd alt thread-even depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://foolip.org/" class="url" rel="nofollow external" title="http://foolip.org/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/99002fd6fed6bafc8b0e687e09a11280.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Philip Jägenstedt</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5816" rel="bookmark" title="Permanent link to this comment by Philip Jägenstedt"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 13:28</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Are there any optimizations made possible by strict mode that 
+aren’t possible without it as well? To someone who hasn’t implemented an
+ ECMAScript engine (me) it looks like all the optimizations mentioned 
+could be done for non-strict code with some analysis during parsing. In 
+the simplest approach, check during parsing if there are any instances 
+of eval, with, arguments.callee, arguments.caller, etc and if there 
+wasn’t, perform the clever optimizations you say strict mode enables. 
+Are there loopholes that would make the bookkeeping more expensive than 
+the gains from the optimizations made possible? On the face of things 
+that seems unlikely, as the bookkeeping would be more or less identical 
+to what you need to do to throw the new syntax errors. Maybe the magic 
+sauce is in some of the new runtime behavior? Am I missing something, or
+ is strict-mode actually not really that useful for performance?</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5826" class="comment even depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5826" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-26">January 26th, 2011</abbr> at 18:22</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>That’s basically what SpiderMonkey does.  It’s what other high-quality engines do.  But there are wrinkles.</p>
+<p>“some analysis” turns out to be too much in many cases.  You can’t 
+spend too much time on analysis, else the time spent will offset the 
+win.  Making it special enough to adapt to register allocation, say, is 
+nigh-impossible.  You could perhaps only optimize on subsequent 
+re-parses, but then you’re getting a bit more intelligence than a 
+seemingly simple fix.  We (and other browsers, blame SunSpider’s dumb JS
+ code) do that sometimes — if you recompile the exact same <code>eval</code>
+ code at the exact same location, we cache the “script” for the code — 
+but it’s not as easy as you make it sound to implement.  It would also 
+probably be pretty fragile.</p>
+<p>Really, the new runtime behavior is much of the possible win.  
+Without that you can’t perform that name optimization which underlies 
+most optimizations JS engines can perform.  You might be able to 
+fast-path somewhat — only sometimes — but it is a good bit of work.  And
+ really, most JS developers agree the stuff strict mode kills is not 
+good form (<code>arguments.callee</code> is probably the only one that 
+might not fit that, but that’s mostly because of old IE bugs that make 
+named function expressions not work properly, somewhat).</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5828" class="comment odd alt depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5828" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-28">January 28th, 2011</abbr> at 10:44</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Answering somewhat more precisely: strict mode lets you optimize name bindings even in the presence of <code>eval</code>.  So if I name an outer variable in strict mode code within a function that uses <code>eval</code>, I know that that’ll always refer to the outer variable, and never to a binding introduced by that <code>eval</code>.  This is a place where current JS engines just give up — when they see <code>eval</code> they throw all optimizations (like that one) out the window.  They must: without strict mode semantics the <code>eval</code> might introduce a local variable that hides the outer name.  If you make <code>eval</code> respect strict mode, then, you can optimize this name reference where you couldn’t before.</p>
+<p>To be sure, you can imagine super-clever cheating that optimizes even
+ this case and somehow avoids getting caught, in the words of the 
+Smalltalk maxim.  SpiderMonkey might implement some rocket surgery like 
+that at some point.  It still seems better to me to avoid the need for 
+it by “fixing” the language.  :-)</p>
+<p>I should also note that the end game for these strict mode fixes is 
+for ES6 to not use a shared global object when running scripts in the 
+even-more-opt-in mode enabled by a <code>type=""</code> on the script 
+element.  With strict mode restrictions applied to the entire script, 
+and with the shared global object taken out of the picture, <em>all</em> name use to binding mappings can be determined at compilation time, before execution.  And <em>that</em>
+ gives you compile-time detection and rejection of mistyped and 
+undeclared variable names.  No more pussyfooting around with making 
+assignment to undeclared global variables a runtime error, that only 
+happens if you run that code!  If you screw up anywhere, the code just 
+won’t work at all.  You can’t do better than reporting the error at the 
+earliest possible point like this.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5817" class="comment even thread-odd thread-alt depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://oxdef.info/" class="url" rel="nofollow external" title="http://oxdef.info">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/621c554958292a622ead5a1bccb7dc21.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">oxdef</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5817" rel="bookmark" title="Permanent link to this comment by oxdef"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 14:06</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Hmm, syntax for statement is not clear but statement irself is good idea.<br>
+Like in Perl.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5818" class="comment odd alt thread-even depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://blog.marcoos.com/" class="url" rel="nofollow external" title="http://blog.marcoos.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/c21db3d7b852a8519d601ca2927dee6b.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">marcoos</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5818" rel="bookmark" title="Permanent link to this comment by marcoos"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 14:08</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Awesome post by Chris. I translated it into Polish. :)</p>
+<p>Polish translation of this MozHacks post / polskie tłumaczenie tej notki:<br>
+<a href="http://blog.marcoos.com/2011/01/25/ecmascript-5-strict-mode-tryb-scisly/" rel="nofollow">http://blog.marcoos.com/2011/01/25/ecmascript-5-strict-mode-tryb-scisly/</a></p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5819" class="comment even thread-odd thread-alt depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/82505ed3c182eb3069ac5b81619f725d.png" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">Daniel Kirsch</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5819" rel="bookmark" title="Permanent link to this comment by Daniel Kirsch"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 17:18</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Is there a way to enable strict mode in general for all 
+scripts? At least within a chrome environment for addons or XULRunner 
+based apps.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5820" class="comment odd alt depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5820" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-25">January 25th, 2011</abbr> at 17:30</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>There isn’t at the moment.  I’m not sure whether or not it would be worth adding one; feel free to file a bug.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5821" class="comment even thread-even depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/fd7dea8fa332cc15c4cbecec57ff1457.png" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">Steffen</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5821" rel="bookmark" title="Permanent link to this comment by Steffen"><abbr class="published" title="2011-01-26">January 26th, 2011</abbr> at 01:14</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>How does this relate to the javascript.options.strict pref?<br>
+Is that a different strict mode?</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5827" class="comment odd alt depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5827" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-26">January 26th, 2011</abbr> at 18:27</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>It’s a different strict mode.  How awesome is that?  Perhaps we should rename our mode to Firebird mode.  Thoughts?</p>
+<p>(…I kid!)</p>
+<p>Seriously, the collision is unfortunate, but strict mode is the right
+ name for the language feature, and it’s just our loss that we 
+implemented something somewhat similar with the same name but which is 
+invoked far differently and has very different behavior in some cases.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5822" class="comment even thread-odd thread-alt depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/3e42479b6063be4a85f9974d2161dadf.png" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">Neil Rashbrook</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5822" rel="bookmark" title="Permanent link to this comment by Neil Rashbrook"><abbr class="published" title="2011-01-26">January 26th, 2011</abbr> at 04:12</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Are all of the strict mode errors exposed in non-strict mode as warnings (with javascript.options.strict turned on)?</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5823" class="comment odd alt depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5823" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-01-26">January 26th, 2011</abbr> at 09:02</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Most are, I believe, but the comprehensive answer is no, because <code>with</code>
+ triggers no warnings.  (It used to, but warnings just weren’t a big 
+enough stick to get developers to change their code, so we don’t spam 
+about <code>with</code>.)</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5824" class="comment even thread-even depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://www.jethrolarson.com/" class="url" rel="nofollow external" title="http://www.jethrolarson.com">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/595eb962aafe8a48b6edeadb83c1d635.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jethro Larson</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5824" rel="bookmark" title="Permanent link to this comment by Jethro Larson"><abbr class="published" title="2011-01-26">January 26th, 2011</abbr> at 11:45</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>I don’t see strict mode getting much use until it actually 
+enables something. Web devs will just see it as new constraints that 
+just make it harder to get stuff done. If strict mode is actually more 
+performant or includes features that let you write more, faster, then 
+the adoption may raise, but it might not happen otherwise.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5825" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/a2b625f331361a7110da59a907d79e95.jpg" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">JulienW</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5825" rel="bookmark" title="Permanent link to this comment by JulienW"><abbr class="published" title="2011-01-26">January 26th, 2011</abbr> at 15:31</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Jethro, what you don’t understand is that strict mode enables 
+you to make less errors : with it you can detect unwanted errors before 
+they actually happen.</p>
+<p>All Javascript “features” removed by “strict mode” are just very bad practices.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5829" class="comment even thread-even depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://www.sa-01.ws/" class="url" rel="nofollow external" title="http://www.sa-01.ws/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/1328f1569508e4c11724038deaee74ad.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">uploading</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5829" rel="bookmark" title="Permanent link to this comment by uploading"><abbr class="published" title="2011-01-29">January 29th, 2011</abbr> at 14:12</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Firefox is very distinctive.<br>
+thanks</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5830" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/e708ee1e7a52edb37d04c41de96a20b1.png" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">OldDog</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5830" rel="bookmark" title="Permanent link to this comment by OldDog"><abbr class="published" title="2011-02-27">February 27th, 2011</abbr> at 06:00</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>I’m all for zapping developers into writing proper code with 
+strict rules but “use strict”;? seriously, couldn’t think of a better 
+syntax?</p>
+<p>How about?</p>
+<p>Object.useStrict;</p>
+<p>or just plain</p>
+<p>use strict; ?</p>
+<p>What’s wrong with that?</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5832" class="comment even depth-2 hentry">
+           <p class="entry-title vcard">
+       <a href="http://whereswalden.com/" class="url" rel="nofollow external" title="http://whereswalden.com/">
+         <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/d26a0ca7ae1134e0e1dbdddf82e28929.png" class="avatar avatar-48 photo" height="48" width="48"></span>         <cite class="author fn">Jeff Walden</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5832" rel="bookmark" title="Permanent link to this comment by Jeff Walden"><abbr class="published" title="2011-02-28">February 28th, 2011</abbr> at 11:14</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>I don’t disagree.  And, seeing how many sites have wrongly, 
+early, incorrectly started using strict mode (tagging stuff as strict 
+that really isn’t, e.g. with assignments to undeclared globals, use of 
+arguments.callee, and the like), I think were we to do it over again we 
+might have chosen a non-backwards-compatible syntax.  But at this point 
+it’s water under the bridge.  Strict mode syntax is what it is, no use 
+crying over spilled milk.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+
+ <li id="comment-5831" class="comment odd alt thread-even depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/a2b625f331361a7110da59a907d79e95.jpg" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">JulienW</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5831" rel="bookmark" title="Permanent link to this comment by JulienW"><abbr class="published" title="2011-02-28">February 28th, 2011</abbr> at 08:27</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Because it must be backward compatible with old engines.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+
+ <li id="comment-5833" class="comment even thread-odd thread-alt depth-1 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/ff3702880a83912831470753acf092d0.jpg" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">PabloCubico</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5833" rel="bookmark" title="Permanent link to this comment by PabloCubico"><abbr class="published" title="2011-06-04">June 4th, 2011</abbr> at 05:06</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>Wouldn’t be dangerous to use strict mode in development but NOT in production?</p>
+<p>As the docs say: “Strict mode changes semantics”. So having it 
+removed in production would be the same as using a browser that doesn’t 
+support it.</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  <ol class="children">
+
+ <li id="comment-5834" class="comment odd alt depth-2 hentry">
+            <p class="entry-title vcard">
+        <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/a2b625f331361a7110da59a907d79e95.jpg" class="avatar avatar-48 photo" height="48" width="48"></span>        <cite class="author fn">JulienW</cite>
+        <span class="comment-meta">wrote on <a href="http://hacks.mozilla.org/2011/01/ecmascript-5-strict-mode-in-firefox-4/comment-page-1/#comment-5834" rel="bookmark" title="Permanent link to this comment by JulienW"><abbr class="published" title="2011-06-06">June 6th, 2011</abbr> at 04:32</a>:</span>
+      </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>As I understand (but I may be wrong), “strict mode” is a subset of “legacy javascript”. So it should be safe.</p>
+<p>(right ?)</p>
+    </blockquote>
+
+      <p class="comment-util"> </p>
+  </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+    </ol>
+
+        </div>
+
+<p class="comments-closed">Comments are closed for this article.</p>
+
+
+
+  </section></main><!-- /#content-main -->
+
+<div id="content-sub">
+  <ul id="widgets">
+  <li class="widget author">
+      <h3>About the Author</h3>
+        <div class="vcard">
+      <h4 class="fn">
+              <a class="url" href="http://christianheilmann.com/" rel="external me">Chris Heilmann            <span class="photo"><img alt="" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/07fcd228af02d476b1b8367d85a903b2.jpg" class="avatar avatar-48 photo" height="48" width="48"></span>      </a></h4>
+          <p>Principal Evangelist at Mozilla for HTML5 and open web. Let's fix this!</p>
+        <ul class="author-meta"><li><a href="http://christianheilmann.com/" class="website" rel="me">christianheilmann.com</a></li><li><a href="http://twitter.com/codepo8" class="twitter" rel="me">@codepo8</a></li></ul>      <p><a class="url" href="http://hacks.mozilla.org/author/cheilmann/">Read more articles by Chris Heilmann…</a></p>
+    </div>
+    </li>
+  <li class="widget categories">
+    <h3>Articles by Category</h3>
+    <ul class="cat-list" role="navigation">
+     	<li class="cat-item cat-item-74992"><a href="http://hacks.mozilla.org/category/35-days/">35 Days</a> (45)
+</li>
+	<li class="cat-item cat-item-75188"><a href="http://hacks.mozilla.org/category/font-face/">@font-face</a> (9)
+</li>
+	<li class="cat-item cat-item-75450"><a href="http://hacks.mozilla.org/category/a-node-js-holiday-season/">A Node.JS Holiday Season</a> (12)
+</li>
+	<li class="cat-item cat-item-75682"><a href="http://hacks.mozilla.org/category/abouthacks/">about:hacks</a> (2)
+</li>
+	<li class="cat-item cat-item-50"><a href="http://hacks.mozilla.org/category/accessibility/">Accessibility</a> (1)
+</li>
+	<li class="cat-item cat-item-119"><a href="http://hacks.mozilla.org/category/add-ons/">Add-ons</a> (16)
+</li>
+	<li class="cat-item cat-item-86093"><a href="http://hacks.mozilla.org/category/javascript/animations/">Animations</a> (7)
+</li>
+	<li class="cat-item cat-item-4213"><a href="http://hacks.mozilla.org/category/apps/">Apps</a> (92)
+</li>
+	<li class="cat-item cat-item-76011"><a href="http://hacks.mozilla.org/category/ask-mdn/">Ask MDN</a> (3)
+</li>
+	<li class="cat-item cat-item-25981"><a href="http://hacks.mozilla.org/category/asm-js/">asm.js</a> (8)
+</li>
+	<li class="cat-item cat-item-221"><a href="http://hacks.mozilla.org/category/audio/">Audio</a> (40)
+</li>
+	<li class="cat-item cat-item-76289"><a href="http://hacks.mozilla.org/category/bleeding-edge/">Bleeding edge</a> (12)
+</li>
+	<li class="cat-item cat-item-76432"><a href="http://hacks.mozilla.org/category/boottogecko/">Boot to Gecko (B2G)</a> (12)
+</li>
+	<li class="cat-item cat-item-76712"><a href="http://hacks.mozilla.org/category/brick/">Brick</a> (2)
+</li>
+	<li class="cat-item cat-item-76814"><a href="http://hacks.mozilla.org/category/browserid-2/">BrowserID</a> (4)
+</li>
+	<li class="cat-item cat-item-134"><a href="http://hacks.mozilla.org/category/canvas/">Canvas</a> (43)
+</li>
+	<li class="cat-item cat-item-23095"><a href="http://hacks.mozilla.org/category/challenge/">Challenge</a> (9)
+</li>
+	<li class="cat-item cat-item-70"><a href="http://hacks.mozilla.org/category/conferences/">Conferences</a> (36)
+</li>
+	<li class="cat-item cat-item-176756"><a href="http://hacks.mozilla.org/category/cordova/">Cordova</a> (1)
+</li>
+	<li class="cat-item cat-item-133"><a href="http://hacks.mozilla.org/category/css/">CSS</a> (106)
+</li>
+	<li class="cat-item cat-item-185"><a href="http://hacks.mozilla.org/category/debugging/">Debugging</a> (11)
+</li>
+	<li class="cat-item cat-item-19490"><a href="http://hacks.mozilla.org/category/demo/">Demo</a> (93)
+</li>
+	<li class="cat-item cat-item-86249"><a href="http://hacks.mozilla.org/category/mdn/demo-studio/">Demo Studio</a> (11)
+</li>
+	<li class="cat-item cat-item-76969"><a href="http://hacks.mozilla.org/category/dev-derby/">Dev Derby</a> (56)
+</li>
+	<li class="cat-item cat-item-297"><a href="http://hacks.mozilla.org/category/developer-tools/">Developer Tools</a> (70)
+</li>
+	<li class="cat-item cat-item-77083"><a href="http://hacks.mozilla.org/category/device-apis/">Device APIs</a> (13)
+</li>
+	<li class="cat-item cat-item-894"><a href="http://hacks.mozilla.org/category/docs/">Docs</a> (96)
+</li>
+	<li class="cat-item cat-item-230"><a href="http://hacks.mozilla.org/category/dom/">DOM</a> (23)
+</li>
+	<li class="cat-item cat-item-77434"><a href="http://hacks.mozilla.org/category/drag-and-drop/">Drag and Drop</a> (10)
+</li>
+	<li class="cat-item cat-item-817"><a href="http://hacks.mozilla.org/category/drumbeat/">Drumbeat</a> (2)
+</li>
+	<li class="cat-item cat-item-77621"><a href="http://hacks.mozilla.org/category/evangelism-reps/">Evangelism Reps</a> (2)
+</li>
+	<li class="cat-item cat-item-57"><a href="http://hacks.mozilla.org/category/event/">Event</a> (26)
+</li>
+	<li class="cat-item cat-item-25569"><a href="http://hacks.mozilla.org/category/feature/">Feature</a> (46)
+</li>
+	<li class="cat-item cat-item-7110"><a href="http://hacks.mozilla.org/category/featured/">Featured Article</a> (174)
+</li>
+	<li class="cat-item cat-item-77870"><a href="http://hacks.mozilla.org/category/demo/featured-demo/">Featured Demo</a> (27)
+</li>
+	<li class="cat-item cat-item-78138"><a href="http://hacks.mozilla.org/category/feedback-channels/">Feedback channels</a> (3)
+</li>
+	<li class="cat-item cat-item-78354"><a href="http://hacks.mozilla.org/category/fileapi/">FileAPI</a> (17)
+</li>
+	<li class="cat-item cat-item-500"><a href="http://hacks.mozilla.org/category/firebug/">Firebug</a> (16)
+</li>
+	<li class="cat-item cat-item-30"><a href="http://hacks.mozilla.org/category/firefox/">Firefox</a> (221)
+</li>
+	<li class="cat-item cat-item-36038"><a href="http://hacks.mozilla.org/category/firefox/firefox-aurora/">Firefox Aurora</a> (30)
+</li>
+	<li class="cat-item cat-item-8802"><a href="http://hacks.mozilla.org/category/firefox/firefox-beta/">Firefox Beta</a> (3)
+</li>
+	<li class="cat-item cat-item-78585"><a href="http://hacks.mozilla.org/category/firefox/firefox-development-highlights/">Firefox Development Highlights</a> (11)
+</li>
+	<li class="cat-item cat-item-78857"><a href="http://hacks.mozilla.org/category/firefox/firefox-nightly/">Firefox Nightly</a> (9)
+</li>
+	<li class="cat-item cat-item-24660"><a href="http://hacks.mozilla.org/category/firefox-os/">Firefox OS</a> (110)
+</li>
+	<li class="cat-item cat-item-27876"><a href="http://hacks.mozilla.org/category/games-2/">Games</a> (38)
+</li>
+	<li class="cat-item cat-item-79240"><a href="http://hacks.mozilla.org/category/geolocation/">Geolocation</a> (10)
+</li>
+	<li class="cat-item cat-item-79514"><a href="http://hacks.mozilla.org/category/hackability/">hackability</a> (2)
+</li>
+	<li class="cat-item cat-item-79853"><a href="http://hacks.mozilla.org/category/hackdays/">hackdays</a> (7)
+</li>
+	<li class="cat-item cat-item-80032"><a href="http://hacks.mozilla.org/category/history-api/">History API</a> (1)
+</li>
+	<li class="cat-item cat-item-254"><a href="http://hacks.mozilla.org/category/html5/">HTML5</a> (175)
+</li>
+	<li class="cat-item cat-item-8633"><a href="http://hacks.mozilla.org/category/identity/">Identity</a> (8)
+</li>
+	<li class="cat-item cat-item-16182"><a href="http://hacks.mozilla.org/category/images/">Images</a> (7)
+</li>
+	<li class="cat-item cat-item-100532"><a href="http://hacks.mozilla.org/category/indexeddb/">IndexedDB</a> (16)
+</li>
+	<li class="cat-item cat-item-453"><a href="http://hacks.mozilla.org/category/interviews/">Interviews</a> (4)
+</li>
+	<li class="cat-item cat-item-4543"><a href="http://hacks.mozilla.org/category/jagermonkey/">JägerMonkey</a> (5)
+</li>
+	<li class="cat-item cat-item-128"><a href="http://hacks.mozilla.org/category/javascript/">JavaScript</a> (136)
+</li>
+	<li class="cat-item cat-item-697"><a href="http://hacks.mozilla.org/category/labs/">Labs</a> (3)
+</li>
+	<li class="cat-item cat-item-4883"><a href="http://hacks.mozilla.org/category/mdn/learning/">Learning</a> (4)
+</li>
+	<li class="cat-item cat-item-199"><a href="http://hacks.mozilla.org/category/localization/">Localization</a> (5)
+</li>
+	<li class="cat-item cat-item-80317"><a href="http://hacks.mozilla.org/category/localstorage/">localStorage</a> (4)
+</li>
+	<li class="cat-item cat-item-766"><a href="http://hacks.mozilla.org/category/mdn/">MDN</a> (81)
+</li>
+	<li class="cat-item cat-item-80686"><a href="http://hacks.mozilla.org/category/css/media-queries/">Media Queries</a> (5)
+</li>
+	<li class="cat-item cat-item-81062"><a href="http://hacks.mozilla.org/category/missionmozilla/">Mission:Mozilla</a> (9)
+</li>
+	<li class="cat-item cat-item-124"><a href="http://hacks.mozilla.org/category/mobile/">Mobile</a> (44)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://hacks.mozilla.org/category/mozilla/">Mozilla</a> (32)
+</li>
+	<li class="cat-item cat-item-81241"><a href="http://hacks.mozilla.org/category/mozilla-hacks-weekly/">Mozilla Hacks Weekly</a> (64)
+</li>
+	<li class="cat-item cat-item-81399"><a href="http://hacks.mozilla.org/category/multi-touch/">Multi-touch</a> (7)
+</li>
+	<li class="cat-item cat-item-58"><a href="http://hacks.mozilla.org/category/news/">News</a> (5)
+</li>
+	<li class="cat-item cat-item-81514"><a href="http://hacks.mozilla.org/category/node-js/">Node.js</a> (20)
+</li>
+	<li class="cat-item cat-item-20266"><a href="http://hacks.mozilla.org/category/offline/">Offline</a> (11)
+</li>
+	<li class="cat-item cat-item-27786"><a href="http://hacks.mozilla.org/category/payments/">Payments</a> (7)
+</li>
+	<li class="cat-item cat-item-81886"><a href="http://hacks.mozilla.org/category/people-of-games/">People of Games</a> (1)
+</li>
+	<li class="cat-item cat-item-82131"><a href="http://hacks.mozilla.org/category/people-of-html5/">People of HTML5</a> (11)
+</li>
+	<li class="cat-item cat-item-311"><a href="http://hacks.mozilla.org/category/performance/">Performance</a> (33)
+</li>
+	<li class="cat-item cat-item-82359"><a href="http://hacks.mozilla.org/category/persona-2/">Persona</a> (3)
+</li>
+	<li class="cat-item cat-item-82536"><a href="http://hacks.mozilla.org/category/presentation-2/">Presentation</a> (14)
+</li>
+	<li class="cat-item cat-item-847"><a href="http://hacks.mozilla.org/category/privacy/">privacy</a> (2)
+</li>
+	<li class="cat-item cat-item-60"><a href="http://hacks.mozilla.org/category/qa/">QA</a> (2)
+</li>
+	<li class="cat-item cat-item-538"><a href="http://hacks.mozilla.org/category/release/">Release</a> (4)
+</li>
+	<li class="cat-item cat-item-907"><a href="http://hacks.mozilla.org/category/research/">Research</a> (5)
+</li>
+	<li class="cat-item cat-item-3389"><a href="http://hacks.mozilla.org/category/screencast/">Screencast</a> (6)
+</li>
+	<li class="cat-item cat-item-69"><a href="http://hacks.mozilla.org/category/security/">Security</a> (14)
+</li>
+	<li class="cat-item cat-item-82787"><a href="http://hacks.mozilla.org/category/serviceworkers/">ServiceWorkers</a> (1)
+</li>
+	<li class="cat-item cat-item-83024"><a href="http://hacks.mozilla.org/category/spdy/">SPDY</a> (2)
+</li>
+	<li class="cat-item cat-item-83193"><a href="http://hacks.mozilla.org/category/sprints/">Sprints</a> (17)
+</li>
+	<li class="cat-item cat-item-248"><a href="http://hacks.mozilla.org/category/standards/">Standards</a> (52)
+</li>
+	<li class="cat-item cat-item-315"><a href="http://hacks.mozilla.org/category/survey/">Survey</a> (8)
+</li>
+	<li class="cat-item cat-item-131"><a href="http://hacks.mozilla.org/category/svg/">SVG</a> (15)
+</li>
+	<li class="cat-item cat-item-725"><a href="http://hacks.mozilla.org/category/test-day/">Test Day</a> (1)
+</li>
+	<li class="cat-item cat-item-265"><a href="http://hacks.mozilla.org/category/testing/">Testing</a> (3)
+</li>
+	<li class="cat-item cat-item-610"><a href="http://hacks.mozilla.org/category/tools/">Tools</a> (9)
+</li>
+	<li class="cat-item cat-item-467"><a href="http://hacks.mozilla.org/category/tracemonkey/">TraceMonkey</a> (9)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://hacks.mozilla.org/category/uncategorized/">Uncategorized</a> (1)
+</li>
+	<li class="cat-item cat-item-220"><a href="http://hacks.mozilla.org/category/video/">Video</a> (62)
+</li>
+	<li class="cat-item cat-item-83360"><a href="http://hacks.mozilla.org/category/videoseries/">Videoseries</a> (11)
+</li>
+	<li class="cat-item cat-item-83698"><a href="http://hacks.mozilla.org/category/web-components/">Web Components</a> (6)
+</li>
+	<li class="cat-item cat-item-83947"><a href="http://hacks.mozilla.org/category/web-developer-toolbox/">Web Developer Toolbox</a> (5)
+</li>
+	<li class="cat-item cat-item-84203"><a href="http://hacks.mozilla.org/category/web-developers/">Web Developers</a> (55)
+</li>
+	<li class="cat-item cat-item-16188"><a href="http://hacks.mozilla.org/category/web-workers/">Web Workers</a> (3)
+</li>
+	<li class="cat-item cat-item-84514"><a href="http://hacks.mozilla.org/category/webapi/">WebAPI</a> (19)
+</li>
+	<li class="cat-item cat-item-19673"><a href="http://hacks.mozilla.org/category/webfwd/">WebFWD</a> (7)
+</li>
+	<li class="cat-item cat-item-6946"><a href="http://hacks.mozilla.org/category/webgl/">WebGL</a> (39)
+</li>
+	<li class="cat-item cat-item-84672"><a href="http://hacks.mozilla.org/category/webinars/">Webinars</a> (6)
+</li>
+	<li class="cat-item cat-item-15881"><a href="http://hacks.mozilla.org/category/webrtc/">WebRTC</a> (32)
+</li>
+	<li class="cat-item cat-item-84974"><a href="http://hacks.mozilla.org/category/websocket/">WebSocket</a> (9)
+</li>
+	<li class="cat-item cat-item-85295"><a href="http://hacks.mozilla.org/category/wiki-wednesday/">Wiki Wednesday</a> (43)
+</li>
+	<li class="cat-item cat-item-85568"><a href="http://hacks.mozilla.org/category/x-tag/">X-Tag</a> (2)
+</li>
+	<li class="cat-item cat-item-85881"><a href="http://hacks.mozilla.org/category/xmlhttprequest/">XMLHttpRequest</a> (13)
+</li>
+    </ul>
+  </li>
+  </ul>
+</div><!-- /#content-sub -->
+</div><!-- /#content -->
+
+<footer id="site-info">
+  <nav id="nav-legal">
+    <ul>
+      <li><a href="https://www.mozilla.org/privacy/websites/" rel="external">Privacy Policy</a></li>
+      <li><a href="https://www.mozilla.org/about/legal.html" rel="external">Legal Notices</a></li>
+      <li><a href="https://www.mozilla.org/legal/fraud-report/" rel="external">Report Trademark Abuse</a></li>
+    </ul>
+  </nav>
+
+  <p id="copyright">Except where otherwise noted, content on this site is licensed under the <br><a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license external">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.</p>
+
+  <nav id="nav-footer">
+    <h5>hacks.mozilla.org:</h5>
+    <ul role="navigation">
+      <li><a href="http://hacks.mozilla.org/">Home</a></li>
+      <li><a href="http://hacks.mozilla.org/articles/">Articles</a></li>
+      <li><a href="http://hacks.mozilla.org/demos/">Demos</a></li>
+      <li><a href="http://hacks.mozilla.org/about/">About</a></li>
+    </ul>
+  </nav>
+</footer>
+
+<script src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/tabzilla.js"></script>
+<script>
+// <![CDATA[
+  jQuery(document).ready(function(){
+    jQuery(document.body).addClass("js");
+  });
+// ]]>
+</script>
+
+<script type="text/javascript" src="ECMAScript%205%20strict%20mode%20in%20Firefox%204%20%E2%9C%A9%20Mozilla%20Hacks%20%E2%80%93%20the%20Web%20developer%20blog_files/comment-reply.js"></script>
+</div>
+
+
+
+
+
+
+</body></html>
+<!-- Dynamic page generated in 0.596 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2015-01-14 02:30:52 -->
+<!-- super cache -->

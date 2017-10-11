@@ -1,0 +1,47 @@
+Git Command
+-Git version
+	git --version
+-Git Configuration
+	-System
+		git config -- system
+	-User
+		git config --global
+	-Project
+		git config
+
+
+Customize user and email in Git
+	-Set user name 
+		git config --global user.name "hasanmbstu13"
+	-Set Email
+		git config --global user.email "hasanmbstu13@gmail.com"
+	-See the list
+		git config --list
+	-See the user name
+		git config user.name
+	-See the email
+		git config user.email
+	-Open git config file
+		cat .gitconfig
+	-Add editor
+		git config --global core.editor "notepad.exe"
+	-Set Color
+		git config --global color.ui true
+
+		
+-For git help
+	git help
+-For git manual
+	git help log
+
+-Initialize git inside a project
+	git init
+-See git file 
+	ls -la .git
+-Before commit a change add the file first
+-Tell git to add all changes that have been made to this entire project, everything that’s been
+	git add .	
+- . is short for this directory
+-Add a commit with message
+	git commit -m "Initial commit"
+	

@@ -1,0 +1,88 @@
+Project Name: pos
+url : ctpos.local
+Login email: admin@codetrio.com
+Password: 12345678
+
+Project Name: project-flow
+url-local: projectflow.dev
+url-online: http://intranet.square44.com/
+Server mail & password
+Login email: math@square44.com(Super User)
+password:    S4square44
+
+Login email: willy@square44.com(project manager)
+password   : 12345678
+
+Login email: mainul@codetrio.com(designer)
+password   : 11309011
+
+Project flow FTP
+FTP Username: intranet@sq44.com
+FTP Server: sq44.com
+lUJ,n9Ew?@{t,&V
+FTP port: 21
+
+Server Info:
+host: steeldeck.co.uk
+username: musa@steeldeck.co.uk
+password: btC@+0v=lT?uGBr
+
+
+Project Name: Best practice - square44
+Back End
+Url:http://www.square44.com/wp-login.php
+Username: math
+password: 1qaz@WSX
+
+Desgin Page Password: sqfourtyfour
+
+FTP
+User: codetrio@square44.com
+Server : square44.com
+Password: Codetrio1!
+21
+
+
+Wordpress
+skylarkwp
+ueW^fDccE(UBzUF#x5lz@M2B
+
+FTP
+=================
+213.168.250.23
+verfides-staging
+1GvLNzhuVw6D
+Port 2222
+
+
+StrategicFit
+212.71.246.82
+strategicfit-dev
+LqiSRyg34wlW
+2222
+
+
+steeldeck
+FTP Username: steeldeck@c3349730.myzen.co.uk
+FTP server: ftp.c3349730.myzen.co.uk
+FTP & explicit FTPS port:  21
+6n1G}SHoTWlK
+
+Wordpress Access is
+skylark16
+Y^NFYhm3D*NCRXa&$Ey73!dZ
+
+Basecamp
+https://3.basecamp.com/3135854/buckets/597437/todolists/136053656
+musabd
+c0detri012
+
+
+Dhaka Tribune
+Admin login: /dt-login
+User: codetrio
+Password: wpPEGa2WohmXZ1&98zx&)U*N
+
+
+Dhaka Tribune everything
+

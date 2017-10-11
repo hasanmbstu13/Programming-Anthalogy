@@ -1,0 +1,2106 @@
+.font-family-title {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+}
+.font-family-content {
+  font-family: "Open Sans", "Proxima Nova Regular", "Helvetica Neue", "Calibri", "Droid Sans", "Helvetica", "Arial", "sans-serif";
+}
+body {
+  background-color: #FFFFFF ;
+  color: #333333 ;
+  font-family: "Open Sans", "Proxima Nova Regular", "Helvetica Neue", "Calibri", "Droid Sans", "Helvetica", "Arial", "sans-serif";
+  font-size: 16px ;
+  line-height: 25px ;
+  margin: 0px 0px 0px 0px ;
+  padding: 0px 0px 0px 0px ;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block ;
+}
+h1 {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 32px ;
+  font-weight: 700 ;
+  line-height: 50px ;
+  margin: 5px 0px 20px 0px ;
+}
+h2 {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 26px ;
+  font-weight: 700 ;
+  line-height: 40px ;
+  margin: 25px 0px 20px 0px ;
+}
+h3 {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 20px ;
+  font-weight: 700 ;
+  line-height: 30px ;
+  margin: 25px 0px 20px 0px ;
+}
+h4 {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  line-height: 24px ;
+  margin: 30px 0px 20px 0px ;
+}
+h5 {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  margin: 20px 0px 20px 0px ;
+}
+h6 {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  margin: 20px 0px 20px 0px ;
+}
+p {
+  margin: 20px 0px 20px 0px ;
+}
+p.blockquote {
+  border-left: 4px solid #EAEAEA ;
+  font-style: italic ;
+  margin-left: 25px ;
+  padding: 0px 15px 0px 25px ;
+}
+p.question {
+  border-left: 3px solid #993333 ;
+  color: #993333 ;
+  margin-left: 15px ;
+  margin-right: 75px ;
+  padding-left: 10px ;
+  font-style: italic ;
+}
+ul,
+ol {
+  margin: 20px 0px 20px 0px ;
+}
+ul li,
+ol li {
+  margin-bottom: 4px ;
+}
+ul ol,
+ol ol,
+ul ul,
+ol ul {
+  margin-bottom: 4px ;
+  margin-top: 4px ;
+}
+ul.paragraphspacing li,
+ol.paragraphspacing li {
+  margin-bottom: 15px ;
+}
+dl {
+  margin: 20px 0px 20px 0px ;
+}
+form {
+  margin: 0px 0px 0px 0px ;
+}
+button,
+input[type="submit"],
+input[type="text"],
+select,
+textarea {
+  font-family: "Open Sans", "Proxima Nova Regular", "Helvetica Neue", "Calibri", "Droid Sans", "Helvetica", "Arial", "sans-serif";
+  font-size: 100% ;
+  margin: 0px 0px 0px 0px ;
+  vertical-align: baseline ;
+  *vertical-align: middle ;
+}
+button,
+input[type="submit"],
+input[type="text"] {
+  line-height: normal ;
+}
+input[type="submit"],
+input[type="text"],
+textarea {
+  border-radius: 3px 3px 3px 3px ;
+  border: 1px solid #AAAAAA ;
+  padding: 8px 8px 8px 8px ;
+  -webkit-box-shadow: inset 0 0 2px #CCCCCC ;
+  -moz-box-shadow: inset 0 0 2px #CCCCCC ;
+  box-shadow: inset 0 0 2px #CCCCCC ;
+}
+textarea {
+  resize: vertical ;
+}
+button {
+  background-color: #227FBB ;
+  border-width: 0px 0px 0px 0px ;
+  border-radius: 8px 8px 8px 8px ;
+  color: #FFFFFF ;
+  cursor: pointer ;
+  font-family: "Open Sans", "Proxima Nova Regular", "Helvetica Neue", "Calibri", "Droid Sans", "Helvetica", "Arial", "sans-serif";
+  font-weight: 600 ;
+  text-transform: uppercase ;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0px 0px 0px 0px ;
+  *height: 13px ;
+  *width: 13px ;
+}
+a {
+  color: inherit ;
+}
+a:focus {
+  outline: thin dotted ;
+}
+a:active,
+a:hover {
+  outline: 0px ;
+}
+img {
+  border: 0px ;
+  vertical-align: middle ;
+}
+span.highlight,
+em.highlight {
+  background-color: #FFDC73 ;
+  padding: 0px 2px 0px 2px ;
+  text-shadow: 1px 1px 0px #FFEFB6 ;
+}
+strong.highlight {
+  background-color: #FFDC73 ;
+  font-weight: 600 ;
+  padding: 0px 2px 0px 2px ;
+  text-shadow: 1px 1px 0px #FFEFB6 ;
+}
+::-moz-selection {
+  background-color: #F2C500 ;
+  color: #FFFFFF ;
+  text-shadow: none ;
+}
+::selection {
+  background-color: #F2C500 ;
+  color: #FFFFFF ;
+  text-shadow: none ;
+}
+div.hrule {
+  background-color: #DDDDDD ;
+  height: 1px ;
+  line-height: 20px ;
+  margin: 50px 0px 50px 0px ;
+  position: relative ;
+}
+div.hrule:after {
+  background-color: #ECECEC ;
+  border-radius: 11px 11px 11px 11px ;
+  color: #CCCCCC ;
+  content: "B N";
+  font-size: 12px ;
+  font-weight: 700 ;
+  height: 21px ;
+  left: 50% ;
+  line-height: 21px ;
+  margin-left: -20px;
+  position: absolute ;
+  text-align: center ;
+  top: -10px;
+  width: 40px ;
+}
+header.l-site-header {
+  margin: 0px auto 0px auto ;
+  width: 95% ;
+}
+header.l-site-header div.masthead {
+  padding: 76px 0px 30px 0px ;
+  text-align: center ;
+}
+header.l-site-header div.masthead a.title {
+  color: #222222 ;
+  display: block ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 32px ;
+  font-weight: 700 ;
+  line-height: 40px ;
+  margin-bottom: 10px ;
+  text-decoration: none ;
+}
+header.l-site-header div.masthead div.tagline {
+  color: #909090 ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 300 ;
+  line-height: 26px ;
+}
+header.l-site-header nav {
+  background-color: #F0F0F0 ;
+  font-size: 16px ;
+  font-weight: 600 ;
+  left: 0px ;
+  position: absolute ;
+  right: 0px ;
+  top: 0px ;
+  z-index: 1000 ;
+}
+header.l-site-header nav a.root {
+  border-bottom: 1px solid #CCCCCC ;
+  display: block ;
+  height: 46px ;
+  line-height: 46px ;
+  padding: 0px 10px 0px 10px ;
+}
+header.l-site-header nav ul.items {
+  display: none ;
+  margin: 0px 0px 0px 0px ;
+  padding: 0px 0px 0px 0px ;
+}
+header.l-site-header nav ul.items li {
+  border-bottom: 1px solid #CCCCCC ;
+  margin: 0px 0px 0px 0px ;
+  padding: 0px 0px 0px 0px ;
+  position: relative ;
+}
+header.l-site-header nav ul.items a {
+  color: #333333 ;
+  display: block ;
+  height: 46px ;
+  line-height: 46px ;
+  padding: 0px 10px 0px 20px ;
+  position: relative ;
+  text-decoration: none ;
+}
+header.l-site-header nav ul.items a:hover {
+  text-decoration: underline ;
+}
+header.l-site-header nav.open ul {
+  display: block ;
+}
+header.l-site-header figure {
+  margin: 0px 0px 0px 0px ;
+  padding-bottom: 50px ;
+  position: relative ;
+}
+header.l-site-header figure img {
+  border-radius: 4px 4px 4px 4px ;
+  display: block ;
+  max-width: 100% ;
+  min-width: 100% ;
+}
+header.l-site-header figure figcaption {
+  background-color: #EAEAEA ;
+  border-radius: 0px 0px 4px 4px ;
+  color: #666666 ;
+  display: none ;
+  font-size: 14px ;
+  margin: 2px 0px 0px 0px ;
+  padding: 10px 15px 10px 15px ;
+}
+header.l-site-header figure a.prev,
+header.l-site-header figure a.next {
+  bottom: 0px ;
+  color: #333333 ;
+  cursor: pointer ;
+  display: block ;
+  padding: 10px 15px 10px 15px ;
+  position: absolute ;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+header.l-site-header figure a.prev span,
+header.l-site-header figure a.next span {
+  text-decoration: underline ;
+}
+header.l-site-header figure a.prev {
+  left: 0px ;
+}
+header.l-site-header figure a.next {
+  right: 0px ;
+}
+@media (min-width: 1024px) {
+  header.l-site-header div.masthead {
+    padding: 60px 0px 60px 0px ;
+  }
+  header.l-site-header div.masthead a.title {
+    font-size: 46px ;
+    line-height: 56px ;
+  }
+  header.l-site-header div.masthead div.tagline {
+    font-size: 22px ;
+    line-height: 43px ;
+  }
+  header.l-site-header nav {
+    background-color: transparent ;
+    border-top: 1px solid #CCCCCC ;
+    font-size: 16px ;
+    left: auto ;
+    position: static ;
+    right: auto ;
+    text-align: center ;
+    top: auto ;
+    z-index: 1 ;
+  }
+  header.l-site-header nav a.root {
+    display: none ;
+  }
+  header.l-site-header nav ul.items {
+    display: block ;
+  }
+  header.l-site-header nav ul.items li {
+    border-bottom-width: 0px ;
+    display: inline-block;
+  }
+  header.l-site-header nav ul.items li a {
+    height: 75px ;
+    line-height: 74px ;
+    padding: 0px 30px 0px 30px ;
+    z-index: 2 ;
+  }
+  header.l-site-header nav ul.items li::before {
+    content: "";
+    position: absolute ;
+    left: -3px;
+    background-image: url("images/standard-sprite2.png");
+    background-size: 1000px 1000px ;
+    background-position: -106px -5px;
+    height: 11px ;
+    width: 11px ;
+    top: 35px ;
+    z-index: 1 ;
+  }
+  header.l-site-header nav ul.items li:first-child::before {
+    display: none ;
+  }
+  header.l-site-header nav ul.items li.jobs::after {
+    content: "";
+    position: absolute ;
+    right: -23px;
+    background-image: url("images/standard-sprite2.png");
+    background-size: 1000px 1000px ;
+    background-position: -5px -5px;
+    height: 65px ;
+    width: 96px ;
+    top: -40px;
+    z-index: 1 ;
+  }
+  header.l-site-header figure img {
+    border-radius: 4px 4px 0px 0px ;
+  }
+  header.l-site-header figure figcaption {
+    display: block ;
+  }
+  header.l-site-header figure:hover span.person {
+    background-color: #FFDC73 ;
+    color: #222222 ;
+    display: inline-block;
+    font-weight: 600 ;
+    padding: 0px 2px 0px 2px ;
+    text-shadow: 1px 1px 0px #FFEFB6 ;
+  }
+}
+@media (min-width: 1120px) {
+  header.l-site-header {
+    width: 1120px ;
+  }
+  header.l-site-header figure img {
+    min-height: 526px ;
+  }
+}
+@media (min-width: 1650px) {
+  header.l-site-header figure {
+    padding-bottom: 0px ;
+  }
+  header.l-site-header figure a.prev,
+  header.l-site-header figure a.next {
+    bottom: auto ;
+    overflow: hidden ;
+    padding: 0px 0px 0px 0px ;
+    text-indent: -1000px;
+  }
+  header.l-site-header figure a.prev {
+    background-image: url("images/standard-sprite2.png");
+    background-size: 1000px 1000px ;
+    background-position: -117px -5px;
+    height: 148px ;
+    width: 148px ;
+    top: 190px ;
+    left: -230px;
+  }
+  header.l-site-header figure a.prev:hover {
+    background-image: url("images/standard-sprite2.png");
+    background-size: 1000px 1000px ;
+    background-position: -117px -158px;
+    height: 148px ;
+    width: 148px ;
+  }
+  header.l-site-header figure a.next {
+    right: -230px;
+    background-image: url("images/standard-sprite2.png");
+    background-size: 1000px 1000px ;
+    background-position: -270px -5px;
+    height: 148px ;
+    width: 148px ;
+    top: 190px ;
+  }
+  header.l-site-header figure a.next:hover {
+    background-image: url("images/standard-sprite2.png");
+    background-size: 1000px 1000px ;
+    background-position: -270px -158px;
+    height: 148px ;
+    width: 148px ;
+  }
+}
+div.l-site-body {
+  padding: 50px 0px 50px 0px ;
+}
+div.l-site-body div.l-site-content {
+  margin: 0px auto 0px auto ;
+  width: 95% ;
+}
+div.l-site-body div.l-site-aside {
+  display: none ;
+}
+@media (min-width: 1120px) {
+  div.l-site-body {
+    margin: 0px auto 0px auto ;
+    width: 1120px ;
+  }
+  div.l-site-body div.l-site-content {
+    float: left ;
+    margin: 0px 0px 0px 0px ;
+    width: 790px ;
+  }
+  div.l-site-body div.l-site-aside {
+    display: block ;
+    float: right ;
+    position: relative ;
+    width: 270px ;
+  }
+  div.l-site-body div.l-site-aside:after {
+    background-color: #DADADA ;
+    bottom: 0px ;
+    content: "";
+    position: absolute ;
+    left: -30px;
+    top: 0px ;
+    width: 1px ;
+  }
+}
+footer.l-site-footer small {
+  color: #666666 ;
+  display: block ;
+  font-size: 13px ;
+  font-weight: 100 ;
+  line-height: 18px ;
+  margin: 0px auto 30px auto ;
+  padding: 0px 0px 0px 0px ;
+  position: relative ;
+  width: 95% ;
+}
+footer.l-site-footer small a.back-to-top {
+  color: inherit ;
+  display: none ;
+  font-size: 13px ;
+  font-weight: 100 ;
+  position: absolute ;
+  right: 0px ;
+  top: 0px ;
+}
+footer.l-site-footer section.epilogue {
+  background-color: #222222 ;
+  color: #E0E0E0 ;
+}
+footer.l-site-footer div.mini-resume {
+  margin: 0px auto 0px auto ;
+  padding: 70px 0px 70px 0px ;
+  position: relative ;
+  text-align: center ;
+  width: 85% ;
+}
+footer.l-site-footer div.mini-resume div.avatar {
+  border-radius: 170px 170px 170px 170px ;
+  height: 178px ;
+  margin: 0px auto 40px auto ;
+  width: 178px ;
+}
+footer.l-site-footer div.mini-resume div.avatar img {
+  border: 4px solid #FFFFFF ;
+  border-radius: 170px 170px 170px 170px ;
+  display: block ;
+  height: 170px ;
+  width: 170px ;
+}
+footer.l-site-footer div.mini-resume div.title {
+  color: #FFFFFF ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 22px ;
+  font-weight: 300 ;
+  margin-bottom: 20px ;
+}
+footer.l-site-footer div.mini-resume div.bio {
+  font-weight: 300 ;
+  margin-bottom: 25px ;
+}
+@media (min-width: 1120px) {
+  footer.l-site-footer small {
+    width: 1120px ;
+  }
+  footer.l-site-footer small a.back-to-top {
+    display: block ;
+  }
+  footer.l-site-footer div.mini-resume {
+    padding: 70px 330px 70px 0px ;
+    text-align: left ;
+    width: 790px ;
+  }
+  footer.l-site-footer div.mini-resume div.avatar {
+    left: 875px ;
+    position: absolute ;
+    top: 60px ;
+  }
+}
+div.m-ad-cluster {
+  height: 270px ;
+  margin: 0px 0px 30px 0px ;
+  position: relative ;
+  width: 270px ;
+}
+div.m-ad-cluster a {
+  background-image: url("images/standard-sprite.png?v=2");
+  background-repeat: no-repeat;
+  height: 125px ;
+  position: absolute ;
+  overflow: hidden ;
+  text-indent: -999px;
+  width: 125px ;
+}
+div.m-ad-cluster a img {
+  display: block ;
+  height: 125px ;
+  width: 125px ;
+}
+div.m-ad-cluster a.ne {
+  background-position: -145px -10px;
+  right: 0px ;
+  top: 0px ;
+}
+div.m-ad-cluster a.se {
+  background-position: -145px -145px;
+  bottom: 0px ;
+  right: 0px ;
+}
+div.m-ad-cluster a.sw {
+  background-position: -10px -145px;
+  bottom: 0px ;
+  left: 0px ;
+}
+div.m-ad-cluster a.nw {
+  background-position: -10px -10px;
+  left: 0px ;
+  top: 0px ;
+}
+span.despammin09,
+span.despammin4,
+span.despammina,
+span.despammint,
+span.despamming2,
+span.despamming34,
+span.despammingg,
+span.despammingj,
+span.despammingp,
+span.despamminj,
+span.despamminq,
+span.despamminz,
+span.despamminzzz {
+  display: none ;
+  visibility: hidden ;
+}
+input.despammin09,
+input.despammin4,
+input.despammina,
+input.despammint,
+input.despamming2,
+input.despamming34,
+input.despammingg,
+input.despammingj,
+input.despammingp,
+input.despamminj,
+input.despamminq,
+input.despamminz,
+input.despamminzzz {
+  display: none ;
+  visibility: hidden ;
+}
+form.m-ask-ben-form {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+form.m-ask-ben-form div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+form.m-ask-ben-form div.error strong {
+  font-weight: 700 ;
+}
+form.m-ask-ben-form div.error ul {
+  margin-bottom: 0px ;
+  margin-top: 15px ;
+}
+form.m-ask-ben-form div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+form.m-ask-ben-form div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+form.m-ask-ben-form div.field div.content {
+  margin-left: 125px ;
+}
+form.m-ask-ben-form div.field div.instructions {
+  margin-bottom: 13px ;
+  padding-top: 3px ;
+}
+form.m-ask-ben-form div.field.name input.primary {
+  width: 350px ;
+}
+form.m-ask-ben-form div.field.email input.primary {
+  width: 350px ;
+}
+form.m-ask-ben-form div.field.question textarea.primary {
+  display: block ;
+  height: 200px ;
+  width: 580px ;
+}
+form.m-ask-ben-form div.field.code-sample textarea.primary {
+  display: block ;
+  height: 200px ;
+  margin-bottom: 8px ;
+  width: 580px ;
+}
+form.m-ask-ben-form div.field.spam input.primary {
+  width: 50px ;
+}
+form.m-ask-ben-form div.buttons {
+  margin: 25px 0px 0px 125px ;
+}
+form.m-ask-ben-form div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+div.m-recent-post h2 {
+  font-size: 22px ;
+  line-height: 34px ;
+  margin-bottom: 0px ;
+}
+div.m-recent-post p.preview {
+  margin: 10px 0px 10px 0px ;
+}
+div.m-recent-post div.comments:before,
+div.m-recent-post div.comments:after {
+  content: " ";
+  display: table;
+}
+div.m-recent-post div.comments:after {
+  clear: both;
+}
+div.m-recent-post div.comments a.avatar {
+  border-radius: 35px 35px 35px 35px ;
+  float: left ;
+  margin: 10px 10px 0px 0px ;
+  text-decoration: none ;
+}
+div.m-recent-post div.comments img {
+  border-radius: 35px 35px 35px 35px ;
+  display: block ;
+  height: 35px ;
+  width: 35px ;
+}
+div.m-recent-post-ad ins {
+  display: block ;
+  height: 90px ;
+  margin: 0px auto 0px auto ;
+  width: 720px ;
+}
+div.m-recent-post-ad iframe {
+  margin: 0px auto 0px auto ;
+}
+div.m-want-more-posts a {
+  background-color: #FFDC73 ;
+  font-weight: 600 ;
+  padding: 0px 2px 0px 2px ;
+  text-shadow: 1px 1px 0px #FFEFB6 ;
+}
+header.m-post-header {
+  margin-bottom: 20px ;
+}
+header.m-post-header h1 {
+  margin-bottom: 15px ;
+}
+header.m-post-header div.meta {
+  color: #666666 ;
+  font-size: 14px ;
+  line-height: 18px ;
+  margin-bottom: 5px ;
+}
+header.m-post-header div.meta a.author {
+  color: inherit ;
+}
+header.m-post-header div.tags {
+  color: #666666 ;
+  font-size: 14px ;
+  line-height: 18px ;
+}
+header.m-post-header div.tags a.tag {
+  color: inherit ;
+}
+iframe.m-like-plugin {
+  border: none ;
+  height: 60px ;
+  overflow: hidden ;
+  width: 100% ;
+}
+aside.m-related-posts h3 {
+  margin-bottom: 15px ;
+}
+aside.m-related-posts li {
+  margin-bottom: 5px ;
+}
+div.m-recent-jobs {
+  position: relative ;
+}
+div.m-recent-jobs h3 {
+  margin-bottom: 13px ;
+}
+div.m-recent-jobs h3 em {
+  background-color: #F2C500 ;
+  display: inline-block;
+  font-style: normal ;
+  padding: 0px 5px 0px 5px ;
+  text-shadow: 1px 1px 1px #FFFFFF ;
+}
+div.m-recent-jobs div.actions {
+  display: none ;
+}
+div.m-recent-jobs li {
+  margin-bottom: 0px ;
+}
+div.m-recent-jobs li a {
+  display: block ;
+  padding: 2px 0px 3px 0px ;
+  text-decoration: none ;
+}
+div.m-recent-jobs li a span.title {
+  text-decoration: underline ;
+}
+div.m-recent-jobs li a span.company {
+  color: #CCCCCC ;
+  font-weight: 100 ;
+}
+div.m-recent-jobs li a:hover span.title {
+  font-weight: 700 ;
+}
+div.m-recent-jobs div.kiva {
+  color: #777777 ;
+  font-size: 14px ;
+  font-weight: 300 ;
+  line-height: 19px ;
+}
+@media (min-width: 650px) {
+  div.m-recent-jobs div.actions {
+    display: block ;
+    line-height: 30px ;
+    position: absolute ;
+    right: 0px ;
+    top: 0px ;
+  }
+}
+section.m-comments h2 {
+  display: none ;
+}
+section.m-comments article.comment {
+  position: relative ;
+  margin-bottom: 30px ;
+}
+section.m-comments article.comment div.meta {
+  height: 60px ;
+  margin-bottom: 17px ;
+  position: relative ;
+}
+section.m-comments article.comment div.meta img.avatar {
+  border-radius: 30px 30px 30px 30px ;
+  height: 60px ;
+  left: 0px ;
+  position: absolute ;
+  top: 0px ;
+  width: 60px ;
+}
+section.m-comments article.comment div.meta a.author {
+  color: inherit ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 20px ;
+  font-weight: 700 ;
+  left: 73px ;
+  line-height: 29px ;
+  padding: 0px 7px 0px 7px ;
+  position: absolute ;
+  text-decoration: none ;
+  top: 3px ;
+}
+section.m-comments article.comment div.meta a.author:hover {
+  text-decoration: underline ;
+}
+section.m-comments article.comment div.meta a.date {
+  color: #666666 ;
+  font-size: 14px ;
+  font-weight: 300 ;
+  left: 80px ;
+  line-height: 19px ;
+  position: absolute ;
+  text-decoration: none ;
+  top: 35px ;
+}
+section.m-comments article.comment div.meta a.date:hover {
+  text-decoration: underline ;
+}
+section.m-comments article.comment div.meta div.count {
+  color: #999999 ;
+  font-size: 14px ;
+  font-weight: 300 ;
+  line-height: 19px ;
+  position: absolute ;
+  right: 0px ;
+  top: 35px ;
+}
+section.m-comments article.comment div.content {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 22px 25px 22px 25px ;
+  position: relative ;
+}
+section.m-comments article.comment div.content:before {
+  background: url("../../images/blog/comment_carrot.png") 50% 0px no-repeat;
+  content: "";
+  height: 10px ;
+  left: 13px ;
+  position: absolute ;
+  top: -10px;
+  width: 33px ;
+}
+section.m-comments article.comment div.content p:first-child,
+section.m-comments article.comment div.content ol:first-child,
+section.m-comments article.comment div.content ul:first-child,
+section.m-comments article.comment div.content div.code:first-child {
+  margin-top: 0px ;
+}
+section.m-comments article.comment div.content p:last-child,
+section.m-comments article.comment div.content ol:last-child,
+section.m-comments article.comment div.content ul:last-child,
+section.m-comments article.comment div.content div.code:last-child {
+  margin-bottom: 0px ;
+}
+section.m-comments article.comment div.reply {
+  border-radius: 4px 0px 4px 0px ;
+  bottom: 1px ;
+  color: #E8E8E8 ;
+  cursor: pointer ;
+  font-size: 14px ;
+  line-height: 22px ;
+  padding: 5px 12px 5px 12px ;
+  position: absolute ;
+  right: 1px ;
+  text-decoration: underline ;
+}
+section.m-comments article.comment:hover div.reply {
+  background-color: #227FBB ;
+  color: #FFFFFF ;
+}
+section.m-comments article.comment.ben div.meta a.author {
+  background-color: #DC3128 ;
+  color: #FFFFFF ;
+  text-shadow: 1px 1px 1px #333333 ;
+}
+section.m-comments div.new-comment h3 {
+  display: none ;
+}
+section.m-comments div.new-comment div.meta {
+  height: 60px ;
+  margin-bottom: 17px ;
+  position: relative ;
+}
+section.m-comments div.new-comment div.meta div.avatar {
+  background-color: #242413 ;
+  border-radius: 30px 30px 30px 30px ;
+  color: #FFFFFF ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 30px ;
+  font-style: italic ;
+  font-weight: 900 ;
+  height: 60px ;
+  left: 0px ;
+  line-height: 70px ;
+  overflow: hidden ;
+  position: absolute ;
+  text-align: center ;
+  text-indent: -4px;
+  top: 0px ;
+  width: 60px ;
+}
+section.m-comments div.new-comment div.meta div.avatar.known {
+  background-color: transparent ;
+}
+section.m-comments div.new-comment div.meta div.avatar.known img {
+  border-radius: 30px 30px 30px 30px ;
+  height: 60px ;
+  left: 0px ;
+  position: absolute ;
+  top: 0px ;
+  width: 60px ;
+}
+section.m-comments div.new-comment div.meta div.author {
+  color: inherit ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 20px ;
+  font-weight: 700 ;
+  left: 73px ;
+  line-height: 29px ;
+  padding: 0px 7px 0px 7px ;
+  position: absolute ;
+  text-decoration: none ;
+  top: 3px ;
+}
+section.m-comments div.new-comment div.meta div.author em {
+  font-style: normal ;
+  font-weight: 900 ;
+}
+section.m-comments div.new-comment div.meta div.date {
+  color: #666666 ;
+  font-size: 14px ;
+  font-weight: 300 ;
+  left: 80px ;
+  line-height: 19px ;
+  position: absolute ;
+  text-decoration: none ;
+  top: 35px ;
+}
+section.m-comments div.new-comment form {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+section.m-comments div.new-comment form:before {
+  background: url("../../images/blog/comment_carrot.png") 50% 0px no-repeat;
+  content: "";
+  height: 10px ;
+  left: 13px ;
+  position: absolute ;
+  top: -10px;
+  width: 33px ;
+}
+section.m-comments div.new-comment form div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  display: none ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+section.m-comments div.new-comment form div.error strong {
+  font-weight: 700 ;
+}
+section.m-comments div.new-comment form div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+section.m-comments div.new-comment form div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+section.m-comments div.new-comment form div.field div.content {
+  margin-left: 125px ;
+}
+section.m-comments div.new-comment form div.field label.subscribe {
+  color: #999999 ;
+  font-size: 14px ;
+}
+section.m-comments div.new-comment form div.field label.subscribe input {
+  margin-right: 5px ;
+}
+section.m-comments div.new-comment form div.field em {
+  color: #999999 ;
+  font-weight: 100 ;
+}
+section.m-comments div.new-comment form div.field.name input.primary {
+  width: 350px ;
+}
+section.m-comments div.new-comment form div.field.email input.primary {
+  margin-right: 5px ;
+  width: 350px ;
+}
+section.m-comments div.new-comment form div.field.twitter input.primary {
+  margin-right: 5px ;
+  width: 200px ;
+}
+section.m-comments div.new-comment form div.field.website input.primary {
+  width: 580px ;
+}
+section.m-comments div.new-comment form div.field.comment textarea.primary {
+  display: block ;
+  height: 300px ;
+  margin-bottom: 5px ;
+  width: 580px ;
+}
+section.m-comments div.new-comment form div.etiquette {
+  margin-left: 125px ;
+}
+section.m-comments div.new-comment form div.etiquette strong {
+  background-color: #FFDC73 ;
+  font-weight: 600 ;
+  padding: 0px 2px 0px 2px ;
+  text-shadow: 1px 1px 0px #FFEFB6 ;
+}
+section.m-comments div.new-comment form div.etiquette em {
+  font-style: normal ;
+  font-weight: 600 ;
+}
+section.m-comments div.new-comment form div.buttons {
+  margin: 25px 0px 0px 125px ;
+}
+section.m-comments div.new-comment form div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+section.m-comments div.new-comment form div.buttons button.processing {
+  background-image: url("../../images/global/ajax-loader-blue.gif");
+  background-position: 93% 50% ;
+  background-repeat: no-repeat;
+}
+section.m-comments article.comment div.content:before,
+section.m-comments div.new-comment form:before {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAARCAYAAABTnsXCAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABR0RVh0Q3JlYXRpb24gVGltZQAzLzkvMTQztGkvAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAAIdJREFUSIm90rkNwDAMQ1FlGO+/jzwMUwQOcviQRNu/J/AKipCpKpg9QM0vAAAwEApRAKUoJIz4AhhICNECRCFuxAgQgbgQVoAXYkZ4AR6ICREFWCFDBAuwQLqIWYARpImYDehBqohVgBbkh1gNqEFeiF2AL+RG7AY8IQDkUFWklOoP3VDOWU4aQSUqU7BUOQAAAABJRU5ErkJggg==");
+}
+section.m-comments div.comments-disabled {
+  font-size: 20px ;
+  font-weight: 300 ;
+  margin: 40px 0px 30px 0px ;
+  line-height: 35px ;
+  text-align: center ;
+}
+section.m-comments div.comments-disabled div.reason {
+  margin-bottom: 10px ;
+}
+section.m-comments div.comments-disabled div.reason span {
+  background-color: #333333 ;
+  border-radius: 3px 3px 3px 3px ;
+  color: #FFFFFF ;
+  display: inline-block;
+  padding: 10px 20px 10px 20px ;
+}
+section.m-comments div.comments-disabled div.follow-up a {
+  background-color: #008ECA ;
+  border-radius: 3px 3px 3px 3px ;
+  color: #FFFFFF ;
+  display: inline-block;
+  padding: 10px 20px 10px 20px ;
+  text-decoration: none ;
+}
+section.m-comments div.comments-disabled div.follow-up a em {
+  font-style: normal ;
+  font-weight: 600 ;
+  text-decoration: underline ;
+}
+section.m-comments div.comments-disabled div.follow-up a:hover {
+  background-color: #007EB4 ;
+}
+.gist {
+  color: ##333333 ;
+  font-size: 12px ;
+  margin: 40px 0px 40px 0px ;
+}
+.gist .gist-file {
+  margin-bottom: 16px ;
+}
+.gist table {
+  margin-bottom: 0px ;
+}
+.gist td {
+  font-size: 12px ;
+  line-height: 14px ;
+}
+.gist .gist-file .gist-data .line-numbers span {
+  display: block ;
+  font-size: 12px ;
+  line-height: 14px ;
+  padding: 2px 0px 2px 0px ;
+}
+.gist div.line {
+  border-bottom: 1px solid ##FFFFFF ;
+  padding-bottom: 2px ;
+  padding-top: 2px ;
+}
+div.code,
+div.codefixed,
+div.codefixedlarge {
+  border: 1px solid #999999 ;
+  margin: 40px auto 40px auto ;
+  overflow: auto ;
+  padding: 2px 2px 2px 2px ;
+}
+div.code ul,
+div.codefixed ul {
+  font-family: monospace, verdana ;
+  font-size: 13px ;
+  line-height: 15px ;
+  list-style-type: none ;
+  margin: 0px 0px 0px 0px ;
+  padding-left: 0px ;
+}
+div.code ul li,
+div.codefixed ul li {
+  background-color: #F5F5F5 ;
+  margin-bottom: 1px ;
+  padding: 1px 3px 1px 3px ;
+}
+div.code ul li.tab1,
+div.codefixed ul li.tab1 {
+  padding-left: 30px ;
+}
+div.code ul li.tab2,
+div.codefixed ul li.tab2 {
+  padding-left: 60px ;
+}
+div.code ul li.tab3,
+div.codefixed ul li.tab3 {
+  padding-left: 90px ;
+}
+div.code ul li.tab4,
+div.codefixed ul li.tab4 {
+  padding-left: 120px ;
+}
+div.code ul li.tab5,
+div.codefixed ul li.tab5 {
+  padding-left: 150px ;
+}
+div.code ul li.tab6,
+div.codefixed ul li.tab6 {
+  padding-left: 180px ;
+}
+div.code ul li.tab7,
+div.codefixed ul li.tab7 {
+  padding-left: 210px ;
+}
+div.code ul li.tab8,
+div.codefixed ul li.tab8 {
+  padding-left: 240px ;
+}
+div.code ul li.tab9,
+div.codefixed ul li.tab9 {
+  padding-left: 270px ;
+}
+div.code ul li.tab10,
+div.codefixed ul li.tab10 {
+  padding-left: 300px ;
+}
+div.code ul li.tab11,
+div.codefixed ul li.tab11 {
+  padding-left: 330px ;
+}
+span.cfmlcodecolor {
+  color: #840000 ;
+}
+span.commentcodecolor {
+  color: #808080 ;
+  /* font-style: italic ; */
+}
+span.attributecodecolor {
+  color: #0000FF ;
+}
+span.numbercodecolor {
+  color: #FF00FF ;
+}
+span.htmlcodecolor {
+  color: #000080 ;
+}
+form.m-contact-form {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+form.m-contact-form div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+form.m-contact-form div.error strong {
+  font-weight: 700 ;
+}
+form.m-contact-form div.error ul {
+  margin-bottom: 0px ;
+  margin-top: 15px ;
+}
+form.m-contact-form div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+form.m-contact-form div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+form.m-contact-form div.field div.content {
+  margin-left: 125px ;
+}
+form.m-contact-form div.field div.instructions {
+  margin-bottom: 13px ;
+  padding-top: 3px ;
+}
+form.m-contact-form div.field.name input.primary {
+  width: 350px ;
+}
+form.m-contact-form div.field.email input.primary {
+  width: 350px ;
+}
+form.m-contact-form div.field.comment textarea.primary {
+  display: block ;
+  height: 200px ;
+  width: 580px ;
+}
+form.m-contact-form div.field.spam input.primary {
+  width: 50px ;
+}
+form.m-contact-form div.buttons {
+  margin: 25px 0px 0px 125px ;
+}
+form.m-contact-form div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+section.m-job-listings ul {
+  border-top: 1px solid #CCCCCC ;
+  list-style-type: none ;
+  margin: 20px 0px 40px 0px ;
+  padding: 0px 0px 0px 0px ;
+}
+section.m-job-listings ul li.job {
+  border-bottom: 1px solid #CCCCCC ;
+  margin: 0px 0px 0px 0px ;
+  padding: 0px 0px 0px 0px ;
+}
+section.m-job-listings ul a {
+  display: block ;
+  position: relative ;
+  text-decoration: none ;
+}
+section.m-job-listings ul a:hover {
+  background-color: #F0F0F0 ;
+}
+section.m-job-listings ul a:hover span.description span.headline {
+  text-decoration: underline ;
+}
+section.m-job-listings ul span.description {
+  display: block ;
+  padding: 13px 0px 13px 0px ;
+  width: 500px ;
+}
+section.m-job-listings ul span.description span.headline {
+  display: block ;
+  font-size: 18px ;
+  font-weight: 600 ;
+  line-height: 25px ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 99.99% ;
+}
+section.m-job-listings ul span.description span.company {
+  color: #999999 ;
+  display: block ;
+  font-weight: 300 ;
+}
+section.m-job-listings ul span.description span.company strong {
+  font-weight: 400 ;
+}
+section.m-job-listings ul span.location {
+  font-size: 14px ;
+  left: 520px ;
+  line-height: 19px ;
+  position: absolute ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  top: 15px ;
+  width: 210px ;
+}
+section.m-job-listings ul span.tags {
+  font-size: 11px ;
+  left: 520px ;
+  line-height: 15px ;
+  position: absolute ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-transform: uppercase ;
+  top: 40px ;
+  width: 210px ;
+}
+section.m-job-listings ul span.tags span.tag {
+  border-radius: 2px 2px 2px 2px ;
+  display: inline-block;
+  padding: 2px 6px 2px 6px ;
+}
+section.m-job-listings ul span.tags span.tag.fulltime {
+  background-color: #E8E8E8 ;
+}
+section.m-job-listings ul span.tags span.tag.freelance {
+  background-color: #FFDC73 ;
+}
+section.m-job-listings ul span.tags span.tag.telecommuting {
+  background-color: #FF3399 ;
+  color: #FFFFFF ;
+}
+section.m-job-listings ul span.date {
+  color: #666666 ;
+  position: absolute ;
+  right: 0px ;
+  text-align: center ;
+  top: 13px ;
+  width: 50px ;
+}
+section.m-job-listings ul span.date span.day {
+  display: block ;
+  font-size: 22px ;
+  font-weight: 600 ;
+  line-height: 29px ;
+}
+section.m-job-listings ul span.date span.month {
+  display: block ;
+  font-size: 14px ;
+  font-weight: 300 ;
+  line-height: 16px ;
+}
+p.m-no-job-listings {
+  font-size: 18px ;
+  font-weight: 30px ;
+  margin: 40px 0px 40px 0px ;
+  text-align: center ;
+}
+aside.m-kiva-teaser div.people {
+  height: 450px ;
+  margin: 30px 0px 25px 0px ;
+  position: relative ;
+}
+aside.m-kiva-teaser div.people a {
+  background-color: #F0F0F0 ;
+  border: 1px solid #CCCCCC ;
+  border-radius: 3px 3px 3px 3px ;
+  padding: 3px 3px 3px 3px ;
+  position: absolute ;
+}
+aside.m-kiva-teaser div.people a.nw {
+  left: 60px ;
+  top: 0px ;
+}
+aside.m-kiva-teaser div.people a.ne {
+  right: 60px ;
+  top: 0px ;
+}
+aside.m-kiva-teaser div.people a.se {
+  bottom: 0px ;
+  right: 60px ;
+}
+aside.m-kiva-teaser div.people a.sw {
+  bottom: 0px ;
+  left: 60px ;
+}
+aside.m-kiva-teaser div.people img {
+  display: block ;
+  height: 187px ;
+  width: 280px ;
+}
+div.m-post-new-job a.call-to-action {
+  background-color: #227FBB ;
+  border-radius: 8px 8px 8px 8px ;
+  color: #FFFFFF ;
+  display: block ;
+  margin-bottom: 15px ;
+  padding: 16px 0px 16px 0px ;
+  text-align: center ;
+  text-decoration: none ;
+}
+div.m-post-new-job a.call-to-action span.label {
+  display: block ;
+  font-size: 26px ;
+  font-weight: 600 ;
+  line-height: 31px ;
+  margin-bottom: 5px ;
+  text-transform: uppercase ;
+}
+div.m-post-new-job a.call-to-action span.price {
+  display: block ;
+  font-size: 18px ;
+  font-style: italic ;
+  font-weight: 300 ;
+  line-height: 23px ;
+}
+div.m-post-new-job div.kiva-note {
+  font-size: 12px ;
+  line-height: 20px ;
+  margin-bottom: 25px ;
+  text-align: center ;
+}
+div.m-post-new-job div.visibility div.header {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  line-height: 25px ;
+  margin: 0px 0px 12px 0px ;
+}
+div.m-post-new-job div.visibility ul {
+  margin-top: 0px ;
+}
+section.m-job dl:before,
+section.m-job dl:after {
+  content: " ";
+  display: table;
+}
+section.m-job dl:after {
+  clear: both;
+}
+section.m-job dt {
+  clear: both ;
+  float: left ;
+  font-weight: 700 ;
+  margin: 0px 0px 13px 0px ;
+  text-align: right ;
+  width: 150px ;
+}
+section.m-job dd {
+  float: left ;
+  margin: 0px 0px 13px 0px ;
+  padding-left: 15px ;
+  width: 625px ;
+}
+section.m-job-application form {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+section.m-job-application form div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+section.m-job-application form div.error strong {
+  font-weight: 700 ;
+}
+section.m-job-application form div.error ul {
+  margin-bottom: 0px ;
+  margin-top: 15px ;
+}
+section.m-job-application form div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+section.m-job-application form div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+section.m-job-application form div.field div.content {
+  margin-left: 125px ;
+}
+section.m-job-application form div.field div.instructions {
+  margin-bottom: 13px ;
+  padding-top: 3px ;
+}
+section.m-job-application form div.field div.note {
+  color: #666666 ;
+  font-size: 14px ;
+  margin-top: 7px ;
+}
+section.m-job-application form div.field em {
+  color: #999999 ;
+  font-weight: 100 ;
+}
+section.m-job-application form div.field.name input.primary {
+  width: 350px ;
+}
+section.m-job-application form div.field.email input.primary {
+  width: 350px ;
+}
+section.m-job-application form div.field.website input.primary {
+  margin-right: 5px ;
+  width: 350px ;
+}
+section.m-job-application form div.field.sample-website input.primary {
+  margin-right: 5px ;
+  width: 350px ;
+}
+section.m-job-application form div.field.message textarea.primary {
+  display: block ;
+  height: 250px ;
+  width: 580px ;
+}
+section.m-job-application form div.field.message span.characters-remaining {
+  background-color: #FFDC73 ;
+  color: #333333 ;
+  padding: 0px 2px 0px 2px ;
+  text-shadow: 1px 1px 0px #FFEFB6 ;
+}
+section.m-job-application form div.field.message span.characters-remaining.error {
+  background-color: #CC554E ;
+  color: #FFFFFF ;
+  text-shadow: none ;
+}
+section.m-job-application form div.field.spam input.primary {
+  font-size: 14px ;
+  padding: 2px 2px 2px 2px ;
+  text-align: center ;
+  width: 30px ;
+}
+section.m-job-application form div.buttons {
+  margin: 25px 0px 0px 125px ;
+}
+section.m-job-application form div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+section.m-external-job-application a {
+  background-color: #227FBB ;
+  border-radius: 8px 8px 8px 8px ;
+  color: #FFFFFF ;
+  display: block ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  margin: 0px auto 0px auto ;
+  text-align: center ;
+  text-decoration: none ;
+  text-transform: uppercase ;
+  width: 240px ;
+}
+div.m-job-stats div.item {
+  background-color: #FFDC73 ;
+  border-radius: 8px 8px 8px 8px ;
+  margin-bottom: 27px ;
+  padding: 15px 0px 15px 0px ;
+  text-align: center ;
+  text-shadow: 1px 1px 0px #FFEFB6 ;
+}
+div.m-job-stats div.value {
+  font-size: 50px ;
+  font-weight: 700 ;
+  line-height: 60px ;
+  margin-bottom: 10px ;
+}
+div.m-job-stats div.caption {
+  font-size: 18px ;
+  font-weight: 600 ;
+  line-height: 26px ;
+}
+form.m-new-job {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+form.m-new-job div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+form.m-new-job div.error strong {
+  font-weight: 700 ;
+}
+form.m-new-job div.error ul {
+  margin-bottom: 0px ;
+  margin-top: 15px ;
+}
+form.m-new-job div.fieldset {
+  margin-bottom: 25px ;
+}
+form.m-new-job div.fieldset div.header {
+  border-bottom: 1px solid #DADADA ;
+  color: #999999 ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 20px ;
+  font-weight: 700 ;
+  line-height: 30px ;
+  margin-bottom: 25px ;
+  padding-bottom: 7px ;
+}
+form.m-new-job div.fieldset div.overview {
+  margin-bottom: 25px ;
+}
+form.m-new-job div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+form.m-new-job div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+form.m-new-job div.field div.content {
+  margin-left: 125px ;
+}
+form.m-new-job div.field div.instructions {
+  margin-bottom: 13px ;
+  padding-top: 3px ;
+}
+form.m-new-job div.field div.note {
+  color: #666666 ;
+  font-size: 14px ;
+  margin-top: 7px ;
+}
+form.m-new-job div.field.company input.primary {
+  width: 350px ;
+}
+form.m-new-job div.field.url input.primary {
+  width: 350px ;
+}
+form.m-new-job div.field.email input.primary {
+  width: 350px ;
+}
+form.m-new-job div.field.headline input.primary {
+  width: 580px ;
+}
+form.m-new-job div.field.type div.content {
+  padding-top: 7px ;
+}
+form.m-new-job div.field.location input.primary {
+  width: 350px ;
+}
+form.m-new-job div.field.location label.telecommuting {
+  display: block ;
+  margin-top: 7px ;
+}
+form.m-new-job div.field.description textarea.primary {
+  display: block ;
+  height: 300px ;
+  width: 580px ;
+}
+form.m-new-job div.field.spam input.primary {
+  font-size: 14px ;
+  padding: 2px 2px 2px 2px ;
+  text-align: center ;
+  width: 30px ;
+}
+form.m-new-job div.buttons {
+  margin: 25px 0px 0px 125px ;
+}
+form.m-new-job div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+form.m-edit-job {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+form.m-edit-job div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+form.m-edit-job div.error strong {
+  font-weight: 700 ;
+}
+form.m-edit-job div.error ul {
+  margin-bottom: 0px ;
+  margin-top: 15px ;
+}
+form.m-edit-job div.fieldset {
+  margin-bottom: 25px ;
+}
+form.m-edit-job div.fieldset div.header {
+  border-bottom: 1px solid #DADADA ;
+  color: #999999 ;
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 20px ;
+  font-weight: 700 ;
+  line-height: 30px ;
+  margin-bottom: 25px ;
+  padding-bottom: 7px ;
+}
+form.m-edit-job div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+form.m-edit-job div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+form.m-edit-job div.field div.content {
+  margin-left: 125px ;
+}
+form.m-edit-job div.field div.instructions {
+  margin-bottom: 13px ;
+  padding-top: 3px ;
+}
+form.m-edit-job div.field div.note {
+  color: #666666 ;
+  font-size: 14px ;
+  margin-top: 7px ;
+}
+form.m-edit-job div.field.company input.primary {
+  width: 350px ;
+}
+form.m-edit-job div.field.url input.primary {
+  width: 350px ;
+}
+form.m-edit-job div.field.email input.primary {
+  width: 350px ;
+}
+form.m-edit-job div.field.headline input.primary {
+  width: 580px ;
+}
+form.m-edit-job div.field.type div.content {
+  padding-top: 7px ;
+}
+form.m-edit-job div.field.location input.primary {
+  width: 350px ;
+}
+form.m-edit-job div.field.location label.telecommuting {
+  display: block ;
+  margin-top: 7px ;
+}
+form.m-edit-job div.field.description textarea.primary {
+  display: block ;
+  height: 300px ;
+  width: 580px ;
+}
+form.m-edit-job div.field.spam input.primary {
+  font-size: 14px ;
+  padding: 2px 2px 2px 2px ;
+  text-align: center ;
+  width: 30px ;
+}
+form.m-edit-job div.buttons {
+  margin: 25px 0px 0px 125px ;
+}
+form.m-edit-job div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+section.m-job-payment form {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+section.m-job-payment form div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+section.m-job-payment form div.error strong {
+  font-weight: 700 ;
+}
+section.m-job-payment form div.error ul {
+  margin-bottom: 0px ;
+  margin-top: 15px ;
+}
+section.m-job-payment form div.error.stripe-error {
+  display: none ;
+}
+section.m-job-payment form div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+section.m-job-payment form div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+section.m-job-payment form div.field div.content {
+  margin-left: 145px ;
+}
+section.m-job-payment form div.field.total div.content {
+  padding-top: 3px ;
+}
+section.m-job-payment form div.field.name input.primary {
+  width: 350px ;
+}
+section.m-job-payment form div.field.number input.primary {
+  width: 350px ;
+}
+section.m-job-payment form div.field.expiration div.content {
+  padding-top: 3px ;
+}
+section.m-job-payment form div.field.security input.primary {
+  width: 50px ;
+}
+section.m-job-payment form div.pci {
+  margin-left: 145px ;
+}
+section.m-job-payment form div.pci strong {
+  background-color: #FFDC73 ;
+  font-weight: 600 ;
+  padding: 0px 2px 0px 2px ;
+  text-shadow: 1px 1px 0px #FFEFB6 ;
+}
+section.m-job-payment form div.pci em {
+  font-style: normal ;
+  font-weight: 600 ;
+}
+section.m-job-payment form div.buttons {
+  margin: 25px 0px 0px 145px ;
+}
+section.m-job-payment form div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+section.m-job-payment form div.buttons button.processing {
+  background-image: url("../../images/global/ajax-loader-blue.gif");
+  background-position: 93% 50% ;
+  background-repeat: no-repeat;
+}
+div.m-new-job-encouragement {
+  padding-top: 10px ;
+}
+div.m-new-job-encouragement div.change-a-life {
+  margin-bottom: 40px ;
+}
+div.m-new-job-encouragement div.change-a-life div.header {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  line-height: 25px ;
+  margin: 0px 0px 12px 0px ;
+}
+div.m-new-job-encouragement div.visibility div.header {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  line-height: 25px ;
+  margin: 0px 0px 12px 0px ;
+}
+div.m-new-job-encouragement div.visibility ul {
+  margin-top: 0px ;
+}
+table.imageborder {
+  margin: 40px 0px 40px 0px ;
+}
+table.imageborder td {
+  font-size: 1px ;
+  line-height: 1px ;
+}
+table.imageborder td.c {
+  border: 5px solid #EAEAEA ;
+  border-radius: 3px ;
+}
+table.imageborder td.c img {
+  display: block ;
+}
+div.m-invision-ad {
+  margin: 0px 0px 30px 0px ;
+}
+div.m-invision-ad a {
+  background: url("images/standard-sprite.png?v=2") -10px -280px no-repeat;
+  height: 250px ;
+  display: block ;
+  margin: 0px auto 0px auto ;
+  overflow: hidden ;
+  text-indent: -999px;
+  width: 250px ;
+}
+form.m-create-short-url {
+  background-color: #FFFFFF ;
+  border: 1px solid #DADADA ;
+  border-radius: 4px 4px 4px 4px ;
+  padding: 25px 25px 25px 25px ;
+  position: relative ;
+}
+form.m-create-short-url div.error {
+  background-color: #CC554E ;
+  border: 6px solid #C15049 ;
+  color: #FFFFFF ;
+  margin-bottom: 30px ;
+  padding: 10px 15px 10px 15px ;
+}
+form.m-create-short-url div.error strong {
+  font-weight: 700 ;
+}
+form.m-create-short-url div.field {
+  margin-bottom: 15px ;
+  position: relative ;
+}
+form.m-create-short-url div.field label.meta {
+  font-family: "Merriweather", "Skolar Bold", "Palatino", "Cambria", "Droid Serif", "Georgia", "Times New Roman", "Times", "serif";
+  font-size: 16px ;
+  font-weight: 700 ;
+  left: 0px ;
+  line-height: 38px ;
+  position: absolute ;
+  top: 0px ;
+}
+form.m-create-short-url div.field div.content {
+  margin-left: 125px ;
+}
+form.m-create-short-url div.field em {
+  color: #999999 ;
+  font-weight: 100 ;
+}
+form.m-create-short-url div.field.short-code input.primary {
+  width: 250px ;
+}
+form.m-create-short-url div.field.url input.primary {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 100% ;
+}
+form.m-create-short-url div.buttons {
+  margin: 25px 0px 0px 125px ;
+}
+form.m-create-short-url div.buttons button {
+  border-radius: 8px 8px 8px 8px ;
+  font-size: 16px ;
+  height: 64px ;
+  line-height: 64px ;
+  padding: 0px 40px 0px 40px ;
+}
+div.m-tweet-this {
+  position: relative ;
+}
+div.m-tweet-this a {
+  display: block ;
+  font-family: "Open Sans", "Proxima Nova Regular", "Helvetica Neue", "Calibri", "Droid Sans", "Helvetica", "Arial", "sans-serif";
+  margin: 25px 0px 25px 0px ;
+  min-height: 27px ;
+  position: relative ;
+  text-decoration: none ;
+}
+div.m-tweet-this span.label {
+  background-color: #008ECA ;
+  border-radius: 3px 3px 3px 3px ;
+  color: #FFFFFF ;
+  font-size: 12px ;
+  font-weight: 700 ;
+  height: 27px ;
+  left: 0px ;
+  line-height: 27px ;
+  position: absolute ;
+  text-align: center ;
+  top: 0px ;
+  width: 87px ;
+}
+div.m-tweet-this span.message {
+  color: #AAAAAA ;
+  display: block ;
+  font-size: 12px ;
+  font-weight: 400 ;
+  line-height: 18px ;
+  padding: 4px 0px 0px 98px ;
+}
+div.m-tweet-this span.thanks {
+  display: none ;
+}
+@media (min-width: 1024px) {
+  div.m-tweet-this span.thanks {
+    background-color: #FFDC73 ;
+    font-size: 12px ;
+    left: 0px ;
+    line-height: 27px ;
+    padding: 0px 7px 0px 7px ;
+    position: absolute ;
+    text-shadow: 1px 1px 0px #FFEFB6 ;
+    top: 33px ;
+  }
+  div.m-tweet-this:hover span.label {
+    background-color: #007EB4 ;
+  }
+  div.m-tweet-this:hover span.message {
+    color: #666666 ;
+  }
+  div.m-tweet-this:hover span.thanks {
+    display: block ;
+  }
+}

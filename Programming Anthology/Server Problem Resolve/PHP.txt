@@ -1,0 +1,3 @@
+If give the message php command not found
+Add following in environment variables
+C:\xampp\php to your PATH Environment Variable
